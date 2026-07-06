@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1419">
+  <meta name="description" content="Searchable Rinnai product documents for plumbers — manuals, spec sheets, warranties, and more.">
+  <title>Rinnai Docs • Field Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="app-header-inner">
+        <div class="brand-mark">R</div>
+        <div class="brand-text">
+          <h1>Rinnai Field Docs</h1>
+          <p>Plumber document library • <span id="catalog-date">Loading…</span></p>
+        </div>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search model, manual, spec…" autocomplete="off" enterkeyhint="search">
+        <button id="clear-search" type="button" aria-label="Clear search">✕</button>
+      </div>
+      <div id="quick-chips" class="filter-row" aria-label="Quick filters"></div>
+    </div>
+
+    <div class="stats-bar">
+      <span id="result-count">Loading…</span>
+      <a href="https://www.rinnai.us/professional/document-library" target="_blank" rel="noopener noreferrer">Official library ↗</a>
+    </div>
+
+    <div id="loading" class="loading-state">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading 900+ documents…</p>
+    </div>
+
+    <p id="empty" class="empty-state" hidden>No documents match. Try another search or clear filters.</p>
+
+    <ul id="doc-list" class="doc-list" aria-live="polite"></ul>
+  </div>
+
+  <button id="open-filters" class="fab-filters" type="button" aria-label="More filters">☰</button>
+
+  <div id="filter-overlay" class="overlay" aria-hidden="true"></div>
+  <aside id="filters-panel" class="filters-panel" aria-label="Filters">
+    <header>
+      <h3>Filters</h3>
+      <button id="close-filters" type="button" class="chip">Close</button>
+    </header>
+    <div class="panel-body">
+      <div class="filter-group">
+        <label for="filter-building">Building type</label>
+        <select id="filter-building"></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-category">Product category</label>
+        <select id="filter-category"></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-type">Document type</label>
+        <select id="filter-type"></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-language">Language</label>
+        <select id="filter-language"></select>
+      </div>
+      <div class="filter-group">
+        <label for="filter-sort">Sort</label>
+        <select id="filter-sort">
+          <option value="title">Title (A–Z)</option>
+          <option value="category">Category, then title</option>
+        </select>
+      </div>
+      <button id="filter-apply" type="button" class="btn primary" style="width:100%;margin-bottom:8px;">Apply filters</button>
+      <button id="filter-reset" type="button" class="btn" style="width:100%;">Reset all</button>
+    </div>
+  </aside>
+
+  <footer style="text-align:center;padding:12px 16px 28px;font-size:0.7rem;color:#64748b;">
+    Documents sourced from <a href="https://www.rinnai.us" style="color:#fca5a5;">rinnai.us</a>.
+    Not affiliated with Rinnai. Re-run <code>fetch_catalog.py</code> to refresh links.
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

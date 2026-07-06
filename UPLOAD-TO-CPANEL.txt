@@ -1,0 +1,121 @@
+================================================================================
+ETERNAHOT PLUMBING — cPanel / Bluehost Upload Checklist
+10/10 CONVERSION-FIRST VERSION (complete restructure)
+================================================================================
+
+UPLOAD LOCATION
+---------------
+Upload these files **directly into public_html/** (the root of eternahot.com).
+Do NOT put them inside an extra folder unless you also change all the paths in index.html.
+
+After upload:
+- Delete or rename Bluehost's default index.php / index.html placeholder so this index.html takes over.
+- Make sure SSL (Let's Encrypt) is active for the domain.
+- Clear any LiteSpeed / site cache.
+
+================================================================================
+CORE REQUIRED FILES (Site will look broken or video won't play without these)
+================================================================================
+
+1. index.html                          ← The full 10/10 site (new hierarchy, hero, Why cards, Commercial section, etc.)
+2. thank-you.html                      ← Confirmation page after form submit
+
+Logos & Icons (Main Navbar + Favicon + Rinnai branding)
+3. eternahot-logo-text.svg             ← Main Eternahot logo (now LARGER in navbar)
+4. faucet-logo.svg                     ← Faucet icon next to logo
+5. big-rinnai-logo.svg                 ← LARGE Rinnai logo used prominently in hero (created from Bigly)
+6. logo.png                            ← Fallback favicon / Apple touch icon
+
+Hero Video + Poster (Critical visual — fixed background for persistent action)
+7. shower-video.mp4                    ← Shower / water heater video (desktop hero background, FIXED position)
+8. hot-water.jpg                       ← Poster image shown while video loads / on mobile / fallback
+
+================================================================================
+CLEAN UPLOAD RECOMMENDATION (Best Practice)
+================================================================================
+
+Upload ONLY these for a clean, fast site:
+
+index.html
+thank-you.html
+eternahot-logo-text.svg
+faucet-logo.svg
+big-rinnai-logo.svg
+logo.png
+shower-video.mp4
+hot-water.jpg
+
+DELETE before or after upload (no longer referenced):
+- All Asset_*.svg
+- Rinnai-Logo.svg (old)
+- small-red-rinnai-logo.svg (only if you don't want it as backup)
+- All the rinnai-rx-*.svg and rinnai-cx-tankless.svg (detailed diagrams — keep locally if you want them later)
+- Rinnai Certified *.png (unless you plan a certifications strip)
+- Any old hero-video.mp4 (we standardized on shower-video.mp4)
+
+================================================================================
+FILENAME NOTES (Case-sensitive on cPanel)
+================================================================================
+
+- Use EXACT filenames as listed above.
+- The new index.html references:
+  /shower-video.mp4
+  /big-rinnai-logo.svg
+  /eternahot-logo-text.svg
+  /faucet-logo.svg
+  /hot-water.jpg
+  (All root-relative with leading / — perfect for flat public_html)
+
+- If images/video still don't appear after upload:
+  1. Hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
+  2. Incognito window
+  3. Browser DevTools → Network tab → reload and look for 404s on the asset names
+
+================================================================================
+WHAT'S NEW IN THIS 10/10 VERSION (summary of the restructure)
+================================================================================
+
+- Hero completely replaced with customer-outcome headline:
+  "NEVER LOSE HOT WATER AGAIN."
+  + big prominent Rinnai logo + emergency card on right + 4 big metrics
+- Trust / credentials shown immediately (CSLB link, Rinnai authorized, 4th gen, 24/7)
+- Big real-numbers authority bar (15,000+ calls, 4th gen, 24/7, 15-20 yr life)
+- Strong red Emergency banner right after hero
+- Why Eternahot: 3 updated cards (Water Heating Specialists / Multifamily & Commercial Specialists / Factory Authorized)
+- Dedicated Commercial Tankless Specialists section (restaurants, apartments, hotels, laundromats, medical, multi-tenant)
+- Premium Aftercare & Support section (new)
+- Reviews moved much higher (social proof before offers)
+- Services kept strong
+- Refined offers:
+  • $199 First-Time Customer Tankless Health Check (was $249)
+  • $250 Yank The Tank Credit (now with $500 deposit before Sept 1, 2026)
+  • $249 Troubleshooting & Diagnosis (no more "$150 credit" language)
+- Calculator REMOVED entirely (replaced with high-trust Rebates & Financing section)
+- New Rebates & Financing Programs Available (broader than just $1,500 SoCalGas)
+- Location SEO baked in (explicit city mentions + "Tankless Water Heater Repair Los Angeles..." heading)
+- Navbar logo made significantly larger (h-28 / h-[170px])
+- All py="[17px]" invalid syntax eliminated (clean Tailwind)
+- Persistent fixed video background + overlays + /90 section bgs for action at all times
+- Commercial angle front-and-center (the obvious authority for property managers)
+
+This version is designed to immediately answer:
+- Do these people specialize in my problem? (Yes — commercial + multifamily + tankless/water heating)
+- Can I trust them? (Immediate credentials + real numbers + reviews higher)
+- How fast can you get here? (24/7 emergency banner + same-day claims)
+- Why you instead of anyone else? (Factory authorized + aftercare + commercial focus)
+- How do I contact? (Big CTAs everywhere + sticky mobile)
+
+================================================================================
+QUICK cPanel File Manager Steps
+================================================================================
+
+1. Log into Bluehost cPanel → File Manager → public_html
+2. Delete/rename the default index.php or "coming soon" page.
+3. Upload the 8 core files listed above (drag & drop or Upload button).
+4. Delete the old/unused Asset_ files and old video name if present.
+5. Clear LiteSpeed cache (or any caching plugin) after upload.
+6. Visit https://eternahot.com (hard refresh).
+
+================================================================================
+Generated: Full 10/10 conversion restructure per detailed review + all follow-up adjustments
+================================================================================
