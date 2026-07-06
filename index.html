@@ -1,1165 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Favicon & App -->
-    <link rel="icon" type="image/svg+xml" href="/big-rinnai-logo.svg">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-    <meta name="apple-mobile-web-app-title" content="Eternahot Plumbing">
-    
-    <!-- SEO -->
-    <title>Eternahot Plumbing • Tankless &amp; Water Heating Specialists Los Angeles</title>
-    <meta name="description" content="Water heating specialists serving Los Angeles and Southern California. Multifamily, commercial &amp; residential tankless installation, repair, maintenance and true 24/7 emergency hot water service. Authorized Rinnai. CSLB #1150831.">
-    
-    <!-- Open Graph / Social -->
-    <meta property="og:title" content="Eternahot Plumbing • Southern California Water Heating Specialists">
-    <meta property="og:description" content="Multifamily, commercial and residential water heating experts. Tankless installation, repair, maintenance &amp; 24/7 emergency service. Authorized Rinnai specialist.">
-    <meta property="og:image" content="https://eternahot.com/logo.png">
-    <meta property="og:url" content="https://eternahot.com">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <!-- Structured Data: Local Business + Services -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Plumber",
-      "name": "Eternahot Plumbing",
-      "description": "Water heating specialists and authorized Rinnai experts providing tankless installation, repair, maintenance, multifamily/commercial systems and true 24/7 emergency service across Southern California.",
-      "url": "https://eternahot.com",
-      "telephone": "+1-213-222-3457",
-      "email": "office@eternahot.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "3415 S. Sepulveda Blvd., Suite 1100",
-        "addressLocality": "Los Angeles",
-        "addressRegion": "CA",
-        "postalCode": "90034",
-        "addressCountry": "US"
-      },
-      "areaServed": ["Los Angeles", "Orange County", "Southern California", "Santa Monica", "Pasadena", "Manhattan Beach", "Beverly Hills", "West Hollywood", "Culver City"],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Water Heating & Tankless Services",
-        "itemListElement": [
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tankless Water Heater Installation"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Emergency Tankless & Water Heater Repair"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Commercial & Multifamily Hot Water Systems"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Tankless Health Check, Flush & Diagnosis"}},
-          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Rebate & Financing Program Assistance"}}
-        ]
-      },
-      "license": "CSLB #1150831",
-      "openingHours": "Mo-Su 00:00-23:59",
-      "priceRange": "$$"
-    }
-    </script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Playfair+Display:wght@700&amp;display=swap');
-        
-        :root {
-            --brand-red: #c8102e;
-        }
-        
-        body { 
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-        }
-        
-        .serif-headline {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-        
-        /* Fixed background video for persistent action on scroll (10/10 premium) */
-        .hero-bg {
-            position: relative;
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-        .hero-bg video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -3;
-            object-fit: cover;
-        }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(15,23,42,0.38), rgba(15,23,42,0.78));
-            z-index: -1;
-        }
-        
-        /* Premium multi-layer water wave */
-        .water-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 92px;
-            overflow: hidden;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .water-wave .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background-repeat: repeat-x;
-            background-size: 1200px 100%;
-            animation: wave-flow 7.8s linear infinite;
-            will-change: transform;
-        }
-        .water-wave .wave1 {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 160%22 preserveAspectRatio=%22none%22><path d=%22M0,95 Q180,42 380,88 Q560,28 760,82 Q920,38 1200,70 L1200,160 L0,160 Z%22 fill=%22%233b82f6%22 fill-opacity=%220.18%22/></svg>');
-            animation-duration: 7.8s;
-        }
-        .water-wave .wave2 {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 160%22 preserveAspectRatio=%22none%22><path d=%22M0,72 Q140,115 360,68 Q590,118 810,65 Q1020,105 1200,78 L1200,160 L0,160 Z%22 fill=%22%2360a5fa%22 fill-opacity=%220.22%22/></svg>');
-            animation-duration: 5.6s;
-            animation-direction: reverse;
-            opacity: 0.85;
-        }
-        .water-wave .wave3 {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 160%22 preserveAspectRatio=%22none%22><path d=%22M0,108 Q260,55 470,102 Q710,48 930,95 Q1080,58 1200,88 L1200,160 L0,160 Z%22 fill=%22%2393c5fd%22 fill-opacity=%220.13%22/></svg>');
-            animation-duration: 9.4s;
-            top: 12px;
-        }
-        @keyframes wave-flow { 0% { transform: translateX(0); } 100% { transform: translateX(-600px); } }
-        
-        .fixed-nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-            background: rgba(255,255,255,0.96); backdrop-filter: blur(14px);
-            border-bottom: 1px solid #e5e5e3;
-        }
-        
-        .nav-link {
-            position: relative;
-            padding-bottom: 2px;
-        }
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0; height: 1px;
-            bottom: 0; left: 0;
-            background-color: #c8102e;
-            transition: width 0.2s ease;
-        }
-        .nav-link:hover:after { width: 100%; }
-        
-        .service-card, .offer-card, .premium-card, .why-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .service-card:hover, .premium-card:hover, .why-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        .offer-card.popular {
-            border-color: #c8102e;
-            box-shadow: 0 10px 15px -3px rgb(200 16 46 / 0.1);
-        }
-        
-        .cta-primary {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .cta-primary::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -140%;
-            width: 35%; height: 200%;
-            background: linear-gradient(115deg, transparent, rgba(255,255,255,0.38), transparent);
-            transition: left 520ms cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-        }
-        .cta-primary:hover::after { left: 280%; }
-        
-        .section-label {
-            font-size: 11px;
-            letter-spacing: 2.5px;
-            font-weight: 700;
-            color: #c8102e;
-        }
-        
-        /* FAQ Accordion */
-        .faq-question {
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .faq-question:hover { color: #c8102e; }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.25s ease;
-        }
-        .faq-answer.open {
-            max-height: 240px;
-            padding-top: 0.5rem;
-        }
-        .faq-icon {
-            transition: transform 0.3s ease;
-        }
-        .faq-question.open .faq-icon {
-            transform: rotate(180deg);
-        }
-        
-        .stat {
-            font-variant-numeric: tabular-nums;
-        }
-        
-        .trust-bar {
-            background: #0f172a;
-            color: #fff;
-        }
-        
-        .form-input {
-            transition: all 0.2s ease;
-        }
-        .form-input:focus {
-            border-color: #c8102e;
-            box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08);
-            outline: none;
-        }
-        
-        .mini-wave {
-            height: 38px;
-            background: linear-gradient(to bottom, transparent, rgba(59,130,246,0.12));
-            position: relative;
-            overflow: hidden;
-        }
-        .mini-wave::before {
-            content: '';
-            position: absolute; bottom: 0; left: 0; width: 200%; height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 60%22 preserveAspectRatio=%22none%22><path d=%22M0,32 Q280,8 520,30 Q780,6 1200,28 L1200,60 L0,60 Z%22 fill=%22%233b82f6%22 fill-opacity=%220.16%22/></svg>') repeat-x;
-            background-size: 600px 100%;
-            animation: wave-flow 5.5s linear infinite;
-        }
-        
-        .big-stat {
-            font-size: 2.25rem;
-            line-height: 1;
-            font-weight: 900;
-            letter-spacing: -1.5px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eternahot — Southern California's tankless water heating specialists. Authorized Rinnai partner. Residential & commercial installation, repair, and maintenance. CSLB #1150831.">
+  <title>Eternahot | Southern California Water Heating Specialists</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/logo-eternahot.webp">
 </head>
-<body class="text-slate-900 overflow-x-hidden bg-[#f8f7f4]">
-    <!-- Fixed background video overlay for persistent action while scrolling -->
-    <div class="fixed inset-0 bg-slate-900/20 z-[-2]"></div>
-
-    <!-- Navbar -->
-    <nav class="fixed-nav h-28 md:h-40">
-        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
-            <div class="flex items-center -ml-2 md:-ml-3">
-                <img src="/eternahot-logo-text.svg" alt="Eternahot Plumbing" class="h-28 md:h-[170px] object-contain">
-                <img src="/faucet-logo.svg" alt="Faucet icon" class="h-16 md:h-[95px] -ml-4 md:-ml-7 scale-[1.1] -mt-1 md:-mt-2" aria-hidden="true">
-            </div>
-            
-            <div class="flex items-center gap-x-6 md:gap-x-9">
-                <div class="hidden md:flex items-center gap-x-7 text-sm">
-                    <a href="#why" class="nav-link text-slate-600 hover:text-slate-900 font-medium transition">Why Us</a>
-                    <a href="#commercial" class="nav-link text-slate-600 hover:text-slate-900 font-medium transition">Commercial</a>
-                    <a href="#services" class="nav-link text-slate-600 hover:text-slate-900 font-medium transition">Services</a>
-                    <a href="#faq" class="nav-link text-slate-600 hover:text-slate-900 font-medium transition">FAQ</a>
-                </div>
-                
-                <a href="tel:2132223457" 
-                   class="cta-primary bg-[#c8102e] hover:bg-[#a50e26] active:scale-[0.985] text-white px-6 py-2.5 md:px-8 md:py-3 rounded-2xl font-semibold text-sm md:text-[15px] flex items-center gap-2 shadow-sm transition-all">
-                    <span class="hidden sm:inline">213.222.3457</span>
-                    <span class="sm:hidden">Call Now</span>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO — exact customer-outcome structure per review + big Rinnai + larger presence -->
-    <section class="hero-bg pt-28 md:pt-40">
-        <!-- Desktop Video Background (fixed for persistent action) -->
-        <video autoplay loop muted playsinline class="hidden md:block" poster="/hot-water.jpg">
-            <source src="/shower-video.mp4" type="video/mp4">
-        </video>
-        
-        <!-- Mobile / Fallback background -->
-        <div class="md:hidden absolute inset-0 bg-slate-900">
-            <div class="absolute inset-0 bg-[radial-gradient(#334155_0.6px,transparent_1px)] bg-[length:4px_4px] opacity-40"></div>
-        </div>
-        
-        <div class="hero-overlay"></div>
-
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-
-            <div class="grid lg:grid-cols-12 gap-10 items-center min-h-[85vh]">
-
-                <div class="lg:col-span-7 text-white">
-
-                    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur px-4 py-2 mb-8 text-sm font-medium">
-                        ★ Authorized Rinnai Specialist • CSLB #1150831
-                    </div>
-
-                    <h1 class="text-[48px] md:text-[72px] lg:text-[82px] leading-[0.9] font-black tracking-[-4px]">
-                        NEVER LOSE
-                        <br>
-                        HOT WATER
-                        <br>
-                        AGAIN.
-                    </h1>
-
-                    <p class="mt-8 text-xl md:text-2xl text-white/90 max-w-2xl leading-relaxed">
-                        Southern California's tankless water heater specialists.
-                        Installation, repair, maintenance and true 24/7 emergency response
-                        for apartments, restaurants, hotels, laundromats and commercial properties.
-                    </p>
-
-                    <!-- Big prominent Rinnai logo (per new spec) -->
-                    <div class="mt-8 flex flex-col md:flex-row items-center gap-6">
-                        <img
-                            src="/big-rinnai-logo.svg"
-                            alt="Authorized Rinnai Specialist"
-                            class="h-20 md:h-28 w-auto opacity-95"
-                        >
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-4 mt-10">
-
-                        <a href="tel:2132223457"
-                           class="bg-[#c8102e] hover:bg-[#a50e26]
-                                  text-white font-bold
-                                  px-10 py-5 rounded-3xl
-                                  text-xl shadow-2xl cta-primary">
-                            Call 213.222.3457
-                        </a>
-
-                        <a href="#contact-form"
-                           class="border-2 border-white
-                                  text-white
-                                  hover:bg-white
-                                  hover:text-slate-900
-                                  px-10 py-5
-                                  rounded-3xl
-                                  text-xl font-semibold">
-                            Request Service
-                        </a>
-
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-14">
-
-                        <div>
-                            <div class="text-4xl font-black">24/7</div>
-                            <div class="text-sm text-white/70">Emergency Response</div>
-                        </div>
-
-                        <div>
-                            <div class="text-4xl font-black">4th</div>
-                            <div class="text-sm text-white/70">Generation Plumbers</div>
-                        </div>
-
-                        <div>
-                            <div class="text-4xl font-black">15–20</div>
-                            <div class="text-sm text-white/70">Year System Life</div>
-                        </div>
-
-                        <div>
-                            <div class="text-4xl font-black">100%</div>
-                            <div class="text-sm text-white/70">Code Compliant Work</div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="lg:col-span-5">
-
-                    <div class="bg-white rounded-[32px] p-8 shadow-2xl">
-
-                        <div class="text-sm font-black tracking-[2px] text-[#c8102e]">
-                            EMERGENCY SERVICE
-                        </div>
-
-                        <h2 class="text-4xl font-black tracking-tight mt-2">
-                            No Hot Water?
-                        </h2>
-
-                        <p class="mt-3 text-slate-600">
-                            Restaurants, apartments, hotels and commercial properties
-                            cannot afford downtime.
-                        </p>
-
-                        <div class="mt-8 space-y-4">
-
-                            <div class="flex gap-3">
-                                <span class="text-[#c8102e] font-bold">✓</span>
-                                <span>Same-day service available</span>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <span class="text-[#c8102e] font-bold">✓</span>
-                                <span>Authorized Rinnai support</span>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <span class="text-[#c8102e] font-bold">✓</span>
-                                <span>Commercial specialists</span>
-                            </div>
-
-                            <div class="flex gap-3">
-                                <span class="text-[#c8102e] font-bold">✓</span>
-                                <span>24/7 emergency response</span>
-                            </div>
-
-                        </div>
-
-                        <a href="tel:2132223457"
-                           class="block mt-8 text-center
-                                  bg-[#c8102e]
-                                  text-white
-                                  py-4 rounded-2xl
-                                  font-bold text-lg cta-primary">
-
-                            Call Now
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Animated Water Wave -->
-        <div class="water-wave">
-            <div class="wave wave1"></div>
-            <div class="wave wave2"></div>
-            <div class="wave wave3"></div>
-        </div>
-    </section>
-
-    <!-- Trust Logos + Credentials (immediate proof) -->
-    <section class="trust-bar py-5 md:py-7">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-4 text-center text-sm md:text-[13.5px]">
-                <div class="flex items-center justify-center gap-2">
-                    <span class="font-semibold">✓</span> 
-                    <span class="font-medium">CSLB Licensed #1150831</span>
-                    <a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener" class="text-white/70 hover:text-white underline text-xs ml-1">Verify →</a>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <span class="font-semibold">✓</span> 
-                    <span class="font-medium">Authorized Rinnai Specialist</span>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <span class="font-semibold">✓</span> 
-                    <span class="font-medium">4th Generation Family Plumbers</span>
-                </div>
-                <div class="flex items-center justify-center gap-2">
-                    <span class="font-semibold">✓</span> 
-                    <span class="font-medium">Real 24/7 Emergency Response</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Real Numbers / Authority Bar -->
-    <section class="bg-white/95 border-b border-slate-100 py-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <div class="big-stat text-[#c8102e]">15,000+</div>
-                    <div class="text-sm font-medium tracking-wider text-slate-600 mt-1">SERVICE CALLS COMPLETED</div>
-                </div>
-                <div>
-                    <div class="big-stat text-[#c8102e]">4th</div>
-                    <div class="text-sm font-medium tracking-wider text-slate-600 mt-1">GENERATION PLUMBERS</div>
-                </div>
-                <div>
-                    <div class="big-stat text-[#c8102e]">24/7</div>
-                    <div class="text-sm font-medium tracking-wider text-slate-600 mt-1">EMERGENCY AVAILABILITY</div>
-                </div>
-                <div>
-                    <div class="big-stat text-[#c8102e]">15–20</div>
-                    <div class="text-sm font-medium tracking-wider text-slate-600 mt-1">YEAR TYPICAL SYSTEM LIFE</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Emergency Service Banner (big red, high urgency) -->
-    <section class="bg-[#c8102e] py-8 text-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="uppercase tracking-[3px] text-sm font-bold opacity-90 mb-2">NO HOT WATER?</div>
-            <div class="text-3xl md:text-4xl font-black tracking-[-1.5px]">Restaurants, apartments, hotels and commercial buildings can't wait.</div>
-            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="tel:2132223457" class="inline-block bg-white text-[#c8102e] font-bold text-lg px-10 py-4 rounded-2xl shadow-xl cta-primary">Call 213.222.3457 — Available 24/7</a>
-                <span class="text-white/90 text-sm">Same-day service across Southern California</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY ETERNAHOT (3 cards, updated per latest) -->
-    <section id="why" class="py-16 md:py-20 bg-white/90">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <div class="section-label mb-2">WHY PROPERTY MANAGERS &amp; OWNERS CHOOSE US</div>
-                <h2 class="serif-headline text-4xl md:text-[42px] tracking-[-1.6px] leading-none">The obvious choice for<br>reliable hot water.</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Card 1: Water Heating Specialists (updated) -->
-                <div class="why-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
-                    <div class="font-black text-2xl tracking-[-0.6px] mb-3">Water Heating Specialists</div>
-                    <p class="text-slate-600 leading-relaxed">
-                        Water heating is our specialty. From tankless water heaters and storage tanks to recirculation systems and commercial hot water equipment, our focused expertise allows us to diagnose problems faster, provide better solutions, and deliver long-term reliability.
-                    </p>
-                    <div class="mt-6 text-sm font-semibold text-[#c8102e]">
-                        Hot water isn't a side business. It's what we do.
-                    </div>
-                </div>
-
-                <!-- Card 2: Multifamily &amp; Commercial Specialists (updated) -->
-                <div class="why-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
-                    <div class="font-black text-2xl tracking-[-0.6px] mb-3">Multifamily &amp; Commercial Specialists</div>
-                    <p class="text-slate-600 leading-relaxed">
-                        We specialize in multifamily apartment communities, hotels, restaurants, salons, spas, laundromats, car washes, and businesses where reliable hot water is critical. We also proudly serve homeowners throughout Southern California.
-                    </p>
-                    <div class="mt-6 text-sm font-semibold text-[#c8102e]">
-                        Built for the markets that depend on hot water every day.
-                    </div>
-                </div>
-
-                <!-- Card 3: Factory Authorized (kept strong) -->
-                <div class="why-card bg-white border border-slate-200 rounded-3xl p-8 flex flex-col">
-                    <div class="font-black text-2xl tracking-[-0.6px] mb-3">Factory Authorized</div>
-                    <p class="text-slate-600 leading-relaxed">
-                        We are an Authorized Rinnai Specialist with direct manufacturer support. This means faster access to parts, accurate technical guidance, and full warranty backing on the systems we install and service.
-                    </p>
-                    <div class="mt-6 text-sm font-semibold text-[#c8102e]">
-                        Genuine parts. Priority support. Better outcomes.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- COMMERCIAL TANKLESS SPECIALISTS (front and center differentiator) -->
-    <section id="commercial" class="py-16 md:py-20 bg-[#f8f7f4]/90 border-t border-b border-slate-100">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-3xl mb-10">
-                <div class="section-label mb-2">WHERE WE DOMINATE</div>
-                <h2 class="serif-headline text-4xl md:text-[42px] tracking-[-1.6px] leading-none">Commercial Tankless Specialists</h2>
-                <p class="mt-4 text-lg text-slate-600">Most competitors target homeowners. We built our business around properties where downtime costs real money — and where tenants, guests, and customers expect hot water without compromise.</p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Restaurants &amp; Food Service</div><div class="text-sm text-slate-600">High-demand kitchens that can't stop.</div></div>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Apartment Buildings &amp; Multifamily</div><div class="text-sm text-slate-600">Hundreds of units. Zero complaints.</div></div>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Hotels &amp; Hospitality</div><div class="text-sm text-slate-600">Guest satisfaction starts with hot water.</div></div>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Laundromats &amp; Car Washes</div><div class="text-sm text-slate-600">Constant high-volume use.</div></div>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Medical Offices &amp; Salons</div><div class="text-sm text-slate-600">Hygiene and client experience matter.</div></div>
-                </div>
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-5 flex gap-3 items-start">
-                    <span class="text-[#c8102e] text-xl mt-px">●</span>
-                    <div><div class="font-semibold">Multi-Tenant Commercial Properties</div><div class="text-sm text-slate-600">Mixed-use buildings and retail plazas.</div></div>
-                </div>
-            </div>
-
-            <p class="mt-8 text-center text-sm text-slate-600">We also serve single-family homeowners across Los Angeles and Southern California with the same commercial-grade attention to detail.</p>
-        </div>
-    </section>
-
-    <!-- PREMIUM SERVICE / AFTERCARE (new high-converting section before reviews) -->
-    <section class="py-16 md:py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-
-            <div class="section-label mb-2">
-                AFTERCARE &amp; SUPPORT
-            </div>
-
-            <h2 class="serif-headline text-4xl md:text-[42px] tracking-[-1.6px]">
-                Service That Doesn't End After Installation
-            </h2>
-
-            <p class="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
-                We are not the lowest-cost option, and that's intentional.
-                Our focus is quality workmanship, communication,
-                responsiveness, and long-term support.
-                From installation through follow-up visits and warranty
-                assistance, we remain available long after the job is complete.
-            </p>
-
-            <div class="grid md:grid-cols-5 gap-4 mt-10 text-sm font-medium">
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl py-4">✓ Follow-Up Visits</div>
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl py-4">✓ Warranty Assistance</div>
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl py-4">✓ Ongoing Support</div>
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl py-4">✓ Clear Communication</div>
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl py-4">✓ Long-Term Maintenance Planning</div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CUSTOMER REVIEWS (moved high for trust) -->
-    <section id="reviews" class="py-16 md:py-20 bg-[#f8f7f4]/90">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-10">
-                <div class="section-label mb-2">REAL CLIENTS, REAL RESULTS</div>
-                <h2 class="serif-headline text-3xl md:text-[38px] tracking-[-1.3px]">Trusted across Southern California.</h2>
-                <div class="mt-1.5 text-sm text-slate-600">See more on <a href="https://www.trustpilot.com/review/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="text-[#c8102e] hover:underline">Trustpilot</a> and <a href="https://www.buildzoom.com/contractor/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="text-[#c8102e] hover:underline">BuildZoom (96/100)</a></div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"They diagnosed and repaired a complex tankless issue that two other companies couldn’t solve. Fast response and extremely knowledgeable. Our tenants haven’t had a single hot water complaint since."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— Santa Monica Property Manager</p>
-                </div>
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"Our restaurant couldn’t operate without hot water. Eternahot got us back online quickly, handled the warranty claim, and everything was done professionally with zero downtime."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— Los Angeles Restaurant Owner</p>
-                </div>
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"Reliable service, clean installation work, and strong communication throughout the project. We now use them for all of our tankless maintenance across multiple locations."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— Orange County Laundromat Operator</p>
-                </div>
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"Eternahot installed five tankless units in our Santa Monica apartment building. They handled permitting, proper venting, and gas upgrades flawlessly. Tenants love the endless hot water and our utility costs dropped."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— Santa Monica Multi-Unit Property Owner</p>
-                </div>
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"Woke up Sunday morning with no hot water. Called at 7am and they were at my house by 9:30. Diagnosed a failed heat exchanger, had the part, and had us back up before lunch. True 24/7 service."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— West Los Angeles Homeowner</p>
-                </div>
-                <div class="premium-card bg-white border border-slate-200 rounded-3xl p-8">
-                    <p class="text-slate-700 leading-snug">"As a property manager overseeing multiple buildings, having a dedicated tankless specialist is a game changer. Eternahot does our annual maintenance and repairs quickly. Clean work and they actually answer the phone."</p>
-                    <p class="mt-6 text-sm font-semibold tracking-tight">— Los Angeles Property Management Company</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="py-16 md:py-20 bg-white/90">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="max-w-2xl mb-10">
-                <div class="section-label mb-2">WHAT WE DO BEST</div>
-                <h2 class="serif-headline text-[34px] md:text-[40px] tracking-[-1.6px] leading-none">Precision hot water,<br>engineered to last.</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">01</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Expert Tankless &amp; Water Heater Installations</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">Thoughtful design and meticulous execution for new construction and full replacements. Every system properly sized, vented, and commissioned for 15–20+ years of reliable performance.</div>
-                </div>
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">02</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Emergency Repairs</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">When hot water disappears, we diagnose and restore comfort fast. We arrive prepared with the knowledge and common Rinnai parts to resolve most issues the same day.</div>
-                </div>
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">03</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Commercial &amp; Multifamily Systems</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">Restaurants, laundromats, apartments, hotels and businesses that cannot afford downtime. High-demand solutions with proper redundancy, venting, and ongoing maintenance plans.</div>
-                </div>
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">04</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Annual Maintenance &amp; Flushing</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">Preventive descaling and care that protects efficiency and extends equipment life. Recommended yearly for most Southern California hard-water installations.</div>
-                </div>
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">05</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Warranty &amp; Manufacturer Support</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">We coordinate directly with Rinnai and other manufacturers so you don’t have to. Proper documentation and fast warranty resolutions when issues arise.</div>
-                </div>
-                <div class="service-card bg-slate-50 border border-slate-200 rounded-3xl p-7">
-                    <div class="text-[#c8102e] text-xs font-black tracking-[1px] mb-2">06</div>
-                    <div class="font-semibold text-xl tracking-[-0.2px] mb-2">Code-Compliant Gas, Venting &amp; Recirc</div>
-                    <div class="text-slate-600 leading-snug text-[14.5px]">Correct gas line sizing, venting design, condensate management, and recirculation loops — the details that determine whether a system performs reliably for decades.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LOCATION SEO (strong local signals) -->
-    <section class="py-10 bg-white/95 border-t border-b">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <div class="text-xs tracking-[2.5px] font-bold text-[#c8102e] mb-2">SERVING SOUTHERN CALIFORNIA</div>
-            <h3 class="text-xl md:text-2xl font-semibold tracking-tight">Tankless Water Heater Repair Los Angeles • Santa Monica • Pasadena • Orange County • Beverly Hills • West Hollywood • Manhattan Beach &amp; Beyond</h3>
-            <p class="mt-3 text-slate-600 max-w-md mx-auto text-sm">Fast local response for commercial properties and homes across the region. If you have a tankless or hot water system in Southern California, we can help.</p>
-        </div>
-    </section>
-
-    <!-- REFINED OFFERS (moved lower, pain-avoidance + exact new pricing/text) -->
-    <section id="offers" class="pt-16 md:pt-20 pb-14 bg-[#f8f7f4]/90">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-10">
-                <div class="section-label mb-2">FOR NEW CUSTOMERS</div>
-                <h2 class="serif-headline text-4xl md:text-[42px] tracking-[-1.6px] leading-none">Thoughtful ways to get started.</h2>
-                <p class="mt-3 text-slate-600 max-w-md mx-auto">Transparent introductory offers for property owners and businesses experiencing premium water heating service for the first time.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                <!-- Health Check - $199 updated + prevention framing -->
-                <div class="offer-card popular premium-card bg-white border-2 border-[#c8102e] rounded-3xl p-8 md:p-9 flex flex-col">
-                    <div class="text-xs font-black tracking-[1.5px] text-[#c8102e] mb-1">MOST POPULAR</div>
-                    <div class="text-6xl font-black tracking-[-2.5px] text-[#c8102e] mt-0.5">$199</div>
-                    <div class="text-[21px] font-semibold tracking-[-0.3px] mt-0.5 mb-1 leading-tight">First-Time Customer Tankless Health Check</div>
-                    <div class="text-sm text-slate-500 mb-6">Regularly $299 — first visit only</div>
-                    
-                    <ul class="text-[14.5px] space-y-[9px] text-slate-700 mb-8 flex-1">
-                        <li class="flex gap-2.5"><span class="text-[#c8102e] font-bold mt-px">✓</span> Descaling and full system flush</li>
-                        <li class="flex gap-2.5"><span class="text-[#c8102e] font-bold mt-px">✓</span> Comprehensive inspection &amp; safety review</li>
-                        <li class="flex gap-2.5"><span class="text-[#c8102e] font-bold mt-px">✓</span> Performance diagnostics and written report</li>
-                        <li class="flex gap-2.5"><span class="text-[#c8102e] font-bold mt-px">✓</span> Priority scheduling for future work</li>
-                    </ul>
-                    <a href="#contact-form" class="cta-primary block text-center bg-[#c8102e] hover:bg-[#a50e26] text-white font-semibold py-3.5 rounded-2xl transition">Book the Health Check</a>
-                </div>
-                
-                <!-- Yank The Tank - updated exact -->
-                <div class="offer-card premium-card bg-white border border-slate-200 rounded-3xl p-8 md:p-9 flex flex-col">
-                    <div class="text-6xl font-black tracking-[-2.5px] text-[#c8102e] mt-0.5">$250</div>
-                    <div class="text-[21px] font-semibold tracking-[-0.3px] mt-0.5 mb-1 leading-tight">Yank The Tank Credit</div>
-                    <div class="text-sm text-slate-500 mb-6">Limited-Time Installation Incentive</div>
-                    
-                    <ul class="text-[14.5px] space-y-[9px] text-slate-700 mb-8 flex-1">
-                        <li>✓ $250 credit applied to final invoice</li>
-                        <li>✓ $500 installation deposit required</li>
-                        <li>✓ Deposit must be received before September 1, 2026</li>
-                        <li>✓ Valid on qualifying replacement installations</li>
-                    </ul>
-                    <a href="#contact-form" class="cta-primary block text-center bg-slate-900 hover:bg-black text-white font-semibold py-3.5 rounded-2xl transition">Start Your Upgrade</a>
-                </div>
-                
-                <!-- Diagnostic / Troubleshooting - updated exact -->
-                <div class="offer-card premium-card bg-white border border-slate-200 rounded-3xl p-8 md:p-9 flex flex-col">
-                    <div class="text-6xl font-black tracking-[-2.5px] text-[#c8102e] mt-0.5">$249</div>
-                    <div class="text-[21px] font-semibold tracking-[-0.3px] mt-0.5 mb-1 leading-tight">Troubleshooting &amp; Diagnosis</div>
-                    <div class="text-sm text-slate-500 mb-6">Professional diagnosis for no hot water, error codes, performance issues, and system concerns.</div>
-                    
-                    <ul class="text-[14.5px] space-y-[9px] text-slate-700 mb-8 flex-1">
-                        <li>✓ Includes up to one hour of labor</li>
-                        <li>✓ Expert troubleshooting and diagnosis</li>
-                        <li>✓ Clear explanation of findings</li>
-                        <li>✓ Written repair recommendations</li>
-                    </ul>
-                    <a href="tel:2132223457" class="block text-center border border-slate-300 hover:bg-slate-50 font-semibold py-3.5 rounded-2xl transition">Call 213.222.3457</a>
-                </div>
-            </div>
-            
-            <p class="text-center text-xs text-slate-500 mt-8 tracking-wider">Intro offers for new customers only. One per property. Commercial pricing available on request.</p>
-        </div>
-    </section>
-
-    <!-- REBATES & FINANCING (replaced calculator with high-trust programs section) -->
-    <section class="py-16 bg-slate-900 text-white">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="text-[#c8102e] text-xs tracking-[2.5px] font-bold mb-2">INCENTIVES &amp; SUPPORT</div>
-            <h2 class="text-3xl md:text-[42px] font-black tracking-[-1.8px]">Rebates &amp; Financing Programs Available</h2>
-            <p class="mt-4 max-w-3xl mx-auto text-lg text-white/90">
-                Residential, multifamily, and commercial customers may qualify for utility rebates, manufacturer incentives, financing programs, and energy-efficiency upgrades. Available programs vary based on equipment type, utility provider, and project scope.
-            </p>
-
-            <ul class="mt-8 max-w-md mx-auto grid gap-y-3 text-left text-lg text-white/90">
-                <li class="flex items-start gap-3"><span class="text-[#c8102e] mt-1">✓</span> Residential rebate opportunities</li>
-                <li class="flex items-start gap-3"><span class="text-[#c8102e] mt-1">✓</span> Commercial and multifamily incentive programs</li>
-                <li class="flex items-start gap-3"><span class="text-[#c8102e] mt-1">✓</span> Financing options available</li>
-                <li class="flex items-start gap-3"><span class="text-[#c8102e] mt-1">✓</span> Assistance with rebate documentation</li>
-            </ul>
-
-            <p class="mt-8 text-sm text-white/60">We help gather the model numbers, photos, and paperwork needed for your application.</p>
-        </div>
-    </section>
-
-    <!-- PROCESS -->
-    <section class="py-14 md:py-16 border-t border-b bg-white/90">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="text-center mb-9">
-                <div class="section-label mb-1.5">OUR PROCESS</div>
-                <h3 class="serif-headline text-3xl tracking-[-1.1px]">Simple. Professional. Fast.</h3>
-            </div>
-            
-            <div class="grid md:grid-cols-4 gap-7">
-                <div class="text-center">
-                    <div class="mx-auto w-12 h-12 rounded-2xl bg-[#c8102e] text-white flex items-center justify-center font-black text-2xl mb-4">1</div>
-                    <div class="font-semibold mb-1">Call or Request</div>
-                    <div class="text-sm text-slate-600">We answer 24/7. Tell us what’s happening and we’ll schedule the right response.</div>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto w-12 h-12 rounded-2xl bg-[#c8102e] text-white flex items-center justify-center font-black text-2xl mb-4">2</div>
-                    <div class="font-semibold mb-1">On-Site Diagnosis</div>
-                    <div class="text-sm text-slate-600">Clear explanation of the issue and options before any work begins. Upfront pricing.</div>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto w-12 h-12 rounded-2xl bg-[#c8102e] text-white flex items-center justify-center font-black text-2xl mb-4">3</div>
-                    <div class="font-semibold mb-1">Expert Repair or Install</div>
-                    <div class="text-sm text-slate-600">Factory-trained work with genuine parts. Clean, code-compliant, and documented.</div>
-                </div>
-                <div class="text-center">
-                    <div class="mx-auto w-12 h-12 rounded-2xl bg-[#c8102e] text-white flex items-center justify-center font-black text-2xl mb-4">4</div>
-                    <div class="font-semibold mb-1">Follow-Up &amp; Warranty</div>
-                    <div class="text-sm text-slate-600">We stand behind the work and help with manufacturer warranty claims when needed.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="py-16 md:py-20 bg-[#f8f7f4]/90">
-        <div class="max-w-3xl mx-auto px-6">
-            <div class="text-center mb-9">
-                <div class="section-label mb-2">FREQUENTLY ASKED</div>
-                <h2 class="serif-headline text-3xl md:text-[38px] tracking-[-1.3px]">Questions we hear every week.</h2>
-            </div>
-            
-            <div class="space-y-3">
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>How fast can you get here for no hot water?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">We offer true 24/7 emergency response. Most Los Angeles and nearby calls are answered the same day. Call 213.222.3457 and we’ll give you an honest ETA immediately.</div>
-                </div>
-                
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>Are you an actual authorized Rinnai installer?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">Yes. We are an authorized Rinnai specialist (not just “we install Rinnai”). This means proper training, access to technical support, and full warranty support on the equipment we install and service.</div>
-                </div>
-                
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>Do tankless water heaters really save money?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">Yes — typically 25–40% on water heating costs in Southern California homes because you only heat water when you need it. You also get unlimited hot water and the units last longer (often 15–20+ years with proper maintenance).</div>
-                </div>
-                
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>Is the $199 Health Check worth it?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">Almost always. Hard water in LA and surrounding areas builds scale fast. A proper annual flush + inspection catches small issues before they become expensive failures and keeps your efficiency high.</div>
-                </div>
-                
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>What areas do you serve?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">All of Los Angeles, Santa Monica, Beverly Hills, Pasadena, Manhattan Beach, West Hollywood, Culver City, and greater Orange County. If you’re in Southern California and have a tankless or hot water system, we can almost certainly help.</div>
-                </div>
-                
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>Do you work on other brands besides Rinnai?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">Yes. We service and install Navien, Rheem, Takagi, Noritz, Bosch, and most other quality tankless brands. Our deep Rinnai expertise gives us an advantage on diagnostics across the category.</div>
-                </div>
-
-                <div class="bg-white border border-slate-200 rounded-2xl px-6 py-4">
-                    <div onclick="toggleFaq(this)" class="faq-question flex items-center justify-between gap-4 font-semibold text-[15px]">
-                        <span>Can I get a SoCalGas rebate or financing help?</span>
-                        <span class="faq-icon text-xl leading-none text-[#c8102e] font-light">⌄</span>
-                    </div>
-                    <div class="faq-answer text-sm text-slate-600">
-                        Yes. Residential, multifamily and commercial customers may qualify for utility rebates, manufacturer incentives, and financing programs. We assist with the documentation and model verification required for applications.
-                        <a href="https://www.socalgas.com/savings/rebates-and-incentives" target="_blank" rel="noopener" class="text-[#c8102e] hover:underline ml-1">See current program details →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact-form" class="py-16 md:py-20 bg-white/90 border-t">
-        <div class="max-w-[620px] mx-auto px-6">
-            <div class="text-center mb-9">
-                <div class="section-label mb-2">LET’S GET YOUR HOT WATER BACK</div>
-                <h2 class="serif-headline text-[32px] md:text-[38px] tracking-[-1.3px]">Request service or a consultation.</h2>
-                <p class="mt-3 text-slate-600">We typically respond within the hour during business hours. For true emergencies, please call directly.</p>
-            </div>
-            
-            <!-- Functional Web3Forms -->
-            <form action="https://api.web3forms.com/submit" method="POST" id="lead-form" class="space-y-4">
-                <input type="hidden" name="access_key" value="a70943cc-da99-49d2-a384-0ba63077536c">
-                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
-                <input type="hidden" name="subject" value="New Eternahot Service Request — Eternahot.com">
-                <input type="hidden" name="redirect" value="https://eternahot.com/thank-you.html">
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="sr-only" for="name">Your Name</label>
-                        <input type="text" id="name" name="name" required placeholder="Your Name" 
-                               class="form-input w-full rounded-2xl border border-slate-200 bg-white px-6 py-4 text-[15px] placeholder:text-slate-400">
-                    </div>
-                    <div>
-                        <label class="sr-only" for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone" required placeholder="Phone Number" 
-                               class="form-input w-full rounded-2xl border border-slate-200 bg-white px-6 py-4 text-[15px] placeholder:text-slate-400">
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="sr-only" for="message">Describe your issue</label>
-                    <textarea id="message" name="message" rows="5" required placeholder="Tell us what’s happening — no hot water, new installation, annual maintenance, commercial project, etc."
-                              class="form-input w-full rounded-2xl border border-slate-200 bg-white px-6 py-4 text-[15px] placeholder:text-slate-400"></textarea>
-                </div>
-                
-                <button type="submit" 
-                        class="cta-primary w-full bg-[#c8102e] hover:bg-[#a50e26] active:scale-[0.985] text-white font-bold tracking-[-0.1px] py-4 rounded-3xl text-[15px] transition-all">
-                    Send Request — We’ll Call You Back
-                </button>
-                
-                <p class="text-center text-xs text-slate-500 pt-1">
-                    Or call <a href="tel:2132223457" class="font-semibold underline underline-offset-2 hover:text-slate-700">213.222.3457</a> for immediate assistance.
-                </p>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-white pt-14 pb-10 px-6">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-y-8 mb-11">
-                <div>
-                    <div class="text-[13px] tracking-[2px] text-white/60 mb-1">ETERNAHOT PLUMBING — <a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener noreferrer" class="hover:underline">CSLB #1150831</a> • 24/7 Emergency</div>
-                    <a href="tel:2132223457" class="text-white text-5xl md:text-[56px] font-semibold tracking-tighter leading-none hover:text-white/90 transition">213.222.3457</a>
-                    <div class="mt-1">
-                        <a href="mailto:office@eternahot.com" class="text-[#c8102e] hover:text-red-400 text-sm font-medium">office@eternahot.com</a>
-                    </div>
-                    <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-white/70">
-                        <a href="https://www.buildzoom.com/contractor/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">BuildZoom 96/100</a>
-                        <a href="https://www.trustpilot.com/review/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Trustpilot reviews</a>
-                    </div>
-                </div>
-                
-                <div class="text-sm text-white/70 md:text-right leading-tight">
-                    3415 S. Sepulveda Blvd., Suite 1100<br>
-                    Los Angeles, CA 90034
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 text-sm border-t border-white/10 pt-8">
-                <div>
-                    <div class="font-semibold tracking-wider text-xs mb-3 text-white/70">SERVICE AREAS</div>
-                    <div class="space-y-px text-white/80 text-[13.5px]">
-                        <div>Los Angeles &amp; Santa Monica</div>
-                        <div>Orange County</div>
-                        <div>Pasadena &amp; San Gabriel Valley</div>
-                        <div>South Bay &amp; Beach Cities</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="font-semibold tracking-wider text-xs mb-3 text-white/70">SERVICES</div>
-                    <div class="space-y-px text-white/80 text-[13.5px]">
-                        <div>Tankless &amp; Water Heater Install</div>
-                        <div>Emergency Repair</div>
-                        <div>Commercial &amp; Multifamily</div>
-                        <div>Annual Maintenance &amp; Flushes</div>
-                    </div>
-                </div>
-                <div>
-                    <div class="font-semibold tracking-wider text-xs mb-3 text-white/70">CREDENTIALS</div>
-                    <div class="space-y-px text-white/80 text-[13.5px]">
-                        <div><a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener noreferrer" class="hover:underline">CSLB #1150831</a> <span class="text-[10px] text-[#c8102e] hover:underline">Verify →</span></div>
-                        <div>Licensed, Insured &amp; Bonded</div>
-                        <div>Authorized Rinnai Specialist</div>
-                        <div>24/7 Real Emergency Response</div>
-                        <div class="pt-1"><a href="https://www.buildzoom.com/contractor/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="hover:underline">96/100 on BuildZoom</a></div>
-                        <div><a href="https://www.trustpilot.com/review/eternahot-plumbing" target="_blank" rel="noopener noreferrer" class="hover:underline">Reviews on Trustpilot</a></div>
-                    </div>
-                </div>
-                <div class="text-white/60 text-xs md:text-sm">
-                    © Eternahot Plumbing.<br class="hidden md:block">
-                    All rights reserved.<br>
-                    <span class="text-[10px]">Fourth-generation family plumbers.</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Sticky Mobile CTA -->
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-[60] bg-white/95 backdrop-blur border-t border-slate-200 px-4 py-3">
-        <div class="flex gap-3 max-w-7xl mx-auto">
-            <a href="tel:2132223457" class="flex-1 text-center bg-[#c8102e] text-white font-bold py-3.5 rounded-2xl text-sm tracking-[-0.1px]">Call 213.222.3457</a>
-            <a href="#contact-form" class="flex-1 text-center bg-slate-900 text-white font-bold py-3.5 rounded-2xl text-sm tracking-[-0.1px]">Request Service</a>
-        </div>
+<body>
+
+<!-- Announcement bar -->
+<div class="announce-bar">
+  Authorized Rinnai Pro Partner &nbsp;·&nbsp; CSLB #1150831 &nbsp;·&nbsp; 24/7 Emergency: <a href="tel:2132223457">(213) 222-3457</a>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-brand">
+    <a class="header-logo" href="index.html">
+      <img src="images/logo-eternahot.webp" alt="Eternahot">
+    </a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu" onclick="this.classList.toggle('open'); document.querySelector('nav').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="residential.html">Residential</a>
+    <a href="commercial.html">Commercial</a>
+    <a href="#services">Services</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:2132223457" class="nav-mobile-phone">(213) 222-3457</a>
+  </nav>
+  <div class="header-phone">
+    <a href="tel:2132223457">(213) 222-3457</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" style="background-image: url('images/hero.webp')">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Authorized Rinnai Partner</div>
+    <h1>Never Run Out of Hot Water.</h1>
+    <p>Southern California's tankless water heating specialists. We install, repair, and maintain systems for homes and businesses — with real 24/7 emergency service when you need it most.</p>
+    <div class="btn-group">
+      <a href="#contact" class="btn btn-primary">Get a Free Estimate</a>
+      <a href="tel:2132223457" class="btn btn-outline">Call (213) 222-3457</a>
     </div>
+  </div>
+</section>
 
-    <script>
-        // Tailwind / init
-        function initializeTailwind() {
-            console.log('%c[Eternahot] 10/10 conversion site initialized', 'color:#64748b;font-size:9px');
-        }
-        
-        // FAQ Accordion
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const isOpen = answer.classList.contains('open');
-            
-            // Close all others
-            document.querySelectorAll('.faq-answer').forEach(a => {
-                a.classList.remove('open');
-                if (a.previousElementSibling) a.previousElementSibling.classList.remove('open');
-            });
-            
-            if (!isOpen) {
-                answer.classList.add('open');
-                element.classList.add('open');
-            }
-        }
-        
-        // Form enhancement + validation (no calculator)
-        function enhanceForm() {
-            const form = document.getElementById('lead-form');
-            if (!form) return;
-            
-            form.addEventListener('submit', function(e) {
-                const name = form.querySelector('#name');
-                const phone = form.querySelector('#phone');
-                const message = form.querySelector('#message');
-                
-                let valid = true;
-                
-                [name, phone, message].forEach(field => {
-                    if (field && !field.value.trim()) {
-                        valid = false;
-                        field.classList.add('!border-red-400');
-                        setTimeout(() => field.classList.remove('!border-red-400'), 2200);
-                    }
-                });
-                
-                if (!valid) {
-                    e.preventDefault();
-                    return false;
-                }
-                
-                const btn = form.querySelector('button[type="submit"]');
-                if (btn) {
-                    const originalText = btn.textContent;
-                    btn.disabled = true;
-                    btn.textContent = 'Sending...';
-                    
-                    setTimeout(() => {
-                        if (btn) {
-                            btn.disabled = false;
-                            btn.textContent = originalText;
-                        }
-                    }, 4500);
-                }
-            });
-            
-            // Phone formatting
-            const phoneField = form.querySelector('#phone');
-            if (phoneField) {
-                phoneField.addEventListener('blur', () => {
-                    let v = phoneField.value.replace(/\D/g, '');
-                    if (v.length === 10) {
-                        phoneField.value = v.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                    }
-                });
-            }
-        }
-        
-        function addFaqKeyboard() {
-            document.querySelectorAll('.faq-question').forEach(q => {
-                q.setAttribute('tabindex', '0');
-                q.setAttribute('role', 'button');
-                q.setAttribute('aria-expanded', 'false');
-                
-                q.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleFaq(q);
-                        const open = q.classList.contains('open');
-                        q.setAttribute('aria-expanded', open ? 'true' : 'false');
-                    }
-                });
-            });
-        }
-        
-        function addSmoothAnchors() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        setTimeout(() => {
-                            const navH = 110;
-                            const top = target.getBoundingClientRect().top + window.scrollY - navH;
-                            window.scrollTo({ top, behavior: 'smooth' });
-                        }, 10);
-                    }
-                });
-            });
-        }
-        
-        function handleVideo() {
-            const video = document.querySelector('.hero-bg video');
-            if (!video) return;
-            
-            video.addEventListener('error', () => {
-                console.log('%c[Eternahot] Video failed to load — static hero active', 'color:#64748b');
-            });
-            
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                video.pause();
-                video.style.display = 'none';
-            }
-        }
-        
-        function init() {
-            initializeTailwind();
-            enhanceForm();
-            addFaqKeyboard();
-            addSmoothAnchors();
-            handleVideo();
-            
-            const logo = document.querySelector('.fixed-nav img');
-            if (logo) {
-                logo.style.cursor = 'pointer';
-                logo.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-            }
-            
-            console.log('%c[Eternahot] Best-in-class 10/10 site ready. Call 213.222.3457', 'color:#c8102e;font-size:10px');
-        }
-        
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-        
-        window.Eternahot = { toggleFaq };
-    </script>
-</body>
-</html>
+<!-- Trust badges -->
+<div class="trust-bar">
+  <div class="trust-item"><span>Rinnai</span>Certified Pro Partner</div>
+  <div class="trust-item"><span>Hot Water</span>Specialists Only</div>
+  <div class="trust-item"><span>24/7</span>Real Emergency Service</div>
+  <div class="trust-item"><span>CSLB</span>#1150831 Licensed</div>
+</div>
+
+<!-- Services split -->
+<section id="services" style="background: var(--light)">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Residential &amp; Commercial</h2>
+        <p class="section-sub">We focus exclusively on water heating — nothing else. That narrow focus means better work, smarter parts inventory, and faster response times.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div class="services-split">
+      <a href="residential.html" class="service-card" style="background-image: url('images/hero.webp')">
+        <div class="service-card-body">
+          <div class="service-card-tag">Homeowners</div>
+          <h3>Residential</h3>
+          <p>Endless hot water for your home. Tankless installation, repair, maintenance, and 24/7 emergency response.</p>
+          <div class="arrow-btn">Learn More &rarr;</div>
+        </div>
+      </a>
+      <a href="commercial.html" class="service-card" style="background-image: url('images/unit-basement.webp')">
+        <div class="service-card-body">
+          <div class="service-card-tag">Businesses &amp; Property Managers</div>
+          <h3>Commercial</h3>
+          <p>High-demand systems for restaurants, hotels, apartment buildings, and commercial properties of any size.</p>
+          <div class="arrow-btn">Learn More &rarr;</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Services grid -->
+<section>
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">Our Services</div>
+        <h2 class="section-title">Hot Water, Handled.</h2>
+        <p class="section-sub">From new installs to emergency repairs — we do it all, and we do it fast.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-installations.webp" alt="New Installations">
+      </div>
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-repair.webp" alt="Repair &amp; Diagnostics">
+      </div>
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-maintenance.webp" alt="Annual Maintenance">
+      </div>
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-emergency.webp" alt="24/7 Emergency">
+      </div>
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-commercial.webp" alt="Commercial &amp; Multifamily">
+      </div>
+      <div class="svc-card svc-patch-card">
+        <img src="images/patch-recirculation.webp" alt="Recirculation Systems">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About / why us -->
+<section style="background: var(--light)">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image">
+        <img src="images/unit.webp" alt="Rinnai tankless water heater" onerror="this.style.background='#222'">
+      </div>
+      <div>
+        <div class="section-label">Why Eternahot</div>
+        <h2 class="section-title">Hot Water. That's All We Do.</h2>
+        <p style="color:var(--mid); margin-bottom:8px;">We built Eternahot around one thing: hot water. That focus makes us faster, smarter, and better stocked than any general plumber.</p>
+        <ul class="about-points">
+          <li>Authorized Rinnai Pro Partner — factory trained &amp; certified</li>
+          <li>CSLB Licensed &amp; fully insured (#1150831)</li>
+          <li>Upfront pricing — the quote you get is the price you pay</li>
+          <li>Same-day service available across greater Los Angeles</li>
+          <li>Trucks stocked with the most common Rinnai parts</li>
+          <li>Written report provided after every maintenance visit</li>
+        </ul>
+        <div style="margin-top:28px;">
+          <a href="#contact" class="btn btn-primary">Get a Free Estimate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rinnai partner -->
+<section class="rinnai-section">
+  <div class="section-inner rinnai-inner">
+    <div class="rinnai-logo">
+      <img src="images/patch-rinnai.webp" alt="Rinnai" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+      <span class="rinnai-text" style="display:none">Rinnai</span>
+    </div>
+    <div class="rinnai-content">
+      <div class="section-label" style="color:var(--gold)">Our Brand Partner</div>
+      <h2 class="section-title">The Unit Matters As Much As the Installer.</h2>
+      <p>We chose to specialize in Rinnai because they're simply the most reliable tankless water heaters available. As an authorized partner, every installation we do carries full manufacturer warranty coverage.</p>
+      <div class="warranty-badges">
+        <div class="warranty-badge"><strong>Full</strong><span>Manufacturer Warranty</span></div>
+        <div class="warranty-badge"><strong>Varies</strong><span>By Model &amp; Series</span></div>
+        <div class="warranty-badge"><strong>40%</strong><span>Energy Savings</span></div>
+        <div class="warranty-badge"><strong>1yr</strong><span>Labor Warranty</span></div>
+      </div>
+      <a href="#contact" class="btn btn-primary">Schedule an Install</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">Transparent Pricing</div>
+        <h2 class="section-title">Know What to Expect.</h2>
+        <p class="section-sub">We give you a firm price before any work begins. No surprises.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Repair &amp; Diagnostics</h3>
+        <div class="pricing-price">$249 <span>per call</span></div>
+        <p>Flat rate covers up to 2 hours of labor. Parts billed separately if needed. $50 fuel surcharge per trip.</p>
+        <ul class="pricing-list">
+          <li>Diagnostic &amp; error code reading</li>
+          <li>Flow sensor &amp; igniter replacement</li>
+          <li>Gas valve &amp; pressure checks</li>
+          <li>Venting inspection &amp; correction</li>
+        </ul>
+        <a href="#contact" class="btn btn-dark" style="width:100%; text-align:center; display:block;">Book a Repair</a>
+      </div>
+      <div class="pricing-card">
+        <h3>Annual Maintenance</h3>
+        <div class="pricing-price">$249 <span>per unit</span></div>
+        <p>Flat rate per unit, per visit. Covers descaling chemicals and approximately 2 hours of labor. No additional charges.</p>
+        <ul class="pricing-list">
+          <li>Full descale &amp; chemical flush</li>
+          <li>Heat exchanger inspection</li>
+          <li>Gas pressure test</li>
+          <li>Written service report</li>
+        </ul>
+        <a href="#contact" class="btn btn-dark" style="width:100%; text-align:center; display:block;">Schedule Service</a>
+      </div>
+    </div>
+    <div class="highlight-box" style="margin-top:24px;">
+      <strong>Commercial &amp; multifamily?</strong> Pricing varies by system size and service frequency. Call us at <a href="tel:2132223457" style="color:var(--red); font-weight:700;">(213) 222-3457</a> or use the form below for a custom quote.
+    </div>
+  </div>
+</section>
+
+<!-- Reviews -->
+<section id="reviews" class="reviews-section">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">Customer Reviews</div>
+        <h2 class="section-title">What Our Customers Say.</h2>
+        <p class="section-sub">Over two decades of work in Southern California, reviewed by the people we've served.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Called at 7am with no hot water before a big client meeting. A tech was at my door by 9:30 and fixed it in under an hour. I've never seen that kind of response from any home services company."</p>
+        <div class="review-author">
+          <div class="review-avatar">JM</div>
+          <div><div class="review-name">James M.</div><div class="review-location">Silver Lake · Emergency repair</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"They replaced our 20-year-old tank with a Rinnai unit. The price they quoted was the price we paid — no surprises. The tech walked us through everything afterward. Couldn't ask for more."</p>
+        <div class="review-author">
+          <div class="review-avatar">SR</div>
+          <div><div class="review-name">Sandra R.</div><div class="review-location">Pasadena · New installation</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"We manage a 40-unit building and Eternahot handles all our water heating. Their service contract means we never worry — they're proactive, fast, and the team knows our system inside and out."</p>
+        <div class="review-author">
+          <div class="review-avatar">DK</div>
+          <div><div class="review-name">David K.</div><div class="review-location">Koreatown · Commercial property</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"I had three quotes. Eternahot was the only company that actually explained the difference between unit models and why one was better for my home's layout. The honest advice won me over."</p>
+        <div class="review-author">
+          <div class="review-avatar">AL</div>
+          <div><div class="review-name">Anita L.</div><div class="review-location">Glendale · Installation consultation</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Been using them for annual maintenance for four years. My Rinnai runs like new. They send a reminder every year, show up on time, and the written report is genuinely useful."</p>
+        <div class="review-author">
+          <div class="review-avatar">TN</div>
+          <div><div class="review-name">Tom N.</div><div class="review-location">Burbank · Annual maintenance</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Our restaurant runs through hot water fast. They designed a system that actually keeps up with us during rush hour. Zero downtime since the install, and they're always reachable when I have a question."</p>
+        <div class="review-author">
+          <div class="review-avatar">MC</div>
+          <div><div class="review-name">Maria C.</div><div class="review-location">Downtown LA · Restaurant</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Service area -->
+<section id="service-area">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">Service Area</div>
+        <h2 class="section-title">We Cover Southern California.</h2>
+        <p class="section-sub">Our trucks are based in Los Angeles and stocked with parts. Same-day service available throughout Southern California.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div style="max-width:380px;margin:0 auto 32px;">
+      <img src="images/patch-ca.webp" alt="Southern California service area map" style="width:100%;height:auto;display:block;">
+    </div>
+    <p style="color:var(--mid); font-size:0.9rem;">Not sure if we serve your area? Call <a href="tel:2132223457" style="color:var(--red); font-weight:700;">(213) 222-3457</a> — we'll let you know right away.</p>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" style="background:var(--light)">
+  <div class="section-inner">
+    <div class="services-header">
+      <div class="services-header-text">
+        <div class="section-label">Get in Touch</div>
+        <h2 class="section-title">Get a Free Estimate.</h2>
+        <p class="section-sub">Fill out the form and we'll reach out within a few hours — usually sooner. For emergencies, call (213) 222-3457 directly.</p>
+      </div>
+      <div class="services-faucet">
+        <img src="images/logo-eternahot.webp" alt="Eternahot">
+      </div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">📞</div>
+          <div><strong><a href="tel:2132223457">(213) 222-3457</a></strong><br><small style="color:var(--mid)">24/7 emergency line — we pick up every call</small></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">✉️</div>
+          <div><a href="mailto:office@eternahot.com">office@eternahot.com</a></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🕐</div>
+          <div>Mon–Fri 7am–7pm<br>Sat 8am–5pm<br><small style="color:var(--mid)">24/7 emergency dispatch available</small></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">🔒</div>
+          <div>CSLB Licensed &amp; Insured<br><a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener" style="color:var(--red); font-size:0.85rem;">Verify License #1150831 →</a></div>
+        </div>
+        <div style="margin-top:24px; padding:20px; background:var(--white); border-radius:var(--radius); border:1px solid #e0e0e0;">
+          <p style="font-size:0.85rem; color:var(--mid); margin-bottom:4px;">✓ No obligation — just an honest conversation</p>
+          <p style="font-size:0.85rem; color:var(--mid); margin-bottom:4px;">✓ Upfront pricing before any work begins</p>
+          <p style="font-size:0.85rem; color:var(--mid); margin-bottom:4px;">✓ Same-day service available in most areas</p>
+          <p style="font-size:0.85rem; color:var(--mid);">✓ We don't share your information</p>
+        </div>
+      </div>
+      <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
+        <input type="hidden" name="form-name" value="contact">
+        <div>
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="first_name" placeholder="First name" required>
+        </div>
+        <div>
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="last_name" placeholder="Smith">
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="(213) 555-0100" required>
+        </div>
+        <div>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="zip">Zip Code</label>
+          <input type="text" id="zip" name="zip" placeholder="90001">
+        </div>
+        <div>
+          <label for="service">Service Needed</label>
+          <select id="service" name="service">
+            <option value="">Select a service</option>
+            <option>New tankless installation</option>
+            <option>Repair / diagnostics</option>
+            <option>Annual maintenance</option>
+            <option>Emergency service</option>
+            <option>Commercial / multifamily</option>
+            <option>Recirculation system</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="message">Tell us a bit more (optional)</label>
+          <textarea id="message" name="message" placeholder="Describe your situation — unit age, symptoms, type of property..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary" style="width:100%">Send My Request</button>
+          <p style="font-size:0.78rem; color:var(--mid); margin-top:10px; text-align:center;">By submitting, you agree to be contacted by Eternahot. We don't sell or share your information.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Eternahot</div>
+      <p>Southern California's water heating specialists. Serving Los Angeles and the Southland since the 1990s. Authorized Rinnai Pro Partner.</p>
