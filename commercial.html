@@ -1,386 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Eternahot Commercial — High-demand water heating systems for restaurants, hotels, apartment buildings, and industrial facilities in Southern California. CSLB #1150831.">
-  <title>Commercial &amp; Industrial Water Heating | Eternahot</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="images/logo-eternahot.webp">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Commercial &amp; Industrial Water Heating | Eternahot — Los Angeles</title>
+<meta name="description" content="Commercial & industrial water heating in Southern California — restaurants, hotels, multifamily, industrial. System design, installation, service contracts & 24/7 emergency response. Rinnai commercial partner. CSLB #1150831.">
+<meta name="theme-color" content="#0C1926">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0C1926;         /* deep carbon navy */
+  --navy-2:#14283A;
+  --ivory:#F5F6F4;        /* cool porcelain */
+  --ivory-2:#EAEDEA;
+  --flame-1:#FF7A2F;      /* flame gradient start */
+  --flame-2:#FFC24B;      /* flame gradient end */
+  --flame-grad:linear-gradient(100deg,#FF7A2F,#FFC24B);
+  --brass:#D2570F;        /* flame — deep, for small text on light bg */
+  --brass-soft:#FF9147;   /* flame — bright, for dark bg */
+  --rule:#DADFDD;         /* hairline */
+  --rule-dark:rgba(255,255,255,.16);
+  --text:#1B2A36;
+  --mute:#5D6A74;
+  --mute-light:#A8B4BD;
+  --display:'Libre Caslon Display',Georgia,serif;
+  --serif:'Libre Caslon Text',Georgia,serif;
+  --sans:'Libre Franklin',system-ui,sans-serif;
+  --pad:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--serif);color:var(--text);background:var(--ivory);line-height:1.65;font-size:16.5px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:rgba(210,87,15,.18)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 var(--pad)}
+
+/* type system */
+h1,h2{font-family:var(--display);font-weight:400;line-height:1.12;letter-spacing:.005em}
+h2{font-size:clamp(1.9rem,5.4vw,2.9rem);margin:14px 0 16px}
+.sc{font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+.eyebrow{color:var(--brass);display:flex;align-items:center;gap:14px}
+.eyebrow::after{content:"";flex:0 0 34px;height:2px;background:var(--flame-grad)}
+.lede{color:var(--mute);font-size:1.02rem;max-width:58ch}
+.rule{border:none;border-top:1px solid var(--rule)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:17px 30px;border:1px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s;min-height:52px}
+.btn-brass{background:var(--flame-grad);color:#2A1300;box-shadow:0 6px 18px rgba(255,122,47,.28)}
+.btn-brass:hover{filter:brightness(1.06)}
+.btn-line{background:transparent;color:var(--navy);border-color:var(--navy)}
+.btn-line:hover{background:var(--navy);color:var(--ivory)}
+.btn-line-light{background:transparent;color:var(--ivory);border-color:rgba(255,255,255,.5)}
+.btn-line-light:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+/* topbar */
+.topbar{background:var(--navy);color:var(--mute-light);font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;text-align:center;padding:9px var(--pad)}
+.topbar b{color:var(--brass-soft);font-weight:600}
+.topbar a{color:#fff;font-weight:600}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:60;background:rgba(250,248,243,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;gap:12px}
+.brand{display:flex;flex-direction:column;line-height:1}
+.brand .word{font-family:var(--display);font-size:1.45rem;letter-spacing:.06em;color:var(--navy)}
+.brand .word em{font-style:normal;background:var(--flame-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand .strap{font-family:var(--sans);font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--mute);margin-top:5px}
+.nav-links{display:none;gap:30px;font-family:var(--sans);font-weight:500;font-size:.85rem;letter-spacing:.04em;color:var(--mute)}
+.nav-links a:hover{color:var(--navy)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.pill{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border:1px solid var(--rule);border-radius:99px;color:var(--mute);white-space:nowrap}
+.pill.open{color:#2E7D4F;border-color:#BFD9C9;background:#F0F7F2}
+.nav .btn{padding:12px 18px;min-height:44px;font-size:.72rem}
+
+/* hero */
+.hero{position:relative;background:var(--navy);color:var(--ivory);isolation:isolate}
+.hero-img{position:absolute;inset:0;z-index:-1}
+.hero-img img{width:100%;height:100%;object-fit:cover;opacity:.42}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,25,38,.55) 0%,rgba(12,25,38,.35) 45%,rgba(12,25,38,.92) 100%)}
+.hero .wrap{padding-top:76px;padding-bottom:64px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero .est{color:var(--brass-soft);display:flex;align-items:center;gap:14px;justify-content:center}
+.hero .est::before,.hero .est::after{content:"";width:34px;height:2px;background:var(--flame-grad)}
+.hero h1{font-size:clamp(2.7rem,10vw,4.9rem);margin:20px 0 18px;color:#fff}
+.hero h1 em{font-style:italic;font-family:var(--serif);background:linear-gradient(90deg,var(--flame-1),var(--flame-2),var(--flame-1));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heat 5s linear infinite}
+@keyframes heat{to{background-position:200% 0}}
+.hero .sub{font-size:1.05rem;color:rgba(250,248,243,.82);max-width:44ch;margin-bottom:32px}
+.hero .cta-col{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
+.hero .marks{margin-top:44px;padding-top:26px;border-top:1px solid var(--rule-dark);width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:18px 8px;font-family:var(--sans)}
+.hero .marks b{display:block;font-family:var(--display);font-size:1.15rem;background:var(--flame-grad);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.03em}
+.hero .marks span{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute-light)}
+
+/* section scaffolding */
+.section{padding:66px 0}
+.section.alt{background:var(--ivory-2)}
+.section.dark{background:var(--navy);color:var(--ivory)}
+.section.dark h2{color:#fff}
+.section.dark .lede{color:var(--mute-light)}
+
+/* photo + text feature */
+.feature{display:grid;gap:30px;margin-top:36px}
+.feature .photo{position:relative}
+.feature .photo img{width:100%;height:300px;object-fit:cover}
+.feature .photo::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.55);pointer-events:none}
+.photo-caption{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:12px}
+
+/* practice areas (services) */
+.practice{border-top:1px solid var(--rule);margin-top:36px}
+.practice-row{display:block;padding:26px 0;border-bottom:1px solid var(--rule);transition:background .2s}
+.practice-row:active{background:rgba(210,87,15,.05)}
+.practice-row .kicker{color:var(--brass)}
+.practice-row h3{font-family:var(--display);font-weight:400;font-size:1.55rem;margin:8px 0 6px;color:var(--navy);display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.practice-row h3 .arrow{font-family:var(--serif);color:var(--brass);font-size:1.2rem;flex-shrink:0}
+.practice-row p{color:var(--mute);font-size:.96rem;max-width:60ch}
+
+/* fee schedule */
+.fees{margin-top:36px;border-top:1px solid var(--rule)}
+.fee{display:flex;justify-content:space-between;align-items:baseline;gap:18px;padding:24px 0;border-bottom:1px solid var(--rule)}
+.fee .name h4{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--navy)}
+.fee .name p{font-size:.9rem;color:var(--mute);max-width:44ch;margin-top:4px}
+.fee .amt{font-family:var(--display);font-size:1.9rem;color:var(--navy);white-space:nowrap;text-align:right}
+.fee .amt small{display:block;font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-top:2px}
+.fees-note{font-family:var(--sans);font-size:.78rem;color:var(--mute);margin-top:18px;font-style:normal}
+
+/* credentials band */
+.creds{display:grid;gap:0;margin-top:36px;border:1px solid var(--rule-dark)}
+.cred{padding:26px 24px;border-bottom:1px solid var(--rule-dark)}
+.cred:last-child{border-bottom:none}
+.cred .sc{color:var(--brass-soft)}
+.cred p{color:var(--mute-light);font-size:.94rem;margin-top:8px}
+.cred b{color:#fff;font-weight:700}
+
+/* testimonials */
+.quote{margin-top:36px;padding:0 0 0 22px;border-left:3px solid transparent;border-image:linear-gradient(180deg,var(--flame-1),var(--flame-2)) 1}
+.quote+.quote{margin-top:30px}
+.quote blockquote{font-size:1.12rem;line-height:1.6;font-style:italic;color:var(--navy)}
+.quote cite{display:block;font-style:normal;font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:12px}
+
+/* engagement (form) */
+.engage{background:#fff;border:1px solid var(--rule);padding:34px 26px;margin-top:36px}
+.engage h3{font-family:var(--display);font-weight:400;font-size:1.6rem;color:var(--navy);margin-bottom:6px}
+.engage .hint{font-size:.92rem;color:var(--mute);margin-bottom:22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:7px}
+.field input,.field select{width:100%;padding:15px 14px;border:1px solid var(--rule);background:var(--ivory);font-family:var(--serif);font-size:1rem;color:var(--text);border-radius:0;appearance:none;-webkit-appearance:none}
+.field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23D2570F'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brass)}
+.engage .btn{width:100%;margin-top:8px}
+.engage .fine{font-family:var(--sans);font-size:.72rem;color:var(--mute);text-align:center;margin-top:14px}
+
+/* footer */
+footer.site{background:var(--navy);color:var(--mute-light);padding:56px 0 130px;font-size:.92rem}
+footer.site .foot-word{font-family:var(--display);font-size:1.6rem;color:#fff;letter-spacing:.06em}
+footer.site .foot-word em{font-style:normal;background:var(--flame-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+footer.site .strap{font-family:var(--sans);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mute-light);margin-top:6px}
+footer.site .cols{display:grid;gap:30px;margin-top:34px;padding-top:34px;border-top:1px solid var(--rule-dark)}
+footer.site h5{font-family:var(--sans);font-size:.66rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-soft);margin-bottom:12px}
+footer.site a{display:block;margin-bottom:9px;color:var(--ivory)}
+footer.site a:hover{color:var(--brass-soft)}
+.legal{font-family:var(--sans);font-size:.74rem;line-height:1.8;margin-top:30px;padding-top:24px;border-top:1px solid var(--rule-dark)}
+
+/* mobile call bar */
+.callbar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:1.15fr 1fr;background:var(--navy);border-top:1px solid var(--rule-dark);padding-bottom:env(safe-area-inset-bottom)}
+.callbar a{font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:17px 10px}
+.callbar .c1{background:var(--flame-grad);color:#2A1300}
+.callbar .c2{color:var(--ivory)}
+
+/* rinnai logo treatments */
+.rinnai-logo{display:inline-block;height:22px;width:auto;vertical-align:middle}
+.rinnai-logo.on-dark{filter:brightness(0) invert(1);opacity:.95}
+.rinnai-lockup{display:flex;align-items:center;gap:12px;margin-top:10px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.reveal{opacity:1;transform:none}}
+
+/* ---------- desktop enhancements ---------- */
+@media(min-width:860px){
+  body{font-size:17px}
+  .nav-links{display:flex}
+  .hero .wrap{padding-top:110px;padding-bottom:100px}
+  .hero .cta-col{flex-direction:row;max-width:none;justify-content:center}
+  .hero .cta-col .btn{min-width:230px}
+  .hero .marks{grid-template-columns:repeat(4,190px);justify-content:center;gap:24px}
+  .section{padding:96px 0}
+  .feature{grid-template-columns:1fr 1fr;align-items:center;gap:56px}
+  .feature .photo img{height:440px}
+  .feature.flip .photo{order:2}
+  .creds{grid-template-columns:repeat(3,1fr)}
+  .cred{border-bottom:none;border-right:1px solid var(--rule-dark)}
+  .cred:last-child{border-right:none}
+  .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+  .quote+.quote{margin-top:36px}
+  .engage-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .engage{margin-top:0}
+  footer.site{padding-bottom:56px}
+  footer.site .cols{grid-template-columns:2fr 1fr 1fr}
+  .callbar{display:none}
+}
+
+/* subpage additions */
+.compare{display:grid;gap:22px;margin-top:36px}
+.compare .col{background:#fff;border:1px solid var(--rule);padding:30px 28px}
+.compare .col.hotcol{border-top:3px solid transparent;border-image:var(--flame-grad) 1 0 0 0;border-top-width:3px}
+.compare h4{font-family:var(--display);font-weight:400;font-size:1.4rem;color:var(--navy);margin-bottom:14px}
+.compare ul{list-style:none;display:grid;gap:10px}
+.compare li{font-size:.95rem;color:var(--mute);padding-left:24px;position:relative}
+.compare li::before{content:"\2014";position:absolute;left:0;color:var(--rule)}
+.compare .hotcol li{color:var(--text)}
+.compare .hotcol li::before{content:"\2713";color:var(--brass)}
+.faq{margin-top:36px;border-top:1px solid var(--rule)}
+.faq details{border-bottom:1px solid var(--rule)}
+.faq summary{cursor:pointer;list-style:none;padding:22px 0;font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--navy);display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.faq summary::after{content:"+";font-family:var(--display);color:var(--brass);font-size:1.3rem;flex-shrink:0}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 22px;color:var(--mute);font-size:.97rem;max-width:64ch}
+.crumb{font-family:var(--sans);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute-light);margin-bottom:18px}
+.crumb a{color:var(--brass-soft)}
+@media(min-width:860px){.compare{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 
-<!-- Announcement bar -->
-<div class="announce-bar">
-  Authorized Rinnai Pro Partner &nbsp;·&nbsp; CSLB #1150831 &nbsp;·&nbsp; 24/7 Emergency: <a href="tel:2132223457">(213) 222-3457</a>
-</div>
-
-<!-- Header -->
-<header class="site-header">
-  <div class="header-brand">
-    <a class="header-logo" href="index.html">
-      <img src="images/logo-eternahot.webp" alt="Eternahot">
+<div class="topbar">Water Heating Specialists &nbsp;·&nbsp; <b>CSLB #1150831</b> &nbsp;·&nbsp; 24/7 <a href="tel:2132223457">(213) 222-3457</a></div>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="word">ETERNA<em>HOT</em></span>
+      <span class="strap">Water Heating Specialists</span>
     </a>
+    <div class="nav-links">
+      <a href="/residential">Residential</a>
+      <a href="/commercial">Commercial</a>
+      <a href="/#guarantee">Our Guarantee</a>
+      <a href="#engage">Contact</a>
+    </div>
+    <div class="nav-right">
+      <span class="pill" id="hoursPill">Hours</span>
+      <a class="btn btn-brass" href="tel:2132223457">Call</a>
+    </div>
   </div>
-  <button class="nav-toggle" aria-label="Toggle menu" onclick="this.classList.toggle('open'); document.querySelector('nav').classList.toggle('open')">
-    <span></span><span></span><span></span>
-  </button>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="residential.html">Residential</a>
-    <a href="commercial.html" class="active">Commercial</a>
-    <a href="index.html#services">Services</a>
-    <a href="index.html#reviews">Reviews</a>
-    <a href="#contact">Contact</a>
-    <a href="tel:2132223457" class="nav-mobile-phone">(213) 222-3457</a>
-  </nav>
-  <div class="header-phone">
-    <a href="tel:2132223457">(213) 222-3457</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1686682728880-d3d3a0ebb048?q=70&w=1600&auto=format&fit=crop" alt="Commercial water heating pipework" fetchpriority="high">
+  </div>
+  <div class="wrap">
+    <span class="sc est">Commercial &amp; Industrial</span>
+    <h1>High-demand hot water,<br><em>any scale.</em></h1>
+    <p class="sub">Restaurants, hotels, apartment buildings, and industrial facilities across Southern California. We design, install, and maintain systems that keep up — no matter the demand.</p>
+    <div class="cta-col">
+      <a class="btn btn-brass" href="tel:2132223457">Call (213) 222-3457</a>
+      <a class="btn btn-line-light" href="#engage">Request a consultation</a>
+    </div>
+    <div class="marks">
+      <div><b>Contracts</b><span>Service Agreements</span></div>
+      <div><b>Design</b><span>Included w/ Projects</span></div>
+      <div><b>№ 1150831</b><span>CSLB Licensed</span></div>
+      <div><b>24 / 7</b><span>Emergency Response</span></div>
+    </div>
   </div>
 </header>
 
-<!-- Page hero -->
-<div class="page-hero" style="background-image: url('images/unit-basement.webp')">
-  <div class="page-hero-content">
-    <div class="breadcrumb"><a href="index.html">Home</a> <span>›</span> Commercial</div>
-    <div class="hero-eyebrow">Commercial &amp; Industrial</div>
-    <h1>High-Demand Hot Water. Any Scale.</h1>
-    <p>Restaurants, hotels, apartment buildings, and industrial facilities across Southern California. We design, install, and maintain systems that keep up — no matter the demand.</p>
-    <div class="btn-group" style="margin-top:24px;">
-      <a href="#contact" class="btn btn-primary">Request a Commercial Quote</a>
-      <a href="tel:2132223457" class="btn btn-outline">Call (213) 222-3457</a>
-    </div>
-  </div>
-</div>
-
-<!-- Trust bar -->
-<div class="trust-bar">
-  <div class="trust-item"><span>Service</span>Contracts Available</div>
-  <div class="trust-item"><span>24/7</span>Emergency Response</div>
-  <div class="trust-item"><span>System</span>Design Included</div>
-  <div class="trust-item"><span>CSLB</span>#1150831 Licensed</div>
-</div>
-
-<!-- Who we serve -->
-<section>
-  <div class="section-inner">
-    <div class="services-header">
-      <div class="services-header-text">
-        <div class="section-label">Who We Serve</div>
-        <h2 class="section-title">Residential. Commercial. Industrial.</h2>
-        <p class="section-sub">We serve every scale of property — from a single apartment unit to a large industrial facility. All with the same focus: keeping your hot water running without interruption.</p>
-      </div>
-      <div class="services-faucet"><img src="images/logo-eternahot.webp" alt="Eternahot"></div>
-    </div>
-    <div class="who-we-serve-grid">
-      <div style="text-align:center; padding:32px 16px; background:var(--light); border-radius:var(--radius); border-top:3px solid var(--red);">
-        <div style="font-size:2.4rem; margin-bottom:12px;">🏠</div>
-        <h3 style="font-size:0.9rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Residential</h3>
-        <p style="font-size:0.82rem; color:var(--mid);">Single-family homes &amp; condos</p>
-      </div>
-      <div style="text-align:center; padding:32px 16px; background:var(--light); border-radius:var(--radius); border-top:3px solid var(--red);">
-        <div style="font-size:2.4rem; margin-bottom:12px;">🏢</div>
-        <h3 style="font-size:0.9rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Commercial</h3>
-        <p style="font-size:0.82rem; color:var(--mid);">Restaurants, hotels, offices</p>
-      </div>
-      <div style="text-align:center; padding:32px 16px; background:var(--dark); border-radius:var(--radius); border-top:3px solid var(--gold);">
-        <div style="font-size:2.4rem; margin-bottom:12px;">🏭</div>
-        <h3 style="font-size:0.9rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px; color:var(--white);">Industrial</h3>
-        <p style="font-size:0.82rem; color:rgba(255,255,255,0.6);">Manufacturing, facilities, campuses</p>
-      </div>
-      <div style="text-align:center; padding:32px 16px; background:var(--light); border-radius:var(--radius); border-top:3px solid var(--red);">
-        <div style="font-size:2.4rem; margin-bottom:12px;">🏗️</div>
-        <h3 style="font-size:0.9rem; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;">Multifamily</h3>
-        <p style="font-size:0.82rem; color:var(--mid);">Apartment buildings &amp; HOAs</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Services -->
-<section id="services" style="background:var(--light)">
-  <div class="section-inner">
-    <div class="section-label">Commercial Services</div>
-    <h2 class="section-title">Everything We Do for Commercial &amp; Industrial.</h2>
-    <p class="section-sub">We don't subcontract water heating work — we do it ourselves, with factory-trained technicians and a fully stocked truck on every call.</p>
-    <div class="services-grid">
-      <div class="svc-card">
-        <div class="svc-icon">📐</div>
+<section class="section">
+  <div class="wrap">
+    <p class="sc eyebrow">Commercial Services</p>
+    <h2>Designed, installed, and kept running.</h2>
+    <p class="lede">We don’t subcontract water heating work — we do it ourselves, with factory-trained technicians and a fully stocked truck on every call.</p>
+    <div class="practice">
+      <div class="practice-row reveal">
+        <span class="sc kicker">Engineer</span>
         <h3>System Design</h3>
-        <p>We engineer the right solution before anything gets ordered. Flow rate analysis, fixture count, peak demand calculations, and code compliance — all included in the design phase. Complex projects are designed in direct collaboration with Rinnai Engineering.</p>
+        <p>We engineer the right solution before anything gets ordered — flow-rate analysis, fixture count, peak-demand calculations, and code compliance, all included in the design phase. Complex projects are designed in direct collaboration with Rinnai Engineering.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">⚡</div>
-        <h3>Tankless Installation</h3>
-        <p>Commercial Rinnai tankless units — including the CX series and Demand Duo — designed for high-volume continuous hot water. We handle permitting, gas, venting, and startup.</p>
+      <div class="practice-row reveal">
+        <span class="sc kicker">Install</span>
+        <h3>Tankless &amp; Rack Systems</h3>
+        <p>Commercial tankless installations engineered for high-volume, continuous hot water — including rack and hybrid configurations. We handle permitting, gas, venting, and startup.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">🔥</div>
+      <div class="practice-row reveal">
+        <span class="sc kicker">Install</span>
         <h3>Hybrid &amp; Tank Systems</h3>
-        <p>Some commercial applications are better served by high-capacity tank or hybrid systems. We'll recommend the right technology for your usage patterns and budget.</p>
+        <p>Some commercial applications are better served by high-capacity tank or hybrid systems. We recommend the right technology for your usage patterns — not the one we happen to sell.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">💧</div>
+      <div class="practice-row reveal">
+        <span class="sc kicker">Comfort</span>
         <h3>Recirculation Systems</h3>
         <p>Commercial recirculation loops for hotels, apartment buildings, and large offices. Hot water at every fixture instantly — no wasted water, no wait time.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">🔩</div>
-        <h3>Pipe Repairs</h3>
-        <p>Leaks, failed fittings, corroded connections, pressure relief issues — we handle all the pipe and connection work related to your commercial water heating system.</p>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">📋</div>
+      <div class="practice-row reveal">
+        <span class="sc kicker">Maintain</span>
         <h3>Service Contracts</h3>
-        <p>Preventive maintenance programs for commercial and industrial accounts. Scheduled service visits, priority dispatch, and a dedicated single point of contact.</p>
+        <p>Preventive maintenance programs for commercial and industrial accounts — scheduled service visits, priority dispatch, and a dedicated single point of contact who knows your system’s history.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">🔧</div>
-        <h3>Repair &amp; Diagnostics</h3>
-        <p>Commercial water heater down? We prioritize commercial clients. Our trucks carry parts for the most common commercial Rinnai and multi-unit configurations.</p>
+      <div class="practice-row reveal">
+        <span class="sc kicker">Repair</span>
+        <h3>Repair, Diagnostics &amp; Troubleshooting</h3>
+        <p>Commercial system down? We prioritize commercial clients and dig into the root cause — not just the symptom — so the problem stays fixed. Any make, any model.</p>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon">🔍</div>
-        <h3>Troubleshooting</h3>
-        <p>Intermittent issues, temperature inconsistencies, pressure problems — we dig into the root cause, not just the symptom, so the problem stays fixed.</p>
+      <a class="practice-row reveal" href="tel:2132223457">
+        <span class="sc kicker">A dedicated line to a real technician</span>
+        <h3>24/7 Emergency <span class="arrow">→</span></h3>
+        <p>A restaurant without hot water loses revenue every minute. Our emergency line connects to a technician — not a call center — around the clock.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <p class="sc eyebrow">Industries We Serve</p>
+    <h2>We know your hot water demands.</h2>
+    <p class="lede">Every facility has its own peak-demand pattern. We’ve engineered solutions for them all across Southern California.</p>
+    <div class="practice">
+      <div class="practice-row reveal"><span class="sc kicker">Restaurants &amp; Food Service</span><p style="margin-top:8px">High-volume dishwashing, prep sinks, and hand-wash stations run all day. We design systems that keep up through peak service without a single cold moment — health-code compliance built in.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Hotels &amp; Hospitality</span><p style="margin-top:8px">Guest satisfaction lives and dies on hot water. We design recirculating systems so every room, on every floor, has instant hot water at any occupancy.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Multifamily &amp; HOAs</span><p style="margin-top:8px">Multiple units, multiple morning peaks. We engineer central systems and recirculation loops sized to your unit count and plumbing layout, so every tenant is satisfied simultaneously.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Car Washes</span><p style="margin-top:8px">Spot-free rinse systems and heated bays need consistent, high-volume hot water. We engineer tankless systems that handle continuous throughput without the lag of tank storage.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Spas &amp; Wellness</span><p style="margin-top:8px">Hydrotherapy pools, steam rooms, and treatment rooms demand precise, reliable temperatures at all hours. We design systems that meet those standards without compromise.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Casinos &amp; Entertainment</span><p style="margin-top:8px">Around-the-clock operations with restaurants, hotels, and spas under one roof. We handle multi-zone systems with redundancy built in — because downtime isn’t an option.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Elderly Care &amp; Assisted Living</span><p style="margin-top:8px">Bathing schedules, laundry demands, and scald-prevention requirements make senior facilities a specialized install. We understand the codes and engineer systems that meet them.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Gyms &amp; Fitness</span><p style="margin-top:8px">Post-workout shower rushes hit hard and fast. Tankless handles simultaneous demand that would drain a conventional tank within minutes — no cold showers, no complaints.</p></div>
+      <div class="practice-row reveal"><span class="sc kicker">Industrial &amp; Manufacturing</span><p style="margin-top:8px">Process hot water, wash stations, facility restrooms — we size systems for continuous industrial demand, with service contracts that keep you running and compliant year-round.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rinnai">
+  <div class="wrap">
+    <p class="sc eyebrow">Commercial Systems</p>
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Rinnai.svg" alt="Rinnai" style="height:30px;width:auto;margin:6px 0 14px">
+    <h2>Built for demand that never stops.</h2>
+    <p class="lede">Rinnai’s commercial line is engineered for applications where hot water demand never lets up. As a Rinnai PRO Network member, we work directly with Rinnai Engineering on system design — so every installation is sized and configured to your actual peak load, not guesswork.</p>
+  </div>
+</section>
+
+<section class="section dark">
+  <div class="wrap">
+    <p class="sc eyebrow">In Their Words</p>
+    <div class="quote" style="border-image:linear-gradient(180deg,var(--flame-1),var(--flame-2)) 1">
+      <blockquote style="color:#fff">We manage a forty-unit building and Eternahot handles all of our water heating. Their service contract means we never worry — they’re proactive, fast, and the team knows our system inside and out.</blockquote>
+      <cite style="color:var(--mute-light)">David K. — Property Manager, Koreatown</cite>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="engage">
+  <div class="wrap">
+    <div class="engage-grid">
+      <div>
+        <p class="sc eyebrow">Get In Touch</p>
+        <h2>Let’s talk about your facility.</h2>
+        <p class="lede">Commercial work is scoped per project. Call us directly, or describe your facility below and we’ll come back with a custom scope — typically within a few hours.</p>
+        <div style="margin-top:26px">
+          <a class="btn btn-line" href="tel:2132223457">Call (213) 222-3457</a>
+        </div>
       </div>
-      <div class="svc-card">
-        <div class="svc-icon" style="background:none;width:auto;height:auto;border-radius:0;margin-bottom:8px;"><img src="images/patch-flame.webp" alt="" style="width:64px;height:64px;object-fit:contain;"></div>
-        <h3>24/7 Emergency</h3>
-        <p>A restaurant with no hot water loses revenue every minute. We have a dedicated emergency line that connects to a real technician — not a call center — around the clock.</p>
+      <div class="engage reveal">
+        <h3>Request a consultation</h3>
+        <p class="hint">Tell us about your facility. We’ll take it from there.</p>
+        <form name="commercial-request" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="commercial-request">
+          <p style="display:none"><label>Leave this empty: <input name="bot-field"></label></p>
+          <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-phone">Telephone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email"></div>
+          <div class="field"><label for="c-facility">Facility Type</label>
+            <select id="c-facility" name="facility">
+              <option>Restaurant / food service</option>
+              <option>Hotel / hospitality</option>
+              <option>Apartment building / multifamily / HOA</option>
+              <option>Car wash</option>
+              <option>Spa / wellness center</option>
+              <option>Casino / entertainment venue</option>
+              <option>Elderly care / assisted living</option>
+              <option>Gym / fitness center</option>
+              <option>Healthcare / medical</option>
+              <option>Industrial / manufacturing</option>
+              <option>Office building</option>
+              <option>Other commercial</option>
+            </select>
+          </div>
+          <button class="btn btn-brass" type="submit">Submit Request</button>
+        </form>
+        <p class="fine">We typically respond within a few hours. For urgent needs, call directly.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Rinnai commercial -->
-<section class="rinnai-section">
-  <div class="section-inner rinnai-inner">
-    <div class="rinnai-logo">
-      <img src="images/patch-rinnai.webp" alt="Rinnai" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-      <span class="rinnai-text" style="display:none">Rinnai</span>
-    </div>
-    <div class="rinnai-content">
-      <div class="section-label" style="color:var(--gold)">Commercial Rinnai Systems</div>
-      <h2 class="section-title">Built for Commercial Demand.</h2>
-      <p>Rinnai's commercial line is engineered for applications where hot water demand never stops. As an authorized commercial partner, we work directly with Rinnai Engineering on system design — so every installation is sized and configured to your actual peak load, not guesswork.</p>
-      <div style="display:flex; flex-direction:column; gap:12px; margin:28px 0;">
-        <a href="brochures/rinnai-commercial-water-heating.pdf" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; background:var(--dark-2); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--gold); border-radius:var(--radius); padding:18px 24px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#2a2a2a'" onmouseout="this.style.background='var(--dark-2)'">
-          <strong style="font-size:1rem; color:var(--white);">Rinnai Commercial Water Heating Solutions</strong>
-          <span style="font-size:0.8rem; color:var(--gold); font-weight:700; white-space:nowrap; margin-left:20px;">📄 Download →</span>
-        </a>
-        <a href="brochures/rinnai-rack-systems.pdf" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; background:var(--dark-2); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--gold); border-radius:var(--radius); padding:18px 24px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#2a2a2a'" onmouseout="this.style.background='var(--dark-2)'">
-          <strong style="font-size:1rem; color:var(--white);">Rinnai Tankless Rack Systems</strong>
-          <span style="font-size:0.8rem; color:var(--gold); font-weight:700; white-space:nowrap; margin-left:20px;">📄 Download →</span>
-        </a>
-        <a href="brochures/rinnai-demand-duo.pdf" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:space-between; background:var(--dark-2); border:1px solid rgba(255,255,255,0.1); border-left:4px solid var(--gold); border-radius:var(--radius); padding:18px 24px; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#2a2a2a'" onmouseout="this.style.background='var(--dark-2)'">
-          <strong style="font-size:1rem; color:var(--white);">Rinnai Demand Duo&#174; Hybrid Commercial Water Heating Solutions</strong>
-          <span style="font-size:0.8rem; color:var(--gold); font-weight:700; white-space:nowrap; margin-left:20px;">📄 Download →</span>
-        </a>
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-word">ETERNA<em>HOT</em></div>
+    <div class="strap">Water Heating Specialists · Los Angeles</div>
+    <div class="cols">
+      <div>
+        <h5>The Firm</h5>
+        <p style="color:var(--mute-light);font-size:.92rem;max-width:46ch">Southern California's water heating specialists, based in Los Angeles.</p>
+        <div class="rinnai-lockup"><img class="rinnai-logo on-dark" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rinnai.svg" alt="Rinnai"><span class="sc" style="color:var(--mute-light);font-size:.58rem">PRO Network Member</span></div>
       </div>
-      <a href="#contact" class="btn btn-primary">Request a Commercial Quote</a>
+      <div>
+        <h5>Services</h5>
+        <a href="/residential">Residential</a>
+        <a href="/commercial">Commercial</a>
+        <a href="/#guarantee">Our Guarantee</a>
+        <a href="/#specials">Current Specials</a>
+        <a href="/#rinnai">For Rinnai Owners</a>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <a href="tel:2132223457">(213) 222-3457</a>
+        <a href="mailto:office@eternahot.com">office@eternahot.com</a>
+        <a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener">Verify CSLB № 1150831</a>
+      </div>
     </div>
+    <p class="legal">© Eternahot · CSLB № 1150831 · Los Angeles, California · Photography courtesy of Unsplash contributors.</p>
   </div>
-</section>
-
-<!-- Industries -->
-<section>
-  <div class="section-inner">
-    <div class="services-header">
-      <div class="services-header-text">
-        <div class="section-label">Industries We Serve</div>
-        <h2 class="section-title">We Know Your Hot Water Demands.</h2>
-        <p class="section-sub">Every type of commercial facility has different peak demand patterns. We've engineered solutions for them all across Southern California.</p>
-      </div>
-      <div class="services-faucet"><img src="images/logo-eternahot.webp" alt="Eternahot"></div>
-    </div>
-    <div class="industries-grid">
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🍽️ Restaurants &amp; Food Service</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">High-volume dishwashing, prep sinks, and hand-wash stations run all day. We design systems that keep up during peak service hours without a single cold moment. Health code compliance built in.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🏨 Hotels &amp; Hospitality</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Guest satisfaction lives and dies on hot water. We design recirculating systems so every room — on every floor — has instant hot water, all day, no matter occupancy.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🏢 Multifamily &amp; Apartment Buildings</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Multiple units, multiple morning peaks. We engineer central systems and recirculation loops sized for your specific unit count and plumbing layout, so every tenant stays satisfied simultaneously.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🚿 Car Washes</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Spot-free rinse systems and heated wash bays need consistent, high-volume hot water. We engineer tankless systems that handle continuous throughput without the lag of tank storage.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🧖 Spas &amp; Wellness Centers</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Hydrotherapy pools, steam rooms, showers, and treatment rooms demand precise, reliable water temperatures at all hours. We design systems that meet those standards without compromise.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🎰 Casinos &amp; Entertainment Venues</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">24/7 operations with restaurants, hotels, and spa facilities all under one roof. We handle the complexity of multi-zone systems with redundancy built in — because downtime isn't an option.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🏥 Elderly Care &amp; Assisted Living</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Bathing schedules, laundry demands, and scald-prevention requirements make senior living facilities a specialized install. We understand the codes and engineer systems that meet them.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🏋️ Gyms &amp; Fitness Centers</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Post-workout shower rushes hit hard and fast. Tankless handles simultaneous demand that would drain a conventional tank system within minutes. No cold showers, no complaints.</p>
-      </div>
-      <div style="padding:24px; border:1px solid #e0e0e0; border-radius:var(--radius); box-shadow:var(--shadow);">
-        <h3 style="font-size:1rem; font-weight:800; margin-bottom:8px;">🏭 Industrial &amp; Manufacturing</h3>
-        <p style="font-size:0.88rem; color:var(--mid);">Process hot water, wash stations, facility restrooms — we size systems for continuous industrial demand with service contracts that keep you running and compliant year-round.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Review -->
-<section style="background:var(--dark); color:var(--white);">
-  <div class="section-inner" style="max-width:720px; text-align:center;">
-    <div class="review-stars" style="color:var(--gold); font-size:1.2rem; letter-spacing:3px; margin-bottom:20px;">★★★★★</div>
-    <p style="font-size:1.1rem; line-height:1.8; color:rgba(255,255,255,0.85); font-style:italic; margin-bottom:24px;">"We manage a 40-unit building and Eternahot handles all our water heating. Their service contract means we never worry — they're proactive, fast, and the team knows our system inside and out."</p>
-    <div style="font-weight:700; color:var(--white);">David K.</div>
-    <div style="font-size:0.85rem; color:rgba(255,255,255,0.55); margin-top:4px;">Property Manager, Koreatown</div>
-    <div style="margin-top:32px;">
-      <a href="#contact" class="btn btn-primary">Get a Commercial Quote</a>
-    </div>
-  </div>
-</section>
-
-
-<!-- Pricing -->
-<section id="pricing" style="background:var(--light)">
-  <div class="section-inner">
-    <div class="services-header">
-      <div class="services-header-text">
-        <div class="section-label">Commercial Pricing</div>
-        <h2 class="section-title">Straightforward Commercial Rates.</h2>
-        <p class="section-sub">No hidden fees. Installations and system design are quoted per project — call or fill out the form for a custom scope. Service, repair, and diagnostics are billed at the rates below.</p>
-      </div>
-      <div class="services-faucet"><img src="images/logo-eternahot.webp" alt="Eternahot"></div>
-    </div>
-    <div class="commercial-pricing-grid">
-      <div style="background:var(--white); border-radius:var(--radius); border:2px solid var(--red); padding:36px 32px;">
-        <h3 style="font-size:1rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--mid); margin-bottom:16px;">Service &amp; Repair</h3>
-        <div style="font-size:2.6rem; font-weight:900; color:var(--dark); line-height:1; margin-bottom:6px;">$200<span style="font-size:1.1rem; font-weight:600; color:var(--mid);"> / hour</span></div>
-        <div style="font-size:0.88rem; color:var(--mid); margin-bottom:24px;">2-hour minimum per call</div>
-        <ul style="list-style:none; font-size:0.9rem; color:var(--dark); display:flex; flex-direction:column; gap:10px; margin-bottom:28px;">
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--red); font-weight:700;">+</span>$50 fuel surcharge per trip</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--red); font-weight:700;">+</span>Parts billed separately at cost</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--red); font-weight:700;">✓</span>Priority dispatch for contract clients</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--red); font-weight:700;">✓</span>24/7 emergency available</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" style="width:100%; text-align:center; display:block;">Request Service</a>
-      </div>
-      <div style="background:var(--dark); border-radius:var(--radius); padding:36px 32px; color:var(--white);">
-        <h3 style="font-size:1rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:16px;">Installations &amp; Projects</h3>
-        <div style="font-size:2.6rem; font-weight:900; color:var(--white); line-height:1; margin-bottom:6px;">Custom<span style="font-size:1.1rem; font-weight:600; color:rgba(255,255,255,0.55);"> quote</span></div>
-        <div style="font-size:0.88rem; color:rgba(255,255,255,0.55); margin-bottom:24px;">Scoped per facility &amp; scope of work</div>
-        <ul style="list-style:none; font-size:0.9rem; color:rgba(255,255,255,0.8); display:flex; flex-direction:column; gap:10px; margin-bottom:28px;">
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--gold); font-weight:700;">✓</span>System design included at no charge</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--gold); font-weight:700;">✓</span>Permit filing included</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--gold); font-weight:700;">✓</span>Dedicated single point of contact</li>
-          <li style="display:flex; align-items:flex-start; gap:10px;"><span style="color:var(--gold); font-weight:700;">✓</span>Service contract options available</li>
-        </ul>
-        <a href="#contact" class="btn btn-outline" style="width:100%; text-align:center; display:block;">Get a Project Quote</a>
-      </div>
-    </div>
-    <p style="margin-top:20px; font-size:0.85rem; color:var(--mid);">Service contract clients receive discounted hourly rates and priority scheduling. Ask about contract terms when you call.</p>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="section-inner">
-    <div class="section-label" style="color:rgba(255,255,255,0.7)">Fast. Reliable. Expert Solutions.</div>
-    <h2 class="section-title">Let's Talk About Your Facility.</h2>
-    <p>Commercial quotes are custom. Call us directly or fill out the form and we'll typically respond within a few hours.</p>
-    <div class="btn-group">
-      <a href="#contact" class="btn btn-dark">Request a Quote</a>
-      <a href="tel:2132223457" class="btn btn-outline">Call (213) 222-3457</a>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact" style="background:var(--light)">
-  <div class="section-inner">
-    <div class="services-header">
-      <div class="services-header-text">
-        <div class="section-label">Get in Touch</div>
-        <h2 class="section-title">Request a Commercial Quote.</h2>
-        <p class="section-sub">Describe your facility and we'll come back with a custom scope and price — no obligation.</p>
-      </div>
-      <div class="services-faucet"><img src="images/logo-eternahot.webp" alt="Eternahot"></div>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📞</div>
-          <div><strong><a href="tel:2132223457">(213) 222-3457</a></strong><br><small style="color:var(--mid)">24/7 emergency line</small></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">✉️</div>
-          <div><a href="mailto:office@eternahot.com">office@eternahot.com</a></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🕐</div>
-          <div>Mon–Fri 7am–7pm &nbsp;·&nbsp; Sat 8am–5pm<br><small style="color:var(--mid)">24/7 emergency dispatch</small></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🔒</div>
-          <div>CSLB Licensed &amp; Insured<br><a href="https://www.cslb.ca.gov/onlineservices/checklicenseII/LicenseDetail.aspx?LicNum=1150831" target="_blank" rel="noopener" style="color:var(--red); font-size:0.85rem;">Verify License #1150831 →</a></div>
-        </div>
-      </div>
-      <form name="contact" method="POST" data-netlify="true" action="/thank-you.html">
-        <input type="hidden" name="form-name" value="contact">
-        <div>
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="first_name" placeholder="First name" required>
-        </div>
-        <div>
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="last_name" placeholder="Last name">
-        </div>
-        <div>
-          <label for="phone">Phone Number</label>
-          <input type="tel" id="phone" name="phone" placeholder="(213) 555-0100" required>
-        </div>
-        <div>
-          <label for="email">Email Address</label>
-          <input type="email" id="email" name="email" placeholder="you@example.com">
-        </div>
-        <div class="full">
-          <label for="facility">Facility Type &amp; Size</label>
-          <select id="facility" name="facility">
-            <option value="">Select facility type</option>
-            <option>Restaurant / food service</option>
-            <option>Hotel / hospitality</option>
-            <option>Apartment building / multifamily</option>
-            <option>Car wash</option>
-            <option>Spa / wellness center</option>
-            <option>Casino / entertainment venue</option>
-            <option>Elderly care / assisted living</option>
-            <option>Gym / fitness center</option>
-            <option>Healthcare / medical</option>
-            <option>Industrial / manufacturing</option>
-            <option>Office building</option>
-            <option>Other commercial</option>
-          </select>
-        </div>
-        <div class="full">
-          <label for="message">Tell us about your facility &amp; needs</label>
-          <textarea id="message" name="message" placeholder="Number of units, building size, current system, what's happening or what you're looking to install..."></textarea>
-        </div>
-        <div class="form-submit">
-          <button type="submit" class="btn btn-primary" style="width:100%">Send My Request</button>
-          <p style="font-size:0.78rem; color:var(--mid); margin-top:10px; text-align:center;">We typically respond within a few hours. For urgent needs, call (213) 222-3457 directly.</p>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+</footer>
+<div class="callbar">
+  <a class="c1" href="tel:2132223457">Call Now</a>
+  <a class="c2" href="#engage">Request Service</a>
+</div>
+<script>
+(function(){
+  var pill=document.getElementById('hoursPill');
+  var pt=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+  var h=pt.getHours(), d=pt.getDay();
+  var open=(d>=1&&d<=6)&&(h>=7&&h<18);
+  if(open){pill.textContent='Open now';pill.classList.add('open');}
+  else{pill.textContent='24/7 Line';}
+})();
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
