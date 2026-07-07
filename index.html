@@ -237,8 +237,8 @@ footer.site a:hover{color:var(--brass-soft)}
       <span class="strap">Water Heating Specialists</span>
     </a>
     <div class="nav-links">
-      <a href="https://eternahot.com/residential">Residential</a>
-      <a href="https://eternahot.com/commercial">Commercial</a>
+      <a href="/residential">Residential</a>
+      <a href="/commercial">Commercial</a>
       <a href="#guarantee">Our Guarantee</a>
       <a href="#engage">Contact</a>
     </div>
@@ -295,12 +295,12 @@ footer.site a:hover{color:var(--brass-soft)}
     <p class="sc eyebrow">Areas of Service</p>
     <h2>How we can be of service.</h2>
     <div class="practice">
-      <a class="practice-row reveal" href="https://eternahot.com/residential">
+      <a class="practice-row reveal" href="/residential">
         <span class="sc kicker">For Homeowners</span>
         <h3>Residential <span class="arrow">→</span></h3>
         <p>Repair and maintenance on every make and model — tank or tankless — plus new installations, replacements, and 24-hour emergency response.</p>
       </a>
-      <a class="practice-row reveal" href="https://eternahot.com/commercial">
+      <a class="practice-row reveal" href="/commercial">
         <span class="sc kicker">For Businesses & Property Managers</span>
         <h3>Commercial &amp; Multifamily <span class="arrow">→</span></h3>
         <p>High-demand systems for restaurants, hotels, apartment buildings, and HOAs — engineered, installed, and maintained under service agreement.</p>
@@ -496,15 +496,19 @@ footer.site a:hover{color:var(--brass-soft)}
       <div class="engage reveal">
         <h3>Request service</h3>
         <p class="hint">Tell us what’s happening. We’ll take it from there.</p>
-        <div class="field"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name"></div>
-        <div class="field"><label for="f-phone">Telephone</label><input id="f-phone" type="tel" autocomplete="tel" inputmode="tel"></div>
-        <div class="field"><label for="f-type">Property</label>
-          <select id="f-type"><option>Home</option><option>Business / multifamily</option></select>
-        </div>
-        <div class="field"><label for="f-need">Matter</label>
-          <select id="f-need"><option>Repair — no hot water</option><option>New tankless installation</option><option>Maintenance / descale</option><option>Something else</option></select>
-        </div>
-        <button class="btn btn-brass" type="button" onclick="sendEstimate(this)">Submit Request</button>
+        <form name="service-request" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="service-request">
+          <p style="display:none"><label>Leave this empty: <input name="bot-field"></label></p>
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="f-phone">Telephone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+          <div class="field"><label for="f-type">Property</label>
+            <select id="f-type" name="property"><option>Home</option><option>Business / multifamily</option></select>
+          </div>
+          <div class="field"><label for="f-need">Matter</label>
+            <select id="f-need" name="matter"><option>Repair — no hot water</option><option>New installation</option><option>Maintenance / descale</option><option>Something else</option></select>
+          </div>
+          <button class="btn btn-brass" type="submit">Submit Request</button>
+        </form>
         <p class="fine">Your information is used only to return your call.</p>
       </div>
     </div>
@@ -523,8 +527,8 @@ footer.site a:hover{color:var(--brass-soft)}
       </div>
       <div>
         <h5>Services</h5>
-        <a href="https://eternahot.com/residential">Residential</a>
-        <a href="https://eternahot.com/commercial">Commercial</a>
+        <a href="/residential">Residential</a>
+        <a href="/commercial">Commercial</a>
         <a href="#guarantee">Our Guarantee</a>
         <a href="#specials">Current Specials</a>
         <a href="#rinnai">For Rinnai Owners</a>
@@ -559,7 +563,6 @@ var io=new IntersectionObserver(function(es){
   es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-function sendEstimate(btn){btn.textContent='Received — we\u2019ll call you';btn.disabled=true;}
 </script>
 </body>
 </html>
