@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eternahot — Commercial & Premium Residential Water Heating | Southern California</title>
-<meta name="description" content="Eternahot is a licensed Southern California plumbing contractor specializing in potable water heating. Commercial & premium residential tankless installation, maintenance, and repair on every make and model. 24/7 emergency. 1-year workmanship guarantee. CSLB #1150831.">
+<meta name="description" content="Eternahot is a licensed Southern California plumbing contractor specializing in water heating. Commercial & premium residential tankless installation, maintenance, and repair on every make and model. 24/7 emergency. 1-year workmanship guarantee. CSLB #1150831.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot">
-<meta property="og:title" content="Eternahot — Potable Water Heating Specialists">
+<meta property="og:title" content="Eternahot — Hot Water Experts">
 <meta property="og:description" content="Commercial & premium residential tankless water heating. Installation, maintenance, and service across Southern California.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,19 +115,23 @@
   @media (max-width:860px){.topnav{display:none}.btn-cta{margin-left:auto}}
 
   /* ============ Hero ============ */
-  header.hero{position:relative;overflow:hidden;padding:84px 0 64px}
+  header.hero{
+    position:relative;overflow:hidden;padding:clamp(48px,8vw,84px) 0 clamp(48px,7vw,64px);
+    background:#0C0B0D url('assets/hot-water.jpg') center/cover no-repeat;
+  }
   header.hero::before{
     content:"";position:absolute;inset:0;pointer-events:none;
     background:
-      radial-gradient(ellipse 60% 50% at 82% -6%, rgba(225,29,46,.22), transparent 60%),
-      radial-gradient(ellipse 55% 45% at 6% 8%, rgba(124,8,23,.20), transparent 62%);
+      linear-gradient(180deg, rgba(12,11,13,.80) 0%, rgba(12,11,13,.90) 55%, var(--bg) 100%),
+      radial-gradient(ellipse 60% 50% at 82% -6%, rgba(225,29,46,.24), transparent 60%),
+      radial-gradient(ellipse 55% 45% at 6% 8%, rgba(124,8,23,.22), transparent 62%);
   }
   header.hero::after{
     content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
     background:linear-gradient(to right,transparent,rgba(225,29,46,.6),transparent);
   }
-  .hero-inner{position:relative;max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .hero-flame{width:64px;height:64px;margin-bottom:8px;filter:drop-shadow(0 10px 24px rgba(225,29,46,.5))}
+  .hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .hero-logo{width:min(264px,74vw);height:auto;margin-bottom:6px;filter:drop-shadow(0 14px 32px rgba(225,29,46,.35))}
   h1{
     font-size:clamp(2.4rem,7.2vw,4.2rem);font-weight:900;color:var(--ink);
     letter-spacing:-.03em;line-height:1.04;margin:20px 0 0;
@@ -145,6 +149,13 @@
   .hero-hl{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:28px auto 0}
   .hero-hl .h{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:#D5D0DA;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:999px;padding:9px 15px}
   .hero-hl .h svg{width:16px;height:16px;stroke:#FF6B5A;fill:none;stroke-width:2}
+  /* Rinnai Certified credential chip */
+  .rinnai-cert{display:inline-flex;align-items:center;gap:12px;margin:24px auto 0;background:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 12px 34px -14px rgba(0,0,0,.7)}
+  .rinnai-cert img{height:20px;width:auto;display:block}
+  .rinnai-cert span{font-size:.78rem;font-weight:700;color:#1A1A1A;letter-spacing:.02em;border-left:1px solid #E2E2E2;padding-left:12px}
+  /* brand logo images */
+  .brand-logo{height:32px;width:auto;display:block}
+  footer .brand-logo{height:36px}
 
   /* ============ Trust strip ============ */
   .trust{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--bg-2)}
@@ -340,10 +351,7 @@
 <div class="topbar">
   <div class="wrap topbar-inner">
     <a class="brand" href="#top" aria-label="Eternahot home">
-      <span class="mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24"><path d="M12 2c1 3-1 4-1 6a3 3 0 0 0 5 2c1 2 1 3 1 4a5 5 0 1 1-10 0c0-3 2-4 2-7 0-2 2-4 3-5z"/></svg>
-      </span>
-      <span class="word">Eterna<span class="tld">hot</span></span>
+      <img class="brand-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
     </a>
     <nav class="topnav" aria-label="Sections">
       <a href="#services">Services</a>
@@ -362,10 +370,10 @@
 <!-- ============ HERO ============ -->
 <header class="hero">
   <div class="wrap hero-inner">
-    <svg class="hero-flame" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="fg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF6B5A"/><stop offset="1" stop-color="#B00E22"/></linearGradient></defs><path fill="url(#fg)" d="M12 2c1.4 3.6-1.3 4.9-1.3 7.4a3.2 3.2 0 0 0 5.4 2.2c1.1 2 1.2 3.2 1.2 4.4a5.3 5.3 0 1 1-10.6 0c0-3.4 2.2-4.6 2.2-7.7C8.9 5.6 10.8 3.4 12 2z"/></svg>
-    <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Potable Water Heating Specialists · Southern California</span>
+    <img class="hero-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
+    <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Hot Water Experts · Southern California</span>
     <h1>Endless hot water,<br><span class="grad">engineered to last.</span></h1>
-    <p class="lede">Eternahot is a commercial &amp; premium residential plumbing contractor built around one thing: reliable potable water heating. Tankless is our specialty — but we install, maintain, and service everything that makes hot water.</p>
+    <p class="lede">Eternahot is a commercial &amp; premium residential plumbing contractor built around one thing: reliable hot water. Tankless is our specialty — but we install, maintain, and service everything that makes hot water.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#contact">
         <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
@@ -380,6 +388,10 @@
       <span class="h"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>24/7 emergency</span>
       <span class="h"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>1-year guarantee</span>
       <span class="h"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg>Every make &amp; model</span>
+    </div>
+    <div class="rinnai-cert" aria-label="Rinnai Certified Installer">
+      <img src="assets/rinnai-logo.svg" alt="Rinnai" width="88" height="22">
+      <span>Certified Installer</span>
     </div>
   </div>
 </header>
@@ -419,7 +431,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow"><span class="spark" aria-hidden="true"></span>What We Do</span>
-      <h2>Full-service potable water heating</h2>
+      <h2>Full-service water heating</h2>
       <p>From ground-up commercial systems to a premium home retrofit — design, installation, maintenance, and emergency service under one roof.</p>
     </div>
     <div class="cards">
@@ -457,7 +469,7 @@
       <article class="card">
         <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 12h2M13 12h2M9 16h2M13 16h2"/></svg></span>
         <h3>Everything That Makes Hot Water</h3>
-        <p>Tank, hybrid heat-pump, high-efficiency, and DHW off boilers. If it heats potable water, we install, maintain, and repair it.</p>
+        <p>Tank, hybrid heat-pump, high-efficiency, and DHW off boilers. If it heats water, we install, maintain, and repair it.</p>
       </article>
 
     </div>
@@ -508,7 +520,7 @@
     <div class="sec-head">
       <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Why Eternahot</span>
       <h2>Specialists, not generalists</h2>
-      <p>Potable water heating is all we do. That focus shows up in cleaner installs, faster diagnoses, and systems that keep running.</p>
+      <p>Hot water is all we do. That focus shows up in cleaner installs, faster diagnoses, and systems that keep running.</p>
     </div>
     <div class="why-grid">
 
@@ -598,7 +610,7 @@
     <div class="faq">
       <details class="qa">
         <summary>Do you only work on tankless water heaters? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">Tankless is our specialty, but no — we install, maintain, and repair every system that produces potable hot water: traditional tanks, hybrid heat-pump units, high-efficiency models, and DHW off commercial boilers.</div>
+        <div class="a">Tankless is our specialty, but no — we install, maintain, and repair every system that produces hot water: traditional tanks, hybrid heat-pump units, high-efficiency models, and DHW off commercial boilers.</div>
       </details>
       <details class="qa">
         <summary>Do you handle commercial projects? <span class="q-ico" aria-hidden="true"></span></summary>
@@ -653,9 +665,8 @@
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a class="brand" href="#top">
-        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2c1 3-1 4-1 6a3 3 0 0 0 5 2c1 2 1 3 1 4a5 5 0 1 1-10 0c0-3 2-4 2-7 0-2 2-4 3-5z"/></svg></span>
-        <span class="word">Eterna<span class="tld">hot</span></span>
+      <a class="brand" href="#top" aria-label="Eternahot home">
+        <img class="brand-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
       </a>
       <nav class="foot-links" aria-label="Footer">
         <a href="#services">Services</a>
@@ -666,7 +677,7 @@
       </nav>
     </div>
     <p class="foot-legal">
-      Eternahot — potable water heating specialists serving Los Angeles &amp; Southern California. Commercial &amp; premium residential installation, maintenance, and repair on every make and model. Licensed &amp; insured, CSLB&nbsp;#1150831. 1-year workmanship guarantee · 24/7 emergency service.
+      Eternahot — hot water experts serving Los Angeles &amp; Southern California. Commercial &amp; premium residential installation, maintenance, and repair on every make and model. Licensed &amp; insured, CSLB&nbsp;#1150831. 1-year workmanship guarantee · 24/7 emergency service.
       <!-- TODO(client): add a physical/mailing address and posted business hours here if you want them listed -->
       &nbsp;·&nbsp; info@eternahot.com &nbsp;·&nbsp; (213) 222-3457
       <br>© <span id="yr">2026</span> Eternahot. All rights reserved.
