@@ -2,718 +2,231 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eternahot — Commercial & Premium Residential Water Heating | Southern California</title>
-<meta name="description" content="Eternahot is a licensed Southern California plumbing contractor specializing in water heating. Commercial & premium residential tankless installation, maintenance, and repair on every make and model. 24/7 emergency. 1-year workmanship guarantee. CSLB #1150831.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Eternahot — Hot Water Experts | Call (213) 222-3457 | Southern California</title>
+<meta name="description" content="No hot water? Eternahot are Southern California's hot water experts — commercial & residential repair, install, and service on every make and model. Licensed CSLB #1150831, Rinnai Certified, 1-year guarantee, 24/7 emergency. Call (213) 222-3457.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot">
-<meta property="og:title" content="Eternahot — Hot Water Experts">
-<meta property="og:description" content="Commercial & premium residential tankless water heating. Installation, maintenance, and service across Southern California.">
+<meta property="og:title" content="Eternahot — Hot Water Experts · Southern California">
+<meta property="og:description" content="Repair, install, and service on every make & model. Licensed, Rinnai Certified, 1-year guarantee, 24/7 emergency. Call (213) 222-3457.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0C0B0D;
-    --bg-2:#111015;
-    --card:#171519;
-    --card-2:#1D1A20;
-    --line:#2A262E;
-    --line-soft:#211E25;
-    --ink:#FFFFFF;
-    --body:#A7A2AD;
-    --dim:#6A646F;
-    --red:#E11D2E;
-    --red-2:#B00E22;
-    --red-deep:#7C0817;
-    --ember:#FF5A47;
+    --bg:#0C0B0D; --bg-2:#111015; --card:#171519; --line:#2A262E; --line-soft:#211E25;
+    --ink:#FFFFFF; --body:#A7A2AD; --dim:#6A646F;
+    --red:#E11D2E; --ember:#FF5A47;
     --grad:linear-gradient(135deg,#F03246 0%,#C20E2E 45%,#7C0817 100%);
-    --grad-soft:linear-gradient(135deg,rgba(240,50,70,.16),rgba(124,8,23,.10));
+    --grad-text:linear-gradient(120deg,#FF6B5A,#E11D2E 55%,#B00E22);
     --ease:cubic-bezier(0.16,1,0.3,1);
-    --radius:16px;
-    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:96px}
-  @media (max-width:760px){html{scroll-padding-top:80px}}
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *,*::before,*::after{animation:none!important;transition:none!important}
-  }
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
   body{
     font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--body);line-height:1.6;
-    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-    padding-bottom:76px;overflow-x:hidden;
+    background:var(--bg);color:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;padding-bottom:0;
   }
   a{color:inherit;text-decoration:none}
   img{max-width:100%;display:block}
   :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
-  ::selection{background:rgba(225,29,46,.35);color:#fff}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px;width:100%}
 
-  .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
-  .serif{font-family:'Fraunces',Georgia,'Times New Roman',serif}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-    color:#FF7A6B;
-    border:1px solid rgba(225,29,46,.4);border-radius:999px;
-    padding:7px 15px;background:rgba(225,29,46,.07);
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:52px;
+    font-weight:800;border-radius:13px;padding:15px 26px;cursor:pointer;border:1px solid transparent;
+    transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);white-space:nowrap;
   }
-  .eyebrow .spark{width:6px;height:6px;border-radius:50%;background:var(--ember);box-shadow:0 0 10px var(--ember)}
+  .btn svg{width:20px;height:20px;fill:currentColor;flex:0 0 auto}
+  .btn-call{background:var(--grad);color:#fff;font-size:1.18rem;letter-spacing:.01em;
+    box-shadow:0 16px 40px -12px rgba(225,29,46,.7), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-call:hover{transform:translateY(-2px);box-shadow:0 22px 50px -14px rgba(225,29,46,.85)}
+  .btn-call:active{transform:translateY(0)}
+  .btn-sm{min-height:44px;padding:11px 18px;font-size:.95rem;font-weight:700}
 
-  /* ============ Utility credibility bar ============ */
-  .ubar{
-    background:linear-gradient(90deg,rgba(124,8,23,.28),rgba(225,29,46,.14),rgba(124,8,23,.28));
-    border-bottom:1px solid var(--line-soft);
-    font-size:.76rem;letter-spacing:.02em;color:#CFC9D3;
-  }
-  .ubar-inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;padding:8px 16px;text-align:center}
+  /* ===== thin credibility bar ===== */
+  .ubar{background:linear-gradient(90deg,rgba(124,8,23,.30),rgba(225,29,46,.14),rgba(124,8,23,.30));border-bottom:1px solid var(--line-soft);font-size:.75rem;letter-spacing:.02em;color:#CFC9D3}
+  .ubar-inner{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:8px 16px;text-align:center}
   .ubar b{color:#fff;font-weight:700}
-  .ubar a{color:#fff;font-weight:700}
   .ubar .sep{color:var(--dim)}
   .ubar .hrs{display:inline-flex;align-items:center;gap:6px;font-weight:600}
   .ubar .hrs .led{width:7px;height:7px;border-radius:50%;background:#39D98A;box-shadow:0 0 8px #39D98A}
   .ubar .hrs.closed .led{background:var(--ember);box-shadow:0 0 8px var(--ember)}
-  @media (max-width:520px){.ubar{font-size:.72rem}.ubar .sep.opt{display:none}}
+  @media (max-width:520px){.ubar .sep.opt,.ubar .opt{display:none}}
 
-  /* ============ Top bar ============ */
-  .topbar{
-    position:sticky;top:0;z-index:60;
-    background:rgba(12,11,13,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--line-soft);
-  }
-  .topbar-inner{display:flex;align-items:center;gap:18px;height:64px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:800;color:#fff;font-size:1.18rem;letter-spacing:-.02em;flex:0 0 auto}
-  .brand .mark{
-    width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
-    background:var(--grad);box-shadow:0 6px 18px -6px rgba(225,29,46,.7), inset 0 1px 0 rgba(255,255,255,.25);
-  }
-  .brand .mark svg{width:17px;height:17px;fill:#fff}
-  .brand .tld{color:var(--red);font-weight:800}
-  .topnav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
-  .topnav::-webkit-scrollbar{display:none}
-  .topnav a{
-    font-size:.9rem;font-weight:600;color:var(--body);white-space:nowrap;
-    padding:8px 13px;border-radius:9px;transition:color .2s var(--ease),background .2s var(--ease);
-  }
-  .topnav a:hover{color:#fff;background:rgba(255,255,255,.05)}
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;
-    font-weight:700;font-size:.92rem;border-radius:11px;padding:11px 20px;
-    transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);
-    cursor:pointer;border:1px solid transparent;white-space:nowrap;
-  }
-  .btn svg{width:16px;height:16px;fill:currentColor}
-  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 30px -10px rgba(225,29,46,.65), inset 0 1px 0 rgba(255,255,255,.22)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgba(225,29,46,.8)}
-  .btn-ghost{background:rgba(255,255,255,.04);color:#fff;border-color:var(--line)}
-  .btn-ghost:hover{border-color:var(--red);background:rgba(225,29,46,.08)}
-  .btn-cta{flex:0 0 auto;margin-left:6px}
-  @media (max-width:860px){.topnav{display:none}.btn-cta{margin-left:auto}}
+  /* ===== sticky header ===== */
+  .head{position:sticky;top:0;z-index:60;background:rgba(12,11,13,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line-soft)}
+  .head-inner{display:flex;align-items:center;justify-content:space-between;gap:14px;height:62px}
+  .head .logo{height:30px;width:auto}
+  @media (max-width:420px){.head .btn-sm span{display:none}.head .btn-sm{padding:11px 14px}}
 
-  /* ============ Hero ============ */
-  header.hero{
-    position:relative;overflow:hidden;padding:clamp(48px,8vw,84px) 0 clamp(48px,7vw,64px);
-    background:#0C0B0D url('assets/hot-water.jpg') center/cover no-repeat;
-  }
-  header.hero::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:
-      linear-gradient(180deg, rgba(12,11,13,.80) 0%, rgba(12,11,13,.90) 55%, var(--bg) 100%),
-      radial-gradient(ellipse 60% 50% at 82% -6%, rgba(225,29,46,.24), transparent 60%),
-      radial-gradient(ellipse 55% 45% at 6% 8%, rgba(124,8,23,.22), transparent 62%);
-  }
-  header.hero::after{
-    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
-    background:linear-gradient(to right,transparent,rgba(225,29,46,.6),transparent);
-  }
-  .hero-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .hero-logo{width:min(264px,74vw);height:auto;margin-bottom:6px;filter:drop-shadow(0 14px 32px rgba(225,29,46,.35))}
-  h1{
-    font-size:clamp(2.4rem,7.2vw,4.2rem);font-weight:900;color:var(--ink);
-    letter-spacing:-.03em;line-height:1.04;margin:20px 0 0;
-  }
-  h1 .grad{
-    background:linear-gradient(120deg,#FF6B5A,#E11D2E 55%,#B00E22);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .lede{margin:22px auto 0;font-size:clamp(1.02rem,2.4vw,1.2rem);max-width:600px;color:#BAB5C0}
-  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;justify-content:center}
-  .hero-cta .btn{padding:15px 28px;font-size:1rem}
-  .hero-note{margin:24px auto 0;display:inline-flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-size:.88rem;color:var(--dim);max-width:560px}
-  .hero-note svg{width:16px;height:16px;fill:none;stroke:var(--ember);stroke-width:2;flex:0 0 auto}
-  /* highlight band under hero */
-  .hero-hl{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:28px auto 0}
-  .hero-hl .h{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;color:#D5D0DA;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:999px;padding:9px 15px}
-  .hero-hl .h svg{width:16px;height:16px;stroke:#FF6B5A;fill:none;stroke-width:2}
-  /* Rinnai Certified credential chip */
-  .rinnai-cert{display:inline-flex;align-items:center;gap:12px;margin:24px auto 0;background:#fff;border-radius:12px;padding:10px 16px;box-shadow:0 12px 34px -14px rgba(0,0,0,.7)}
-  .rinnai-cert img{height:20px;width:auto;display:block}
-  .rinnai-cert span{font-size:.78rem;font-weight:700;color:#1A1A1A;letter-spacing:.02em;border-left:1px solid #E2E2E2;padding-left:12px}
-  /* brand logo images */
-  .brand-logo{height:32px;width:auto;display:block}
-  footer .brand-logo{height:36px}
+  /* ===== hero ===== */
+  .hero{position:relative;overflow:hidden;background:#0C0B0D url('assets/hot-water.jpg') center/cover no-repeat;
+    min-height:calc(100svh - 62px - 37px);display:flex;align-items:center;padding:44px 0 52px}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(12,11,13,.78),rgba(12,11,13,.88) 55%,var(--bg) 100%),
+      radial-gradient(ellipse 60% 50% at 50% -8%,rgba(225,29,46,.22),transparent 62%)}
+  .hero-in{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;margin:0 auto;max-width:720px}
+  .hero-logo{width:min(220px,64vw);height:auto;margin-bottom:14px;filter:drop-shadow(0 14px 30px rgba(225,29,46,.35))}
+  .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FF7A6B;margin-bottom:14px}
+  h1{font-family:'Inter',sans-serif;font-size:clamp(2.5rem,8vw,4.4rem);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.02}
+  h1 .grad{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:20px auto 0;font-size:clamp(1.02rem,2.4vw,1.18rem);max-width:540px;color:#C6C1CC}
 
-  /* ============ Trust strip ============ */
-  .trust{border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:var(--bg-2)}
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-  @media (max-width:760px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
-  .trust-item{padding:26px 22px;text-align:center;border-right:1px solid var(--line-soft)}
-  .trust-item:last-child{border-right:0}
-  @media (max-width:760px){
-    .trust-item{border-bottom:1px solid var(--line-soft)}
-    .trust-item:nth-child(2n){border-right:0}
-    .trust-item:nth-last-child(-n+2){border-bottom:0}
-  }
-  .trust-item .t-ico{width:26px;height:26px;margin:0 auto 10px;stroke:var(--red);fill:none;stroke-width:1.8}
-  .trust-item .t-h{color:#fff;font-weight:700;font-size:1rem}
-  .trust-item .t-p{font-size:.82rem;margin-top:3px}
+  .call-wrap{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+  .btn-call{width:min(420px,92vw)}
+  .call-note{font-size:.9rem;color:#C6C1CC;display:inline-flex;align-items:center;gap:8px}
+  .call-note .led{width:8px;height:8px;border-radius:50%;background:#39D98A;box-shadow:0 0 9px #39D98A;flex:0 0 auto}
+  .call-note.closed .led{background:var(--ember);box-shadow:0 0 9px var(--ember)}
 
-  /* ============ Section scaffolding ============ */
-  section{padding:clamp(54px,8vw,80px) 0}
-  .sec-head{max-width:660px;margin:0 auto 44px;text-align:center}
-  .sec-head h2{
-    font-family:'Fraunces',serif;font-weight:700;color:#fff;
-    font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-.02em;line-height:1.08;margin-top:14px;
-  }
-  .sec-head p{margin-top:14px;font-size:1.04rem;color:var(--body)}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:26px;max-width:600px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:#D5D0DA;
+    background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .chip svg{width:15px;height:15px;stroke:#FF6B5A;fill:none;stroke-width:2;flex:0 0 auto}
+  .rinnai-cert{display:inline-flex;align-items:center;gap:11px;margin-top:14px;background:#fff;border-radius:11px;padding:9px 15px;box-shadow:0 12px 34px -14px rgba(0,0,0,.7)}
+  .rinnai-cert img{height:18px;width:auto}
+  .rinnai-cert span{font-size:.74rem;font-weight:700;color:#1A1A1A;border-left:1px solid #E2E2E2;padding-left:11px}
 
-  /* ============ Services ============ */
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media (max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:600px){.cards{grid-template-columns:1fr}}
-  .card{
-    position:relative;background:var(--card);border:1px solid var(--line);text-align:center;
-    border-radius:var(--radius);padding:30px 24px;overflow:hidden;
-    transition:transform .28s var(--ease),border-color .28s var(--ease),box-shadow .28s var(--ease);
-  }
-  .card::after{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--grad);transform:scaleX(0);transform-origin:center;transition:transform .3s var(--ease)}
-  .card:hover{transform:translateY(-4px);border-color:rgba(225,29,46,.5);box-shadow:0 22px 44px -26px rgba(225,29,46,.5)}
-  .card:hover::after{transform:scaleX(1)}
-  .card .ico{
-    width:50px;height:50px;border-radius:13px;display:grid;place-items:center;margin:0 auto 18px;
-    background:var(--grad-soft);border:1px solid rgba(225,29,46,.28);
-  }
-  .card .ico svg{width:24px;height:24px;stroke:#FF6B5A;fill:none;stroke-width:1.8}
-  .card h3{color:#fff;font-size:1.12rem;font-weight:700;letter-spacing:-.01em}
-  .card p{margin-top:9px;font-size:.92rem;color:var(--body)}
+  .email-line{margin-top:24px;font-size:.92rem;color:var(--dim)}
+  .email-line a{color:#fff;font-weight:800;border-bottom:1px solid rgba(255,255,255,.3)}
 
-  /* ============ Segments (commercial / residential) ============ */
-  .segs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media (max-width:820px){.segs{grid-template-columns:1fr}}
-  .seg{
-    position:relative;border-radius:20px;padding:36px 30px;overflow:hidden;text-align:center;
-    background:linear-gradient(165deg,var(--card-2),var(--card));border:1px solid var(--line);
-    display:flex;flex-direction:column;align-items:center;
-  }
-  .seg.primary{border-color:rgba(225,29,46,.45)}
-  .seg.primary::before{content:"";position:absolute;inset:0;background:var(--grad-soft);opacity:.6;pointer-events:none}
-  .seg>*{position:relative}
-  .seg .tag{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
-  .seg.primary .tag{background:var(--grad);color:#fff}
-  .seg.alt .tag{background:rgba(255,255,255,.06);color:#FF8577;border:1px solid var(--line)}
-  .seg h3{font-family:'Fraunces',serif;color:#fff;font-size:1.55rem;font-weight:700;margin:16px 0 10px}
-  .seg p{font-size:.96rem;color:var(--body);max-width:44ch}
-  .seg ul{margin:20px auto 0;display:inline-grid;gap:11px;text-align:left}
-  .seg li{list-style:none;display:flex;gap:11px;align-items:flex-start;font-size:.92rem;color:#CFCAD4}
-  .seg li svg{width:18px;height:18px;flex:0 0 auto;margin-top:2px;stroke:var(--red);fill:none;stroke-width:2}
+  /* ===== proof band ===== */
+  .proof{position:relative;overflow:hidden;background:#0C0B0D url('assets/install-rinnai.jpg') center 32%/cover no-repeat;
+    padding:clamp(60px,12vw,120px) 0}
+  .proof::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,11,.72),rgba(10,9,11,.8))}
+  .proof-in{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .proof h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em;max-width:16ch;line-height:1.12}
+  .proof p{margin-top:14px;color:#D5D0DA;max-width:44ch;font-size:1rem}
+  .proof .btn-call{margin-top:28px}
 
-  /* ============ Why (feature rows) ============ */
-  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-  @media (max-width:760px){.why-grid{grid-template-columns:1fr}}
-  .why{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;padding:28px 22px;background:var(--card);border:1px solid var(--line-soft);border-radius:14px}
-  .why .w-ico{width:46px;height:46px;flex:0 0 auto;border-radius:12px;display:grid;place-items:center;background:rgba(225,29,46,.1);border:1px solid rgba(225,29,46,.25)}
-  .why .w-ico svg{width:21px;height:21px;stroke:#FF6B5A;fill:none;stroke-width:1.8}
-  .why h4{color:#fff;font-size:1.02rem;font-weight:700}
-  .why p{font-size:.9rem;margin-top:5px;color:var(--body)}
+  /* ===== footer ===== */
+  footer{background:var(--bg-2);border-top:1px solid var(--line-soft);padding:38px 0 34px;text-align:center}
+  footer .flogo{height:34px;width:auto;margin:0 auto 16px}
+  .foot-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:.95rem;color:var(--body)}
+  .foot-contact a{color:#fff;font-weight:700}
+  .foot-meta{margin-top:16px;font-size:.8rem;color:var(--dim);line-height:1.7}
+  /* TODO(client): add a physical/mailing address or posted hours here if you want them shown */
 
-  /* ============ Process ============ */
-  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:step}
-  @media (max-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
-  @media (max-width:460px){.steps{grid-template-columns:1fr}}
-  .step{position:relative;padding:28px 22px;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;text-align:center}
-  .step .num{
-    font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;color:#fff;
-    width:40px;height:40px;border-radius:11px;display:grid;place-items:center;margin:0 auto 16px;
-    background:var(--grad);box-shadow:0 8px 20px -8px rgba(225,29,46,.6)
-  }
-  .step h4{color:#fff;font-size:1.05rem;font-weight:700}
-  .step p{font-size:.88rem;margin-top:7px;color:var(--body)}
-
-  /* ============ Area ============ */
-  .area-box{
-    position:relative;border-radius:20px;padding:clamp(34px,6vw,52px) 32px;overflow:hidden;text-align:center;
-    background:linear-gradient(160deg,var(--card-2),var(--card));border:1px solid var(--line);
-    display:flex;flex-direction:column;align-items:center;gap:20px;
-  }
-  .area-box::before{content:"";position:absolute;left:50%;top:-60px;transform:translateX(-50%);width:340px;height:280px;background:radial-gradient(circle,rgba(225,29,46,.16),transparent 70%);pointer-events:none}
-  .area-box>*{position:relative}
-  .area-box h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.02em}
-  .area-box p{margin-top:14px;color:var(--body);max-width:56ch}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px;justify-content:center;max-width:640px}
-  .chip{font-size:.85rem;font-weight:600;color:#D5D0DA;padding:8px 15px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--line)}
-  .chip.more{color:#FF8577;border-color:rgba(225,29,46,.4)}
-
-  /* ============ FAQ ============ */
-  .faq{max-width:820px;margin:0 auto}
-  details.qa{border:1px solid var(--line-soft);border-radius:13px;background:var(--card);margin-bottom:12px;overflow:hidden}
-  details.qa[open]{border-color:rgba(225,29,46,.4)}
-  details.qa summary{
-    list-style:none;cursor:pointer;padding:20px 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;
-    color:#fff;font-weight:600;font-size:1.02rem;
-  }
-  details.qa summary::-webkit-details-marker{display:none}
-  details.qa summary .q-ico{width:22px;height:22px;flex:0 0 auto;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .25s var(--ease),background .25s var(--ease)}
-  details.qa summary .q-ico::before{content:"";width:9px;height:2px;background:var(--red);position:absolute}
-  details.qa summary .q-ico::after{content:"";width:2px;height:9px;background:var(--red);transition:opacity .25s var(--ease)}
-  details.qa[open] summary .q-ico{background:var(--grad);transform:rotate(90deg)}
-  details.qa[open] summary .q-ico::before{background:#fff}
-  details.qa[open] summary .q-ico::after{opacity:0}
-  details.qa .a{padding:0 22px 20px;color:var(--body);font-size:.95rem}
-
-  /* ============ Contact / CTA ============ */
-  .cta{
-    position:relative;border-radius:24px;padding:56px 44px;overflow:hidden;text-align:center;
-    background:linear-gradient(150deg,#1B0810,#160A12 55%,#0F0A0D);border:1px solid rgba(225,29,46,.35);
-  }
-  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 60% 90% at 50% -10%,rgba(225,29,46,.28),transparent 60%);pointer-events:none}
-  .cta>*{position:relative}
-  .cta h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(2rem,4.4vw,2.9rem);font-weight:700;letter-spacing:-.02em;line-height:1.06}
-  .cta p{margin:16px auto 0;max-width:520px;color:#C8C2CE;font-size:1.05rem}
-  .cta-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
-  .cta-actions .btn{padding:15px 30px;font-size:1.02rem}
-  .cta-meta{margin-top:26px;display:flex;flex-wrap:wrap;gap:22px;justify-content:center;font-size:.92rem;color:#BAB5C0}
-  .cta-meta a{color:#fff;font-weight:600}
-  .cta-meta .m{display:inline-flex;align-items:center;gap:9px}
-  .cta-meta svg{width:17px;height:17px;stroke:var(--ember);fill:none;stroke-width:2}
-
-  /* ============ Footer ============ */
-  footer{border-top:1px solid var(--line-soft);padding:40px 0;margin-top:78px}
-  .foot{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-  .foot .brand{font-size:1.05rem}
-  .foot-links{display:flex;flex-wrap:wrap;gap:20px;font-size:.9rem}
-  .foot-links a:hover{color:#fff}
-  .foot-legal{width:100%;margin-top:18px;font-size:.8rem;color:var(--dim);line-height:1.7}
-
-  /* ============ Mobile sticky call bar ============ */
-  .callbar{
-    position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;
-    background:rgba(12,11,13,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border-top:1px solid var(--line);padding:10px 14px;gap:10px;
-  }
-  .callbar a{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px;border-radius:12px;font-weight:700;font-size:.95rem}
-  .callbar .c-call{background:var(--grad);color:#fff}
-  .callbar .c-quote{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--line)}
-  .callbar svg{width:17px;height:17px;fill:currentColor}
-  .callbar a{min-height:52px}
-  @media (max-width:760px){.callbar{display:flex}body{padding-bottom:74px}}
-  @media (min-width:761px){body{padding-bottom:0}}
-
-  /* ============ Mobile fine-tuning ============ */
-  @media (max-width:600px){
-    .wrap{padding:0 18px}
-    .foot{flex-direction:column;text-align:center;gap:14px}
-    .foot-links{justify-content:center}
-    .foot-legal{text-align:center}
-    .cta{padding:44px 22px}
-    .why-grid{gap:12px}
-    .cards{gap:14px}
-  }
-  @media (max-width:480px){
-    /* full-width, thumb-friendly primary actions */
-    .hero-cta{flex-direction:column;align-items:stretch;width:100%;max-width:340px;margin-left:auto;margin-right:auto}
-    .hero-cta .btn{width:100%}
-    .cta-actions{flex-direction:column;align-items:stretch}
-    .cta-actions .btn{width:100%}
-    .hero-note{font-size:.82rem}
-  }
+  /* ===== mobile sticky call bar ===== */
+  .callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(12,11,13,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+  .callbar .btn-call{width:100%;min-height:54px}
+  @media (max-width:760px){.callbar{display:block}body{padding-bottom:80px}}
 </style>
 </head>
 <body>
 
-<!-- ============ UTILITY CREDIBILITY BAR ============ -->
+<!-- ===== credibility bar ===== -->
 <div class="ubar">
   <div class="wrap ubar-inner">
     <span class="hrs" id="hoursPill"><span class="led" aria-hidden="true"></span>24/7 Emergency Line</span>
     <span class="sep" aria-hidden="true">·</span>
     <span>Licensed &amp; Insured — <b>CSLB&nbsp;#1150831</b></span>
     <span class="sep opt" aria-hidden="true">·</span>
-    <span class="opt">1-Year Workmanship Guarantee</span>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="tel:2132223457">(213)&nbsp;222-3457</a>
+    <span class="opt">Rinnai Certified Installer</span>
   </div>
 </div>
 
-<!-- ============ TOP BAR ============ -->
-<div class="topbar">
-  <div class="wrap topbar-inner">
-    <a class="brand" href="#top" aria-label="Eternahot home">
-      <img class="brand-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
+<!-- ===== sticky header ===== -->
+<header class="head">
+  <div class="wrap head-inner">
+    <a href="#top" aria-label="Eternahot home"><img class="logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117"></a>
+    <a class="btn btn-call btn-sm" href="tel:2132223457">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
+      <span>(213) 222-3457</span>
     </a>
-    <nav class="topnav" aria-label="Sections">
-      <a href="#services">Services</a>
-      <a href="#segments">Who We Serve</a>
-      <a href="#why">Why Us</a>
-      <a href="#process">Process</a>
-      <a href="#areas">Service Area</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a class="btn btn-primary btn-cta" href="#contact">Request Service</a>
-  </div>
-</div>
-
-<span id="top"></span>
-
-<!-- ============ HERO ============ -->
-<header class="hero">
-  <div class="wrap hero-inner">
-    <img class="hero-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
-    <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Hot Water Experts · Southern California</span>
-    <h1>Endless hot water,<br><span class="grad">engineered to last.</span></h1>
-    <p class="lede">Eternahot is a commercial &amp; premium residential plumbing contractor built around one thing: reliable hot water. Tankless is our specialty — but we install, maintain, and service everything that makes hot water.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#contact">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
-        Get a Quote
-      </a>
-      <a class="btn btn-ghost" href="tel:2132223457">
-        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
-        (213) 222-3457
-      </a>
-    </div>
-    <div class="hero-hl" aria-label="Highlights">
-      <span class="h"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>24/7 emergency</span>
-      <span class="h"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>1-year guarantee</span>
-      <span class="h"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg>Every make &amp; model</span>
-    </div>
-    <div class="rinnai-cert" aria-label="Rinnai Certified Installer">
-      <img src="assets/rinnai-logo.svg" alt="Rinnai" width="88" height="22">
-      <span>Certified Installer</span>
-    </div>
   </div>
 </header>
 
-<!-- ============ TRUST STRIP ============ -->
-<div class="trust">
-  <div class="wrap">
-    <div class="trust-grid">
-      <div class="trust-item">
-        <svg class="t-ico" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
-        <div class="t-h">CSLB Licensed &amp; Insured</div>
-        <div class="t-p">License&nbsp;#1150831</div>
-      </div>
-      <div class="trust-item">
-        <svg class="t-ico" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3"/><circle cx="12" cy="12" r="3"/></svg>
-        <div class="t-h">1-Year Guarantee</div>
-        <div class="t-p">We stand behind our workmanship</div>
-      </div>
-      <div class="trust-item">
-        <svg class="t-ico" viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>
-        <div class="t-h">24/7 Emergency</div>
-        <div class="t-p">Always-on for no-hot-water calls</div>
-      </div>
-      <div class="trust-item">
-        <svg class="t-ico" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg>
-        <div class="t-h">Every Make &amp; Model</div>
-        <div class="t-p">We service them all — not just tankless</div>
-      </div>
+<span id="top"></span>
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
+    <div class="kicker">Hot Water Experts · Southern California</div>
+    <h1>Endless hot water,<br><span class="grad">one call away.</span></h1>
+    <p class="sub">Repair, installation, and service on every make &amp; model — commercial and premium residential.</p>
+
+    <div class="call-wrap">
+      <a class="btn btn-call" href="tel:2132223457">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
+        Call (213) 222-3457
+      </a>
+      <span class="call-note" id="callNote"><span class="led" aria-hidden="true"></span>Open now — talk to a real person</span>
     </div>
-  </div>
-</div>
 
-<main>
-
-<!-- ============ SERVICES ============ -->
-<section id="services">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>What We Do</span>
-      <h2>Full-service water heating</h2>
-      <p>From ground-up commercial systems to a premium home retrofit — design, installation, maintenance, and emergency service under one roof.</p>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>CSLB #1150831</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>24/7 Emergency</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>1-Year Guarantee</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg>Every make &amp; model</span>
     </div>
-    <div class="cards">
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M12 6v4M10 8h4"/><path d="M9 15h6"/></svg></span>
-        <h3>Tankless Installation &amp; Conversion</h3>
-        <p>Our specialty. Right-sized tankless design, tank-to-tankless conversions, cascades, and clean venting for commercial and residential jobs.</p>
-      </article>
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="7" height="18" rx="2"/><rect x="15" y="3" width="5" height="10" rx="1.5"/><path d="M11 12h4"/></svg></span>
-        <h3>Commercial Water Heating Systems</h3>
-        <p>Volume water heaters, hybrid tank + tankless plants, rack systems, and multi-family central heating — sized, installed, and serviced.</p>
-      </article>
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg></span>
-        <h3>Repair &amp; Diagnostics</h3>
-        <p>No hot water? Error codes, ignition, scale, gas or venting faults — we diagnose and repair every system that makes hot water, not just tankless.</p>
-      </article>
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 8a5 5 0 1 0 5 5"/><path d="M9 3l3-1 3 1"/></svg></span>
-        <h3>Maintenance &amp; Service Agreements</h3>
-        <p>Scheduled descaling, flushing, anode and part checks. Planned service agreements keep commercial hot water online and warranties intact.</p>
-      </article>
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M21 3l-6 6M21 3h-5M21 3v5"/></svg></span>
-        <h3>Recirculation &amp; Delivery</h3>
-        <p>Instant hot water at the tap — recirculation pumps, dedicated loops, and delivery upgrades that cut wait time and wasted water.</p>
-      </article>
-
-      <article class="card">
-        <span class="ico"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13"/><path d="M9 12h2M13 12h2M9 16h2M13 16h2"/></svg></span>
-        <h3>Everything That Makes Hot Water</h3>
-        <p>Tank, hybrid heat-pump, high-efficiency, and DHW off boilers. If it heats water, we install, maintain, and repair it.</p>
-      </article>
-
+    <div class="rinnai-cert" aria-label="Rinnai Certified Installer">
+      <img src="assets/rinnai-logo.svg" alt="Rinnai" width="80" height="20">
+      <span>Certified Installer</span>
     </div>
+
+    <p class="email-line">Rather write to us? <a href="mailto:info@eternahot.com">info@eternahot.com</a></p>
   </div>
 </section>
 
-<!-- ============ SEGMENTS ============ -->
-<section id="segments" style="background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Who We Serve</span>
-      <h2>Commercial-first, residential-refined</h2>
-      <p>Most of our work is commercial — where uptime and sizing matter. We bring that same engineering discipline to a select group of premium homes.</p>
-    </div>
-    <div class="segs">
-
-      <div class="seg primary">
-        <span class="tag">Primary focus · Commercial</span>
-        <h3>Commercial &amp; Multi-Family</h3>
-        <p>Restaurants, hospitality, gyms, medical, apartments, and HOAs that can't afford cold water. We design for demand, redundancy, and serviceability.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Load sizing &amp; system design for peak demand</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Tankless cascades, racks &amp; hybrid plants</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Planned maintenance &amp; priority service response</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Code-compliant gas, venting &amp; seismic details</li>
-        </ul>
-      </div>
-
-      <div class="seg alt">
-        <span class="tag">Premium · Residential</span>
-        <h3>Premium Homes</h3>
-        <p>Homeowners who want it done right the first time — quiet, efficient, endless hot water with an install you'd be proud to show off.</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Tank-to-tankless conversions done clean</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Recirculation for instant hot water</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>High-efficiency &amp; hybrid heat-pump options</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Annual flush &amp; tune-up to protect your investment</li>
-        </ul>
-      </div>
-
-    </div>
+<!-- ===== proof band ===== -->
+<section class="proof">
+  <div class="wrap proof-in">
+    <h2>Real installs. Backed by a 1-year guarantee.</h2>
+    <p>Rinnai Certified, fully licensed, and ready when your hot water isn't. One call gets it handled.</p>
+    <a class="btn btn-call" href="tel:2132223457">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
+      Call (213) 222-3457
+    </a>
   </div>
 </section>
 
-<!-- ============ WHY ============ -->
-<section id="why">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Why Eternahot</span>
-      <h2>Specialists, not generalists</h2>
-      <p>Hot water is all we do. That focus shows up in cleaner installs, faster diagnoses, and systems that keep running.</p>
-    </div>
-    <div class="why-grid">
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M12 2c1 3-1 4-1 6a3 3 0 0 0 5 2c1 2 1 3 1 4a5 5 0 1 1-10 0c0-3 2-4 2-7 0-2 2-4 3-5z"/></svg></span>
-        <div><h4>Hot water is our whole world</h4><p>We don't dabble. Deep, brand-certified expertise in tankless and every water-heating system.</p></div>
-      </div>
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg></span>
-        <div><h4>Sized right, the first time</h4><p>Commercial-grade load calcs mean a system that meets demand — no undersizing, no cold surprises.</p></div>
-      </div>
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg></span>
-        <div><h4>Fast, reliable response</h4><p>When hot water goes down it's an emergency. We show up and get you running.</p></div>
-      </div>
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
-        <div><h4>Upfront, honest pricing</h4><p>Clear scope and pricing before we start. No mystery invoices, no upsell games.</p></div>
-      </div>
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <div><h4>Warranty-protecting work</h4><p>Installed to spec and maintained on schedule so manufacturer warranties stay valid.</p></div>
-      </div>
-
-      <div class="why">
-        <span class="w-ico"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <div><h4>Clean, code-compliant installs</h4><p>Gas, venting, seismic, and condensate done properly — work you'd want to show an inspector.</p></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROCESS ============ -->
-<section id="process" style="background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>How It Works</span>
-      <h2>Simple from first call to hot water</h2>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="num">1</div><h4>Contact us</h4><p>Call or send a quick message about your project or the system that's down.</p></div>
-      <div class="step"><div class="num">2</div><h4>Assess &amp; quote</h4><p>We evaluate demand and site conditions, then give you clear options and upfront pricing.</p></div>
-      <div class="step"><div class="num">3</div><h4>Install or service</h4><p>Certified techs do the work clean, to code, on schedule — commercial or residential.</p></div>
-      <div class="step"><div class="num">4</div><h4>Reliable hot water</h4><p>You get endless hot water, plus a maintenance plan to keep it that way.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICE AREA ============ -->
-<section id="areas">
-  <div class="wrap">
-    <div class="area-box">
-      <div>
-        <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Service Area</span>
-        <h2>Serving Southern California</h2>
-        <p>Based in the greater Los Angeles area, we serve commercial clients and premium homes across the region. Not sure if you're in range? Reach out — we'll tell you straight.</p>
-        <!-- TODO(client): confirm exact cities / add physical address if you want it listed -->
-      </div>
-      <div>
-        <div class="chips">
-          <span class="chip">Los Angeles</span>
-          <span class="chip">Orange County</span>
-          <span class="chip">San Fernando Valley</span>
-          <span class="chip">San Gabriel Valley</span>
-          <span class="chip">South Bay</span>
-          <span class="chip">Long Beach</span>
-          <span class="chip">Inland Empire</span>
-          <span class="chip more">+ surrounding areas</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section id="faq" style="background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)">
-  <div class="wrap">
-    <div class="sec-head" style="margin-left:auto;margin-right:auto;text-align:center">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>FAQ</span>
-      <h2>Questions we hear a lot</h2>
-    </div>
-    <div class="faq">
-      <details class="qa">
-        <summary>Do you only work on tankless water heaters? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">Tankless is our specialty, but no — we install, maintain, and repair every system that produces hot water: traditional tanks, hybrid heat-pump units, high-efficiency models, and DHW off commercial boilers.</div>
-      </details>
-      <details class="qa">
-        <summary>Do you handle commercial projects? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">Yes — commercial is the majority of our work. We size and install systems for restaurants, multi-family, hospitality, medical, and more, and offer planned maintenance with priority service response.</div>
-      </details>
-      <details class="qa">
-        <summary>Is tankless worth it versus a standard tank? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">For most of our clients, yes: endless hot water, higher efficiency, a smaller footprint, and a longer service life when maintained. We'll give you an honest comparison for your specific demand and budget rather than a one-size-fits-all answer.</div>
-      </details>
-      <details class="qa">
-        <summary>How often should a tankless unit be serviced? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">Typically once a year — more often in hard-water areas or high-demand commercial settings. Regular descaling and flushing protect performance and keep the manufacturer warranty valid. Ask us about a service agreement.</div>
-      </details>
-      <details class="qa">
-        <summary>My commercial system is down — can you respond fast? <span class="q-ico" aria-hidden="true"></span></summary>
-        <div class="a">A hot-water outage is an emergency, especially for a business. Call us at <a href="tel:2132223457" style="color:#FF8577;font-weight:600">(213) 222-3457</a> and we'll get you scheduled and back online as quickly as possible.</div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTACT / CTA ============ -->
-<section id="contact">
-  <div class="wrap">
-    <div class="cta">
-      <span class="eyebrow"><span class="spark" aria-hidden="true"></span>Get Started</span>
-      <h2>Ready for hot water that just works?</h2>
-      <p>Tell us about your project — a new commercial system, a premium home retrofit, maintenance, or a repair. We'll follow up with clear options and honest pricing.</p>
-      <div class="cta-actions">
-        <a class="btn btn-primary" href="mailto:info@eternahot.com?subject=Water%20Heating%20Inquiry&body=Tell%20us%20about%20your%20project%20(commercial%20or%20residential)%2C%20location%2C%20and%20the%20best%20way%20to%20reach%20you%3A%0A%0A">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
-          Email info@eternahot.com
-        </a>
-        <a class="btn btn-ghost" href="tel:2132223457">
-          <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
-          Call (213) 222-3457
-        </a>
-      </div>
-      <div class="cta-meta">
-        <span class="m"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="M2 7l10 6 10-6"/></svg><a href="mailto:info@eternahot.com">info@eternahot.com</a></span>
-        <span class="m"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg><a href="tel:2132223457">(213) 222-3457</a></span>
-        <span class="m"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Los Angeles &amp; Southern California</span>
-        <span class="m"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>CSLB #1150831</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
+<!-- ===== footer ===== -->
 <footer>
   <div class="wrap">
-    <div class="foot">
-      <a class="brand" href="#top" aria-label="Eternahot home">
-        <img class="brand-logo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
-      </a>
-      <nav class="foot-links" aria-label="Footer">
-        <a href="#services">Services</a>
-        <a href="#segments">Who We Serve</a>
-        <a href="#process">Process</a>
-        <a href="#areas">Service Area</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <img class="flogo" src="assets/eternahot-logo.png" alt="Eternahot" width="212" height="117">
+    <div class="foot-contact">
+      <a href="tel:2132223457">(213) 222-3457</a>
+      <span class="sep" aria-hidden="true" style="color:var(--line)">·</span>
+      <a href="mailto:info@eternahot.com">info@eternahot.com</a>
+      <span class="sep" aria-hidden="true" style="color:var(--line)">·</span>
+      <span>Los Angeles &amp; Southern California</span>
     </div>
-    <p class="foot-legal">
-      Eternahot — hot water experts serving Los Angeles &amp; Southern California. Commercial &amp; premium residential installation, maintenance, and repair on every make and model. Licensed &amp; insured, CSLB&nbsp;#1150831. 1-year workmanship guarantee · 24/7 emergency service.
-      <!-- TODO(client): add a physical/mailing address and posted business hours here if you want them listed -->
-      &nbsp;·&nbsp; info@eternahot.com &nbsp;·&nbsp; (213) 222-3457
+    <p class="foot-meta">
+      Hot Water Experts · Licensed &amp; insured, CSLB&nbsp;#1150831 · Rinnai Certified Installer · 1-year workmanship guarantee · 24/7 emergency service.
       <br>© <span id="yr">2026</span> Eternahot. All rights reserved.
     </p>
   </div>
 </footer>
 
-<!-- ============ MOBILE STICKY CALL BAR ============ -->
+<!-- ===== mobile sticky call bar ===== -->
 <div class="callbar">
-  <a class="c-call" href="tel:2132223457">
+  <a class="btn btn-call" href="tel:2132223457">
     <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
-    Call Now
-  </a>
-  <a class="c-quote" href="mailto:info@eternahot.com?subject=Water%20Heating%20Inquiry">
-    <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
-    Get a Quote
+    Call (213) 222-3457
   </a>
 </div>
 
 <script>
-  // Fill current year without hardcoding drift
   (function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();
-
-  // Live hours indicator (Pacific): office hours Mon–Sat 7a–6p, otherwise the 24/7 emergency line
+  // Live hours (Pacific): office Mon–Sat 7a–6p, otherwise 24/7 emergency line
   (function(){
     try{
-      var pill=document.getElementById('hoursPill');
-      if(!pill) return;
       var pt=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
-      var h=pt.getHours(), d=pt.getDay(); // 0=Sun
+      var h=pt.getHours(), d=pt.getDay();
       var open=(d>=1&&d<=6)&&(h>=7&&h<18);
-      pill.childNodes[pill.childNodes.length-1].textContent = open ? ' Open now — call us' : ' 24/7 Emergency Line';
-      pill.classList.toggle('closed', !open);
+      var pill=document.getElementById('hoursPill');
+      if(pill){pill.childNodes[pill.childNodes.length-1].textContent=open?' Open now — call us':' 24/7 Emergency Line';pill.classList.toggle('closed',!open);}
+      var note=document.getElementById('callNote');
+      if(note){note.childNodes[note.childNodes.length-1].textContent=open?' Open now — talk to a real person':' After hours? 24/7 emergency line';note.classList.toggle('closed',!open);}
     }catch(e){}
   })();
 </script>
-
 </body>
 </html>
