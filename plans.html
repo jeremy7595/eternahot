@@ -164,7 +164,7 @@
         <h3>Eternahot Service Plan</h3>
         <p class="desc">One monthly fee keeps your water heater maintained and your service calls covered — homes and businesses alike.</p>
         <div class="price"><span class="amt">$30</span><span class="per">/ month · per unit</span></div>
-        <p class="price-note">+ $300 to start — includes your first maintenance visit &amp; full report</p>
+        <p class="price-note">+ $300 to start — includes your first maintenance visit &amp; equipment inspection</p>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Scheduled maintenance visits — covered by your monthly payment</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Service calls covered — $50 fuel surcharge per visit</li>
@@ -174,9 +174,8 @@
         </ul>
         <p class="excl">Parts &amp; equipment replacements, pipe repairs, and any required permits are billed separately.</p>
         <div class="cta">
-          <div class="qty"><label for="maintQty">Units</label><input id="maintQty" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Number of units"></div>
-          <a id="enrollMaintenance" class="btn btn-primary" href="mailto:info@eternahot.com?subject=Service%20Plan%20Enrollment&body=Please%20enroll%20me%20in%20the%20Eternahot%20Service%20Plan.%0A%0AName%2Fbusiness%3A%0AService%20address%3A%0APhone%3A%0A%23%20of%20units%3A%0AWho%20installed%20the%20unit(s)%3A%0A">Start my plan</a>
-          <span class="fine">Secure checkout by card · $300 to start, then $30/mo per unit · cancel anytime.</span>
+          <a class="btn btn-primary" href="https://buy.stripe.com/test_cNicN63ko7fn3Dg7uAebu00">Start my plan</a>
+          <span class="fine">Secure checkout by card · $330 today, then $30/mo · cancel anytime.</span>
         </div>
       </div>
 
@@ -249,22 +248,6 @@
 
 <script>
   (function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();
-  // Maintenance enrollment: try Stripe Checkout; fall back to email if not configured yet.
-  (function(){
-    var btn=document.getElementById('enrollMaintenance');
-    if(!btn) return;
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      var mailto=btn.getAttribute('href');
-      var qEl=document.getElementById('maintQty');
-      var qty=Math.max(1, Math.min(50, parseInt(qEl&&qEl.value,10)||1));
-      btn.style.opacity='.65'; btn.style.pointerEvents='none';
-      fetch('/.netlify/functions/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:'maintenance',quantity:qty})})
-        .then(function(r){return r.ok?r.json():Promise.reject(r.status);})
-        .then(function(d){ if(d&&d.url){window.location=d.url;} else {throw 0;} })
-        .catch(function(){ window.location.href=mailto; });
-    });
-  })();
 </script>
 </body>
 </html>
