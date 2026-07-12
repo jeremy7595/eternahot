@@ -47,17 +47,14 @@
   .head .home svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2}
 
   /* hero */
-  .hero{position:relative;text-align:center;padding:clamp(48px,8vw,84px) 0 20px;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% -10%,rgba(225,29,46,.16),transparent 60%)}
+  .hero{position:relative;text-align:center;padding:clamp(56px,9vw,96px) 0 26px;overflow:hidden;background:#0C0B0D url('assets/install-rinnai.jpg') center 28%/cover no-repeat}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(12,11,13,.72),rgba(12,11,13,.82) 55%,var(--bg) 100%),radial-gradient(ellipse 60% 60% at 50% -8%,rgba(225,29,46,.14),transparent 60%)}
   .hero>*{position:relative}
   .kicker{font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#FF7A6B}
-  .hero h1{font-family:'Fraunces',serif;font-weight:700;color:#fff;font-size:clamp(2.3rem,6vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin:16px auto 0;max-width:16ch}
-  .hero .mission{margin:18px auto 0;font-size:clamp(1.05rem,2.4vw,1.35rem);color:#D6D2DB;max-width:44ch}
-  .hero .intro{margin:16px auto 0;font-size:1rem;color:var(--body);max-width:60ch}
+  .hero h1{font-family:'Fraunces',serif;font-weight:700;color:#fff;font-size:clamp(2.3rem,6vw,3.6rem);letter-spacing:-.02em;line-height:1.05;margin:16px auto 0;max-width:16ch;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+  .hero .mission{margin:18px auto 0;font-size:clamp(1.05rem,2.4vw,1.35rem);color:#E4E1E8;max-width:44ch;text-shadow:0 1px 12px rgba(0,0,0,.7)}
+  .hero .intro{margin:16px auto 0;font-size:1rem;color:#CFCAD4;max-width:60ch;text-shadow:0 1px 10px rgba(0,0,0,.7)}
 
-  /* video */
-  .video-wrap{max-width:840px;margin:34px auto 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(0,0,0,.8);background:#000}
-  .video-wrap video{width:100%;height:auto;display:block}
 
   /* section scaffold */
   section{padding:clamp(46px,7vw,72px) 0}
@@ -139,13 +136,6 @@
     <h1 class="serif">Hot water when you want it.</h1>
     <p class="mission">We build systems that take the guessing and worrying out of hot water.</p>
     <p class="intro">Two ways to keep your hot water handled — a straightforward maintenance plan for homes and businesses, and business-crucial coverage that guarantees continuity for sites that can't go without.</p>
-    <!-- NOTE(client): promo video below couldn't be previewed in the build environment (H.264) — please confirm it plays/looks right on the deploy preview -->
-    <div class="video-wrap">
-      <video controls muted playsinline preload="metadata">
-        <source src="assets/plans-promo.mp4" type="video/mp4">
-        Your browser doesn't support embedded video.
-      </video>
-    </div>
   </div>
 </section>
 
