@@ -3,159 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Eternahot | Water Heating Specialists — Southern California</title>
-<meta name="description" content="Eternahot — Southern California water heating specialists. We repair every make and model and guarantee our work for one year. Residential & commercial. 24/7 emergency. CSLB #1150831.">
-<meta name="theme-color" content="#0C1926">
+<title>Eternahot — Hot Water Experts | Call (213) 222-3457 | Southern California</title>
+<meta name="description" content="No hot water? Eternahot are Southern California's hot water experts — commercial & residential repair, install, and service on every make and model. Licensed CSLB #1150831, Rinnai Certified, 1-year guarantee, 24/7 emergency. Call (213) 222-3457.">
+<meta name="theme-color" content="#0C0B0D">
+<meta name="apple-mobile-web-app-title" content="Eternahot">
+<meta property="og:title" content="Eternahot — Hot Water Experts · Southern California">
+<meta property="og:description" content="Repair, install, and service on every make & model. Licensed, Rinnai Certified, 1-year guarantee, 24/7 emergency. Call (213) 222-3457.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0C1926;
-  --ivory:#F5F6F4;
-  --flame-1:#FF7A2F;
-  --flame-2:#FFC24B;
-  --flame-grad:linear-gradient(100deg,#FF7A2F,#FFC24B);
-  --brass:#D2570F;
-  --brass-soft:#FF9147;
-  --rule:#DADFDD;
-  --rule-dark:rgba(255,255,255,.16);
-  --text:#1B2A36;
-  --mute:#5D6A74;
-  --mute-light:#A8B4BD;
-  --display:'Libre Caslon Display',Georgia,serif;
-  --serif:'Libre Caslon Text',Georgia,serif;
-  --sans:'Libre Franklin',system-ui,sans-serif;
-  --pad:22px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;-webkit-text-size-adjust:100%}
-body{font-family:var(--serif);color:var(--text);background:var(--navy);line-height:1.65;font-size:16.5px;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
-a{color:inherit;text-decoration:none}
-a:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 var(--pad);width:100%}
+  :root{
+    --bg:#0C0B0D; --bg-2:#111015; --card:#171519; --line:#2A262E; --line-soft:#211E25;
+    --ink:#FFFFFF; --body:#A7A2AD; --dim:#6A646F;
+    --red:#E11D2E; --ember:#FF5A47;
+    --grad:linear-gradient(135deg,#F03246 0%,#C20E2E 45%,#7C0817 100%);
+    --grad-text:linear-gradient(120deg,#FF6B5A,#E11D2E 55%,#B00E22);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;padding-bottom:0;
+  }
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:960px;margin:0 auto;padding:0 22px;width:100%}
 
-/* topbar */
-.topbar{background:rgba(0,0,0,.35);color:var(--mute-light);font-family:var(--sans);font-size:.72rem;letter-spacing:.08em;text-align:center;padding:9px var(--pad);border-bottom:1px solid var(--rule-dark)}
-.topbar b{color:var(--brass-soft);font-weight:600}
-.topbar a{color:#fff;font-weight:600}
+  /* buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:52px;
+    font-weight:800;border-radius:13px;padding:15px 26px;cursor:pointer;border:1px solid transparent;
+    transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);white-space:nowrap;
+  }
+  .btn svg{width:20px;height:20px;fill:currentColor;flex:0 0 auto}
+  .btn-call{background:var(--grad);color:#fff;font-size:1.18rem;letter-spacing:.01em;
+    box-shadow:0 16px 40px -12px rgba(225,29,46,.7), inset 0 1px 0 rgba(255,255,255,.25)}
+  .btn-call:hover{transform:translateY(-2px);box-shadow:0 22px 50px -14px rgba(225,29,46,.85)}
+  .btn-call:active{transform:translateY(0)}
+  .btn-sm{min-height:44px;padding:11px 18px;font-size:.95rem;font-weight:700}
 
-/* nav */
-.nav{border-bottom:1px solid var(--rule-dark);padding:14px 0}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand .word{font-family:var(--display);font-size:1.45rem;letter-spacing:.06em;color:#fff}
-.brand .word em{font-style:normal;background:var(--flame-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-.brand .strap{font-family:var(--sans);font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--mute-light);margin-top:5px}
-.pill{font-family:var(--sans);font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 13px;border:1px solid var(--rule-dark);border-radius:99px;color:var(--mute-light);white-space:nowrap}
-.pill.open{color:#6fcf97;border-color:rgba(111,207,151,.4)}
-.btn-call{font-family:var(--sans);font-weight:600;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 18px;background:var(--flame-grad);color:#2A1300;min-height:44px;display:inline-flex;align-items:center}
+  /* ===== top ticker ===== */
+  .ticker{overflow:hidden;white-space:nowrap;background:linear-gradient(90deg,rgba(124,8,23,.34),rgba(225,29,46,.16),rgba(124,8,23,.34));border-bottom:1px solid var(--line-soft)}
+  .ticker-track{display:flex;width:max-content;animation:tickerscroll 30s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .tk-group{display:flex;align-items:center}
+  .tk{display:inline-flex;align-items:center;gap:8px;padding:9px 0;font-size:.88rem;font-weight:600;letter-spacing:.02em;color:#D3CDD8}
+  .tk b{color:#fff;font-weight:700}
+  .tk .led{width:7px;height:7px;border-radius:50%;background:#39D98A;box-shadow:0 0 8px #39D98A;flex:0 0 auto}
+  .tk.closed .led{background:var(--ember);box-shadow:0 0 8px var(--ember)}
+  .tk::after{content:"◆";color:rgba(255,122,107,.4);font-size:.55rem;margin:0 22px;position:relative;top:-1px}
+  @keyframes tickerscroll{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion:reduce){
+    .ticker{white-space:normal}
+    .ticker-track{animation:none;width:auto;flex-wrap:wrap;justify-content:center;padding:3px 12px}
+    .tk-group[aria-hidden]{display:none}
+    .tk:last-child::after{content:none}
+  }
 
-/* main */
-main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:56px var(--pad) 80px}
-.inner{max-width:660px;margin:0 auto;text-align:center}
-h1{font-family:var(--display);font-weight:400;font-size:clamp(2.4rem,8vw,4rem);color:#fff;line-height:1.1;margin-bottom:16px}
-h1 em{font-style:italic;font-family:var(--serif);background:linear-gradient(90deg,var(--flame-1),var(--flame-2),var(--flame-1));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:heat 5s linear infinite}
-@keyframes heat{to{background-position:200% 0}}
-.sub{font-size:1rem;color:rgba(250,248,243,.7);max-width:42ch;margin:0 auto 44px}
+  /* ===== hero ===== */
+  .hero{position:relative;overflow:hidden;background:#0C0B0D url('assets/hot-water.jpg') center/cover no-repeat;
+    min-height:calc(100svh - 40px);display:flex;align-items:center;padding:44px 0 52px}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(12,11,13,.38) 0%,rgba(12,11,13,.56) 44%,rgba(12,11,13,.86) 78%,var(--bg) 100%),
+      radial-gradient(ellipse 60% 50% at 50% -8%,rgba(225,29,46,.16),transparent 62%)}
+  .hero-in{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;margin:0 auto;max-width:720px}
+  .hero-logo{width:min(370px,86vw);height:auto;margin-bottom:18px;transform:translateX(10px);filter:drop-shadow(0 6px 20px rgba(225,29,46,.45)) drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+  .kicker{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#FF7A6B;margin-bottom:14px}
+  h1{font-family:'Inter',sans-serif;font-size:clamp(2.5rem,8vw,4.4rem);font-weight:800;color:var(--ink);letter-spacing:-.03em;line-height:1.02;text-shadow:0 2px 22px rgba(0,0,0,.6)}
+  h1 .grad{background:var(--grad-text);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{margin:20px auto 0;font-size:clamp(1.02rem,2.4vw,1.18rem);max-width:540px;color:#D6D2DB;text-shadow:0 1px 12px rgba(0,0,0,.7)}
 
-/* choice cards */
-.choices{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:0}
-.choice{display:flex;flex-direction:column;padding:28px 24px;border:1px solid var(--rule-dark);background:rgba(255,255,255,.04);transition:background .2s,border-color .2s;text-align:left}
-.choice:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28)}
-.choice .label{font-family:var(--sans);font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-soft);margin-bottom:10px}
-.choice h2{font-family:var(--display);font-weight:400;font-size:1.55rem;color:#fff;margin-bottom:8px}
-.choice p{font-size:.9rem;color:var(--mute-light);line-height:1.5;flex:1}
-.choice .arrow{font-size:1.3rem;color:var(--brass-soft);margin-top:18px;display:block}
+  .call-wrap{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+  .btn-call{width:min(420px,92vw)}
+  .call-note{font-size:.9rem;color:#C6C1CC;display:inline-flex;align-items:center;gap:8px}
+  .call-note .led{width:8px;height:8px;border-radius:50%;background:#39D98A;box-shadow:0 0 9px #39D98A;flex:0 0 auto}
+  .call-note.closed .led{background:var(--ember);box-shadow:0 0 9px var(--ember)}
 
-/* badges */
-.badges{display:flex;gap:24px;justify-content:center;margin-top:38px;flex-wrap:wrap}
-.badge{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute-light)}
-.badge b{display:block;font-family:var(--display);font-size:1rem;color:#fff;letter-spacing:.03em;margin-bottom:3px}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-top:26px;max-width:600px}
+  .chip{display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:#D5D0DA;
+    background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+  .chip svg{width:15px;height:15px;stroke:#FF6B5A;fill:none;stroke-width:2;flex:0 0 auto}
+  .rinnai-cert{display:inline-flex;align-items:center;gap:11px;margin-top:14px;background:#fff;border-radius:11px;padding:9px 15px;box-shadow:0 12px 34px -14px rgba(0,0,0,.7)}
+  .rinnai-cert img{height:18px;width:auto}
+  .rinnai-cert span{font-size:.74rem;font-weight:700;color:#1A1A1A;border-left:1px solid #E2E2E2;padding-left:11px}
 
-/* footer */
-footer{border-top:1px solid var(--rule-dark);padding:18px var(--pad);font-family:var(--sans);font-size:.7rem;letter-spacing:.06em;color:var(--mute-light);text-align:center;padding-bottom:calc(18px + env(safe-area-inset-bottom))}
-footer a{color:var(--mute-light)}
+  .email-line{margin-top:24px;font-size:.92rem;color:var(--dim)}
+  .email-line a{color:#fff;font-weight:800;border-bottom:1px solid rgba(255,255,255,.3)}
 
-/* mobile call bar */
-.callbar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:grid;grid-template-columns:1.15fr 1fr;background:var(--navy);border-top:1px solid var(--rule-dark);padding-bottom:env(safe-area-inset-bottom)}
-.callbar a{font-family:var(--sans);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:17px 10px}
-.callbar .c1{background:var(--flame-grad);color:#2A1300}
-.callbar .c2{color:var(--ivory)}
+  /* ===== differentiator (service) ===== */
+  .diff{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);padding:clamp(54px,9vw,84px) 0}
+  .diff-in{text-align:center;max-width:780px;margin:0 auto}
+  .diff .kicker{color:#FF7A6B}
+  .diff h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(1.8rem,4.5vw,2.7rem);font-weight:700;letter-spacing:-.02em;line-height:1.08;margin-top:12px}
+  .diff .lead{margin:18px auto 0;color:#C6C1CC;font-size:clamp(1rem,2.3vw,1.12rem);max-width:60ch}
+  .diff .lead b{color:#fff;font-weight:700}
+  .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:34px auto 0;max-width:640px;text-align:center}
+  @media (max-width:720px){.diff-grid{grid-template-columns:1fr;gap:12px;max-width:420px;margin-left:auto;margin-right:auto}}
+  .diff-card{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:26px 22px;display:flex;flex-direction:column;align-items:center}
+  .diff-card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;margin:0 auto 14px;background:var(--grad-soft,rgba(225,29,46,.1));border:1px solid rgba(225,29,46,.28)}
+  .diff-card .ic svg{width:22px;height:22px;stroke:#FF6B5A;fill:none;stroke-width:1.9}
+  .diff-card h3{color:#fff;font-size:1.06rem;font-weight:700}
+  .diff-card p{margin-top:7px;font-size:.92rem;color:var(--body)}
+  .diff .btn-call{margin-top:34px}
 
-@media(min-width:860px){
-  body{font-size:17px}
-  .callbar{display:none}
-  footer{padding-bottom:18px}
-}
-@media(max-width:520px){
-  .choices{grid-template-columns:1fr}
-}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+  /* ===== proof band ===== */
+  .proof{position:relative;overflow:hidden;background:#0C0B0D url('assets/install-rinnai.jpg') center 32%/cover no-repeat;
+    padding:clamp(60px,12vw,120px) 0}
+  .proof::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,11,.72),rgba(10,9,11,.8))}
+  .proof-in{position:relative;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .proof h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;letter-spacing:-.01em;max-width:16ch;line-height:1.12}
+  .proof p{margin-top:14px;color:#D5D0DA;max-width:44ch;font-size:1rem}
+
+  /* ===== footer ===== */
+  footer{background:var(--bg-2);border-top:1px solid var(--line-soft);padding:38px 0 34px;text-align:center}
+  footer .flogo{width:min(190px,55vw);height:auto;margin:0 auto 18px}
+  .foot-contact{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:.95rem;color:var(--body);text-align:center}
+  .foot-contact a{color:#fff;font-weight:700}
+  .foot-email{font-size:1.02rem}
+  .foot-address{font-style:normal;line-height:1.55;color:var(--body)}
+  .foot-address .lbl{display:block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+  .foot-area{font-size:.9rem;color:var(--dim)}
+  .foot-meta{margin-top:18px;font-size:.8rem;color:var(--dim);line-height:1.7}
+
+  /* ===== mobile sticky call bar ===== */
+  .callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(12,11,13,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+  .callbar .btn-call{width:100%;min-height:54px}
+  @media (max-width:760px){.callbar{display:block}body{padding-bottom:80px}}
 </style>
 </head>
 <body>
 
-<div class="topbar">CSLB <b>#1150831</b> &nbsp;·&nbsp; 24/7 <a href="tel:2132223457">(213) 222-3457</a></div>
+<!-- ===== top ticker ===== -->
+<div class="ticker" aria-label="Eternahot highlights">
+  <div class="ticker-track">
+    <span class="tk-group">
+      <span class="tk js-hours"><span class="led" aria-hidden="true"></span><span class="txt">24/7 Emergency Line</span></span>
+      <span class="tk">Licensed &amp; Insured — <b>CSLB&nbsp;#1150831</b></span>
+      <span class="tk">Rinnai Certified Installer</span>
+      <span class="tk">1-Year Workmanship Guarantee</span>
+      <span class="tk">Repair · Install · Service</span>
+      <span class="tk">Every make &amp; model</span>
+      <span class="tk">Endless hot water, engineered to last</span>
+    </span>
+    <span class="tk-group" aria-hidden="true">
+      <span class="tk js-hours"><span class="led" aria-hidden="true"></span><span class="txt">24/7 Emergency Line</span></span>
+      <span class="tk">Licensed &amp; Insured — <b>CSLB&nbsp;#1150831</b></span>
+      <span class="tk">Rinnai Certified Installer</span>
+      <span class="tk">1-Year Workmanship Guarantee</span>
+      <span class="tk">Repair · Install · Service</span>
+      <span class="tk">Every make &amp; model</span>
+      <span class="tk">Endless hot water, engineered to last</span>
+    </span>
+  </div>
+</div>
 
-<nav class="nav">
-  <div class="wrap">
-    <a class="brand" href="#top">
-      <div class="word">ETERNA<em>HOT</em></div>
-      <div class="strap">Water Heating Specialists</div>
-    </a>
-    <div style="display:flex;align-items:center;gap:10px">
-      <span class="pill" id="hoursPill">Hours</span>
-      <a class="btn-call" href="tel:2132223457">Call</a>
+<span id="top"></span>
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="assets/eternahot-flat-red.png" alt="Eternahot — hot water experts" width="758" height="270">
+    <div class="kicker">Hot Water Experts · Southern California</div>
+    <h1>Endless hot water,<br><span class="grad">one call away.</span></h1>
+    <p class="sub">Repair, installation, and service on every make &amp; model — commercial and premium residential.</p>
+
+    <div class="call-wrap">
+      <a class="btn btn-call" href="tel:2132223457">
+        <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
+        Call (213) 222-3457
+      </a>
+      <span class="call-note" id="callNote"><span class="led" aria-hidden="true"></span>Open now — talk to a real person</span>
+    </div>
+
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>CSLB #1150831</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 8v5l3 2"/><circle cx="12" cy="12" r="9"/></svg>24/7 Emergency</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>1-Year Guarantee</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg>Every make &amp; model</span>
+    </div>
+    <div class="rinnai-cert" aria-label="Rinnai Certified Installer">
+      <img src="assets/rinnai-logo.svg" alt="Rinnai" width="80" height="20">
+      <span>Certified Installer</span>
+    </div>
+
+    <p class="email-line"><a href="mailto:info@eternahot.com">info@eternahot.com</a></p>
+  </div>
+</section>
+
+<!-- ===== differentiator: service ===== -->
+<section class="diff">
+  <div class="wrap diff-in">
+    <div class="kicker">What makes us different</div>
+    <h2>Service is where we shine.</h2>
+    <p class="lead">Licensed, guaranteed, and invested in how your system runs — long after install day.</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3>Guaranteed workmanship</h3>
+        <p>Licensed, insured, and backed by a 1-year guarantee on every install.</p>
+      </div>
+      <div class="diff-card">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg></span>
+        <h3>Service comes first</h3>
+        <p>Any make or model. Great service is how we earn your trust.</p>
+      </div>
     </div>
   </div>
-</nav>
+</section>
 
-<main>
-  <div class="inner">
-    <h1>Endless<br><em>hot water.</em></h1>
-    <p class="sub">Southern California's water heating specialists — repair, installation, and guaranteed work on every make and model.</p>
-
-    <div class="choices">
-      <a class="choice" href="/residential">
-        <span class="label">Homeowners</span>
-        <h2>Residential</h2>
-        <p>Repair and maintenance, any make or model, plus installations and 24-hour emergency response.</p>
-        <span class="arrow">→</span>
-      </a>
-      <a class="choice" href="/commercial">
-        <span class="label">Businesses & Property Managers</span>
-        <h2>Commercial</h2>
-        <p>High-demand systems for restaurants, hotels, and multifamily — installed and maintained under service agreement.</p>
-        <span class="arrow">→</span>
-      </a>
-    </div>
-
-    <div class="badges">
-      <div class="badge"><b>1 Year</b>Work Guaranteed</div>
-      <div class="badge"><b>24 / 7</b>Emergency Line</div>
-      <div class="badge"><b>№ 1150831</b>CSLB Licensed</div>
-    </div>
+<!-- ===== proof band ===== -->
+<section class="proof">
+  <div class="wrap proof-in">
+    <h2>Real installs. Backed by a 1-year guarantee.</h2>
+    <p>Rinnai Certified, fully licensed, and ready when your hot water isn't.</p>
   </div>
-</main>
+</section>
 
+<!-- ===== footer ===== -->
 <footer>
-  © Eternahot · CSLB № 1150831 · Los Angeles, California &nbsp;·&nbsp; <a href="mailto:office@eternahot.com">office@eternahot.com</a>
+  <div class="wrap">
+    <img class="flogo" src="assets/logo-eternahot.png" alt="Eternahot" width="820" height="449">
+    <div class="foot-contact">
+      <a class="foot-email" href="mailto:info@eternahot.com">info@eternahot.com</a>
+      <address class="foot-address">
+        <span class="lbl">Mailing address</span>
+        Eternahot<br>
+        3415 S Sepulveda Blvd, Suite 1100<br>
+        Los Angeles, CA 90034
+      </address>
+      <span class="foot-area">Serving Los Angeles &amp; Southern California</span>
+    </div>
+    <p class="foot-meta">
+      Hot Water Experts · Licensed &amp; insured, CSLB&nbsp;#1150831 · Rinnai Certified Installer · 1-year workmanship guarantee · 24/7 emergency service.
+      <br>© <span id="yr">2026</span> Eternahot. All rights reserved.
+    </p>
+  </div>
 </footer>
 
+<!-- ===== mobile sticky call bar ===== -->
 <div class="callbar">
-  <a class="c1" href="tel:2132223457">Call Now</a>
-  <a class="c2" href="#engage">Request Service</a>
+  <a class="btn btn-call" href="tel:2132223457">
+    <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.24 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.24 1z"/></svg>
+    Call (213) 222-3457
+  </a>
 </div>
 
 <script>
-(function(){
-  var pill=document.getElementById('hoursPill');
-  var pt=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
-  var h=pt.getHours(),d=pt.getDay();
-  var open=(d>=1&&d<=6)&&(h>=7&&h<18);
-  if(open){pill.textContent='Open now';pill.classList.add('open');}
-  else{pill.textContent='24/7 Line';}
-})();
+  (function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();
+  // Live hours (Pacific): office Mon–Sat 7a–6p, otherwise 24/7 emergency line
+  (function(){
+    try{
+      var pt=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Los_Angeles'}));
+      var h=pt.getHours(), d=pt.getDay();
+      var open=(d>=1&&d<=6)&&(h>=7&&h<18);
+      document.querySelectorAll('.js-hours').forEach(function(el){
+        var t=el.querySelector('.txt'); if(t){t.textContent=open?'Open now — call us':'24/7 Emergency Line';}
+        el.classList.toggle('closed',!open);
+      });
+      var note=document.getElementById('callNote');
+      if(note){note.childNodes[note.childNodes.length-1].textContent=open?' Open now — talk to a real person':' After hours? 24/7 emergency line';note.classList.toggle('closed',!open);}
+    }catch(e){}
+  })();
 </script>
 </body>
 </html>
