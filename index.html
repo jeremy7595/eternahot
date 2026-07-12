@@ -53,11 +53,11 @@
   .ticker-track{display:flex;width:max-content;animation:tickerscroll 40s linear infinite}
   .ticker:hover .ticker-track{animation-play-state:paused}
   .tk-group{display:flex;align-items:center}
-  .tk{display:inline-flex;align-items:center;gap:8px;padding:9px 0;font-size:.76rem;font-weight:600;letter-spacing:.02em;color:#D3CDD8}
+  .tk{display:inline-flex;align-items:center;gap:8px;padding:9px 0;font-size:.88rem;font-weight:600;letter-spacing:.02em;color:#D3CDD8}
   .tk b{color:#fff;font-weight:700}
   .tk .led{width:7px;height:7px;border-radius:50%;background:#39D98A;box-shadow:0 0 8px #39D98A;flex:0 0 auto}
   .tk.closed .led{background:var(--ember);box-shadow:0 0 8px var(--ember)}
-  .tk::after{content:"◆";color:rgba(255,122,107,.4);font-size:.5rem;margin:0 22px;position:relative;top:-1px}
+  .tk::after{content:"◆";color:rgba(255,122,107,.4);font-size:.55rem;margin:0 22px;position:relative;top:-1px}
   @keyframes tickerscroll{to{transform:translateX(-50%)}}
   @media (prefers-reduced-motion:reduce){
     .ticker{white-space:normal}
