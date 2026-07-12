@@ -87,6 +87,9 @@
   .plan .cta{margin-top:24px;padding-top:22px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:9px}
   .plan .cta .btn{width:100%}
   .plan .cta .fine{font-size:.8rem;color:var(--dim);text-align:center}
+  .qty{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:2px}
+  .qty label{font-size:.85rem;color:var(--body);font-weight:600}
+  .qty input{width:76px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:.95rem;font-weight:700;text-align:center;min-height:44px}
 
   /* terms */
   .terms{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
@@ -172,8 +175,9 @@
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Residential &amp; commercial</li>
         </ul>
         <div class="cta">
-          <a class="btn btn-primary" href="mailto:info@eternahot.com?subject=Maintenance%20Plan%20Enrollment&body=Please%20enroll%20me%20in%20the%20Maintenance%20Plan.%0A%0AName%2Fbusiness%3A%0AService%20address%3A%0APhone%3A%0A%23%20of%20units%3A%0AWho%20installed%20the%20unit(s)%3A%0A">Enroll now</a>
-          <span class="fine">Secure card checkout coming online — enroll and we'll get you set up.</span>
+          <div class="qty"><label for="maintQty">Units</label><input id="maintQty" type="number" min="1" max="50" value="1" inputmode="numeric" aria-label="Number of units"></div>
+          <a id="enrollMaintenance" class="btn btn-primary" href="mailto:info@eternahot.com?subject=Maintenance%20Plan%20Enrollment&body=Please%20enroll%20me%20in%20the%20Maintenance%20Plan.%0A%0AName%2Fbusiness%3A%0AService%20address%3A%0APhone%3A%0A%23%20of%20units%3A%0AWho%20installed%20the%20unit(s)%3A%0A">Enroll now</a>
+          <span class="fine">Secure checkout by card · billed monthly · cancel anytime.</span>
         </div>
       </div>
 
@@ -257,6 +261,24 @@
   </a>
 </div>
 
-<script>(function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();</script>
+<script>
+  (function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();
+  // Maintenance enrollment: try Stripe Checkout; fall back to email if not configured yet.
+  (function(){
+    var btn=document.getElementById('enrollMaintenance');
+    if(!btn) return;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var mailto=btn.getAttribute('href');
+      var qEl=document.getElementById('maintQty');
+      var qty=Math.max(1, Math.min(50, parseInt(qEl&&qEl.value,10)||1));
+      btn.style.opacity='.65'; btn.style.pointerEvents='none';
+      fetch('/.netlify/functions/create-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:'maintenance',quantity:qty})})
+        .then(function(r){return r.ok?r.json():Promise.reject(r.status);})
+        .then(function(d){ if(d&&d.url){window.location=d.url;} else {throw 0;} })
+        .catch(function(){ window.location.href=mailto; });
+    });
+  })();
+</script>
 </body>
 </html>

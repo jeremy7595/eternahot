@@ -1,0 +1,4 @@
+# Static site (published from the repo root) + serverless functions for Stripe checkout.
+# No build command — the site is plain HTML; functions bundle automatically.
+[functions]
+  directory = "netlify/functions"
