@@ -123,10 +123,13 @@
   /* ===== footer ===== */
   footer{background:var(--bg-2);border-top:1px solid var(--line-soft);padding:38px 0 34px;text-align:center}
   footer .flogo{width:min(190px,55vw);height:auto;margin:0 auto 18px}
-  .foot-contact{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-size:.95rem;color:var(--body)}
+  .foot-contact{display:flex;flex-direction:column;align-items:center;gap:12px;font-size:.95rem;color:var(--body);text-align:center}
   .foot-contact a{color:#fff;font-weight:700}
-  .foot-meta{margin-top:16px;font-size:.8rem;color:var(--dim);line-height:1.7}
-  /* TODO(client): add a physical/mailing address or posted hours here if you want them shown */
+  .foot-email{font-size:1.02rem}
+  .foot-address{font-style:normal;line-height:1.55;color:var(--body)}
+  .foot-address .lbl{display:block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+  .foot-area{font-size:.9rem;color:var(--dim)}
+  .foot-meta{margin-top:18px;font-size:.8rem;color:var(--dim);line-height:1.7}
 
   /* ===== mobile sticky call bar ===== */
   .callbar{position:fixed;left:0;right:0;bottom:0;z-index:70;display:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
@@ -228,13 +231,14 @@
   <div class="wrap">
     <img class="flogo" src="assets/logo-eternahot.png" alt="Eternahot" width="820" height="449">
     <div class="foot-contact">
-      <a href="tel:2132223457">(213) 222-3457</a>
-      <span class="sep" aria-hidden="true" style="color:var(--line)">·</span>
-      <a href="mailto:info@eternahot.com">info@eternahot.com</a>
-      <span class="sep" aria-hidden="true" style="color:var(--line)">·</span>
-      <a href="/plans.html">Service Plans</a>
-      <span class="sep" aria-hidden="true" style="color:var(--line)">·</span>
-      <span>Los Angeles &amp; Southern California</span>
+      <a class="foot-email" href="mailto:info@eternahot.com">info@eternahot.com</a>
+      <address class="foot-address">
+        <span class="lbl">Mailing address</span>
+        Eternahot<br>
+        3415 S Sepulveda Blvd, Suite 1100<br>
+        Los Angeles, CA 90034
+      </address>
+      <span class="foot-area">Serving Los Angeles &amp; Southern California</span>
     </div>
     <p class="foot-meta">
       Hot Water Experts · Licensed &amp; insured, CSLB&nbsp;#1150831 · Rinnai Certified Installer · 1-year workmanship guarantee · 24/7 emergency service.
