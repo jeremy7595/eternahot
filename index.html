@@ -112,7 +112,9 @@
   .diff-card .body{padding:20px 22px 24px}
   .diff-card h3{color:#fff;font-size:1.06rem;font-weight:700}
   .diff-card p{margin-top:7px;font-size:.92rem;color:var(--body)}
-  .diff .btn-call{margin-top:34px}
+  .btn-plans{display:inline-flex;align-items:center;gap:9px;margin-top:36px;min-height:50px;padding:13px 26px;border-radius:13px;font-weight:700;font-size:1rem;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--line);transition:transform .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
+  .btn-plans:hover{border-color:var(--red);background:rgba(225,29,46,.1);transform:translateY(-2px)}
+  .btn-plans svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
 
   /* ===== proof band ===== */
   .proof{position:relative;overflow:hidden;background:#0C0B0D url('assets/install-rinnai.jpg') center 24%/cover no-repeat;
@@ -222,6 +224,9 @@
         </div>
       </div>
     </div>
+    <a class="btn-plans" href="/plans.html">See our service plans
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
   </div>
 </section>
 
