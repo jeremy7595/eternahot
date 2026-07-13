@@ -112,9 +112,11 @@
   .diff-card .body{padding:20px 22px 24px}
   .diff-card h3{color:#fff;font-size:1.06rem;font-weight:700}
   .diff-card p{margin-top:7px;font-size:.92rem;color:var(--body)}
-  .btn-plans{display:inline-flex;align-items:center;gap:9px;margin-top:36px;min-height:50px;padding:13px 26px;border-radius:13px;font-weight:700;font-size:1rem;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--line);transition:transform .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease)}
-  .btn-plans:hover{border-color:var(--red);background:rgba(225,29,46,.1);transform:translateY(-2px)}
-  .btn-plans svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+  .foot-plan{margin:4px auto 26px;display:flex;flex-direction:column;align-items:center;gap:11px}
+  .foot-plan-lead{font-size:.9rem;color:var(--body)}
+  .foot-plan-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:54px;padding:15px 34px;border-radius:13px;font-weight:800;font-size:1.05rem;color:#fff;background:var(--grad);box-shadow:0 14px 36px -14px rgba(225,29,46,.6), inset 0 1px 0 rgba(255,255,255,.2);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+  .foot-plan-btn:hover{transform:translateY(-2px);box-shadow:0 20px 46px -16px rgba(225,29,46,.8)}
+  .foot-plan-btn svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2}
 
   /* ===== proof band ===== */
   .proof{position:relative;overflow:hidden;background:#0C0B0D url('assets/install-rinnai.jpg') center 24%/cover no-repeat;
@@ -224,9 +226,6 @@
         </div>
       </div>
     </div>
-    <a class="btn-plans" href="/plans.html">See our service plans
-      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
   </div>
 </section>
 
@@ -242,6 +241,12 @@
 <footer>
   <div class="wrap">
     <img class="flogo" src="assets/eternahot-logo.png" alt="Eternahot — Hot Water Experts" width="1070" height="416">
+    <div class="foot-plan">
+      <p class="foot-plan-lead">Set up or pay for your service plan</p>
+      <a class="foot-plan-btn" href="/plans.html">Service Plans
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
     <div class="foot-contact">
       <a class="foot-email" href="mailto:info@eternahot.com">info@eternahot.com</a>
       <address class="foot-address">
