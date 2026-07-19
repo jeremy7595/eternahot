@@ -109,13 +109,6 @@
   .form-msg.show{display:block}
   .form-msg.warn{background:rgba(225,29,46,.1);border:1px solid rgba(225,29,46,.45);color:#FF8577}
 
-  /* pricing explainer */
-  .pricing-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;max-width:1000px;margin:0 auto}
-  @media (max-width:760px){.pricing-notes{grid-template-columns:1fr;max-width:560px}}
-  .pnote{border:1px solid var(--line-soft);border-radius:16px;background:var(--card);padding:26px 24px}
-  .pnote h3{font-family:'Fraunces',serif;color:#fff;font-size:1.25rem;font-weight:700;line-height:1.2}
-  .pnote p{margin-top:10px;font-size:.93rem;color:var(--body)}
-
   /* member comparison */
   .compare-wrap{max-width:820px;margin:0 auto;overflow-x:auto}
   .compare{width:100%;border-collapse:collapse;font-size:.93rem}
@@ -227,34 +220,6 @@
   </div>
 </section>
 
-<!-- ===== how pricing works ===== -->
-<section id="pricing">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">The program</div>
-      <h2>Fixed terms. Dedicated service.</h2>
-    </div>
-    <div class="pricing-notes">
-      <div class="pnote">
-        <h3>Non-negotiable pricing</h3>
-        <p>Prices are set by the program and applied automatically at checkout. No one at Eternahot can modify, discount, or negotiate them. Same units, same price — every customer, every time.</p>
-      </div>
-      <div class="pnote">
-        <h3>One dedicated technician</h3>
-        <p>Your property is assigned one technician for every maintenance visit and service call. They know your equipment, your water, and your property — fast diagnosis, no starting over with someone new.</p>
-      </div>
-      <div class="pnote">
-        <h3>Service calls without surprises</h3>
-        <p>No overtime charges. No drive-time charges to any location under contract. Labor is charged only upon arrival — $250/hour, two-hour minimum per call — plus a $50 fuel surcharge.</p>
-      </div>
-      <div class="pnote">
-        <h3>Keeping your discount</h3>
-        <p>Discounts hold while your plan is active and payments are current. If unpaid invoices cancel your plan, every unit must be re-inspected and re-onboarded — re-enrollment is at the full initiation fee.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ===== member comparison ===== -->
 <section id="compare">
   <div class="wrap">
@@ -292,14 +257,12 @@
       <h2>Clear terms, no surprises</h2>
     </div>
     <div class="terms-grid">
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Service plans cover Rinnai tankless water heaters only. We service every make and model, but the monthly plan is for Rinnai tankless systems.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/></svg><div><h4>Every unit, identified</h4><p>Each enrolled unit is identified by its serial number and documented at your initial inspection. Coverage is tied to those exact units — enroll every system you'd like covered.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Monthly billing</h4><p>Commercial Duty from $30/unit and Severe Service from $55/unit, with progressive multi-unit discounts applied automatically. Initiation fee charged at checkout, monthly payments begin in 30 days. Month-to-month — cancel anytime.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>What's covered</h4><p>Your monthly payment covers your flush and service visits — one per year on Commercial Duty, two per year on Severe Service — plus priority scheduling and direct phone access to our techs. It also keeps your manufacturer warranty valid.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>No overtime, no drive time</h4><p>With a plan in effect there are no overtime charges and no charge for drive time to any service location under contract — any hour, any day.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Diagnostics &amp; repairs</h4><p>We diagnose on-site and quote any parts or equipment for your approval before proceeding. Equipment replacements, pipe repairs, and permits are billed separately.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg><div><h4>Service-call labor</h4><p>Labor is charged only upon arrival — $250/hour with a two-hour minimum per call — plus a $50 fuel surcharge per dispatch. Scheduled maintenance visits have no surcharge.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg><div><h4>Full service agreement</h4><p>The complete terms and service conditions are detailed in the Eternahot service agreement you'll receive at enrollment.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Rinnai tankless water heaters only, enrolled by serial number at your initial inspection.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Billing</h4><p>Commercial Duty $30/unit/mo, Severe Service $55/unit/mo — multi-unit discounts automatic. Initiation fee at checkout; monthly billing starts in 30 days. Cancel anytime.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>Fixed pricing</h4><p>Set by the program, applied at checkout. No one at Eternahot can modify or negotiate it.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Service calls</h4><p>Labor charged on arrival — $250/hour, two-hour minimum — plus a $50 fuel surcharge. Parts quoted for your approval.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>Lapsed plans</h4><p>Unpaid invoices cancel the plan. Re-enrollment requires re-inspection and the full initiation fee.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg><div><h4>Service agreement</h4><p>Complete terms come with the agreement at enrollment.</p></div></div>
     </div>
   </div>
 </section>
@@ -309,20 +272,11 @@
   <div class="wrap">
     <div class="sec-head"><div class="kicker">FAQ</div><h2>Common questions</h2></div>
     <div class="faq">
-      <details class="qa"><summary>Which water heaters do the plans cover?</summary><div class="a">Rinnai tankless water heaters. We service every make and model on the repair side, but the monthly service plans are for Rinnai tankless systems only.</div></details>
-      <details class="qa"><summary>What's the difference between Commercial Duty and Severe Service?</summary><div class="a">Commercial Duty ($30/unit/mo base) includes one flush and service visit per year, for typical systems on a standard duty cycle. Severe Service ($55/unit/mo base) includes two flush and service visits per year and is designed for more demanding service conditions and environments — units running at 145°F or higher, water hardness above 200 mg/L or demonstrated dissolved-solids issues, or on track to average more than 3,000 hours a year. Both plans carry the same progressive multi-unit discounts.</div></details>
-      <details class="qa"><summary>How do the multi-unit discounts work?</summary><div class="a">They're progressive and automatic. Each additional unit's monthly rate is 10% lower than the previous unit's, down to a maximum discount of 50% per unit. The same applies to the one-time initiation fee: $300 for the first unit, each additional unit 10% less, down to $150. The signup form above shows your exact price as you change the unit count.</div></details>
-      <details class="qa"><summary>Can I negotiate the price?</summary><div class="a">No — and that's by design. Prices and discounts are set by the program and applied automatically at checkout. Our employees and technicians cannot modify, discount, or negotiate them for anyone, so every customer with the same number of enrolled units pays exactly the same price. Want a bigger discount? Enroll more units.</div></details>
-      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">Just the one-time initiation fee for your units — $300 for the first, discounted for each additional one. That covers your first maintenance visit and inspection, where we document each unit's condition and record its serial number. Your card is saved at signup, and monthly payments begin in 30 days.</div></details>
-      <details class="qa"><summary>How does the 30-day free trial work?</summary><div class="a">Your plan benefits start immediately, but the monthly fee doesn't. At checkout you pay only the initiation fee; your card is saved, and the first monthly charge happens on day 31. Cancel within the first 30 days and you owe no monthly fees.</div></details>
-      <details class="qa"><summary>Is the plan for homes or businesses?</summary><div class="a">Both. Choose the duty level that matches how hard your systems work, enroll every Rinnai tankless unit at the property, and the multi-unit discounts apply automatically either way.</div></details>
-      <details class="qa"><summary>What's covered, and what's billed separately?</summary><div class="a">Your monthly payment covers your flush and service visits (one per year on Commercial Duty, two on Severe Service), priority scheduling, and phone access to our techs — with no overtime or drive-time charges. Service-call labor is $250/hour with a two-hour minimum, charged only upon arrival, plus a $50 fuel surcharge; equipment replacements, pipe repairs, and permits are billed separately.</div></details>
-      <details class="qa"><summary>What do non-members pay?</summary><div class="a">Non-members pay drive time to the location, overtime rates on nights and weekends, and pay for each service individually — and they get whichever technician is on call and closest at the time. With a plan in effect there's no drive time, no overtime, your flush and service visits are included, and one dedicated technician handles your property.</div></details>
-      <details class="qa"><summary>Do members pay overtime for nights or weekends?</summary><div class="a">No. With a plan in effect there are no overtime charges and no drive-time charges to your contracted location — the rate is the same any hour, any day, holidays included.</div></details>
-      <details class="qa"><summary>How do service calls work?</summary><div class="a">Call and we dispatch — no overtime charges, no drive-time charges to your contracted location. Labor is charged only upon arrival at $250/hour with a two-hour minimum per call, plus the $50 fuel surcharge. Any parts or equipment are quoted for your approval before we proceed.</div></details>
-      <details class="qa"><summary>What is the $50 fuel surcharge?</summary><div class="a">It applies per service call — any time you ask us to dispatch a technician — to cover fuel costs in California. Regularly scheduled maintenance visits have no surcharge.</div></details>
-      <details class="qa"><summary>What happens if I miss payments?</summary><div class="a">Your plan is active service you use — not a balance you build up. If a payment fails we'll email you to update your card and retry it automatically; if it stays unpaid the plan cancels and your benefits stop. Your discounts remain in effect as long as your plan is active and payments are current — but if unpaid invoices cause cancellation, re-enrollment requires the full, undiscounted initiation fee for every unit, because lapsed units must be re-inspected and re-onboarded.</div></details>
-      <details class="qa"><summary>Can I cancel?</summary><div class="a">Yes — the plan is month-to-month. Cancel anytime, including during your free 30 days.</div></details>
+      <details class="qa"><summary>Which water heaters do the plans cover?</summary><div class="a">Rinnai tankless water heaters only, enrolled by serial number.</div></details>
+      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">The initiation fee only. Monthly billing begins in 30 days.</div></details>
+      <details class="qa"><summary>What does a service call cost?</summary><div class="a">Labor on arrival at $250/hour with a two-hour minimum, plus a $50 fuel surcharge. No overtime, no drive time. Parts are quoted for approval before we proceed.</div></details>
+      <details class="qa"><summary>What happens if I miss payments?</summary><div class="a">Unpaid invoices cancel the plan. Re-enrolling requires re-inspection and the full, undiscounted initiation fee.</div></details>
+      <details class="qa"><summary>Can I cancel?</summary><div class="a">Anytime. Plans are month-to-month.</div></details>
     </div>
   </div>
 </section>
