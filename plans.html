@@ -110,7 +110,7 @@
   .form-msg.warn{background:rgba(225,29,46,.1);border:1px solid rgba(225,29,46,.45);color:#FF8577}
 
   /* pricing explainer */
-  .pricing-notes{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+  .pricing-notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;max-width:1000px;margin:0 auto}
   @media (max-width:760px){.pricing-notes{grid-template-columns:1fr;max-width:560px}}
   .pnote{border:1px solid var(--line-soft);border-radius:16px;background:var(--card);padding:26px 24px}
   .pnote h3{font-family:'Fraunces',serif;color:#fff;font-size:1.25rem;font-weight:700;line-height:1.2}
@@ -221,28 +221,21 @@
 <section id="pricing">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">How pricing works</div>
-      <h2>Multi-unit pricing that rewards every unit you enroll</h2>
-      <p>Our discounts are progressive and automatic. Every unit you enroll after the first earns a bigger discount than the one before it — on both the monthly plan and the one-time initiation fee.</p>
+      <div class="kicker">The program</div>
+      <h2>Fixed terms. Dedicated service.</h2>
     </div>
     <div class="pricing-notes">
       <div class="pnote">
-        <h3>Progressive, automatic discounts</h3>
-        <p><b style="color:#CFCAD4">Monthly plan:</b> each additional unit is priced 10% lower than the last, down to a maximum discount of 50% per unit.</p>
-        <p><b style="color:#CFCAD4">Initiation fee:</b> the first unit is $300. Each additional unit's initiation drops another 10%, down to a maximum discount of 50% ($150 per unit).</p>
-        <p>Initiation fee charged at checkout, monthly payments begin in 30 days. Your card is saved at signup.</p>
+        <h3>Non-negotiable pricing</h3>
+        <p>Prices are set by the program and applied automatically at checkout. No one at Eternahot can modify, discount, or negotiate them. Same units, same price — every customer, every time.</p>
       </div>
       <div class="pnote">
-        <h3>Our pricing is fixed — and that's a feature</h3>
-        <p>These prices and discounts are set by the program and applied automatically at checkout. Our employees and technicians cannot modify, discount, or negotiate them — for anyone. Every customer with the same number of enrolled units pays exactly the same price. Want a bigger discount? Enroll more units.</p>
-      </div>
-      <div class="pnote">
-        <h3>Your property gets a dedicated technician</h3>
-        <p>Every enrolled property is assigned to one dedicated technician who handles your maintenance visits and service calls. Your technician knows your equipment, your water quality, your piping, and your property's quirks — faster diagnosis, no repeated troubleshooting by someone new to your system.</p>
+        <h3>One dedicated technician</h3>
+        <p>Your property is assigned one technician for every maintenance visit and service call. They know your equipment, your water, and your property — fast diagnosis, no starting over with someone new.</p>
       </div>
       <div class="pnote">
         <h3>Keeping your discount</h3>
-        <p>Your discounts remain in effect as long as your plan is active and payments are current. If unpaid invoices cause cancellation, re-enrollment requires the full, undiscounted initiation fee for every unit, because lapsed units must be re-inspected and re-onboarded.</p>
+        <p>Discounts hold while your plan is active and payments are current. If unpaid invoices cancel your plan, every unit must be re-inspected and re-onboarded — re-enrollment is at the full initiation fee.</p>
       </div>
     </div>
   </div>
@@ -252,7 +245,7 @@
 <section class="band">
   <div class="wrap">
     <h2 class="serif">One fee. We handle the rest.</h2>
-    <p>Keep paying your monthly fee and we cover the upkeep, the service, and the fixes — scheduled maintenance, priority response, and a tech on the other end of the phone, so your hot water just keeps working.</p>
+    <p>Scheduled maintenance, priority dispatch, and a specialist on the line — your hot water just keeps working.</p>
   </div>
 </section>
 
