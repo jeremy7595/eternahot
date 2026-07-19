@@ -85,6 +85,7 @@
   .plan-toggle label{display:block;cursor:pointer;border:1px solid var(--line);border-radius:13px;padding:14px 16px;background:var(--bg-2);transition:border-color .2s var(--ease),background .2s var(--ease)}
   .plan-toggle label .pt-name{display:block;color:#fff;font-weight:800;font-size:.98rem}
   .plan-toggle label .pt-rate{display:block;margin-top:3px;font-size:.84rem;color:var(--body)}
+  .plan-toggle label .pt-note{display:block;margin-top:2px;font-size:.8rem;color:var(--dim)}
   .plan-toggle input:checked + label{border-color:var(--red);background:rgba(225,29,46,.08)}
   .plan-toggle input:focus-visible + label{outline:2px solid var(--red);outline-offset:3px}
   .plan-hint{margin:0 0 22px;font-size:.85rem;color:var(--dim)}
@@ -184,11 +185,11 @@
       <div class="plan-toggle" role="radiogroup" aria-label="Priority tier">
         <span>
           <input type="radio" name="plan" id="planRegular" value="regular" checked>
-          <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo base</span></label>
+          <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo base</span><span class="pt-note">One service visit per year</span></label>
         </span>
         <span>
           <input type="radio" name="plan" id="planHeavy" value="heavy">
-          <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo base</span></label>
+          <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo base</span><span class="pt-note">Two service visits per year</span></label>
         </span>
       </div>
       <p class="plan-hint" id="planHint"></p>
@@ -235,7 +236,7 @@
         <tbody>
           <tr><td>Drive time</td><td>Never billed</td><td>Billed to your location</td></tr>
           <tr><td>Nights, weekends &amp; holidays</td><td>Same rate, any hour</td><td>Overtime rates</td></tr>
-          <tr><td>Flush &amp; service visits</td><td>Included — one or two per year by tier</td><td>Paid per service</td></tr>
+          <tr><td>Flush &amp; service visits</td><td>Included — one per year on Commercial Duty, two on Severe Service</td><td>Paid per service</td></tr>
           <tr><td>Your technician</td><td>One dedicated technician who knows your property</td><td>Whoever is on call and closest at the time</td></tr>
         </tbody>
       </table>
@@ -260,7 +261,7 @@
     </div>
     <div class="terms-grid">
       <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Rinnai tankless water heaters only, enrolled by serial number at your initial inspection.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Billing</h4><p>Commercial Duty $30/unit/mo, Severe Service $55/unit/mo — multi-unit discounts automatic. Initiation fee at checkout; monthly billing starts in 30 days. Cancel anytime.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Billing</h4><p>Commercial Duty $30/unit/mo (one service visit per year), Severe Service $55/unit/mo (two per year) — multi-unit discounts automatic. Initiation fee at checkout; monthly billing starts in 30 days. Cancel anytime.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>Fixed pricing</h4><p>Set by the program, applied at checkout. No one at Eternahot can modify or negotiate it.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Service calls</h4><p>Labor charged on arrival — $250/hour, two-hour minimum — plus a $50 fuel surcharge. Parts quoted for your approval.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>Lapsed plans</h4><p>Unpaid invoices cancel the plan. Re-enrollment requires re-inspection and the full initiation fee.</p></div></div>
