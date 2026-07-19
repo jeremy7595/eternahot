@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Service Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
-<meta name="description" content="Eternahot Service Plans for Rinnai tankless water heaters: Commercial Duty from $30/unit/mo or Severe Service from $55/unit/mo, with automatic progressive discounts for every additional unit you enroll. First 30 days free. One-time initiation fee from $300 for the first unit, discounted for each additional unit. Covers annual maintenance, priority service, no overtime charges, and member rates on all repairs. Residential & commercial, Southern California.">
+<meta name="description" content="Eternahot Service Plans for Rinnai tankless water heaters: Commercial Duty from $30/unit/mo or Severe Service from $55/unit/mo, with automatic progressive discounts for every additional unit you enroll. Initiation fee charged at checkout; monthly payments begin in 30 days. One-time initiation fee from $300 for the first unit, discounted for each additional unit. Covers annual maintenance, priority service, no overtime charges, and member rates on all repairs. Residential & commercial, Southern California.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot Plans">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,10 +161,11 @@
 <!-- ===== hero ===== -->
 <section class="hero">
   <div class="wrap">
-    <div class="kicker">Eternahot Care · Service Plans</div>
-    <h1 class="serif">Hot water when you want it.</h1>
-    <p class="mission">We build systems that take the guessing and worrying out of hot water.</p>
-    <p class="intro">Pick your duty level, tell us how many tankless units you have, and progressive discounts do the rest — every unit you enroll after the first costs less than the one before it. Your first 30 days are free.</p>
+    <div class="kicker">Eternahot Priority Response</div>
+    <h1 class="serif">Hot water systems that never wait.</h1>
+    <p class="mission">Eternahot Priority Response deploys certified technicians and pre-stocked critical parts faster than standard service channels. This is what we do. Commercial tankless water heating is our only business — we are not a general plumbing company.</p>
+    <p class="intro">Our service is designed for rapid response and guaranteed results. We keep your hot water on and running, right now. No delays. Just immediate, decisive resolution by the specialists who know these systems best.</p>
+    <p class="intro">Select your priority tier and number of tankless units. Each additional unit receives elevated dispatch priority and dedicated parts allocation.</p>
     <div id="statusNotice" class="notice" role="status"></div>
   </div>
 </section>
@@ -173,14 +174,14 @@
 <section id="signup">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">Sign up</div>
-      <h2>Start your plan — first 30 days free</h2>
-      <p>Choose a plan, enter your unit count, and see your exact price before you check out. Prices are set by the program and applied automatically.</p>
+      <div class="kicker">Enrollment</div>
+      <h2>Enroll Now</h2>
+      <p>Choose your tier, enter unit count, and see exact terms before checkout.</p>
     </div>
 
     <form id="signupForm" class="signup-card">
-      <span class="field-label">Choose your plan</span>
-      <div class="plan-toggle" role="radiogroup" aria-label="Plan">
+      <span class="field-label">Select your priority tier</span>
+      <div class="plan-toggle" role="radiogroup" aria-label="Priority tier">
         <span>
           <input type="radio" name="plan" id="planRegular" value="regular" checked>
           <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo base</span></label>
@@ -193,7 +194,7 @@
       <p class="plan-hint" id="planHint"></p>
 
       <div class="qty">
-        <label class="field-label" for="unitCount">How many tankless units are at your property?</label>
+        <label class="field-label" for="unitCount">Select total number of tankless units that require service</label>
         <input type="number" id="unitCount" name="quantity" inputmode="numeric" min="1" max="50" step="1" value="1">
       </div>
 
@@ -204,12 +205,12 @@
         <div class="pv-label pv-label-2">One-time initiation fee</div>
         <div id="pvInitRows"></div>
         <div class="row due total"><span class="k">Due today</span><span class="v" id="pvInitiation"></span></div>
-        <p class="trial-note">Your first 30 days are free. Your card is saved at signup, the initiation fee is charged today, and monthly billing begins on day 31.</p>
+        <p class="trial-note">Initiation fee charged at checkout, monthly payments begin in 30 days. Your card is saved at signup.</p>
       </div>
 
       <div class="cta">
-        <button class="btn btn-primary" type="submit" id="checkoutBtn">Start my 30-day free trial</button>
-        <span class="fine">Secure checkout by Stripe · initiation fee today, monthly billing starts day 31 · cancel anytime.</span>
+        <button class="btn btn-primary" type="submit" id="checkoutBtn">Proceed to checkout</button>
+        <span class="fine">Secure checkout by Stripe · cancel anytime.</span>
       </div>
       <div id="formMsg" class="form-msg warn" role="alert"></div>
     </form>
@@ -229,7 +230,7 @@
         <h3>Progressive, automatic discounts</h3>
         <p><b style="color:#CFCAD4">Monthly plan:</b> each additional unit is priced 10% lower than the last, down to a maximum discount of 50% per unit.</p>
         <p><b style="color:#CFCAD4">Initiation fee:</b> the first unit is $300. Each additional unit's initiation drops another 10%, down to a maximum discount of 50% ($150 per unit).</p>
-        <p>Your first 30 days are free. Your card is saved at signup, the initiation fee is charged today, and monthly billing begins on day 31.</p>
+        <p>Initiation fee charged at checkout, monthly payments begin in 30 days. Your card is saved at signup.</p>
       </div>
       <div class="pnote">
         <h3>Our pricing is fixed — and that's a feature</h3>
@@ -265,7 +266,7 @@
     <div class="terms-grid">
       <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Service plans cover Rinnai tankless water heaters only. We service every make and model, but the monthly plan is for Rinnai tankless systems.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/></svg><div><h4>Every unit, identified</h4><p>Each enrolled unit is identified by its serial number and documented at your initial inspection. Coverage is tied to those exact units — enroll every system you'd like covered.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Monthly billing</h4><p>Commercial Duty from $30/unit and Severe Service from $55/unit, with progressive multi-unit discounts applied automatically. Your first 30 days are free; monthly billing begins on day 31. Month-to-month — cancel anytime.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Monthly billing</h4><p>Commercial Duty from $30/unit and Severe Service from $55/unit, with progressive multi-unit discounts applied automatically. Initiation fee charged at checkout, monthly payments begin in 30 days. Month-to-month — cancel anytime.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>What's covered</h4><p>Your monthly payment covers scheduled maintenance (flush, descale &amp; inspection), priority scheduling, direct phone access to our techs, and member rates on all service — and it keeps your manufacturer warranty valid.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>No overtime charges</h4><p>Members pay the same rate any hour — call nights, weekends, or holidays with no after-hours or overtime premium.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Diagnostics &amp; repairs</h4><p>We diagnose the problem, then quote any repair (parts &amp; labor) at member rates for your approval — your diagnostic fee is credited toward any repair we perform. Equipment replacements, pipe repairs, and permits are billed separately.</p></div></div>
@@ -284,7 +285,7 @@
       <details class="qa"><summary>What's the difference between Commercial Duty and Severe Service?</summary><div class="a">Commercial Duty ($30/unit/mo base) is for typical systems with annual maintenance. Severe Service ($55/unit/mo base) is for units operating under severe conditions — running at 145°F or higher, water hardness above 200 mg/L or demonstrated dissolved-solids issues, or on track to average more than 3,000 hours a year — and includes more intensive maintenance to match the heavier wear. Both plans carry the same progressive multi-unit discounts.</div></details>
       <details class="qa"><summary>How do the multi-unit discounts work?</summary><div class="a">They're progressive and automatic. Each additional unit's monthly rate is 10% lower than the previous unit's, down to a maximum discount of 50% per unit. The same applies to the one-time initiation fee: $300 for the first unit, each additional unit 10% less, down to $150. The signup form above shows your exact price as you change the unit count.</div></details>
       <details class="qa"><summary>Can I negotiate the price?</summary><div class="a">No — and that's by design. Prices and discounts are set by the program and applied automatically at checkout. Our employees and technicians cannot modify, discount, or negotiate them for anyone, so every customer with the same number of enrolled units pays exactly the same price. Want a bigger discount? Enroll more units.</div></details>
-      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">Just the one-time initiation fee for your units — $300 for the first, discounted for each additional one. That covers your first maintenance visit and inspection, where we document each unit's condition and record its serial number. Your card is saved at signup, your first 30 days are free, and monthly billing begins on day 31.</div></details>
+      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">Just the one-time initiation fee for your units — $300 for the first, discounted for each additional one. That covers your first maintenance visit and inspection, where we document each unit's condition and record its serial number. Your card is saved at signup, and monthly payments begin in 30 days.</div></details>
       <details class="qa"><summary>How does the 30-day free trial work?</summary><div class="a">Your plan benefits start immediately, but the monthly fee doesn't. At checkout you pay only the initiation fee; your card is saved, and the first monthly charge happens on day 31. Cancel within the first 30 days and you owe no monthly fees.</div></details>
       <details class="qa"><summary>Is the plan for homes or businesses?</summary><div class="a">Both. Choose the duty level that matches how hard your systems work, enroll every Rinnai tankless unit at the property, and the multi-unit discounts apply automatically either way.</div></details>
       <details class="qa"><summary>What's covered, and what's billed separately?</summary><div class="a">Your monthly payment covers scheduled maintenance (flush, descale &amp; inspection), priority scheduling, phone access to our techs, member rates on all service, and no overtime charges. Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed; equipment replacements, pipe repairs, and permits are billed separately.</div></details>
@@ -446,7 +447,7 @@
       var status = new URLSearchParams(window.location.search).get('status');
       var notice = document.getElementById('statusNotice');
       if (status === 'success') {
-        notice.textContent = 'You\'re enrolled! Your 30-day free trial has started — we\'ll reach out shortly to schedule your first inspection.';
+        notice.textContent = 'You\'re enrolled! We\'ll reach out shortly to schedule your first inspection.';
         notice.classList.add('show', 'ok');
       } else if (status === 'cancelled') {
         notice.textContent = 'Checkout was cancelled — no charge was made. Ready when you are.';
