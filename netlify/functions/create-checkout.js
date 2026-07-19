@@ -3,8 +3,8 @@
 // Secret key + Price/Product IDs are read from Netlify environment variables — never hard-coded.
 // Required env vars (set in Netlify → Project configuration → Environment variables):
 //   STRIPE_SECRET_KEY          your sk_… key (use the TEST key first)
-//   STRIPE_PRICE_REGULAR       graduated tiered recurring price for Regular Duty (base $30/unit/mo)
-//   STRIPE_PRICE_HEAVY         graduated tiered recurring price for Heavy Duty (base $55/unit/mo)
+//   STRIPE_PRICE_REGULAR       graduated tiered recurring price for Commercial Duty (base $30/unit/mo)
+//   STRIPE_PRICE_HEAVY         graduated tiered recurring price for Severe Service (base $55/unit/mo)
 //   STRIPE_PRODUCT_INITIATION  product ID (prod_…) used to bill the one-time initiation fee
 //
 // The front-end falls back to email enrollment if this function isn't configured yet,
