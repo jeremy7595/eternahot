@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Service Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
-<meta name="description" content="Eternahot Service Plans for Rinnai tankless water heaters: Commercial Duty from $30/unit/mo or Severe Service from $55/unit/mo, with automatic progressive discounts for every additional unit you enroll. Initiation fee charged at checkout; monthly payments begin in 30 days. One-time initiation fee from $300 for the first unit, discounted for each additional unit. Covers scheduled flush and service visits, priority dispatch, and no overtime or drive-time charges. Residential & commercial, Southern California.">
+<meta name="description" content="Eternahot Priority Response: service plans for Rinnai tankless water heaters. Certified technicians, pre-stocked critical parts, priority dispatch, and a dedicated technician for every enrolled property. Commercial Duty (one service visit per year) and Severe Service (two per year) tiers, with no overtime or drive-time charges for locations under contract. Southern California.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot Plans">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -261,7 +261,7 @@
     </div>
     <div class="terms-grid">
       <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Rinnai tankless water heaters only, enrolled by serial number at your initial inspection.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Billing</h4><p>Commercial Duty $30/unit/mo (one service visit per year), Severe Service $55/unit/mo (two per year) — multi-unit discounts automatic. Initiation fee at checkout; monthly billing starts in 30 days. Cancel anytime.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Billing</h4><p>Commercial Duty $30/unit/mo (one service visit per year), Severe Service $55/unit/mo (two per year). Initiation fee at checkout; monthly billing starts in 30 days. Cancel anytime.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>Fixed pricing</h4><p>Set by the program, applied at checkout. No one at Eternahot can modify or negotiate it.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Service calls</h4><p>Labor charged on arrival — $250/hour, two-hour minimum — plus a $50 fuel surcharge. Parts quoted for your approval.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>Lapsed plans</h4><p>Unpaid invoices cancel the plan. Re-enrollment requires re-inspection and the full initiation fee.</p></div></div>
@@ -296,7 +296,7 @@
 
   (function(){
     // Display math only — the server (create-checkout function) stays the source of truth.
-    // Each unit after the first is priced 10% of base below the last, capped at a 50% discount.
+    // Each unit after the first is priced 10% of base below the last, floored at half the base rate.
     var BASE_CENTS = { regular: 3000, heavy: 5500 };
     var PLAN_HINTS = {
       regular: 'One flush and service visit per year. For typical systems on a standard duty cycle.',
@@ -338,7 +338,7 @@
     }
 
     // One line per unit with its price, so the totals are self-explanatory.
-    // Units 6+ all cost the same (the discount floor), so they collapse into one line.
+    // Units 6+ are all priced at the floor, so they collapse into one line.
     function unitRowsHTML(units, priceCentsFn){
       var html = '';
       var shown = units > 6 ? 5 : units;
