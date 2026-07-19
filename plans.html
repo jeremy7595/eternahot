@@ -76,34 +76,10 @@
   .band h2{font-family:'Fraunces',serif;color:#fff;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;text-shadow:0 2px 20px rgba(0,0,0,.9),0 1px 4px rgba(0,0,0,.85)}
   .band p{margin:14px auto 0;max-width:48ch;color:#ECEAF0;font-size:1.02rem;text-shadow:0 1px 14px rgba(0,0,0,.9)}
 
-  /* plan cards */
-  .plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
-  @media (max-width:820px){.plans{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
-  .plan .excl{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:.84rem;color:var(--dim)}
-  .plan{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:32px 28px;background:linear-gradient(165deg,var(--card-2),var(--card));border:1px solid var(--line);overflow:hidden}
-  .plan.feature{border-color:rgba(225,29,46,.5)}
-  .plan.feature::before{content:"";position:absolute;inset:0;background:var(--grad-soft);opacity:.5;pointer-events:none}
-  .plan>*{position:relative}
-  .plan .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:999px;margin-bottom:16px}
-  .plan.feature .tag{background:var(--grad);color:#fff}
-  .plan.alt .tag{background:rgba(255,255,255,.06);color:#FF8577;border:1px solid var(--line)}
-  .plan h3{font-family:'Fraunces',serif;color:#fff;font-size:1.55rem;font-weight:700;line-height:1.1}
-  .plan .desc{margin-top:8px;font-size:.95rem;color:var(--body);min-height:44px}
-  .price{display:flex;align-items:baseline;gap:8px;margin:20px 0 4px}
-  .price .amt{font-family:'Fraunces',serif;font-weight:700;font-size:2.6rem;color:#fff;line-height:1}
-  .price .per{font-size:.95rem;color:var(--body);font-weight:600}
-  .price-note{font-size:.85rem;color:var(--dim)}
-  .plan ul{list-style:none;margin:20px 0 0;display:grid;gap:11px}
-  .plan li{display:flex;gap:11px;align-items:flex-start;font-size:.93rem;color:#CFCAD4}
-  .plan li svg{width:18px;height:18px;flex:0 0 auto;margin-top:2px;stroke:var(--red);fill:none;stroke-width:2}
-  .plan .cta{margin-top:24px;padding-top:22px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:9px}
-  .plan .cta .btn{width:100%}
-  .plan .cta .fine{font-size:.8rem;color:var(--dim);text-align:center}
-
   /* signup form */
   .signup-card{max-width:640px;margin:0 auto;border-radius:20px;padding:32px 28px;background:linear-gradient(165deg,var(--card-2),var(--card));border:1px solid rgba(225,29,46,.5)}
   .field-label{display:block;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:10px}
-  .plan-toggle{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+  .plan-toggle{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
   @media (max-width:480px){.plan-toggle{grid-template-columns:1fr}}
   .plan-toggle input{position:absolute;opacity:0;pointer-events:none}
   .plan-toggle label{display:block;cursor:pointer;border:1px solid var(--line);border-radius:13px;padding:14px 16px;background:var(--bg-2);transition:border-color .2s var(--ease),background .2s var(--ease)}
@@ -111,6 +87,7 @@
   .plan-toggle label .pt-rate{display:block;margin-top:3px;font-size:.84rem;color:var(--body)}
   .plan-toggle input:checked + label{border-color:var(--red);background:rgba(225,29,46,.08)}
   .plan-toggle input:focus-visible + label{outline:2px solid var(--red);outline-offset:3px}
+  .plan-hint{margin:0 0 22px;font-size:.85rem;color:var(--dim)}
   .qty{margin-bottom:22px}
   .qty input{width:110px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:1.05rem;font-weight:700;text-align:center;min-height:48px;font-family:inherit}
   .preview{border:1px solid var(--line);border-radius:13px;background:var(--bg-2);padding:18px 20px;margin-bottom:22px}
@@ -188,64 +165,6 @@
   </div>
 </section>
 
-<!-- ===== plans ===== -->
-<section id="plans">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">The plans</div>
-      <h2>Two plans. Progressive discounts on both.</h2>
-      <p>For Rinnai tankless systems, residential or commercial. Every plan is priced per unit, and every additional unit you enroll earns a bigger discount — automatically.</p>
-    </div>
-
-    <div class="plans">
-
-      <div class="plan feature">
-        <span class="tag">Commercial Duty</span>
-        <h3>Commercial Duty</h3>
-        <p class="desc">For typical residential and light-commercial systems. Full member benefits with annual maintenance.</p>
-        <div class="price"><span class="amt">$30</span><span class="per">/ month · per unit</span></div>
-        <p class="price-note">Base rate for your first unit — each additional unit is priced 10% below the last, down to $15/unit</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><b>For Rinnai tankless water heaters</b></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Annual maintenance — flush, descale &amp; inspection (keeps your warranty valid)</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Priority scheduling &amp; direct phone access to our techs</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span><b>No overtime charges</b> — nights, weekends &amp; holidays at member rates</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Member rates on all diagnostics &amp; repairs</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Your diagnostic fee credited toward any repair we do</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Month-to-month — cancel anytime</li>
-        </ul>
-        <div class="cta">
-          <button class="btn btn-primary" type="button" data-choose="regular">Choose Commercial Duty</button>
-          <span class="fine">First 30 days free · cancel anytime.</span>
-        </div>
-      </div>
-
-      <div class="plan alt">
-        <span class="tag">Severe Service</span>
-        <h3>Severe Service</h3>
-        <p class="desc">For units that run at 145°F or higher, operate with water hardness above 200 mg/L or demonstrated dissolved-solids issues, or are on track to average more than 3,000 hours a year.</p>
-        <div class="price"><span class="amt">$55</span><span class="per">/ month · per unit</span></div>
-        <p class="price-note">Base rate for your first unit — each additional unit is priced 10% below the last, down to $27.50/unit</p>
-        <ul>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><b>Everything in Commercial Duty</b></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Built for high-temperature, hard-water, and near-continuous operation</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>More intensive maintenance to match heavier wear</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Priority scheduling &amp; direct phone access to our techs</li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span><b>No overtime charges</b> — nights, weekends &amp; holidays at member rates</span></li>
-          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Month-to-month — cancel anytime</li>
-        </ul>
-        <div class="cta">
-          <button class="btn btn-ghost" type="button" data-choose="heavy">Choose Severe Service</button>
-          <span class="fine">First 30 days free · cancel anytime.</span>
-        </div>
-      </div>
-
-    </div>
-
-    <p class="excl" style="max-width:900px;margin:22px auto 0;font-size:.84rem;color:var(--dim);text-align:center">Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed. A $50 fuel surcharge applies per dispatch; equipment replacements, pipe repairs, and permits are billed separately.</p>
-  </div>
-</section>
-
 <!-- ===== signup ===== -->
 <section id="signup">
   <div class="wrap">
@@ -267,6 +186,7 @@
           <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo base</span></label>
         </span>
       </div>
+      <p class="plan-hint" id="planHint"></p>
 
       <div class="qty">
         <label class="field-label" for="unitCount">How many tankless units are at your property?</label>
@@ -399,6 +319,10 @@
     // Display math only — the server (create-checkout function) stays the source of truth.
     // Each unit after the first is priced 10% of base below the last, capped at a 50% discount.
     var BASE_CENTS = { regular: 3000, heavy: 5500 };
+    var PLAN_HINTS = {
+      regular: 'For typical systems on a standard duty cycle, with annual maintenance and full member benefits.',
+      heavy: 'For units that run at 145°F or higher, operate with water hardness above 200 mg/L or demonstrated dissolved-solids issues, or are on track to average more than 3,000 hours a year.'
+    };
 
     function marginalMonthlyCents(plan, i){ // i is 0-indexed unit number
       var base = BASE_CENTS[plan];
@@ -445,23 +369,13 @@
       document.getElementById('pvAvg').textContent = usd(Math.round(monthly / units)) + ' /mo';
       document.getElementById('pvDiscount').textContent = discountText;
       document.getElementById('pvInitiation').textContent = usd(initiationFeeCents(units));
+      document.getElementById('planHint').textContent = PLAN_HINTS[plan];
     }
 
     qtyInput.addEventListener('input', updatePreview);
     qtyInput.addEventListener('change', function(){ qtyInput.value = clampedUnits(); updatePreview(); });
     var radios = form.querySelectorAll('input[name="plan"]');
     for (var r = 0; r < radios.length; r++) radios[r].addEventListener('change', updatePreview);
-
-    // "Choose plan" buttons on the cards select the plan and jump to the form.
-    var choosers = document.querySelectorAll('[data-choose]');
-    for (var c = 0; c < choosers.length; c++) {
-      choosers[c].addEventListener('click', function(){
-        var plan = this.getAttribute('data-choose');
-        document.getElementById(plan === 'heavy' ? 'planHeavy' : 'planRegular').checked = true;
-        updatePreview();
-        document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
-      });
-    }
 
     function showMsg(text){
       msg.textContent = text;
