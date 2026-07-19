@@ -89,7 +89,12 @@
   .plan-toggle input:focus-visible + label{outline:2px solid var(--red);outline-offset:3px}
   .plan-hint{margin:0 0 22px;font-size:.85rem;color:var(--dim)}
   .qty{margin-bottom:22px}
-  .qty input{width:110px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:1.05rem;font-weight:700;text-align:center;min-height:48px;font-family:inherit}
+  .stepper{display:inline-flex;align-items:stretch;gap:10px}
+  .stepper .step{width:52px;min-height:52px;border-radius:10px;border:1px solid var(--line);background:var(--bg-2);color:#fff;font-size:1.5rem;font-weight:700;line-height:1;cursor:pointer;font-family:inherit;transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .stepper .step:hover{border-color:var(--red);background:rgba(225,29,46,.08)}
+  .stepper .step:active{background:rgba(225,29,46,.16)}
+  .qty input{width:110px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:1.15rem;font-weight:700;text-align:center;min-height:52px;font-family:inherit;-moz-appearance:textfield;appearance:textfield}
+  .qty input::-webkit-inner-spin-button,.qty input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
   .preview{border:1px solid var(--line);border-radius:13px;background:var(--bg-2);padding:18px 20px;margin-bottom:22px}
   .preview .pv-label{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:2px 0 4px}
   .preview .pv-label-2{margin-top:16px;border-top:1px solid var(--line-soft);padding-top:14px}
@@ -190,7 +195,11 @@
 
       <div class="qty">
         <label class="field-label" for="unitCount">Select total number of tankless units that require service</label>
-        <input type="number" id="unitCount" name="quantity" inputmode="numeric" min="1" max="50" step="1" value="1">
+        <div class="stepper">
+          <button type="button" class="step" id="qtyMinus" aria-label="Decrease unit count">&minus;</button>
+          <input type="number" id="unitCount" name="quantity" inputmode="numeric" min="1" max="50" step="1" value="1">
+          <button type="button" class="step" id="qtyPlus" aria-label="Increase unit count">+</button>
+        </div>
       </div>
 
       <div class="preview" aria-live="polite">
@@ -361,6 +370,13 @@
       btn.textContent = defaultBtnLabel;
       updatePreview();
     });
+
+    function stepUnits(delta){
+      qtyInput.value = Math.max(1, Math.min(50, clampedUnits() + delta));
+      updatePreview();
+    }
+    document.getElementById('qtyMinus').addEventListener('click', function(){ stepUnits(-1); });
+    document.getElementById('qtyPlus').addEventListener('click', function(){ stepUnits(1); });
 
     qtyInput.addEventListener('input', updatePreview);
     qtyInput.addEventListener('change', function(){ qtyInput.value = clampedUnits(); updatePreview(); });
