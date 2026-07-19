@@ -91,11 +91,15 @@
   .qty{margin-bottom:22px}
   .qty input{width:110px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:1.05rem;font-weight:700;text-align:center;min-height:48px;font-family:inherit}
   .preview{border:1px solid var(--line);border-radius:13px;background:var(--bg-2);padding:18px 20px;margin-bottom:22px}
+  .preview .pv-label{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:2px 0 4px}
+  .preview .pv-label-2{margin-top:16px;border-top:1px solid var(--line-soft);padding-top:14px}
   .preview .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;font-size:.93rem}
   .preview .row .k{color:var(--body)}
   .preview .row .v{color:#fff;font-weight:700;white-space:nowrap}
+  .preview .row.unit{padding:4px 0;font-size:.9rem}
+  .preview .row.unit .v{font-weight:600;color:#CFCAD4}
+  .preview .row.total{border-top:1px dashed var(--line);margin-top:6px;padding-top:12px}
   .preview .row.big .v{font-family:'Fraunces',serif;font-size:1.45rem}
-  .preview .row.due{border-top:1px dashed var(--line);margin-top:8px;padding-top:14px}
   .preview .row.due .k{color:#FF8577;font-weight:700}
   .preview .trial-note{margin-top:12px;font-size:.82rem;color:var(--dim)}
   .signup-card .cta{display:flex;flex-direction:column;gap:9px}
@@ -194,10 +198,12 @@
       </div>
 
       <div class="preview" aria-live="polite">
-        <div class="row big"><span class="k">Monthly total</span><span class="v" id="pvMonthly">$30.00<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span></span></div>
-        <div class="row"><span class="k">Average per unit</span><span class="v" id="pvAvg">$30.00 /mo</span></div>
-        <div class="row"><span class="k">Effective discount</span><span class="v" id="pvDiscount">0%</span></div>
-        <div class="row due"><span class="k">One-time initiation fee — due today</span><span class="v" id="pvInitiation">$300.00</span></div>
+        <div class="pv-label">Monthly service</div>
+        <div id="pvMonthlyRows"></div>
+        <div class="row big total"><span class="k">Monthly total</span><span class="v" id="pvMonthly"></span></div>
+        <div class="pv-label pv-label-2">One-time initiation fee</div>
+        <div id="pvInitRows"></div>
+        <div class="row due total"><span class="k">Due today</span><span class="v" id="pvInitiation"></span></div>
         <p class="trial-note">Your first 30 days are free. Your card is saved at signup, the initiation fee is charged today, and monthly billing begins on day 31.</p>
       </div>
 
@@ -358,16 +364,27 @@
       return Math.max(1, Math.min(50, n));
     }
 
+    // One line per unit with its price, so the totals are self-explanatory.
+    // Units 6+ all cost the same (the discount floor), so they collapse into one line.
+    function unitRowsHTML(units, priceCentsFn){
+      var html = '';
+      var shown = units > 6 ? 5 : units;
+      for (var i = 0; i < shown; i++) {
+        html += '<div class="row unit"><span class="k">Unit ' + (i + 1) + '</span><span class="v">' + usd(priceCentsFn(i)) + '</span></div>';
+      }
+      if (units > 6) {
+        var per = priceCentsFn(5), count = units - 5;
+        html += '<div class="row unit"><span class="k">Units 6&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
+      }
+      return html;
+    }
+
     function updatePreview(){
       var plan = selectedPlan();
       var units = clampedUnits();
-      var monthly = monthlyTotalCents(plan, units);
-      var full = BASE_CENTS[plan] * units;
-      var discount = full > 0 ? (1 - monthly / full) * 100 : 0;
-      var discountText = (Math.round(discount * 10) / 10) + '%';
-      document.getElementById('pvMonthly').innerHTML = usd(monthly) + '<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span>';
-      document.getElementById('pvAvg').textContent = usd(Math.round(monthly / units)) + ' /mo';
-      document.getElementById('pvDiscount').textContent = discountText;
+      document.getElementById('pvMonthlyRows').innerHTML = unitRowsHTML(units, function(i){ return marginalMonthlyCents(plan, i); });
+      document.getElementById('pvMonthly').innerHTML = usd(monthlyTotalCents(plan, units)) + '<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span>';
+      document.getElementById('pvInitRows').innerHTML = unitRowsHTML(units, function(i){ return Math.max(30000 - 3000 * i, 15000); });
       document.getElementById('pvInitiation').textContent = usd(initiationFeeCents(units));
       document.getElementById('planHint').textContent = PLAN_HINTS[plan];
     }
