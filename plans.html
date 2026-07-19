@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Service Plan — Eternahot | Rinnai Tankless Maintenance & Service</title>
-<meta name="description" content="The Eternahot Service Plan for Rinnai tankless water heaters: $330 to start — a $300 initiation (first service and inspection) plus your first month — then $30/month per unit. Covers annual maintenance, priority service, no overtime charges, and member rates on all repairs (diagnostic credited toward the repair). Residential & commercial, Southern California.">
+<title>Service Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
+<meta name="description" content="Eternahot Service Plans for Rinnai tankless water heaters: Regular Duty from $30/unit/mo or Heavy Duty from $55/unit/mo, with automatic progressive discounts for every additional unit you enroll. First 30 days free. One-time initiation fee from $300 for the first unit, discounted for each additional unit. Covers annual maintenance, priority service, no overtime charges, and member rates on all repairs. Residential & commercial, Southern California.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot Plans">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,10 +31,11 @@
   .serif{font-family:'Fraunces',Georgia,serif}
 
   /* buttons */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;font-weight:800;border-radius:13px;padding:15px 26px;cursor:pointer;border:1px solid transparent;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);white-space:nowrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;font-weight:800;border-radius:13px;padding:15px 26px;cursor:pointer;border:1px solid transparent;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);white-space:nowrap;font-size:1rem;font-family:inherit}
   .btn svg{width:19px;height:19px;fill:currentColor;flex:0 0 auto}
   .btn-primary{background:var(--grad);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
   .btn-primary:hover{transform:translateY(-2px)}
+  .btn-primary:disabled{opacity:.6;cursor:wait;transform:none}
   .btn-ghost{background:rgba(255,255,255,.04);color:#fff;border-color:var(--line)}
   .btn-ghost:hover{border-color:var(--red);background:rgba(225,29,46,.08)}
 
@@ -56,6 +57,11 @@
   .hero .mission{margin:18px auto 0;font-size:clamp(1.05rem,2.4vw,1.35rem);color:#EDEBF0;max-width:44ch;text-shadow:0 1px 14px rgba(0,0,0,.9),0 1px 3px rgba(0,0,0,.85)}
   .hero .intro{margin:16px auto 0;font-size:1rem;color:#DED9E2;max-width:60ch;text-shadow:0 1px 12px rgba(0,0,0,.9)}
 
+  /* status banner */
+  .notice{display:none;margin:18px auto 0;max-width:640px;padding:14px 18px;border-radius:13px;font-size:.95rem;font-weight:600;text-align:center}
+  .notice.show{display:block}
+  .notice.ok{background:rgba(34,160,86,.14);border:1px solid rgba(34,160,86,.5);color:#7BE0A5}
+  .notice.warn{background:rgba(225,29,46,.1);border:1px solid rgba(225,29,46,.45);color:#FF8577}
 
   /* section scaffold */
   section{padding:clamp(46px,7vw,72px) 0}
@@ -73,7 +79,6 @@
   /* plan cards */
   .plans{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
   @media (max-width:820px){.plans{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
-  .plans-single{grid-template-columns:1fr;max-width:540px;margin:0 auto}
   .plan .excl{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:.84rem;color:var(--dim)}
   .plan{position:relative;display:flex;flex-direction:column;border-radius:20px;padding:32px 28px;background:linear-gradient(165deg,var(--card-2),var(--card));border:1px solid var(--line);overflow:hidden}
   .plan.feature{border-color:rgba(225,29,46,.5)}
@@ -94,9 +99,41 @@
   .plan .cta{margin-top:24px;padding-top:22px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:9px}
   .plan .cta .btn{width:100%}
   .plan .cta .fine{font-size:.8rem;color:var(--dim);text-align:center}
-  .qty{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:2px}
-  .qty label{font-size:.85rem;color:var(--body);font-weight:600}
-  .qty input{width:76px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:.95rem;font-weight:700;text-align:center;min-height:44px}
+
+  /* signup form */
+  .signup-card{max-width:640px;margin:0 auto;border-radius:20px;padding:32px 28px;background:linear-gradient(165deg,var(--card-2),var(--card));border:1px solid rgba(225,29,46,.5)}
+  .field-label{display:block;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:10px}
+  .plan-toggle{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+  @media (max-width:480px){.plan-toggle{grid-template-columns:1fr}}
+  .plan-toggle input{position:absolute;opacity:0;pointer-events:none}
+  .plan-toggle label{display:block;cursor:pointer;border:1px solid var(--line);border-radius:13px;padding:14px 16px;background:var(--bg-2);transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .plan-toggle label .pt-name{display:block;color:#fff;font-weight:800;font-size:.98rem}
+  .plan-toggle label .pt-rate{display:block;margin-top:3px;font-size:.84rem;color:var(--body)}
+  .plan-toggle input:checked + label{border-color:var(--red);background:rgba(225,29,46,.08)}
+  .plan-toggle input:focus-visible + label{outline:2px solid var(--red);outline-offset:3px}
+  .qty{margin-bottom:22px}
+  .qty input{width:110px;background:var(--bg-2);border:1px solid var(--line);color:#fff;border-radius:10px;padding:10px;font-size:1.05rem;font-weight:700;text-align:center;min-height:48px;font-family:inherit}
+  .preview{border:1px solid var(--line);border-radius:13px;background:var(--bg-2);padding:18px 20px;margin-bottom:22px}
+  .preview .row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;font-size:.93rem}
+  .preview .row .k{color:var(--body)}
+  .preview .row .v{color:#fff;font-weight:700;white-space:nowrap}
+  .preview .row.big .v{font-family:'Fraunces',serif;font-size:1.45rem}
+  .preview .row.due{border-top:1px dashed var(--line);margin-top:8px;padding-top:14px}
+  .preview .row.due .k{color:#FF8577;font-weight:700}
+  .preview .trial-note{margin-top:12px;font-size:.82rem;color:var(--dim)}
+  .signup-card .cta{display:flex;flex-direction:column;gap:9px}
+  .signup-card .cta .btn{width:100%}
+  .signup-card .cta .fine{font-size:.8rem;color:var(--dim);text-align:center}
+  .form-msg{display:none;margin-top:14px;padding:12px 16px;border-radius:10px;font-size:.9rem;font-weight:600;text-align:center}
+  .form-msg.show{display:block}
+  .form-msg.warn{background:rgba(225,29,46,.1);border:1px solid rgba(225,29,46,.45);color:#FF8577}
+
+  /* pricing explainer */
+  .pricing-notes{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin:0 auto}
+  @media (max-width:760px){.pricing-notes{grid-template-columns:1fr;max-width:560px}}
+  .pnote{border:1px solid var(--line-soft);border-radius:16px;background:var(--card);padding:26px 24px}
+  .pnote h3{font-family:'Fraunces',serif;color:#fff;font-size:1.25rem;font-weight:700;line-height:1.2}
+  .pnote p{margin-top:10px;font-size:.93rem;color:var(--body)}
 
   /* terms */
   .terms{background:var(--bg-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
@@ -146,7 +183,8 @@
     <div class="kicker">Eternahot Care · Service Plans</div>
     <h1 class="serif">Hot water when you want it.</h1>
     <p class="mission">We build systems that take the guessing and worrying out of hot water.</p>
-    <p class="intro">One set monthly fee keeps your hot water handled — annual maintenance, priority service any hour with no overtime charges, and member rates on every repair.</p>
+    <p class="intro">Pick your duty level, tell us how many tankless units you have, and progressive discounts do the rest — every unit you enroll after the first costs less than the one before it. Your first 30 days are free.</p>
+    <div id="statusNotice" class="notice" role="status"></div>
   </div>
 </section>
 
@@ -154,19 +192,19 @@
 <section id="plans">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">The plan</div>
-      <h2>One simple service plan</h2>
-      <p>$30/month per unit, for Rinnai tankless systems. Residential or commercial. Month-to-month, cancel anytime.</p>
+      <div class="kicker">The plans</div>
+      <h2>Two plans. Progressive discounts on both.</h2>
+      <p>For Rinnai tankless systems, residential or commercial. Every plan is priced per unit, and every additional unit you enroll earns a bigger discount — automatically.</p>
     </div>
 
-    <div class="plans plans-single">
+    <div class="plans">
 
       <div class="plan feature">
-        <span class="tag">Service Plan</span>
-        <h3>Eternahot Service Plan</h3>
-        <p class="desc">One monthly fee keeps your Rinnai tankless system maintained and your warranty valid, puts you at the front of the line, and gets you member rates on everything — no overtime charges, ever.</p>
+        <span class="tag">Regular Duty</span>
+        <h3>Regular Duty</h3>
+        <p class="desc">For typical residential and light-commercial systems. Full member benefits with annual maintenance.</p>
         <div class="price"><span class="amt">$30</span><span class="per">/ month · per unit</span></div>
-        <p class="price-note">$330 to start — $300 initiation (first service &amp; inspection) + your first month</p>
+        <p class="price-note">Base rate for your first unit — each additional unit is 10% cheaper than the last, down to $15/unit</p>
         <ul>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><b>For Rinnai tankless water heaters</b></li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Annual maintenance — flush, descale &amp; inspection (keeps your warranty valid)</li>
@@ -176,13 +214,109 @@
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Your diagnostic fee credited toward any repair we do</li>
           <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Month-to-month — cancel anytime</li>
         </ul>
-        <p class="excl">Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed. A $50 fuel surcharge applies per dispatch; equipment replacements, pipe repairs, and permits are billed separately.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="https://buy.stripe.com/14A3cw1dm4rW9WS5ZTenS02">Start my plan</a>
-          <span class="fine">Secure checkout by card · $330 today, then $30/mo · cancel anytime.</span>
+          <button class="btn btn-primary" type="button" data-choose="regular">Choose Regular Duty</button>
+          <span class="fine">First 30 days free · cancel anytime.</span>
         </div>
       </div>
 
+      <div class="plan alt">
+        <span class="tag">Heavy Duty</span>
+        <h3>Heavy Duty</h3>
+        <p class="desc">For hard-working systems — high daily demand, hard water, or commercial duty cycles that need closer attention.</p>
+        <div class="price"><span class="amt">$55</span><span class="per">/ month · per unit</span></div>
+        <p class="price-note">Base rate for your first unit — each additional unit is 10% cheaper than the last, down to $27.50/unit</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><b>Everything in Regular Duty</b></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Built for high-demand and commercial duty cycles</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>More intensive maintenance to match heavier wear</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Priority scheduling &amp; direct phone access to our techs</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><span><b>No overtime charges</b> — nights, weekends &amp; holidays at member rates</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Month-to-month — cancel anytime</li>
+        </ul>
+        <div class="cta">
+          <button class="btn btn-ghost" type="button" data-choose="heavy">Choose Heavy Duty</button>
+          <span class="fine">First 30 days free · cancel anytime.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="excl" style="max-width:900px;margin:22px auto 0;font-size:.84rem;color:var(--dim);text-align:center">Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed. A $50 fuel surcharge applies per dispatch; equipment replacements, pipe repairs, and permits are billed separately.</p>
+  </div>
+</section>
+
+<!-- ===== signup ===== -->
+<section id="signup">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Sign up</div>
+      <h2>Start your plan — first 30 days free</h2>
+      <p>Choose a plan, enter your unit count, and see your exact price before you check out. Prices are set by the program and applied automatically.</p>
+    </div>
+
+    <form id="signupForm" class="signup-card">
+      <span class="field-label">Choose your plan</span>
+      <div class="plan-toggle" role="radiogroup" aria-label="Plan">
+        <span>
+          <input type="radio" name="plan" id="planRegular" value="regular" checked>
+          <label for="planRegular"><span class="pt-name">Regular Duty</span><span class="pt-rate">$30 / unit / mo base</span></label>
+        </span>
+        <span>
+          <input type="radio" name="plan" id="planHeavy" value="heavy">
+          <label for="planHeavy"><span class="pt-name">Heavy Duty</span><span class="pt-rate">$55 / unit / mo base</span></label>
+        </span>
+      </div>
+
+      <div class="qty">
+        <label class="field-label" for="unitCount">How many tankless units are at your property?</label>
+        <input type="number" id="unitCount" name="quantity" inputmode="numeric" min="1" max="50" step="1" value="1">
+      </div>
+
+      <div class="preview" aria-live="polite">
+        <div class="row big"><span class="k">Monthly total</span><span class="v" id="pvMonthly">$30.00<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span></span></div>
+        <div class="row"><span class="k">Average per unit</span><span class="v" id="pvAvg">$30.00 /mo</span></div>
+        <div class="row"><span class="k">Effective discount</span><span class="v" id="pvDiscount">0%</span></div>
+        <div class="row due"><span class="k">One-time initiation fee — due today</span><span class="v" id="pvInitiation">$300.00</span></div>
+        <p class="trial-note">Your first 30 days are free. Your card is saved at signup, the initiation fee is charged today, and monthly billing begins on day 31.</p>
+      </div>
+
+      <div class="cta">
+        <button class="btn btn-primary" type="submit" id="checkoutBtn">Start my 30-day free trial</button>
+        <span class="fine">Secure checkout by Stripe · initiation fee today, monthly billing starts day 31 · cancel anytime.</span>
+      </div>
+      <div id="formMsg" class="form-msg warn" role="alert"></div>
+    </form>
+  </div>
+</section>
+
+<!-- ===== how pricing works ===== -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">How pricing works</div>
+      <h2>Multi-unit pricing that rewards every unit you enroll</h2>
+      <p>Our discounts are progressive and automatic. Every unit you enroll after the first earns a bigger discount than the one before it — on both the monthly plan and the one-time initiation fee.</p>
+    </div>
+    <div class="pricing-notes">
+      <div class="pnote">
+        <h3>Progressive, automatic discounts</h3>
+        <p><b style="color:#CFCAD4">Monthly plan:</b> each additional unit is priced 10% lower than the last, down to a maximum discount of 50% per unit.</p>
+        <p><b style="color:#CFCAD4">Initiation fee:</b> the first unit is $300. Each additional unit's initiation drops another 10%, down to a maximum discount of 50% ($150 per unit).</p>
+        <p>Your first 30 days are free. Your card is saved at signup, the initiation fee is charged today, and monthly billing begins on day 31.</p>
+      </div>
+      <div class="pnote">
+        <h3>Our pricing is fixed — and that's a feature</h3>
+        <p>These prices and discounts are set by the program and applied automatically at checkout. Our employees and technicians cannot modify, discount, or negotiate them — for anyone. Every customer with the same number of enrolled units pays exactly the same price. Want a bigger discount? Enroll more units.</p>
+      </div>
+      <div class="pnote">
+        <h3>Your property gets a dedicated technician</h3>
+        <p>Every enrolled property is assigned to one dedicated technician who handles your maintenance visits and service calls. Your technician knows your equipment, your water quality, your piping, and your property's quirks — faster diagnosis, no repeated troubleshooting by someone new to your system.</p>
+      </div>
+      <div class="pnote">
+        <h3>Keeping your discount</h3>
+        <p>Your discounts remain in effect as long as your plan is active and payments are current. If unpaid invoices cause cancellation, re-enrollment requires the full, undiscounted initiation fee for every unit, because lapsed units must be re-inspected and re-onboarded.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -204,9 +338,9 @@
     </div>
     <div class="terms-grid">
       <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Service plans cover Rinnai tankless water heaters only. We service every make and model, but the monthly plan is for Rinnai tankless systems.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/></svg><div><h4>One specific unit</h4><p>Each plan covers one specific Rinnai tankless unit — identified by its serial number and documented at your initial inspection. It doesn't cover the whole house; add a unit for every system you'd like covered.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Monthly billing</h4><p>$30 per unit, billed automatically each month. Month-to-month — cancel anytime.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>What's covered</h4><p>Your monthly payment covers annual maintenance (flush, descale &amp; inspection), priority scheduling, direct phone access to our techs, and member rates on all service — and it keeps your manufacturer warranty valid.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/></svg><div><h4>Every unit, identified</h4><p>Each enrolled unit is identified by its serial number and documented at your initial inspection. Coverage is tied to those exact units — enroll every system you'd like covered.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><div><h4>Monthly billing</h4><p>Regular Duty from $30/unit and Heavy Duty from $55/unit, with progressive multi-unit discounts applied automatically. Your first 30 days are free; monthly billing begins on day 31. Month-to-month — cancel anytime.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg><div><h4>What's covered</h4><p>Your monthly payment covers scheduled maintenance (flush, descale &amp; inspection), priority scheduling, direct phone access to our techs, and member rates on all service — and it keeps your manufacturer warranty valid.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>No overtime charges</h4><p>Members pay the same rate any hour — call nights, weekends, or holidays with no after-hours or overtime premium.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Diagnostics &amp; repairs</h4><p>We diagnose the problem, then quote any repair (parts &amp; labor) at member rates for your approval — your diagnostic fee is credited toward any repair we perform. Equipment replacements, pipe repairs, and permits are billed separately.</p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M3 12h4l2-7 4 14 2-7h6"/></svg><div><h4>Fuel surcharge</h4><p>A $50 fuel surcharge applies any time we dispatch a technician, to cover California fuel costs. Scheduled preventive maintenance has no surcharge.</p></div></div>
@@ -220,16 +354,19 @@
   <div class="wrap">
     <div class="sec-head"><div class="kicker">FAQ</div><h2>Common questions</h2></div>
     <div class="faq">
-      <details class="qa"><summary>Which water heaters do the plans cover?</summary><div class="a">Rinnai tankless water heaters. We service every make and model on the repair side, but the monthly service plan is for Rinnai tankless systems only.</div></details>
-      <details class="qa"><summary>Is the plan for homes or businesses?</summary><div class="a">Both — it's $30/month per unit either way, plus $330 to start ($300 initiation + your first month). Add a unit for each additional Rinnai tankless system you'd like covered.</div></details>
-      <details class="qa"><summary>What's covered, and what's billed separately?</summary><div class="a">Your monthly payment covers annual maintenance (flush, descale &amp; inspection), priority scheduling, phone access to our techs, member rates on all service, and no overtime charges. Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed; equipment replacements, pipe repairs, and permits are billed separately.</div></details>
+      <details class="qa"><summary>Which water heaters do the plans cover?</summary><div class="a">Rinnai tankless water heaters. We service every make and model on the repair side, but the monthly service plans are for Rinnai tankless systems only.</div></details>
+      <details class="qa"><summary>What's the difference between Regular Duty and Heavy Duty?</summary><div class="a">Regular Duty ($30/unit/mo base) is for typical residential and light-commercial systems with annual maintenance. Heavy Duty ($55/unit/mo base) is for hard-working systems — high daily demand, hard water, or commercial duty cycles — and includes more intensive maintenance to match the heavier wear. Both plans carry the same progressive multi-unit discounts.</div></details>
+      <details class="qa"><summary>How do the multi-unit discounts work?</summary><div class="a">They're progressive and automatic. Each additional unit's monthly rate is 10% lower than the previous unit's, down to a maximum discount of 50% per unit. The same applies to the one-time initiation fee: $300 for the first unit, each additional unit 10% less, down to $150. The signup form above shows your exact price as you change the unit count.</div></details>
+      <details class="qa"><summary>Can I negotiate the price?</summary><div class="a">No — and that's by design. Prices and discounts are set by the program and applied automatically at checkout. Our employees and technicians cannot modify, discount, or negotiate them for anyone, so every customer with the same number of enrolled units pays exactly the same price. Want a bigger discount? Enroll more units.</div></details>
+      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">Just the one-time initiation fee for your units — $300 for the first, discounted for each additional one. That covers your first maintenance visit and inspection, where we document each unit's condition and record its serial number. Your card is saved at signup, your first 30 days are free, and monthly billing begins on day 31.</div></details>
+      <details class="qa"><summary>How does the 30-day free trial work?</summary><div class="a">Your plan benefits start immediately, but the monthly fee doesn't. At checkout you pay only the initiation fee; your card is saved, and the first monthly charge happens on day 31. Cancel within the first 30 days and you owe no monthly fees.</div></details>
+      <details class="qa"><summary>Is the plan for homes or businesses?</summary><div class="a">Both. Choose the duty level that matches how hard your systems work, enroll every Rinnai tankless unit at the property, and the multi-unit discounts apply automatically either way.</div></details>
+      <details class="qa"><summary>What's covered, and what's billed separately?</summary><div class="a">Your monthly payment covers scheduled maintenance (flush, descale &amp; inspection), priority scheduling, phone access to our techs, member rates on all service, and no overtime charges. Repairs (parts &amp; labor) are quoted at member rates and approved before we proceed; equipment replacements, pipe repairs, and permits are billed separately.</div></details>
       <details class="qa"><summary>Do members pay overtime for nights or weekends?</summary><div class="a">No. As a member you pay the same rate any hour — nights, weekends, and holidays included — with no after-hours or overtime premium.</div></details>
       <details class="qa"><summary>How do diagnostics and repairs work?</summary><div class="a">We come diagnose the problem, then quote any repair at member rates for your approval — nothing gets fixed without your okay. If you have us do the repair, your diagnostic fee is credited toward it.</div></details>
       <details class="qa"><summary>What is the $50 fuel surcharge?</summary><div class="a">It applies per service call — any time you ask us to dispatch a technician — to cover fuel costs in California. Regularly scheduled maintenance visits have no surcharge.</div></details>
-      <details class="qa"><summary>Does the plan cover my whole house?</summary><div class="a">No — each plan covers one specific Rinnai tankless unit, identified by its serial number. At your initial inspection we record the serial number and document the unit's condition, so coverage is tied to that exact unit. Have more than one system? Add a plan for each.</div></details>
-      <details class="qa"><summary>What am I charged at signup?</summary><div class="a">$330 today — a $300 initiation (your first maintenance visit and inspection, where we document the unit's condition and record its serial number) plus your first month. Then $30/month per unit. Stripe bills the first month at checkout, which is why the first payment is $330.</div></details>
-      <details class="qa"><summary>What happens if I miss payments?</summary><div class="a">Your plan is active service you use — not a balance you build up. The value is the maintenance, priority, no-overtime, and member rates you get while you're a member. If a payment fails we'll email you to update your card and retry it automatically; if it stays unpaid the plan cancels. Once it lapses those benefits stop and any visit is billed at standard rates — so it pays to keep it active, especially before your annual service comes due. Restarting later means a new signup (initiation &amp; inspection).</div></details>
-      <details class="qa"><summary>Can I cancel?</summary><div class="a">Yes — the plan is month-to-month. Cancel anytime.</div></details>
+      <details class="qa"><summary>What happens if I miss payments?</summary><div class="a">Your plan is active service you use — not a balance you build up. If a payment fails we'll email you to update your card and retry it automatically; if it stays unpaid the plan cancels and your benefits stop. Your discounts remain in effect as long as your plan is active and payments are current — but if unpaid invoices cause cancellation, re-enrollment requires the full, undiscounted initiation fee for every unit, because lapsed units must be re-inspected and re-onboarded.</div></details>
+      <details class="qa"><summary>Can I cancel?</summary><div class="a">Yes — the plan is month-to-month. Cancel anytime, including during your free 30 days.</div></details>
     </div>
   </div>
 </section>
@@ -257,6 +394,137 @@
 
 <script>
   (function(){try{document.getElementById('yr').textContent=new Date().getFullYear();}catch(e){}})();
+
+  (function(){
+    // Display math only — the server (create-checkout function) stays the source of truth.
+    // Each unit after the first is 10% of base cheaper than the last, capped at a 50% discount.
+    var BASE_CENTS = { regular: 3000, heavy: 5500 };
+
+    function marginalMonthlyCents(plan, i){ // i is 0-indexed unit number
+      var base = BASE_CENTS[plan];
+      var step = Math.round(base * 0.10);
+      return Math.max(base - step * i, base / 2);
+    }
+    function monthlyTotalCents(plan, units){
+      var total = 0;
+      for (var i = 0; i < units; i++) total += marginalMonthlyCents(plan, i);
+      return total;
+    }
+    // Initiation: unit 1 is $300, each additional unit $30 less, floor $150 (unit 6+).
+    function initiationFeeCents(units){
+      var total = 0;
+      for (var i = 0; i < units; i++) total += Math.max(30000 - 3000 * i, 15000);
+      return total;
+    }
+    function usd(cents){
+      return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    var form = document.getElementById('signupForm');
+    var qtyInput = document.getElementById('unitCount');
+    var btn = document.getElementById('checkoutBtn');
+    var msg = document.getElementById('formMsg');
+
+    function selectedPlan(){
+      return document.getElementById('planHeavy').checked ? 'heavy' : 'regular';
+    }
+    function clampedUnits(){
+      var n = parseInt(qtyInput.value, 10);
+      if (isNaN(n)) n = 1;
+      return Math.max(1, Math.min(50, n));
+    }
+
+    function updatePreview(){
+      var plan = selectedPlan();
+      var units = clampedUnits();
+      var monthly = monthlyTotalCents(plan, units);
+      var full = BASE_CENTS[plan] * units;
+      var discount = full > 0 ? (1 - monthly / full) * 100 : 0;
+      var discountText = (Math.round(discount * 10) / 10) + '%';
+      document.getElementById('pvMonthly').innerHTML = usd(monthly) + '<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span>';
+      document.getElementById('pvAvg').textContent = usd(Math.round(monthly / units)) + ' /mo';
+      document.getElementById('pvDiscount').textContent = discountText;
+      document.getElementById('pvInitiation').textContent = usd(initiationFeeCents(units));
+    }
+
+    qtyInput.addEventListener('input', updatePreview);
+    qtyInput.addEventListener('change', function(){ qtyInput.value = clampedUnits(); updatePreview(); });
+    var radios = form.querySelectorAll('input[name="plan"]');
+    for (var r = 0; r < radios.length; r++) radios[r].addEventListener('change', updatePreview);
+
+    // "Choose plan" buttons on the cards select the plan and jump to the form.
+    var choosers = document.querySelectorAll('[data-choose]');
+    for (var c = 0; c < choosers.length; c++) {
+      choosers[c].addEventListener('click', function(){
+        var plan = this.getAttribute('data-choose');
+        document.getElementById(plan === 'heavy' ? 'planHeavy' : 'planRegular').checked = true;
+        updatePreview();
+        document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    function showMsg(text){
+      msg.textContent = text;
+      msg.classList.add('show');
+    }
+
+    // Fallback: enroll by email until the checkout function is configured.
+    function emailFallback(plan, units){
+      var planName = plan === 'heavy' ? 'Heavy Duty' : 'Regular Duty';
+      var subject = encodeURIComponent('Service plan enrollment — ' + planName + ', ' + units + ' unit(s)');
+      var body = encodeURIComponent('Hi Eternahot,\n\nI\'d like to enroll in the ' + planName + ' service plan for ' + units + ' tankless unit(s).\n\nName:\nProperty address:\nPhone:\n');
+      window.location.href = 'mailto:info@eternahot.com?subject=' + subject + '&body=' + body;
+      showMsg('Online checkout isn\'t available just yet — we\'ve opened an email to info@eternahot.com so you can enroll directly.');
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      msg.classList.remove('show');
+      var plan = selectedPlan();
+      var units = clampedUnits();
+      btn.disabled = true;
+      var btnText = btn.textContent;
+      btn.textContent = 'Opening secure checkout…';
+      fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan: plan, quantity: units })
+      }).then(function(resp){
+        return resp.json().then(function(data){ return { ok: resp.ok, data: data }; });
+      }).then(function(res){
+        if (res.ok && res.data && res.data.url) {
+          window.location.href = res.data.url;
+          return;
+        }
+        btn.disabled = false;
+        btn.textContent = btnText;
+        if (res.data && res.data.error === 'not_configured') {
+          emailFallback(plan, units);
+        } else {
+          showMsg('Something went wrong opening checkout. Please try again, or call (213) 222-3457 and we\'ll enroll you by phone.');
+        }
+      }).catch(function(){
+        btn.disabled = false;
+        btn.textContent = btnText;
+        emailFallback(plan, units);
+      });
+    });
+
+    // Show a banner when returning from Stripe checkout.
+    try {
+      var status = new URLSearchParams(window.location.search).get('status');
+      var notice = document.getElementById('statusNotice');
+      if (status === 'success') {
+        notice.textContent = 'You\'re enrolled! Your 30-day free trial has started — we\'ll reach out shortly to schedule your first inspection.';
+        notice.classList.add('show', 'ok');
+      } else if (status === 'cancelled') {
+        notice.textContent = 'Checkout was cancelled — no charge was made. Ready when you are.';
+        notice.classList.add('show', 'warn');
+      }
+    } catch(e){}
+
+    updatePreview();
+  })();
 </script>
 </body>
 </html>
