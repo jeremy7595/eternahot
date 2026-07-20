@@ -379,12 +379,11 @@
     function monthlyTotalCents(plan, units){
       return BASE_CENTS[plan] * units;
     }
-    // Initiation: $50 less per unit — $300, $250, $200, then $150 from
-    // unit 4 on — every unit's initiation includes a full flush and
-    // maintenance, so no unit enrolls below the cost of that service.
-    var INITIATION_STEPS_CENTS = [30000, 25000, 20000];
+    // Initiation: $30 less per unit — $300, $270, $240, $210, $180, then
+    // $150 from unit 6 on — every unit's initiation includes a full flush
+    // and maintenance, so no unit enrolls below the cost of that service.
     function initiationMarginalCents(i){
-      return INITIATION_STEPS_CENTS[i] || 15000;
+      return Math.max(30000 - 3000 * i, 15000);
     }
     function initiationFeeCents(units){
       var total = 0;
@@ -410,16 +409,16 @@
     }
 
     // One line per unit with its price, so the totals are self-explanatory.
-    // Units 4+ are all at the $150 floor, so they collapse into one line.
+    // Units 6+ are all at the $150 floor, so they collapse into one line.
     function unitRowsHTML(units, priceCentsFn){
       var html = '';
-      var shown = units > 4 ? 3 : units;
+      var shown = units > 6 ? 5 : units;
       for (var i = 0; i < shown; i++) {
         html += '<div class="row unit"><span class="k">Unit ' + (i + 1) + '</span><span class="v">' + usd(priceCentsFn(i)) + '</span></div>';
       }
-      if (units > 4) {
-        var per = priceCentsFn(3), count = units - 3;
-        html += '<div class="row unit"><span class="k">Units 4&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
+      if (units > 6) {
+        var per = priceCentsFn(5), count = units - 5;
+        html += '<div class="row unit"><span class="k">Units 6&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
       }
       return html;
     }
