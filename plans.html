@@ -141,6 +141,17 @@
   .foot-contact a{color:#fff;font-weight:700}
   .foot-legal{margin-top:16px;font-size:.78rem;color:var(--dim);line-height:1.7}
 
+  /* first visit */
+  .fv{max-width:680px;margin:0 auto}
+  .fv p{margin-top:16px;font-size:.96rem;color:var(--body)}
+  .wage{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0 10px}
+  .wage .wg{text-align:center;border:1px solid var(--line-soft);border-radius:13px;background:var(--card);padding:16px 8px}
+  .wage .wg b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:#FF6B5A;line-height:1}
+  .wage .wg span{display:block;margin-top:6px;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .fv-note{margin-top:26px;border-left:3px solid var(--red);border-radius:0 13px 13px 0;background:var(--card);padding:18px 20px}
+  .fv-note p{margin:0;color:#CFCAD4;font-size:.96rem}
+  @media (max-width:520px){.wage{grid-template-columns:repeat(2,1fr)}}
+
   /* sticky totals (shown while adjusting units with the totals off-screen) */
   .sticky-totals{position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;justify-content:center;align-items:baseline;gap:20px;padding:11px 14px calc(11px + env(safe-area-inset-bottom));background:rgba(12,11,13,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);font-size:.9rem;color:var(--body);white-space:nowrap}
   .sticky-totals b{color:#fff;font-weight:800;margin-left:6px}
@@ -279,6 +290,30 @@
           <tr><td>Your technician</td><td>One dedicated technician who knows your property</td><td>Whoever is on call and closest at the time</td></tr>
         </tbody>
       </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== first visit ===== -->
+<section id="first-visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The first visit</div>
+      <h2>We learn your system.</h2>
+    </div>
+    <div class="fv">
+      <p>People assume plumbing systems are all alike and any plumber just knows them. They aren't. Every building is piped by different people, with different ideas, in different eras — pipes, valves, and venting are never in the same place twice. So your technician's first visit is spent learning yours.</p>
+      <div class="wage" aria-label="Water, Air, Gas, Electricity">
+        <div class="wg"><b>W</b><span>Water</span></div>
+        <div class="wg"><b>A</b><span>Air</span></div>
+        <div class="wg"><b>G</b><span>Gas</span></div>
+        <div class="wg"><b>E</b><span>Electricity</span></div>
+      </div>
+      <p>He walks in looking at how everything is connected. Where your water main is and how to shut it off. Where your gas meter, regulator, and piping run — make, size, and pressure, photographed and documented. How your units breathe. What powers and controls them. He measures water pressure, flow at the fixtures you use most, and the temperature at the unit against what actually reaches your faucets. He studies your recirculation loop — pipe size, pump, and what turns it on and off — and arranges a spare pump at your location, nearby, or on his truck.</p>
+      <p>Then the whole team reviews the photos together and builds your continuity strategy. Your staff learns what to watch, and everyone gets the number to call.</p>
+      <div class="fv-note">
+        <p>If you ever have a leak and you panic — and that happens — call us. Your technician knows exactly where your shutoffs are and will talk you through it, and the truck is rolling within moments.</p>
+      </div>
     </div>
   </div>
 </section>
