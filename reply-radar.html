@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reply Radar — fresh high-traffic X posts</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; color: #1a1a1a; }
+    .container { max-width: 900px; margin: auto; }
+    h1 { margin-bottom: 4px; }
+    .sub { color: #666; margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    .hint { font-weight: normal; color: #888; font-size: 0.85rem; }
+    input[type=password], input[type=text], textarea, select { width: 100%; padding: 8px; margin: 5px 0 10px; box-sizing: border-box; }
+    textarea { height: 70px; }
+    button { padding: 12px 24px; background: #000; color: white; border: none; cursor: pointer; margin-right: 10px; border-radius: 4px; }
+    button:hover { background: #333; }
+    button:disabled { background: #aaa; cursor: default; }
+    .controls { display: flex; gap: 16px; flex-wrap: wrap; }
+    .controls > div { flex: 1; min-width: 140px; }
+    .bar { margin: 14px 0; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    #status { color: #666; font-style: italic; }
+    .cost { font-size: 0.8rem; color: #999; margin-top: 6px; }
+    .post { background: white; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); border-left: 4px solid #ccc; }
+    .post.fresh { border-left-color: #3aa35a; }
+    .post .meta { font-size: 0.85rem; color: #666; margin-bottom: 6px; }
+    .post .meta b { color: #1a1a1a; }
+    .post .text { white-space: pre-wrap; line-height: 1.45; margin-bottom: 8px; }
+    .post .stats { font-size: 0.85rem; color: #888; }
+    .post a.reply { display: inline-block; margin-top: 8px; padding: 6px 14px; background: #1d9bf0; color: white; border-radius: 999px; text-decoration: none; font-size: 0.9rem; font-weight: bold; }
+    .newbadge { background: #3aa35a; color: white; border-radius: 4px; padding: 2px 6px; font-size: 0.75rem; margin-left: 6px; }
+    .error { background: #fdecec; border-left: 4px solid #d94a4a; padding: 12px 14px; border-radius: 8px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Reply Radar</h1>
+    <p class="sub">Scans X (via Grok live search) for fresh posts from your target accounts, ranked by views — so you can be an early reply on high-traffic threads. Leave the tab open with auto-scan on and you'll get a browser notification when something new lands.</p>
+
+    <label>xAI API Key <span class="hint">(uses Grok live search — billed per scan, roughly a few cents; not stored)</span></label>
+    <input type="password" id="grokKey" placeholder="xai-...">
+
+    <label>Target accounts <span class="hint">(comma or space separated handles, with or without @ — scanned in batches of 10)</span></label>
+    <textarea id="handles" placeholder="@naval, @levelsio, @MrBeast"></textarea>
+
+    <div class="controls">
+      <div>
+        <label>Min views</label>
+        <select id="minViews">
+          <option value="1000">1,000</option>
+          <option value="5000" selected>5,000</option>
+          <option value="20000">20,000</option>
+          <option value="100000">100,000</option>
+        </select>
+      </div>
+      <div>
+        <label>Lookback</label>
+        <select id="lookback">
+          <option value="1">1 hour</option>
+          <option value="2" selected>2 hours</option>
+          <option value="6">6 hours</option>
+          <option value="24">24 hours</option>
+        </select>
+      </div>
+      <div>
+        <label>Auto-scan</label>
+        <select id="interval">
+          <option value="0" selected>Off (manual)</option>
+          <option value="10">Every 10 min</option>
+          <option value="15">Every 15 min</option>
+          <option value="30">Every 30 min</option>
+          <option value="60">Every hour</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="bar">
+      <button id="scanBtn" onclick="scan()">Scan now</button>
+      <span id="status"></span>
+    </div>
+    <p class="cost">Cost guide: each scan is one live-search request per 10 handles (~$0.03 each at xAI's per-source rates). Auto-scan every 15 min ≈ $3/day per 10 handles while the tab is open — turn it off when you're done for the day.</p>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    let timer = null;
+    let seen = new Set(JSON.parse(localStorage.getItem("radar_seen") || "[]"));
+
+    // Persist settings (not the API key)
+    for (const id of ["handles", "minViews", "lookback", "interval"]) {
+      const el = document.getElementById(id);
+      const saved = localStorage.getItem("radar_" + id);
+      if (saved !== null) el.value = saved;
+      el.addEventListener("change", () => {
+        localStorage.setItem("radar_" + id, el.value);
+        if (id === "interval") applyInterval();
+      });
+    }
+
+    function applyInterval() {
+      if (timer) clearInterval(timer);
+      timer = null;
+      const mins = parseInt(document.getElementById("interval").value, 10);
+      if (mins > 0) {
+        if ("Notification" in window && Notification.permission === "default") {
+          Notification.requestPermission();
+        }
+        timer = setInterval(scan, mins * 60 * 1000);
+        setStatus("Auto-scan on — every " + mins + " min while this tab stays open.");
+      }
+    }
+    applyInterval();
+
+    function setStatus(text) { document.getElementById("status").textContent = text; }
+
+    function parseHandles() {
+      return document.getElementById("handles").value
+        .split(/[\s,]+/).map(h => h.replace(/^@/, "").trim()).filter(Boolean);
+    }
+
+    function chunk(arr, n) {
+      const out = [];
+      for (let i = 0; i < arr.length; i += n) out.push(arr.slice(i, i + n));
+      return out;
+    }
+
+    function agoMinutes(iso) {
+      const t = Date.parse(iso);
+      return isNaN(t) ? null : Math.round((Date.now() - t) / 60000);
+    }
+
+    function fmtAgo(mins) {
+      if (mins === null) return "";
+      if (mins < 60) return mins + " min ago";
+      return (mins / 60).toFixed(1) + " h ago";
+    }
+
+    async function scanBatch(key, handles, minViews, hours) {
+      const fromDate = new Date(Date.now() - Math.max(hours, 24) * 3600 * 1000)
+        .toISOString().slice(0, 10);
+      const prompt =
+        "Search X for posts published in the last " + hours + " hours by these accounts: " +
+        handles.map(h => "@" + h).join(", ") + ". " +
+        "Only include posts with at least " + minViews + " views. Exclude replies; include original posts and quote posts. " +
+        "Return ONLY a JSON array (no prose, no markdown fences). Each element: " +
+        '{"handle": "...", "name": "...", "url": "https://x.com/...", "posted_at": "ISO 8601 UTC", ' +
+        '"text": "first 250 chars of the post", "views": number, "likes": number, "replies": number}. ' +
+        "If there are no matching posts, return [].";
+
+      const r = await fetch("https://api.x.ai/v1/chat/completions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
+        body: JSON.stringify({
+          model: "grok-4",
+          messages: [
+            { role: "system", content: "You are a precise data-extraction service. You output only valid JSON." },
+            { role: "user", content: prompt }
+          ],
+          search_parameters: {
+            mode: "on",
+            sources: [{ type: "x", included_x_handles: handles, post_view_count: minViews }],
+            from_date: fromDate,
+            max_search_results: 25,
+            return_citations: true
+          },
+          max_tokens: 4000
+        })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error("xAI API: " + (data.error?.message || data.error || r.status));
+      let text = (data.choices?.[0]?.message?.content || "").trim();
+      text = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+      const start = text.indexOf("[");
+      const end = text.lastIndexOf("]");
+      if (start === -1 || end === -1) return [];
+      try { return JSON.parse(text.slice(start, end + 1)); }
+      catch { return []; }
+    }
+
+    async function scan() {
+      const key = document.getElementById("grokKey").value.trim();
+      const handles = parseHandles();
+      const minViews = parseInt(document.getElementById("minViews").value, 10);
+      const hours = parseInt(document.getElementById("lookback").value, 10);
+
+      if (!key) return setStatus("Add your xAI API key first.");
+      if (handles.length === 0) return setStatus("Add at least one handle to watch.");
+
+      const btn = document.getElementById("scanBtn");
+      btn.disabled = true;
+      setStatus("Scanning " + handles.length + " account" + (handles.length > 1 ? "s" : "") + "...");
+
+      try {
+        const batches = chunk(handles, 10);
+        const results = [];
+        for (const b of batches) {
+          results.push(...await scanBatch(key, b, minViews, hours));
+        }
+
+        // De-dup by URL, drop stale/underqualified entries, sort by views desc
+        const byUrl = new Map();
+        for (const p of results) {
+          if (!p || !p.url) continue;
+          const mins = agoMinutes(p.posted_at);
+          if (mins !== null && mins > hours * 60) continue;
+          if ((p.views || 0) < minViews) continue;
+          byUrl.set(p.url, p);
+        }
+        const posts = [...byUrl.values()].sort((a, b) => (b.views || 0) - (a.views || 0));
+
+        render(posts);
+
+        const fresh = posts.filter(p => !seen.has(p.url));
+        for (const p of fresh) seen.add(p.url);
+        localStorage.setItem("radar_seen", JSON.stringify([...seen].slice(-500)));
+
+        if (fresh.length > 0 && "Notification" in window && Notification.permission === "granted") {
+          const top = fresh[0];
+          new Notification("Reply Radar: " + fresh.length + " new post" + (fresh.length > 1 ? "s" : ""), {
+            body: "@" + top.handle + " (" + (top.views || "?") + " views): " + (top.text || "").slice(0, 100)
+          });
+        }
+
+        setStatus("Last scan " + new Date().toLocaleTimeString() + " — " + posts.length +
+          " match" + (posts.length === 1 ? "" : "es") + ", " + fresh.length + " new.");
+      } catch (err) {
+        document.getElementById("results").insertAdjacentHTML("afterbegin",
+          '<div class="error">Scan failed: ' + String(err.message).replace(/</g, "&lt;") + "</div>");
+        setStatus("Scan failed.");
+      }
+      btn.disabled = false;
+    }
+
+    function render(posts) {
+      const box = document.getElementById("results");
+      box.innerHTML = "";
+      if (posts.length === 0) {
+        box.innerHTML = '<div class="post">Nothing matching right now. Widen the lookback, lower the view threshold, or add more accounts.</div>';
+        return;
+      }
+      for (const p of posts) {
+        const mins = agoMinutes(p.posted_at);
+        const isFresh = !seen.has(p.url);
+        const div = document.createElement("div");
+        div.className = "post" + (isFresh ? " fresh" : "");
+        div.innerHTML =
+          '<div class="meta"><b>@' + esc(p.handle) + '</b>' +
+          (p.name ? " · " + esc(p.name) : "") +
+          (mins !== null ? " · " + fmtAgo(mins) : "") +
+          (isFresh ? '<span class="newbadge">NEW</span>' : "") + "</div>" +
+          '<div class="text">' + esc(p.text || "") + "</div>" +
+          '<div class="stats">' + num(p.views) + " views · " + num(p.likes) + " likes · " +
+          num(p.replies) + " replies</div>" +
+          '<a class="reply" href="' + esc(p.url) + '" target="_blank" rel="noopener">Open & reply →</a>';
+        box.appendChild(div);
+      }
+    }
+
+    function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+    function num(n) { return typeof n === "number" ? n.toLocaleString() : "—"; }
+  </script>
+</body>
+</html>
