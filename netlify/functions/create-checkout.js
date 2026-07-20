@@ -45,6 +45,16 @@ exports.handler = async (event) => {
   params.append('success_url', origin + '/thanks.html');
   params.append('cancel_url', origin + '/plans.html?status=cancelled');
 
+  // Contact info for scheduling the initiation visit — collected on the Stripe
+  // checkout page and stored on the Customer/Session in the Stripe dashboard.
+  params.append('phone_number_collection[enabled]', 'true');
+  params.append('shipping_address_collection[allowed_countries][0]', 'US');
+  params.append('custom_text[shipping_address][message]', "Service address — where the tankless unit(s) we'll be maintaining are located.");
+  params.append('custom_fields[0][key]', 'contact_name');
+  params.append('custom_fields[0][label][type]', 'custom');
+  params.append('custom_fields[0][label][custom]', 'Contact person for scheduling');
+  params.append('custom_fields[0][type]', 'text');
+
   // Line items: recurring monthly (× units) + one-time initiation (× units, added to first invoice)
   let i = 0;
   params.append(`line_items[${i}][price]`, PRICE_MONTHLY);
