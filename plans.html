@@ -220,11 +220,11 @@
       <div class="plan-toggle" role="radiogroup" aria-label="Priority tier">
         <span>
           <input type="radio" name="plan" id="planRegular" value="regular" checked>
-          <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo base</span><span class="pt-note">One service visit per year</span></label>
+          <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo</span><span class="pt-note">One service visit per year</span></label>
         </span>
         <span>
           <input type="radio" name="plan" id="planHeavy" value="heavy">
-          <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo base</span><span class="pt-note">Two service visits per year</span></label>
+          <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo</span><span class="pt-note">Two service visits per year</span></label>
         </span>
       </div>
       <p class="plan-hint" id="planHint"></p>
@@ -333,23 +333,16 @@
 
   (function(){
     // Display math only — the server (create-checkout function) stays the source of truth.
-    // Units 1 and 2 are full price; from unit 3 each unit is priced 10% of
-    // base below the last, floored at half the base rate (reached at unit 7).
+    // Monthly is flat: every unit pays the full per-unit rate. The step-down
+    // curve applies only to the one-time initiation fee.
     var BASE_CENTS = { regular: 3000, heavy: 5500 };
     var PLAN_HINTS = {
       regular: 'One flush and service visit per year. For typical systems on a standard duty cycle.',
       heavy: 'Two flush and service visits per year — designed for more demanding service conditions and environments: units running at 145°F or higher, water hardness above 200 mg/L or demonstrated dissolved-solids issues, or 3,000+ hours a year.'
     };
 
-    function marginalMonthlyCents(plan, i){ // i is 0-indexed unit number
-      var base = BASE_CENTS[plan];
-      var step = Math.round(base * 0.10);
-      return Math.max(base - step * Math.max(0, i - 1), base / 2);
-    }
     function monthlyTotalCents(plan, units){
-      var total = 0;
-      for (var i = 0; i < units; i++) total += marginalMonthlyCents(plan, i);
-      return total;
+      return BASE_CENTS[plan] * units;
     }
     // Initiation: units 1 and 2 are $300 each, then $30 less per unit, floor $150 (unit 7+).
     function initiationFeeCents(units){
@@ -395,7 +388,7 @@
       var units = clampedUnits();
       var monthly = monthlyTotalCents(plan, units);
       var initiation = initiationFeeCents(units);
-      document.getElementById('pvMonthlyRows').innerHTML = unitRowsHTML(units, function(i){ return marginalMonthlyCents(plan, i); });
+      document.getElementById('pvMonthlyRows').innerHTML = '<div class="row unit"><span class="k">' + units + (units > 1 ? ' units' : ' unit') + ' &times; ' + usd(BASE_CENTS[plan]) + '</span><span class="v">' + usd(monthly) + '</span></div>';
       document.getElementById('pvMonthly').innerHTML = usd(monthly) + '<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span>';
       document.getElementById('pvInitRows').innerHTML = unitRowsHTML(units, function(i){ return Math.max(30000 - 3000 * Math.max(0, i - 1), 15000); });
       document.getElementById('pvInitiation').textContent = usd(initiation);

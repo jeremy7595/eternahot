@@ -3,8 +3,8 @@
 // Secret key + Price/Product IDs are read from Netlify environment variables — never hard-coded.
 // Required env vars (set in Netlify → Project configuration → Environment variables):
 //   STRIPE_SECRET_KEY          your sk_… key (use the TEST key first)
-//   STRIPE_PRICE_REGULAR       graduated tiered recurring price for Commercial Duty (base $30/unit/mo)
-//   STRIPE_PRICE_HEAVY         graduated tiered recurring price for Severe Service (base $55/unit/mo)
+//   STRIPE_PRICE_REGULAR       per-unit recurring price for Commercial Duty ($30/unit/mo)
+//   STRIPE_PRICE_HEAVY         per-unit recurring price for Severe Service ($55/unit/mo)
 //   STRIPE_PRODUCT_INITIATION  product ID (prod_…) used to bill the one-time initiation fee
 //
 // The front-end falls back to email enrollment if this function isn't configured yet,
@@ -62,8 +62,7 @@ exports.handler = async (event) => {
   params.append('payment_method_collection', 'always');
 
   // Line items:
-  //   0: recurring monthly plan — progressive discounts live in Stripe's
-  //      graduated tiered price, so we just pass the unit count.
+  //   0: recurring monthly plan — flat per-unit price × unit count.
   //   1: one-time initiation fee, computed here and charged immediately at checkout.
   params.append('line_items[0][price]', PRICES[plan]);
   params.append('line_items[0][quantity]', String(quantity));
