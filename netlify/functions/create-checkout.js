@@ -10,12 +10,12 @@
 // The front-end falls back to email enrollment if this function isn't configured yet,
 // so the page keeps working until the env vars are in place.
 
-// One-time initiation fee, in cents: unit 1 is $300, each additional unit
-// $30 less, floored at $150 per unit (reached at unit 6).
-// Examples: 1 unit $300; 4 units $1,020; 8 units $1,650; 20 units $3,450.
+// One-time initiation fee, in cents: units 1 and 2 are $300 each, then each
+// additional unit is $30 less, floored at $150 per unit (reached at unit 7).
+// Examples: 1 unit $300; 2 units $600; 4 units $1,110; 8 units $1,800; 20 units $3,600.
 function initiationFeeCents(units) {
   let total = 0;
-  for (let i = 0; i < units; i++) total += Math.max(30000 - 3000 * i, 15000);
+  for (let i = 0; i < units; i++) total += Math.max(30000 - 3000 * Math.max(0, i - 1), 15000);
   return total;
 }
 
