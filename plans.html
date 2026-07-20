@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Service Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
-<meta name="description" content="Eternahot Priority Response: service plans for Rinnai tankless water heaters. Certified technicians, pre-stocked critical parts, priority dispatch, and a dedicated technician for every enrolled property. Commercial Duty (one service visit per year) and Severe Service (two per year) tiers, with no overtime or drive-time charges for locations under contract. Southern California.">
+<title>Service Continuity Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
+<meta name="description" content="Eternahot Service Continuity Plans for Rinnai tankless water heaters. Certified technicians, pre-stocked critical parts, priority dispatch, and a dedicated technician for every enrolled property. Commercial Duty (one service visit per year) and Severe Service (two per year) tiers, with no overtime or drive-time charges for locations under contract. Southern California.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot Plans">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,7 +208,7 @@
 <!-- ===== hero ===== -->
 <section class="hero">
   <div class="wrap">
-    <div class="kicker">Eternahot Priority Response</div>
+    <div class="kicker">Eternahot · Service Continuity Plans</div>
     <h1 class="serif">Hot water systems that never wait.</h1>
     <p class="mission">Eternahot Priority Response deploys certified technicians and pre-stocked critical parts faster than standard service channels.</p>
     <p class="intro">Our service is designed for rapid response and guaranteed results. We keep your hot water on and running, right now. No delays. Just immediate, decisive resolution by the specialists who know these systems best. We will assign a dedicated technician to your system to keep responsiveness high.</p>
@@ -479,8 +479,8 @@
     // Fallback: enroll by email until the checkout function is configured.
     function emailFallback(plan, units){
       var planName = plan === 'heavy' ? 'Severe Service' : 'Commercial Duty';
-      var subject = encodeURIComponent('Service plan enrollment — ' + planName + ', ' + units + ' unit(s)');
-      var body = encodeURIComponent('Hi Eternahot,\n\nI\'d like to enroll in the ' + planName + ' service plan for ' + units + ' tankless unit(s).\n\nName:\nProperty address:\nPhone:\n');
+      var subject = encodeURIComponent('Service continuity plan enrollment — ' + planName + ', ' + units + ' unit(s)');
+      var body = encodeURIComponent('Hi Eternahot,\n\nI\'d like to enroll in the ' + planName + ' service continuity plan for ' + units + ' tankless unit(s).\n\nName:\nProperty address:\nPhone:\n');
       window.location.href = 'mailto:info@eternahot.com?subject=' + subject + '&body=' + body;
       showMsg('Online checkout isn\'t available just yet — we\'ve opened an email to info@eternahot.com so you can enroll directly.');
     }
