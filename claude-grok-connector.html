@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude + Grok Connector</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
+    .container { max-width: 1200px; margin: auto; }
+    textarea { width: 100%; height: 120px; margin-bottom: 10px; padding: 10px; }
+    button { padding: 12px 24px; background: #000; color: white; border: none; cursor: pointer; margin-right: 10px; }
+    button:hover { background: #333; }
+    .column { width: 48%; display: inline-block; vertical-align: top; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .response { min-height: 300px; border: 1px solid #ddd; padding: 15px; white-space: pre-wrap; }
+    .key-input { width: 100%; padding: 8px; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Claude + Grok Connector</h1>
+
+    <label>Anthropic API Key (Claude)</label>
+    <input type="password" id="claudeKey" class="key-input" placeholder="sk-ant-...">
+
+    <label>xAI / Grok API Key</label>
+    <input type="password" id="grokKey" class="key-input" placeholder="gsk_...">
+
+    <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+
+    <button onclick="sendToBoth()">Send to Both</button>
+    <button onclick="clearAll()">Clear</button>
+
+    <div style="margin-top: 20px;">
+      <div class="column">
+        <h2>Claude</h2>
+        <div id="claudeResponse" class="response">Claude response will appear here...</div>
+      </div>
+      <div class="column" style="margin-left: 4%;">
+        <h2>Grok</h2>
+        <div id="grokResponse" class="response">Grok response will appear here...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function sendToBoth() {
+      const prompt = document.getElementById('prompt').value.trim();
+      if (!prompt) return alert("Enter a prompt");
+
+      const claudeKey = document.getElementById('claudeKey').value.trim();
+      const grokKey = document.getElementById('grokKey').value.trim();
+
+      if (!claudeKey) return alert("Add Claude API key");
+      if (!grokKey) return alert("Add Grok API key");
+
+      document.getElementById('claudeResponse').textContent = "Thinking...";
+      document.getElementById('grokResponse').textContent = "Thinking...";
+
+      // Claude
+      fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": claudeKey,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true"
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-5",
+          max_tokens: 2000,
+          messages: [{ role: "user", content: prompt }]
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
+        document.getElementById('claudeResponse').textContent = text || JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('claudeResponse').textContent = "Error: " + err.message;
+      });
+
+      // Grok
+      fetch("https://api.x.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + grokKey
+        },
+        body: JSON.stringify({
+          model: "grok-4",
+          messages: [{ role: "user", content: prompt }],
+          max_tokens: 2000
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('grokResponse').textContent = data.choices?.[0]?.message?.content || JSON.stringify(data, null, 2);
+      })
+      .catch(err => {
+        document.getElementById('grokResponse').textContent = "Error: " + err.message;
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('prompt').value = '';
+      document.getElementById('claudeResponse').textContent = 'Claude response will appear here...';
+      document.getElementById('grokResponse').textContent = 'Grok response will appear here...';
+    }
+  </script>
+</body>
+</html>
