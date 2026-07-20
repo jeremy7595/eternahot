@@ -11,11 +11,12 @@
 // so the page keeps working until the env vars are in place.
 
 // One-time initiation fee, in cents: units 1 and 2 are $300 each, then each
-// additional unit is $30 less, floored at $150 per unit (reached at unit 7).
-// Examples: 1 unit $300; 2 units $600; 4 units $1,110; 8 units $1,800; 20 units $3,600.
+// additional unit is $30 less, down to $0 (reached at unit 12). The fee
+// therefore caps at $1,950 total regardless of unit count.
+// Examples: 1 unit $300; 2 units $600; 4 units $1,110; 8 units $1,770; 20 units $1,950.
 function initiationFeeCents(units) {
   let total = 0;
-  for (let i = 0; i < units; i++) total += Math.max(30000 - 3000 * Math.max(0, i - 1), 15000);
+  for (let i = 0; i < units; i++) total += Math.max(30000 - 3000 * Math.max(0, i - 1), 0);
   return total;
 }
 
