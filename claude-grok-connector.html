@@ -3,109 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude + Grok Connector</title>
+  <title>Claude ↔ Grok Dialogue</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
-    .container { max-width: 1200px; margin: auto; }
-    textarea { width: 100%; height: 120px; margin-bottom: 10px; padding: 10px; }
-    button { padding: 12px 24px; background: #000; color: white; border: none; cursor: pointer; margin-right: 10px; }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; color: #1a1a1a; }
+    .container { max-width: 900px; margin: auto; }
+    h1 { margin-bottom: 4px; }
+    .sub { color: #666; margin-bottom: 20px; }
+    label { font-weight: bold; display: block; margin-top: 10px; }
+    textarea { width: 100%; height: 100px; margin: 6px 0 10px; padding: 10px; box-sizing: border-box; }
+    button { padding: 12px 24px; background: #000; color: white; border: none; cursor: pointer; margin-right: 10px; border-radius: 4px; }
     button:hover { background: #333; }
-    .column { width: 48%; display: inline-block; vertical-align: top; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .response { min-height: 300px; border: 1px solid #ddd; padding: 15px; white-space: pre-wrap; }
-    .key-input { width: 100%; padding: 8px; margin: 5px 0; }
+    button:disabled { background: #aaa; cursor: default; }
+    .key-input, select { width: 100%; padding: 8px; margin: 5px 0 10px; box-sizing: border-box; }
+    .controls { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px; }
+    .controls > div { flex: 1; min-width: 160px; }
+    #transcript { margin-top: 24px; }
+    .turn { padding: 14px 16px; border-radius: 10px; margin-bottom: 14px; white-space: pre-wrap; line-height: 1.5; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .turn .who { font-weight: bold; margin-bottom: 6px; font-size: 0.9rem; letter-spacing: 0.03em; }
+    .claude { background: #fdf3ec; border-left: 4px solid #d97a4a; }
+    .grok { background: #eef2fb; border-left: 4px solid #4a6bd9; }
+    .synthesis { background: #eefaf0; border-left: 4px solid #3aa35a; }
+    .status { background: #fff; border: 1px dashed #bbb; color: #666; font-style: italic; }
+    .error { background: #fdecec; border-left: 4px solid #d94a4a; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Claude + Grok Connector</h1>
+    <h1>Claude ↔ Grok Dialogue</h1>
+    <p class="sub">Pose a question and the two models confer — reading each other's turns, challenging and building on ideas — then produce a joint synthesis of what they discovered.</p>
 
     <label>Anthropic API Key (Claude)</label>
     <input type="password" id="claudeKey" class="key-input" placeholder="sk-ant-...">
 
-    <label>xAI / Grok API Key</label>
-    <input type="password" id="grokKey" class="key-input" placeholder="gsk_...">
+    <label>xAI API Key (Grok)</label>
+    <input type="password" id="grokKey" class="key-input" placeholder="xai-...">
 
-    <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+    <label>Question or topic to explore</label>
+    <textarea id="prompt" placeholder="e.g. What overlooked technology from the last 50 years deserves a second chance, and why did it fail the first time?"></textarea>
 
-    <button onclick="sendToBoth()">Send to Both</button>
-    <button onclick="clearAll()">Clear</button>
-
-    <div style="margin-top: 20px;">
-      <div class="column">
-        <h2>Claude</h2>
-        <div id="claudeResponse" class="response">Claude response will appear here...</div>
+    <div class="controls">
+      <div>
+        <label>Exchanges (turns each)</label>
+        <select id="rounds">
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
-      <div class="column" style="margin-left: 4%;">
-        <h2>Grok</h2>
-        <div id="grokResponse" class="response">Grok response will appear here...</div>
+      <div style="flex: 3;">
+        <button id="startBtn" onclick="startDialogue()">Start Dialogue</button>
+        <button id="stopBtn" onclick="stopDialogue()" disabled>Stop</button>
+        <button onclick="clearAll()">Clear</button>
       </div>
     </div>
+
+    <div id="transcript"></div>
   </div>
 
   <script>
-    async function sendToBoth() {
-      const prompt = document.getElementById('prompt').value.trim();
-      if (!prompt) return alert("Enter a prompt");
+    let running = false;
 
-      const claudeKey = document.getElementById('claudeKey').value.trim();
-      const grokKey = document.getElementById('grokKey').value.trim();
+    // Shared transcript: [{speaker: "Claude"|"Grok", text: "..."}]
+    let dialogue = [];
 
-      if (!claudeKey) return alert("Add Claude API key");
-      if (!grokKey) return alert("Add Grok API key");
+    function persona(self, other) {
+      return "You are " + self + ", in a live back-and-forth dialogue with " + other +
+        " (a different AI model built by a different company, with different training and different strengths). " +
+        "A human has posed a question and is watching you two think it through together. " +
+        "Your shared goal is discovery: reach insights neither of you would reach alone. " +
+        "Read " + other + "'s latest points carefully. Agree only when genuinely persuaded; " +
+        "push back with specifics when you see a flaw; introduce angles " + other + " hasn't considered. " +
+        "Build on the strongest thread rather than restarting the topic. " +
+        "Address " + other + " directly, and keep each turn focused — under 250 words.";
+    }
 
-      document.getElementById('claudeResponse').textContent = "Thinking...";
-      document.getElementById('grokResponse').textContent = "Thinking...";
+    function addTurn(cls, who, text) {
+      const div = document.createElement("div");
+      div.className = "turn " + cls;
+      div.innerHTML = '<div class="who">' + who + '</div>';
+      div.appendChild(document.createTextNode(text));
+      document.getElementById("transcript").appendChild(div);
+      div.scrollIntoView({ behavior: "smooth", block: "end" });
+      return div;
+    }
 
-      // Claude
-      fetch("https://api.anthropic.com/v1/messages", {
+    function setStatus(text) {
+      const el = document.getElementById("statusLine") || addTurn("status", "", "");
+      el.id = "statusLine";
+      el.textContent = text;
+      el.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+
+    function clearStatus() {
+      const el = document.getElementById("statusLine");
+      if (el) el.remove();
+    }
+
+    // Build Claude's message array: its own turns are "assistant", Grok's are "user".
+    function claudeMessages(question, extraInstruction) {
+      const msgs = [{ role: "user", content: "The question on the table: " + question }];
+      for (const t of dialogue) {
+        if (t.speaker === "Claude") msgs.push({ role: "assistant", content: t.text });
+        else msgs.push({ role: "user", content: "Grok responds:\n\n" + t.text });
+      }
+      if (extraInstruction) msgs.push({ role: "user", content: extraInstruction });
+      return msgs;
+    }
+
+    // Build Grok's message array (OpenAI-style): its own turns are "assistant", Claude's are "user".
+    function grokMessages(question, system) {
+      const msgs = [
+        { role: "system", content: system },
+        { role: "user", content: "The question on the table: " + question }
+      ];
+      for (const t of dialogue) {
+        if (t.speaker === "Grok") msgs.push({ role: "assistant", content: t.text });
+        else msgs.push({ role: "user", content: "Claude responds:\n\n" + t.text });
+      }
+      return msgs;
+    }
+
+    async function askClaude(key, system, messages, maxTokens) {
+      const r = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": claudeKey,
+          "x-api-key": key,
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true"
         },
         body: JSON.stringify({
           model: "claude-sonnet-5",
-          max_tokens: 2000,
-          messages: [{ role: "user", content: prompt }]
+          max_tokens: maxTokens,
+          system: system,
+          messages: messages
         })
-      })
-      .then(r => r.json())
-      .then(data => {
-        const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("");
-        document.getElementById('claudeResponse').textContent = text || JSON.stringify(data, null, 2);
-      })
-      .catch(err => {
-        document.getElementById('claudeResponse').textContent = "Error: " + err.message;
       });
+      const data = await r.json();
+      if (!r.ok) throw new Error("Claude API: " + (data.error?.message || r.status));
+      if (data.stop_reason === "refusal") throw new Error("Claude declined to answer this one.");
+      const text = (data.content || []).filter(b => b.type === "text").map(b => b.text).join("").trim();
+      if (!text) throw new Error("Claude returned an empty response.");
+      return text;
+    }
 
-      // Grok
-      fetch("https://api.x.ai/v1/chat/completions", {
+    async function askGrok(key, messages, maxTokens) {
+      const r = await fetch("https://api.x.ai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + grokKey
+          "Authorization": "Bearer " + key
         },
         body: JSON.stringify({
           model: "grok-4",
-          messages: [{ role: "user", content: prompt }],
-          max_tokens: 2000
+          messages: messages,
+          max_tokens: maxTokens
         })
-      })
-      .then(r => r.json())
-      .then(data => {
-        document.getElementById('grokResponse').textContent = data.choices?.[0]?.message?.content || JSON.stringify(data, null, 2);
-      })
-      .catch(err => {
-        document.getElementById('grokResponse').textContent = "Error: " + err.message;
       });
+      const data = await r.json();
+      if (!r.ok) throw new Error("Grok API: " + (data.error?.message || data.error || r.status));
+      const text = (data.choices?.[0]?.message?.content || "").trim();
+      if (!text) throw new Error("Grok returned an empty response.");
+      return text;
+    }
+
+    async function startDialogue() {
+      const question = document.getElementById("prompt").value.trim();
+      const claudeKey = document.getElementById("claudeKey").value.trim();
+      const grokKey = document.getElementById("grokKey").value.trim();
+      const rounds = parseInt(document.getElementById("rounds").value, 10);
+
+      if (!question) return alert("Enter a question or topic");
+      if (!claudeKey) return alert("Add your Anthropic API key");
+      if (!grokKey) return alert("Add your xAI API key");
+
+      running = true;
+      dialogue = [];
+      document.getElementById("transcript").innerHTML = "";
+      document.getElementById("startBtn").disabled = true;
+      document.getElementById("stopBtn").disabled = false;
+
+      const claudeSystem = persona("Claude", "Grok");
+      const grokSystem = persona("Grok", "Claude");
+
+      try {
+        for (let round = 1; round <= rounds && running; round++) {
+          setStatus("Round " + round + " of " + rounds + " — Claude is thinking...");
+          const cText = await askClaude(claudeKey, claudeSystem, claudeMessages(question), 1500);
+          if (!running) break;
+          clearStatus();
+          addTurn("claude", "CLAUDE — round " + round, cText);
+          dialogue.push({ speaker: "Claude", text: cText });
+
+          setStatus("Round " + round + " of " + rounds + " — Grok is thinking...");
+          const gText = await askGrok(grokKey, grokMessages(question, grokSystem), 1500);
+          if (!running) break;
+          clearStatus();
+          addTurn("grok", "GROK — round " + round, gText);
+          dialogue.push({ speaker: "Grok", text: gText });
+        }
+
+        if (running && dialogue.length > 0) {
+          setStatus("Synthesizing discoveries...");
+          const synth = await askClaude(
+            claudeKey,
+            "You are Claude, wrapping up a dialogue with Grok for the human who has been watching. Be a fair referee of the conversation, including of your own contributions.",
+            claudeMessages(question,
+              "The dialogue is over. Write a joint synthesis for the human: " +
+              "(1) the most interesting discoveries or ideas that emerged from the exchange — especially ones neither side opened with; " +
+              "(2) where you and Grok genuinely converged; " +
+              "(3) where you still disagree and what would settle it. " +
+              "Credit ideas to whoever raised them."),
+            2000
+          );
+          clearStatus();
+          addTurn("synthesis", "JOINT SYNTHESIS", synth);
+        }
+      } catch (err) {
+        clearStatus();
+        addTurn("error", "ERROR", err.message + (dialogue.length ? "\n\nThe dialogue up to this point is preserved above." : ""));
+      }
+
+      clearStatus();
+      running = false;
+      document.getElementById("startBtn").disabled = false;
+      document.getElementById("stopBtn").disabled = true;
+    }
+
+    function stopDialogue() {
+      running = false;
+      document.getElementById("stopBtn").disabled = true;
+      setStatus("Stopping after the current turn...");
     }
 
     function clearAll() {
-      document.getElementById('prompt').value = '';
-      document.getElementById('claudeResponse').textContent = 'Claude response will appear here...';
-      document.getElementById('grokResponse').textContent = 'Grok response will appear here...';
+      if (running) return;
+      dialogue = [];
+      document.getElementById("prompt").value = "";
+      document.getElementById("transcript").innerHTML = "";
     }
   </script>
 </body>
