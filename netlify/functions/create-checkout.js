@@ -36,6 +36,23 @@ exports.handler = async (event) => {
     return { statusCode: 503, body: JSON.stringify({ error: 'not_configured' }) };
   }
 
+  // Guard: the monthly price must be a flat per-unit price at exactly the
+  // advertised rate. Refuses to check out if an env var points at a wrong
+  // price (e.g. the retired tiered/progressive-discount prices), so the
+  // monthly fee can never be anything but the flat rate.
+  const EXPECTED_UNIT_AMOUNT = { regular: 3000, heavy: 5500 };
+  try {
+    const priceResp = await fetch('https://api.stripe.com/v1/prices/' + encodeURIComponent(PRICE_MONTHLY), {
+      headers: { 'Authorization': 'Bearer ' + KEY }
+    });
+    const price = await priceResp.json();
+    if (!priceResp.ok || price.billing_scheme !== 'per_unit' || price.unit_amount !== EXPECTED_UNIT_AMOUNT[plan]) {
+      return { statusCode: 502, body: JSON.stringify({ error: 'misconfigured_price' }) };
+    }
+  } catch (err) {
+    return { statusCode: 502, body: JSON.stringify({ error: 'request_failed' }) };
+  }
+
   const host = event.headers['x-forwarded-host'] || event.headers.host || '';
   const origin = host ? 'https://' + host : '';
 
