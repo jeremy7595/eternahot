@@ -42,6 +42,11 @@ exports.handler = async (event) => {
   const params = new URLSearchParams();
   params.append('mode', 'subscription');
   params.append('billing_address_collection', 'required');
+  // Regular (Commercial) Duty includes a 30-day free trial of the monthly fee.
+  // One-time line items (the initiation fee) are still charged at checkout.
+  if (plan === 'regular') {
+    params.append('subscription_data[trial_period_days]', '30');
+  }
   params.append('success_url', origin + '/thanks.html');
   params.append('cancel_url', origin + '/plans.html?status=cancelled');
 
