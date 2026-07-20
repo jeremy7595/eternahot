@@ -379,10 +379,15 @@
     function monthlyTotalCents(plan, units){
       return BASE_CENTS[plan] * units;
     }
-    // Initiation: units 1 and 2 are $300 each, then $30 less per unit, down to $0 (unit 12+).
+    // Initiation: unit 1 is $300, each additional unit 20% less than the
+    // last (whole dollars), floored at $150 (unit 5+) — every unit's
+    // initiation includes a full flush and maintenance.
+    function initiationMarginalCents(i){
+      return Math.max(Math.round(300 * Math.pow(0.8, i)) * 100, 15000);
+    }
     function initiationFeeCents(units){
       var total = 0;
-      for (var i = 0; i < units; i++) total += Math.max(30000 - 3000 * Math.max(0, i - 1), 0);
+      for (var i = 0; i < units; i++) total += initiationMarginalCents(i);
       return total;
     }
     function usd(cents){
@@ -404,16 +409,16 @@
     }
 
     // One line per unit with its price, so the totals are self-explanatory.
-    // Units 12+ are all $0, so they collapse into one line.
+    // Units 5+ are all at the $150 floor, so they collapse into one line.
     function unitRowsHTML(units, priceCentsFn){
       var html = '';
-      var shown = units > 12 ? 11 : units;
+      var shown = units > 5 ? 4 : units;
       for (var i = 0; i < shown; i++) {
         html += '<div class="row unit"><span class="k">Unit ' + (i + 1) + '</span><span class="v">' + usd(priceCentsFn(i)) + '</span></div>';
       }
-      if (units > 12) {
-        var per = priceCentsFn(11), count = units - 11;
-        html += '<div class="row unit"><span class="k">Units 12&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
+      if (units > 5) {
+        var per = priceCentsFn(4), count = units - 4;
+        html += '<div class="row unit"><span class="k">Units 5&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
       }
       return html;
     }
@@ -425,7 +430,7 @@
       var initiation = initiationFeeCents(units);
       document.getElementById('pvMonthlyRows').innerHTML = '<div class="row unit"><span class="k">' + units + (units > 1 ? ' units' : ' unit') + ' &times; ' + usd(BASE_CENTS[plan]) + '</span><span class="v">' + usd(monthly) + '</span></div>';
       document.getElementById('pvMonthly').innerHTML = usd(monthly) + '<span style="font-size:.9rem;color:var(--body);font-weight:600"> /mo</span>';
-      document.getElementById('pvInitRows').innerHTML = unitRowsHTML(units, function(i){ return Math.max(30000 - 3000 * Math.max(0, i - 1), 0); });
+      document.getElementById('pvInitRows').innerHTML = unitRowsHTML(units, initiationMarginalCents);
       document.getElementById('pvInitiation').textContent = usd(initiation);
       document.getElementById('planHint').textContent = PLAN_HINTS[plan];
       document.getElementById('stMonthly').textContent = usd(monthly) + '/mo';
