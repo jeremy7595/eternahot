@@ -379,10 +379,10 @@
     function monthlyTotalCents(plan, units){
       return BASE_CENTS[plan] * units;
     }
-    // Initiation: $300, then 20% off the previous price per step, rounded
-    // to the nearest $5, stopping at the $150 floor (unit 4+) — every
-    // unit's initiation includes a full flush and maintenance.
-    var INITIATION_STEPS_CENTS = [30000, 24000, 19000];
+    // Initiation: $50 less per unit — $300, $250, $200, then $150 from
+    // unit 4 on — every unit's initiation includes a full flush and
+    // maintenance, so no unit enrolls below the cost of that service.
+    var INITIATION_STEPS_CENTS = [30000, 25000, 20000];
     function initiationMarginalCents(i){
       return INITIATION_STEPS_CENTS[i] || 15000;
     }

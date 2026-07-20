@@ -10,13 +10,12 @@
 // The front-end falls back to email enrollment if this function isn't configured yet,
 // so the page keeps working until the env vars are in place.
 
-// One-time initiation fee, in cents: unit 1 is $300, then each step takes
-// 20% off the previous price, rounded to the nearest $5, stopping at the
+// One-time initiation fee, in cents: $50 less per unit, stopping at the
 // $150 floor (reached at unit 4) — every unit's initiation includes a full
 // flush and maintenance, so no unit enrolls below the cost of that service.
-// Per-unit: $300, $240, $190, then $150 from unit 4 on.
-// Examples: 1 unit $300; 2 units $540; 4 units $880; 8 units $1,480; 20 units $3,280.
-const INITIATION_STEPS_CENTS = [30000, 24000, 19000];
+// Per-unit: $300, $250, $200, then $150 from unit 4 on.
+// Examples: 1 unit $300; 2 units $550; 4 units $900; 8 units $1,500; 20 units $3,300.
+const INITIATION_STEPS_CENTS = [30000, 25000, 20000];
 function initiationFeeCents(units) {
   let total = 0;
   for (let i = 0; i < units; i++) total += INITIATION_STEPS_CENTS[i] || 15000;
