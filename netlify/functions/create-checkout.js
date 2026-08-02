@@ -2,8 +2,17 @@
 //
 // WHAT HAPPENS AT CHECKOUT
 //   1. The customer is charged $300 per unit — the enrollment service.
-//   2. A $60-per-unit monthly subscription is created, billing from the FIRST
-//      OF A MONTH at least 14 days out. Nothing monthly is charged today.
+//   2. A $60-per-unit monthly subscription is created, anchored to bill from
+//      the FIRST OF A MONTH at least 14 days out. Nothing monthly is charged
+//      today — the $300 enrollment pays for the initial maintenance.
+//
+// WHY AN ANCHOR AND NOT A TRIAL
+//   Stripe renders a trial as "X days free" / "Pay and start trial" on the
+//   checkout page. "Free" is a prohibited word (Doc 06 §11(2)) and it is false
+//   in spirit — the first month's service is PREPAID by the enrollment, not
+//   free. A billing_cycle_anchor defers the first invoice to the same date
+//   with no trial language anywhere. proration_behavior=none stops Stripe
+//   from charging a partial month today.
 //
 // WHY THE SUBSCRIPTION STARTS ITSELF
 //   The monthly must not begin until the enrollment service has been performed.
@@ -32,8 +41,10 @@
 // The front-end falls back to email enrollment if this isn't configured yet.
 
 // $300 per unit, flat. It is a full service, not a fee — descale and flush,
-// full maintenance, enrollability verification, and a system audit locating
-// every water and energy source with its valves and pumps.
+// full maintenance, and enrollability verification for that unit. The SYSTEM
+// AUDIT — every water and energy source located, with its valves and pumps —
+// happens ONCE PER SYSTEM, not per unit: all units are part of one system,
+// usually one system per building. Four units = four full services, one audit.
 // 1 unit $300 · 2 units $600 · 4 units $1,200 · 8 units $2,400 · 20 units $6,000.
 const ENROLLMENT_CENTS_PER_UNIT = 30000;
 
@@ -88,7 +99,7 @@ exports.handler = async (event) => {
 
   const host = event.headers['x-forwarded-host'] || event.headers.host || '';
   const origin = host ? 'https://' + host : '';
-  const trialEnd = firstMonthlyChargeUnix();
+  const anchorTs = firstMonthlyChargeUnix();
 
   const params = new URLSearchParams();
   params.append('mode', 'subscription');
@@ -96,10 +107,16 @@ exports.handler = async (event) => {
   params.append('success_url', origin + '/plans.html?status=success');
   params.append('cancel_url', origin + '/plans.html?status=cancelled');
 
-  // Monthly billing begins on the 1st (at least 14 days out). The card is
-  // collected today regardless, because the enrollment service is charged now.
-  params.append('subscription_data[trial_end]', String(trialEnd));
+  // Monthly billing begins on the 1st (at least 14 days out) — as a billing
+  // anchor, never a trial, so the page never says "free" or "trial". The card
+  // is collected today because the enrollment service is charged now.
+  params.append('subscription_data[billing_cycle_anchor]', String(anchorTs));
+  params.append('subscription_data[proration_behavior]', 'none');
   params.append('payment_method_collection', 'always');
+
+  // Say what today's charge actually is, in Eternahot's own words, on the page.
+  params.append('custom_text[submit][message]',
+    'Today you pay the enrollment service only — a full maintenance and flush for every unit, plus a complete audit of your system. Your monthly plan bills on the 1st of the month, starting at least two weeks from today.');
 
   // Line 0: the monthly plan — $60 per unit, one line, quantity = unit count.
   // Line 1: the enrollment service — $300 per unit, charged at checkout.
