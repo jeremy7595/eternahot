@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Service Continuity Plans — Eternahot | Rinnai Tankless Maintenance & Service</title>
-<meta name="description" content="Eternahot Service Continuity Plans for Rinnai tankless water heaters. Certified technicians, pre-stocked critical parts, priority dispatch, and a dedicated technician for every enrolled property. Commercial Duty (one service visit per year) and Severe Service (two per year) tiers, with no overtime or drive-time charges for locations under contract. Southern California.">
+<title>Service Continuity Plan — Eternahot | Rinnai Tankless Maintenance &amp; Service</title>
+<meta name="description" content="Eternahot Service Continuity Plan for Rinnai tankless water heaters. $300 per unit to enroll — a full service, flush and system audit. $60 per unit a month, one maintenance visit a year, priority scheduling and a dedicated technician. Month to month, cancel anytime. Southern California.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="apple-mobile-web-app-title" content="Eternahot Plans">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -208,11 +208,11 @@
 <!-- ===== hero ===== -->
 <section class="hero">
   <div class="wrap">
-    <div class="kicker">Eternahot · Service Continuity Plans</div>
+    <div class="kicker">Eternahot · Service Continuity Plan</div>
     <h1 class="serif">Hot water systems that never wait.</h1>
-    <p class="mission">Eternahot Priority Response deploys certified technicians and pre-stocked critical parts faster than standard service channels.</p>
-    <p class="intro">Our service is designed for rapid response and guaranteed results. We keep your hot water on and running, right now. No delays. Just immediate, decisive resolution by the specialists who know these systems best. We will assign a dedicated technician to your system to keep responsiveness high.</p>
-    <p class="intro">Select your priority tier and number of tankless units. Each additional unit receives elevated dispatch priority and dedicated parts allocation.</p>
+    <p class="mission">Certified technicians and pre-stocked critical parts stand ready for immediate deployment whenever a hot water emergency arises.</p>
+    <p class="intro">Service Continuity offers high-value readiness through a rigorously organized program. Every enrolled unit is recorded by serial number. Every system is audited at enrollment down to its water and energy sources, valves and pumps. Every property is assigned a technician who already knows your building before he arrives. <b>If continuous hot water is mission-critical to your operations, this plan was built for you.</b></p>
+    <p class="intro">Enter the number of tankless units that require service. Enrollment and the monthly rate are the same for every unit.</p>
     <div id="statusNotice" class="notice" role="status"></div>
   </div>
 </section>
@@ -223,19 +223,15 @@
     <div class="sec-head">
       <div class="kicker">Enrollment</div>
       <h2>Enroll Now</h2>
-      <p>Choose your tier, enter unit count, and see exact terms before checkout.</p>
+      <p>Enter your unit count and see exact terms before checkout.</p>
     </div>
 
     <form id="signupForm" class="signup-card">
-      <span class="field-label">Select your priority tier</span>
-      <div class="plan-toggle" role="radiogroup" aria-label="Priority tier">
+      <span class="field-label">The plan</span>
+      <div class="plan-toggle" role="group" aria-label="Service Continuity Plan">
         <span>
           <input type="radio" name="plan" id="planRegular" value="regular" checked>
-          <label for="planRegular"><span class="pt-name">Commercial Duty</span><span class="pt-rate">$30 / unit / mo</span><span class="pt-note">One service visit per year</span></label>
-        </span>
-        <span>
-          <input type="radio" name="plan" id="planHeavy" value="heavy">
-          <label for="planHeavy"><span class="pt-name">Severe Service</span><span class="pt-rate">$55 / unit / mo</span><span class="pt-note">Two service visits per year</span></label>
+          <label for="planRegular"><span class="pt-name">Service Continuity Plan</span><span class="pt-rate">$300 per unit to enroll &middot; $60 / unit / mo</span><span class="pt-note">One maintenance visit a year</span></label>
         </span>
       </div>
       <p class="plan-hint" id="planHint"></p>
@@ -250,13 +246,13 @@
       </div>
 
       <div class="preview" aria-live="polite">
-        <div class="pv-label">Monthly service</div>
+        <div class="pv-label">Monthly service &mdash; begins after your enrollment visit</div>
         <div id="pvMonthlyRows"></div>
-        <div class="row big total"><span class="k">Monthly total — due in 30 days and every month after</span><span class="v" id="pvMonthly"></span></div>
-        <div class="pv-label pv-label-2">One-time initiation fee</div>
+        <div class="row big total"><span class="k">Monthly total &mdash; first payment <span id="pvStartDate"></span></span><span class="v" id="pvMonthly"></span></div>
+        <div class="pv-label pv-label-2">Enrollment service &mdash; $300 per unit</div>
         <div id="pvInitRows"></div>
         <div class="row due total"><span class="k">Due today</span><span class="v" id="pvInitiation"></span></div>
-        <p class="trial-note">Initiation fee charged at checkout, monthly payments begin in 30 days. Your card is saved at signup.</p>
+        <p class="trial-note"><b>Today you pay the enrollment service only.</b> Your first monthly payment is <b id="pvStartDate2"></b>, and every month on the 1st after that. That leaves at least two weeks for your technician to complete the service and record each unit by serial number first. If a unit doesn't qualify, its plan is cancelled before any monthly payment and your $300 goes toward a replacement. Month to month &mdash; no term, cancel anytime.</p>
       </div>
 
       <div class="cta">
@@ -284,9 +280,9 @@
       <table class="compare">
         <thead><tr><th scope="col"></th><th scope="col">With a plan</th><th scope="col">Without</th></tr></thead>
         <tbody>
-          <tr><td>Drive time</td><td>Never billed</td><td>Billed to your location</td></tr>
-          <tr><td>Nights, weekends &amp; holidays</td><td>Same rate, any hour</td><td>Overtime rates</td></tr>
-          <tr><td>Flush &amp; service visits</td><td>Included — one per year on Commercial Duty, two on Severe Service</td><td>Paid per service</td></tr>
+          <tr><td>Labor on additional visits</td><td>$150 / hour</td><td>$250 / hour</td></tr>
+          <tr><td>Scheduling</td><td>Ahead of non-members, first available slot</td><td>Standard queue</td></tr>
+          <tr><td>Maintenance visit</td><td>Included &mdash; one per year, per unit</td><td>Paid per service</td></tr>
           <tr><td>Your technician</td><td>One dedicated technician who knows your property</td><td>Whoever is on call and closest at the time</td></tr>
         </tbody>
       </table>
@@ -334,9 +330,11 @@
       <h2>Clear terms, no surprises</h2>
     </div>
     <div class="terms-grid">
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Rinnai tankless water heaters only, enrolled by serial number at your initial inspection.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Service calls</h4><p>Labor charged on arrival — $250/hour, two-hour minimum — plus a $50 fuel surcharge. Parts quoted for your approval.</p></div></div>
-      <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>Lapsed plans</h4><p>Lapsed plans require re-enrollment with the initiation fee and service.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Eligible units</h4><p>Rinnai tankless water heaters only, enrolled by serial number at the enrollment visit and subject to a serviceable-condition check.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z"/></svg><div><h4>Service calls</h4><p><b>Every dispatch carries labor at the applicable rate</b> &mdash; $150/hour for plan members, two-hour minimum; $250/hour for non-members. Your annual maintenance visit is prepaid by your monthly. Tankless repairs and parts replacements are performed upon an approved repair proposal.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg><div><h4>Lapsed plans</h4><p>A unit that is not current is served at non-member rates and standard scheduling. <b>Any past-due amount must be paid before dispatch</b> to be served at member rates. After two missed months, re-enrollment and the $300 enrollment service are required.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><path d="M3 7h13v10H3z"/><path d="M16 10h4l1 3v4h-5z"/><circle cx="7" cy="18" r="1.6"/><circle cx="18" cy="18" r="1.6"/></svg><div><h4>Loaner units</h4><p>If a critical part has to come from Rinnai, your unit comes to our shop and a loaner keeps your hot water on while we repair it &mdash; usually under a week. A loaner is <b>$100 per day</b>. It goes in on the visit your unit comes out and leaves on the visit your unit returns, so there is no separate trip for it. A loaner is never guaranteed and is not part of the plan &mdash; what we can do on the day depends on what is on the shelf. <b>The loaner remains Eternahot property</b>, under a signed agreement for each deployment.</p></div></div>
+      <div class="term"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg><div><h4>What this plan is not</h4><p>It is not insurance, a warranty, or a repair plan, and it does not entitle you to a loaner or a replacement unit. It buys maintenance, priority, prepared parts, and a technician who already knows your building. <b>You will not wait days to get hot water back.</b></p></div></div>
       <div class="term"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg><div><h4>Service agreement</h4><p>Complete terms come with the agreement at enrollment.</p></div></div>
     </div>
   </div>
@@ -370,25 +368,34 @@
     // Display math only — the server (create-checkout function) stays the source of truth.
     // Monthly is flat: every unit pays the full per-unit rate. The step-down
     // curve applies only to the one-time initiation fee.
-    var BASE_CENTS = { regular: 3000, heavy: 5500 };
+    var BASE_CENTS = { regular: 6000 };
     var PLAN_HINTS = {
-      regular: 'One flush and service visit per year. For typical systems on a standard duty cycle.',
-      heavy: 'Two flush and service visits per year — designed for more demanding service conditions and environments: units running at 145°F or higher, water hardness above 200 mg/L or demonstrated dissolved-solids issues, or 3,000+ hours a year.'
+      regular: 'One maintenance visit a year, per unit \u2014 descale, flush and full service. Additional visits are billed at the member labor rate.'
     };
 
     function monthlyTotalCents(plan, units){
       return BASE_CENTS[plan] * units;
     }
-    // Initiation: $30 less per unit — $300, $270, $240, $210, $180, then
-    // $150 from unit 6 on — every unit's initiation includes a full flush
-    // and maintenance, so no unit enrolls below the cost of that service.
+    // Enrollment is flat: $300 for every unit. It is a full service, not a
+    // fee — descale and flush, full maintenance, enrollability verification,
+    // and a system audit locating every water and energy source with its
+    // valves and pumps.
     function initiationMarginalCents(i){
-      return Math.max(30000 - 3000 * i, 15000);
+      return 30000;
     }
     function initiationFeeCents(units){
       var total = 0;
       for (var i = 0; i < units; i++) total += initiationMarginalCents(i);
       return total;
+    }
+    // First monthly charge: the first 1st of a month at least 14 days out.
+    // Mirrors firstMonthlyChargeUnix() in the checkout function; the server
+    // stays the source of truth.
+    function firstChargeDate(){
+      var now = new Date();
+      var d = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      while (d - now < 14 * 86400000) d = new Date(d.getFullYear(), d.getMonth() + 1, 1);
+      return d;
     }
     function usd(cents){
       return (cents / 100).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -400,7 +407,7 @@
     var msg = document.getElementById('formMsg');
 
     function selectedPlan(){
-      return document.getElementById('planHeavy').checked ? 'heavy' : 'regular';
+      return 'regular';
     }
     function clampedUnits(){
       var n = parseInt(qtyInput.value, 10);
@@ -408,19 +415,11 @@
       return Math.max(1, Math.min(50, n));
     }
 
-    // One line per unit with its price, so the totals are self-explanatory.
-    // Units 6+ are all at the $150 floor, so they collapse into one line.
+    // Flat pricing — one line stating the arithmetic.
     function unitRowsHTML(units, priceCentsFn){
-      var html = '';
-      var shown = units > 6 ? 5 : units;
-      for (var i = 0; i < shown; i++) {
-        html += '<div class="row unit"><span class="k">Unit ' + (i + 1) + '</span><span class="v">' + usd(priceCentsFn(i)) + '</span></div>';
-      }
-      if (units > 6) {
-        var per = priceCentsFn(5), count = units - 5;
-        html += '<div class="row unit"><span class="k">Units 6&ndash;' + units + ' &middot; ' + count + ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * count) + '</span></div>';
-      }
-      return html;
+      var per = priceCentsFn(0);
+      return '<div class="row unit"><span class="k">' + units + (units > 1 ? ' units' : ' unit') +
+             ' &times; ' + usd(per) + '</span><span class="v">' + usd(per * units) + '</span></div>';
     }
 
     function updatePreview(){
@@ -435,6 +434,9 @@
       document.getElementById('planHint').textContent = PLAN_HINTS[plan];
       document.getElementById('stMonthly').textContent = usd(monthly) + '/mo';
       document.getElementById('stDue').textContent = usd(initiation);
+      var startTxt = firstChargeDate().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      document.getElementById('pvStartDate').textContent = startTxt;
+      document.getElementById('pvStartDate2').textContent = startTxt;
     }
 
     // Pin the totals to the bottom of the screen while the form is in view
@@ -451,7 +453,6 @@
 
     var defaultBtnLabel = btn.textContent;
     document.getElementById('clearBtn').addEventListener('click', function(){
-      document.getElementById('planRegular').checked = true;
       qtyInput.value = 1;
       msg.classList.remove('show');
       btn.disabled = false;
@@ -468,8 +469,6 @@
 
     qtyInput.addEventListener('input', updatePreview);
     qtyInput.addEventListener('change', function(){ qtyInput.value = clampedUnits(); updatePreview(); });
-    var radios = form.querySelectorAll('input[name="plan"]');
-    for (var r = 0; r < radios.length; r++) radios[r].addEventListener('change', updatePreview);
 
     function showMsg(text){
       msg.textContent = text;
@@ -478,9 +477,8 @@
 
     // Fallback: enroll by email until the checkout function is configured.
     function emailFallback(plan, units){
-      var planName = plan === 'heavy' ? 'Severe Service' : 'Commercial Duty';
-      var subject = encodeURIComponent('Service continuity plan enrollment — ' + planName + ', ' + units + ' unit(s)');
-      var body = encodeURIComponent('Hi Eternahot,\n\nI\'d like to enroll in the ' + planName + ' service continuity plan for ' + units + ' tankless unit(s).\n\nName:\nProperty address:\nPhone:\n');
+      var subject = encodeURIComponent('Service continuity plan enrollment \u2014 ' + units + ' unit(s)');
+      var body = encodeURIComponent('Hi Eternahot,\n\nI\'d like to enroll in the service continuity plan for ' + units + ' tankless unit(s).\n\nName:\nProperty address:\nPhone:\n');
       window.location.href = 'mailto:info@eternahot.com?subject=' + subject + '&body=' + body;
       showMsg('Online checkout isn\'t available just yet — we\'ve opened an email to info@eternahot.com so you can enroll directly.');
     }
@@ -496,7 +494,7 @@
       fetch('/.netlify/functions/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan: plan, quantity: units })
+        body: JSON.stringify({ quantity: units })
       }).then(function(resp){
         return resp.json().then(function(data){ return { ok: resp.ok, data: data }; });
       }).then(function(res){
