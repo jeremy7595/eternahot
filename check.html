@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Check eligibility — Eternahot</title>
+<meta name="theme-color" content="#0C0B0D"><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/eternahot-logo.png">
+<style>
+:root{--bg:#0C0B0D;--card:#171519;--line:#2A262E;--ink:#fff;--body:#A7A2AD;--dim:#6A646F;--red:#E11D2E;--ok:#39D98A;--ember:#FF5A47;--grad:linear-gradient(135deg,#F03246 0%,#C20E2E 45%,#7C0817 100%)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--body);min-height:100dvh}
+a{color:inherit;text-decoration:none}
+.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(12,11,13,.88);border-bottom:1px solid var(--line)}
+.top-inner{max-width:720px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.top img{height:36px;width:auto}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 80px}
+h1{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:clamp(1.5rem,4vw,2rem);font-weight:700}
+.lede{margin-top:10px;font-size:.95rem;color:var(--body)}
+.steps{display:flex;gap:6px;margin:20px 0 16px}
+.steps i{flex:1;height:4px;border-radius:99px;background:var(--line)}
+.steps i.on{background:var(--red)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 16px}
+.card h2{color:var(--ink);font-size:1.1rem;margin-bottom:6px}
+.hint{font-size:.88rem;color:var(--dim);margin-bottom:14px}
+label{display:block;font-size:.75rem;font-weight:700;color:var(--ink);margin:0 0 6px}
+.field{margin-bottom:12px}
+input,select,textarea{width:100%;min-height:46px;border-radius:12px;border:1px solid var(--line);background:#121015;color:var(--ink);padding:11px 13px;font:inherit}
+textarea{min-height:90px}
+.row{display:grid;gap:10px}
+@media(min-width:560px){.row.two{grid-template-columns:1fr 1fr}}
+.choice{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--line);background:#121015;color:var(--body);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;font:inherit}
+.choice.on{border-color:var(--red);background:rgba(225,29,46,.12);color:var(--ink)}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--line);flex:0 0 auto}
+.choice.on .dot{border-color:var(--red);background:var(--red);box-shadow:inset 0 0 0 3px #121015}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);background:#121015;border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer}
+.toggle span{color:var(--ink);font-size:.9rem}
+.sw{position:relative;width:42px;height:24px;border-radius:99px;background:var(--line);flex:0 0 auto}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.2s}
+.toggle.on .sw{background:var(--red)}
+.toggle.on .sw::after{transform:translateX(18px)}
+.status{display:none;border-radius:12px;padding:11px 13px;font-size:.88rem;margin-top:8px;border:1px solid}
+.status.show{display:block}
+.status.ok{border-color:rgba(57,217,138,.35);background:rgba(57,217,138,.1);color:var(--ok)}
+.status.bad{border-color:rgba(245,90,71,.35);background:rgba(245,90,71,.1);color:var(--ember)}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 18px;border-radius:13px;font-weight:800;border:1px solid transparent;cursor:pointer;font:inherit}
+.btn-ghost{background:transparent;color:var(--body);border-color:var(--line)}
+.btn-primary{background:var(--grad);color:#fff;flex:1}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed}
+.slots{display:grid;gap:8px}
+@media(min-width:560px){.slots{grid-template-columns:1fr 1fr}}
+.slot{border:1px solid var(--line);background:#121015;border-radius:12px;padding:12px;text-align:left;color:var(--body);cursor:pointer;font:inherit}
+.slot.on{border-color:var(--red);background:rgba(225,29,46,.12);color:var(--ink)}
+.slot b{display:block;color:var(--ink)}
+.slot small{display:block;margin-top:2px;font-size:.75rem;color:var(--dim)}
+.foot{margin-top:24px;text-align:center;font-size:.78rem;color:var(--dim)}
+.foot a{color:var(--body);text-decoration:underline}
+.hidden{display:none!important}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+</style></head><body>
+<header class="top"><div class="top-inner">
+<a href="/"><img src="assets/eternahot-logo.png" alt="Eternahot" width="160" height="62"></a>
+<a href="/" style="font-size:.85rem;font-weight:600">← Back to site</a>
+</div></header>
+<main class="wrap">
+<h1>Check if we can take your job</h1>
+<p class="lede">West LA coverage · by appointment · custom quote from your project details. No fixed price range on this form.</p>
+<div class="steps" id="stepBar"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+<form id="eligForm" name="eligibility" method="POST" action="/check-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="eligibility">
+<p class="hp"><label>Don’t fill this <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<input type="hidden" name="coverage" id="f-coverage" value="">
+<input type="hidden" name="neighborhood" id="f-neighborhood" value="">
+<input type="hidden" name="preferred_date" id="f-preferred" value="">
+<input type="hidden" name="project_type" id="f-project" value="replace_tank">
+<input type="hidden" name="gas_available" id="f-gas" value="yes">
+<input type="hidden" name="urgency" id="f-urgency" value="two_to_four">
+<input type="hidden" name="is_homeowner" id="f-homeowner" value="yes">
+<input type="hidden" name="can_schedule" id="f-schedule-ok" value="yes">
+<input type="hidden" name="understands_custom_price" id="f-price-ok" value="yes">
+<section class="card step" data-step="0">
+<h2>1 · Location</h2>
+<p class="hint">About 15 miles around West Los Angeles.</p>
+<div class="field"><label for="street">Street address</label><input id="street" name="street" type="text" required autocomplete="street-address" placeholder="Street address"></div>
+<div class="row two">
+<div class="field"><label for="city">City</label><input id="city" name="city" type="text" required value="Los Angeles"></div>
+<div class="field"><label for="zip">ZIP</label><input id="zip" name="zip" type="text" inputmode="numeric" maxlength="5" required placeholder="90025"></div>
+</div>
+<div id="zipStatus" class="status" role="status"></div>
+</section>
+<section class="card step hidden" data-step="1">
+<h2>2 · Project</h2>
+<p class="hint">Helps us prepare an accurate custom quote.</p>
+<button type="button" class="choice on" data-group="project" data-val="replace_tank"><span class="dot"></span>Replace tank with tankless</button>
+<button type="button" class="choice" data-group="project" data-val="first_tankless"><span class="dot"></span>First tankless install</button>
+<button type="button" class="choice" data-group="project" data-val="replace_tankless"><span class="dot"></span>Replace existing tankless</button>
+<button type="button" class="choice" data-group="project" data-val="new_construction"><span class="dot"></span>New construction / remodel</button>
+<div class="row two" style="margin-top:10px">
+<div class="field"><label for="bathrooms">Bathrooms</label><input id="bathrooms" name="bathrooms" type="number" min="1" max="8" value="2"></div>
+<div class="field"><label>Gas available?</label>
+<div style="display:flex;gap:6px">
+<button type="button" class="choice on" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="yes"><span class="dot"></span>Yes</button>
+<button type="button" class="choice" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="no"><span class="dot"></span>No</button>
+<button type="button" class="choice" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="unknown"><span class="dot"></span>?</button>
+</div></div></div>
+</section>
+<section class="card step hidden" data-step="2">
+<h2>3 · Fit</h2>
+<p class="hint">Installs by appointment on open days. Pricing is custom to the job.</p>
+<div class="toggle on" data-field="f-homeowner"><span>I am the homeowner (or authorized decision-maker)</span><div class="sw"></div></div>
+<div class="toggle on" data-field="f-schedule-ok"><span>I can schedule on an open install day</span><div class="sw"></div></div>
+<div class="toggle on" data-field="f-price-ok"><span>I understand pricing is custom based on job details</span><div class="sw"></div></div>
+<div class="field" style="margin-top:10px"><label>Timeline</label>
+<button type="button" class="choice" data-group="urgency" data-val="asap"><span class="dot"></span>As soon as an open day is available</button>
+<button type="button" class="choice on" data-group="urgency" data-val="two_to_four"><span class="dot"></span>In the next 2–4 weeks</button>
+<button type="button" class="choice" data-group="urgency" data-val="flexible"><span class="dot"></span>Flexible</button>
+<button type="button" class="choice" data-group="urgency" data-val="researching"><span class="dot"></span>Just researching</button>
+</div>
+<div id="fitWarn" class="status bad" role="status"></div>
+</section>
+<section class="card step hidden" data-step="3">
+<h2>4 · Contact</h2>
+<p class="hint">We’ll reply with fit, a custom quote, and open days. Or call <a href="tel:2132223457" style="color:var(--ink);text-decoration:underline">(213) 222-3457</a>.</p>
+<div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
+<div class="row two">
+<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
+<div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required inputmode="tel"></div>
+</div>
+<div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" placeholder="Access notes, HOA rules…"></textarea></div>
+</section>
+<section class="card step hidden" data-step="4">
+<h2>5 · Preferred day</h2>
+<p class="hint">Optional. Only open appointment days are listed.</p>
+<div class="slots" id="slotList"></div>
+</section>
+<div class="nav">
+<button type="button" class="btn btn-ghost" id="btnBack" disabled>Back</button>
+<button type="button" class="btn btn-primary" id="btnNext">Continue</button>
+</div>
+</form>
+<p class="foot">CSLB #1150831 · Rinnai Certified · <a href="/">eternahot.com</a> · <a href="tel:2132223457">(213) 222-3457</a></p>
+</main>
+<script src="/check-app.js"></script>
+
+</body></html>
