@@ -68,6 +68,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .chev svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
 .badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0C0B0D;background:#fff;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
 
+.alt{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:.88rem;color:var(--muted);text-align:center;margin:-6px 0 18px}
+.alt b{color:var(--ink);font-weight:600}
+.alt a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .trust{text-align:center;font-size:.78rem;color:var(--dim);line-height:1.6}
 .trust a{color:var(--muted)}
 
@@ -107,14 +110,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:14px;font-weight:700;font-size:1rem;color:#fff}
 .btn.app{margin-bottom:10px}
 .btn.venmo{background:var(--venmo)} .btn.cash{background:var(--cash);color:#000}
-.btn.done{background:#fff;color:#0C0B0D}
 .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);min-height:44px;font-size:.9rem}
 .btn img{height:18px;width:auto}
 .btn.venmo img{filter:brightness(0) invert(1)}
-.optin{margin:4px 0 12px}
-.optin label{display:block;font-size:.72rem;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.optin input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:11px 12px;font:inherit;font-size:.95rem;outline:0}
-.optin input:focus{border-color:#4a4550}
 .or{text-align:center;font-size:.75rem;color:var(--dim);margin:10px 0}
 
 /* success */
@@ -216,6 +214,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
       </button>
     </div>
 
+    <div class="alt">Prefer <b>Zelle</b>? <a href="sms:2132223457?&body=Hi%20Eternahot%2C%20please%20send%20me%20a%20Zelle%20request.">Text us</a> and we'll send you a Zelle request by text or email.</div>
+
     <div class="trust">
       Eternahot Plumbing · CSLB #1150831<br>
       Card and bank payments are processed by Stripe. We never see your card number.<br>
@@ -235,18 +235,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
   </div>
   <div class="amt"><span class="l">Amount</span><span class="v" id="sh-amt"></span></div>
   <div id="sh-body"></div>
-  <div class="optin">
-    <label for="sh-who">Your name or job address (optional, helps us match your payment)</label>
-    <input id="sh-who" placeholder="e.g. Smith, 123 Main St">
-  </div>
-  <button class="btn done" id="sh-done" type="button">I've sent it</button>
+  <button class="btn ghost" id="sh-done" type="button">Done</button>
 </section>
-
-<!-- Netlify Forms registration (submitted via fetch) -->
-<form name="payment-sent" netlify netlify-honeypot="bot-field" hidden>
-  <input type="text" name="method"><input type="text" name="amount"><input type="text" name="ref">
-  <input type="text" name="who"><input type="text" name="page"><input type="text" name="bot-field">
-</form>
 
 <div class="toast" id="toast"></div>
 
@@ -347,28 +337,16 @@ $("#sh-close").addEventListener("click", closeSheet);
 $("#scrim").addEventListener("click", closeSheet);
 $("#sh-body").addEventListener("click", (e) => { const b = e.target.closest("[data-copy]"); if (b) copy(b.dataset.copy, b); });
 
-/* "I've sent it" -> notify office via Netlify Forms, then show the done card */
-$("#sh-done").addEventListener("click", async () => {
-  const btn = $("#sh-done"); btn.disabled = true; btn.textContent = "Sending…";
-  const data = new URLSearchParams({ "form-name": "payment-sent", method: current, amount: amount.toFixed(2), ref, who: $("#sh-who").value.trim(), page: location.href });
-  try { await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: data }); } catch { /* still show thanks */ }
-  closeSheet();
-  showDone({ method: current, amount, stripe: false });
-});
+$("#sh-done").addEventListener("click", closeSheet);
 
 /* ---------- done state ---------- */
-const NAMES = { card: "card", bank: "bank transfer", venmo: "Venmo", cash: "Cash App" };
-function showDone({ method, amount, stripe }) {
+function showDone({ amount }) {
   $("#main").classList.add("hide");
   $("#done").classList.add("on");
-  $("#done-h").textContent = stripe ? "Payment received" : "Thanks — we're on it";
   $("#done-amt").textContent = amount ? fmt(amount) : "";
-  $("#done-p").textContent = stripe
-    ? "Thank you. A receipt from Stripe has been emailed to you."
-    : "We'll confirm your " + (NAMES[method] || "") + " payment by text as soon as it lands.";
   history.replaceState(null, "", location.pathname);
 }
-if (q.get("paid") === "1") showDone({ method: q.get("method") || "card", amount: parseAmt(q.get("amt")), stripe: true });
+if (q.get("paid") === "1") showDone({ amount: parseAmt(q.get("amt")) });
 if (q.get("error") === "amount") setTimeout(() => toast("Enter an amount between $1 and $50,000"), 400);
 if (q.get("error") === "stripe") setTimeout(() => toast("Card checkout is unavailable right now — try Bank transfer instead"), 400);
 
