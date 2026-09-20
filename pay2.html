@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pay Eternahot Plumbing</title>
-<meta name="description" content="Pay Eternahot Plumbing by card, Apple Pay, bank transfer, Zelle, Venmo, or Cash App.">
+<meta name="description" content="Pay Eternahot Plumbing by card, Apple Pay, bank transfer, Venmo, or Cash App.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://eternahot.com/pay">
 <link rel="icon" href="assets/favicon.png" type="image/png">
 <meta property="og:title" content="Pay Eternahot Plumbing">
-<meta property="og:description" content="Card, Apple Pay, bank, Zelle, Venmo, or Cash App.">
+<meta property="og:description" content="Card, Apple Pay, bank, Venmo, or Cash App.">
 <meta property="og:url" content="https://eternahot.com/pay">
 <meta property="og:image" content="https://eternahot.com/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +20,7 @@
 :root{
   --bg:#0C0B0D; --card:#171519; --card2:#1E1B21; --line:#2A262E; --ink:#fff; --muted:#A7A2AD; --dim:#6A646F;
   --red:#E11D2E; --green:#22C55E;
-  --zelle:#6D1ED4; --venmo:#008CFF; --cash:#00D632; --bank:#0A2540;
+  --venmo:#008CFF; --cash:#00D632; --bank:#0A2540;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -59,7 +59,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .mark.card{background:#fff}
 .row .mark.card img{width:34px;height:auto}
 .row .mark.bank{background:var(--bank)} .row .mark.bank svg{width:24px;height:24px;fill:#fff}
-.row .mark.zelle{background:var(--zelle)} .row .mark.zelle img{filter:brightness(0) invert(1)}
 .row .mark.venmo{background:var(--venmo)} .row .mark.venmo img{filter:brightness(0) invert(1);width:34px;height:auto}
 .row .mark.cash{background:var(--cash)} .row .mark.cash img{width:28px;height:28px}
 .row .txt{flex:1;min-width:0}
@@ -107,11 +106,11 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .qr .c{font-size:.8rem;color:var(--dim);margin-top:6px}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:14px;font-weight:700;font-size:1rem;color:#fff}
 .btn.app{margin-bottom:10px}
-.btn.zelle{background:var(--zelle)} .btn.venmo{background:var(--venmo)} .btn.cash{background:var(--cash);color:#000}
+.btn.venmo{background:var(--venmo)} .btn.cash{background:var(--cash);color:#000}
 .btn.done{background:#fff;color:#0C0B0D}
 .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink);min-height:44px;font-size:.9rem}
 .btn img{height:18px;width:auto}
-.btn.zelle img,.btn.venmo img{filter:brightness(0) invert(1)}
+.btn.venmo img{filter:brightness(0) invert(1)}
 .optin{margin:4px 0 12px}
 .optin label{display:block;font-size:.72rem;color:var(--dim);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
 .optin input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:11px 12px;font:inherit;font-size:.95rem;outline:0}
@@ -205,11 +204,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
         <span class="txt"><span class="t">Bank transfer</span><span class="s">Connect your bank securely · settles in 1–3 business days</span></span>
         <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
-      <button class="row" data-m="zelle" type="button">
-        <span class="mark zelle"><img src="assets/pay/zelle.svg" alt=""></span>
-        <span class="txt"><span class="t">Zelle<span class="badge">No fees</span></span><span class="s">From your own banking app · arrives in minutes</span></span>
-        <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
-      </button>
       <button class="row" data-m="venmo" type="button">
         <span class="mark venmo"><img src="assets/pay/venmo.svg" alt=""></span>
         <span class="txt"><span class="t">Venmo</span><span class="s">Opens the Venmo app · @eternahot</span></span>
@@ -260,9 +254,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 /* ---------- config ---------- */
 const CFG = {
   phone: "2132223457", phoneFmt: "(213) 222-3457",
-  zelleEmail: "office@eternahot.com",
-  zelleName: "Eternahot",
-  zelleQr: "assets/pay/zelle-qr.png",     // add this file when you have it; panel shows it automatically
   venmo: "eternahot", cash: "eternahot",
   site: "https://eternahot.com", path: location.pathname.includes("pay2") ? "/pay2" : "/pay"
 };
@@ -319,16 +310,6 @@ $("#methods").addEventListener("click", (e) => {
 
 /* ---------- sheet ---------- */
 const SHEETS = {
-  zelle: {
-    title: "Pay with Zelle", sub: "From your own banking app · no fees", cls: "zelle", img: "assets/pay/zelle.svg",
-    body: () => `
-      <div class="note">In your bank's app, open <b>Zelle</b>, choose <b>Send</b>, and enter either of these. You'll see the name <b>${CFG.zelleName}</b> — that's us.</div>
-      <div class="kv"><div class="txt"><div class="k">Phone</div><div class="v">${CFG.phoneFmt}</div></div><button class="cp" data-copy="${CFG.phone}" type="button">Copy</button></div>
-      <div class="kv"><div class="txt"><div class="k">Email</div><div class="v">${CFG.zelleEmail}</div></div><button class="cp" data-copy="${CFG.zelleEmail}" type="button">Copy</button></div>
-      <div class="kv"><div class="txt"><div class="k">Amount</div><div class="v">${fmt(amount)}</div></div><button class="cp" data-copy="${amount.toFixed(2)}" type="button">Copy</button></div>
-      ${ref ? `<div class="kv"><div class="txt"><div class="k">Memo</div><div class="v">${esc(ref)}</div></div><button class="cp" data-copy="${esc(ref)}" type="button">Copy</button></div>` : ""}
-      <div class="qr" id="zelle-qr"><img src="${CFG.zelleQr}" alt="Zelle QR code for Eternahot" onload="this.parentNode.classList.add('on')"><div class="c">On a computer? Scan this with your bank app's Zelle scanner.</div></div>`
-  },
   venmo: {
     title: "Pay with Venmo", sub: "@" + CFG.venmo, cls: "venmo", img: "assets/pay/venmo.svg",
     body: () => `
@@ -376,7 +357,7 @@ $("#sh-done").addEventListener("click", async () => {
 });
 
 /* ---------- done state ---------- */
-const NAMES = { card: "card", bank: "bank transfer", zelle: "Zelle", venmo: "Venmo", cash: "Cash App" };
+const NAMES = { card: "card", bank: "bank transfer", venmo: "Venmo", cash: "Cash App" };
 function showDone({ method, amount, stripe }) {
   $("#main").classList.add("hide");
   $("#done").classList.add("on");
@@ -389,7 +370,7 @@ function showDone({ method, amount, stripe }) {
 }
 if (q.get("paid") === "1") showDone({ method: q.get("method") || "card", amount: parseAmt(q.get("amt")), stripe: true });
 if (q.get("error") === "amount") setTimeout(() => toast("Enter an amount between $1 and $50,000"), 400);
-if (q.get("error") === "stripe") setTimeout(() => toast("Card checkout is unavailable right now — try Zelle or bank"), 400);
+if (q.get("error") === "stripe") setTimeout(() => toast("Card checkout is unavailable right now — try Bank transfer instead"), 400);
 
 /* ---------- admin (send tools) ---------- */
 if (q.get("admin") === "1") {
