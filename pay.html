@@ -133,6 +133,13 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .done-card .a{font-family:Fraunces,Georgia,serif;font-weight:700;color:var(--ink);font-size:2rem;margin:6px 0 4px}
 .done-card p{font-size:.92rem;color:var(--muted)}
 .done-card .m{margin-top:14px;font-size:.85rem;color:var(--dim)}
+.done-card .review{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);animation:rise .5s ease-out .45s both}
+.done-card .rv-h{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size:1.15rem;margin-bottom:6px}
+.done-card .rv-p{font-size:.9rem;color:var(--muted);margin-bottom:14px}
+.done-card .rv-p b{color:var(--ink);font-weight:600}
+.done-card .rv-btn{background:var(--red);color:#fff}
+.done-card .rv-btn svg{width:20px;height:20px;fill:#fff}
+.done-card .rv-s{margin-top:8px;font-size:.78rem;color:var(--dim)}
 .hide{display:none!important}
 
 /* admin */
@@ -180,6 +187,12 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
     <h2 id="done-h">Payment received</h2>
     <div class="a" id="done-amt"></div>
     <p id="done-p">Thank you. A receipt has been emailed to you.</p>
+    <div class="review">
+      <div class="rv-h">Was Jeremy worth a review?</div>
+      <div class="rv-p">It takes 20 seconds and helps a small local shop more than anything else. This opens Eternahot on Google; tap <b>Write a review</b>.</div>
+      <a class="btn rv-btn" href="/review?go=1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7L12 17.5 5.8 21.1l1.6-7L2 9.3l7.1-.7z"/></svg>Leave a Google review</a>
+      <div class="rv-s">You'll need a Google account (Gmail works).</div>
+    </div>
     <div class="m">Questions? Text or call <a href="tel:2132223457" style="color:#fff">(213) 222-3457</a></div>
   </section>
 
