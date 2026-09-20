@@ -22,10 +22,16 @@ export default async (req) => {
   }
 
   const origin = "https://eternahot.com";
+  const ref = (url.searchParams.get("ref") || "").slice(0, 80);
+  const back = url.searchParams.get("back") === "pay2" ? "/pay2" : "/pay";
+  const q = (extra) => { const p = new URLSearchParams(extra); if (ref) p.set("ref", ref); return "?" + p; };
   const params = new URLSearchParams();
   params.set("mode", "payment");
-  params.set("success_url", origin + "/pay?paid=1");
-  params.set("cancel_url", origin + "/pay");
+  params.set("submit_type", "pay");
+  params.set("success_url", origin + back + q({ paid: "1", amt: n.toFixed(2), method: url.searchParams.get("method") || "card" }));
+  params.set("cancel_url", origin + back + q({ amt: n.toFixed(2) }));
+  params.set("metadata[source]", "eternahot.com/pay");
+  if (ref) { params.set("metadata[ref]", ref); params.set("payment_intent_data[description]", "Eternahot – " + ref); params.set("payment_intent_data[metadata][ref]", ref); }
   params.set("line_items[0][quantity]", "1");
   params.set("line_items[0][price_data][currency]", "usd");
   params.set("line_items[0][price_data][unit_amount]", String(cents));
