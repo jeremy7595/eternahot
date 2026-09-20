@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Check eligibility — Eternahot</title>
-<meta name="theme-color" content="#0C0B0D"><meta name="robots" content="noindex">
+<title>Get a custom quote — Eternahot</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C0B0D">
+<link rel="icon" href="assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="assets/eternahot-logo.png">
 <style>
 :root{--bg:#0C0B0D;--card:#171519;--line:#2A262E;--ink:#fff;--body:#A7A2AD;--dim:#6A646F;--red:#E11D2E;--ok:#39D98A;--ember:#FF5A47;--grad:linear-gradient(135deg,#F03246 0%,#C20E2E 45%,#7C0817 100%)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--body);min-height:100dvh}
 a{color:inherit;text-decoration:none}
+
+
+
+
+
+
 .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(12,11,13,.88);border-bottom:1px solid var(--line)}
 .top-inner{max-width:720px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
 .top img{height:36px;width:auto}
 .wrap{max-width:720px;margin:0 auto;padding:28px 18px 80px}
 h1{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:clamp(1.5rem,4vw,2rem);font-weight:700}
 .lede{margin-top:10px;font-size:.95rem;color:var(--body)}
+.cities{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 4px}
+.city{font-size:.72rem;font-weight:600;color:#D5D0DA;border:1px solid var(--line);border-radius:999px;padding:5px 10px}
 .steps{display:flex;gap:6px;margin:20px 0 16px}
 .steps i{flex:1;height:4px;border-radius:99px;background:var(--line)}
 .steps i.on{background:var(--red)}
@@ -27,6 +36,7 @@ label{display:block;font-size:.75rem;font-weight:700;color:var(--ink);margin:0 0
 .field{margin-bottom:12px}
 input,select,textarea{width:100%;min-height:46px;border-radius:12px;border:1px solid var(--line);background:#121015;color:var(--ink);padding:11px 13px;font:inherit}
 textarea{min-height:90px}
+.field.invalid input,.field.invalid textarea{border-color:var(--ember)}
 .row{display:grid;gap:10px}
 @media(min-width:560px){.row.two{grid-template-columns:1fr 1fr}}
 .choice{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid var(--line);background:#121015;color:var(--body);border-radius:12px;padding:12px;margin-bottom:8px;cursor:pointer;font:inherit}
@@ -54,93 +64,111 @@ textarea{min-height:90px}
 .slot.on{border-color:var(--red);background:rgba(225,29,46,.12);color:var(--ink)}
 .slot b{display:block;color:var(--ink)}
 .slot small{display:block;margin-top:2px;font-size:.75rem;color:var(--dim)}
-.foot{margin-top:24px;text-align:center;font-size:.78rem;color:var(--dim)}
+.foot{margin-top:24px;text-align:center;font-size:.78rem;color:var(--dim);line-height:1.6}
 .foot a{color:var(--body);text-decoration:underline}
 .hidden{display:none!important}
 .hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+.privacy{margin-top:14px;font-size:.78rem;color:var(--dim);line-height:1.5}
 </style></head><body>
 <header class="top"><div class="top-inner">
-<a href="/"><img src="assets/eternahot-logo.png" alt="Eternahot" width="160" height="62"></a>
-<a href="/" style="font-size:.85rem;font-weight:600">← Back to site</a>
+<a href="index.html"><img src="assets/eternahot-logo.png" alt="Eternahot" width="160" height="62"></a>
+<a href="index.html" style="font-size:.85rem;font-weight:600">← Back to site</a>
 </div></header>
 <main class="wrap">
-<h1>Check if we can take your job</h1>
-<p class="lede">West LA coverage · by appointment · custom quote from your project details. No fixed price range on this form.</p>
+<h1>Get a custom quote</h1>
+<p class="lede">Southern California · by appointment · quote from your project details.</p>
+<div class="cities">
+  <span class="city">Los Angeles County</span>
+  <span class="city">Orange County</span>
+  <span class="city">Riverside County</span>
+  <span class="city">San Bernardino County</span>
+</div>
 <div class="steps" id="stepBar"><i class="on"></i><i></i><i></i><i></i><i></i></div>
-<form id="eligForm" name="eligibility" method="POST" action="/check-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
-<input type="hidden" name="form-name" value="eligibility">
+<form id="quoteForm" name="quote" method="POST" action="check-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+<input type="hidden" name="form-name" value="quote">
 <p class="hp"><label>Don’t fill this <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 <input type="hidden" name="coverage" id="f-coverage" value="">
 <input type="hidden" name="neighborhood" id="f-neighborhood" value="">
 <input type="hidden" name="preferred_date" id="f-preferred" value="">
-<input type="hidden" name="project_type" id="f-project" value="replace_tank">
-<input type="hidden" name="gas_available" id="f-gas" value="yes">
-<input type="hidden" name="urgency" id="f-urgency" value="two_to_four">
+<input type="hidden" name="project_type" id="f-project" value="">
+<input type="hidden" name="gas_available" id="f-gas" value="">
+<input type="hidden" name="urgency" id="f-urgency" value="">
 <input type="hidden" name="is_homeowner" id="f-homeowner" value="yes">
 <input type="hidden" name="can_schedule" id="f-schedule-ok" value="yes">
 <input type="hidden" name="understands_custom_price" id="f-price-ok" value="yes">
+
 <section class="card step" data-step="0">
 <h2>1 · Location</h2>
-<p class="hint">About 15 miles around West Los Angeles.</p>
-<div class="field"><label for="street">Street address</label><input id="street" name="street" type="text" required autocomplete="street-address" placeholder="Street address"></div>
+<p class="hint">Anywhere in Southern California. Address helps us quote travel, permits, and the job.</p>
+<div class="field" id="fStreet"><label for="street">Street address</label><input id="street" name="street" type="text" required autocomplete="street-address" placeholder="Street address"></div>
 <div class="row two">
-<div class="field"><label for="city">City</label><input id="city" name="city" type="text" required value="Los Angeles"></div>
-<div class="field"><label for="zip">ZIP</label><input id="zip" name="zip" type="text" inputmode="numeric" maxlength="5" required placeholder="90025"></div>
+<div class="field" id="fCity"><label for="city">City</label><input id="city" name="city" type="text" required autocomplete="address-level2" placeholder="City"></div>
+<div class="field" id="fZip"><label for="zip">ZIP</label><input id="zip" name="zip" type="text" inputmode="numeric" maxlength="5" required autocomplete="postal-code" placeholder="ZIP"></div>
 </div>
 <div id="zipStatus" class="status" role="status"></div>
 </section>
+
 <section class="card step hidden" data-step="1">
 <h2>2 · Project</h2>
-<p class="hint">Helps us prepare an accurate custom quote.</p>
-<button type="button" class="choice on" data-group="project" data-val="replace_tank"><span class="dot"></span>Replace tank with tankless</button>
+<p class="hint">Choose what you need — nothing is pre-selected.</p>
+<button type="button" class="choice" data-group="project" data-val="replace_tank"><span class="dot"></span>Replace tank with tankless</button>
 <button type="button" class="choice" data-group="project" data-val="first_tankless"><span class="dot"></span>First tankless install</button>
 <button type="button" class="choice" data-group="project" data-val="replace_tankless"><span class="dot"></span>Replace existing tankless</button>
+<button type="button" class="choice" data-group="project" data-val="flush"><span class="dot"></span>Annual flush / service — $300</button>
+<button type="button" class="choice" data-group="project" data-val="commercial"><span class="dot"></span>Commercial / restaurant / multifamily</button>
 <button type="button" class="choice" data-group="project" data-val="new_construction"><span class="dot"></span>New construction / remodel</button>
 <div class="row two" style="margin-top:10px">
-<div class="field"><label for="bathrooms">Bathrooms</label><input id="bathrooms" name="bathrooms" type="number" min="1" max="8" value="2"></div>
-<div class="field"><label>Gas available?</label>
+<div class="field"><label for="bathrooms">Bathrooms (optional)</label><input id="bathrooms" name="bathrooms" type="number" min="1" max="8" placeholder="e.g. 2"></div>
+<div class="field" id="fGas"><label>Gas available?</label>
 <div style="display:flex;gap:6px">
-<button type="button" class="choice on" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="yes"><span class="dot"></span>Yes</button>
+<button type="button" class="choice" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="yes"><span class="dot"></span>Yes</button>
 <button type="button" class="choice" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="no"><span class="dot"></span>No</button>
 <button type="button" class="choice" style="flex:1;margin:0;justify-content:center" data-group="gas" data-val="unknown"><span class="dot"></span>?</button>
 </div></div></div>
+<div id="projectErr" class="status bad" role="status"></div>
 </section>
+
 <section class="card step hidden" data-step="2">
 <h2>3 · Fit</h2>
-<p class="hint">Installs by appointment on open days. Pricing is custom to the job.</p>
+<p class="hint">Installs by appointment. Pricing is custom to the job — except the $300 flush.</p>
 <div class="toggle on" data-field="f-homeowner"><span>I am the homeowner (or authorized decision-maker)</span><div class="sw"></div></div>
-<div class="toggle on" data-field="f-schedule-ok"><span>I can schedule on an open install day</span><div class="sw"></div></div>
+<div class="toggle on" data-field="f-schedule-ok"><span>I can schedule an appointment</span><div class="sw"></div></div>
 <div class="toggle on" data-field="f-price-ok"><span>I understand pricing is custom based on job details</span><div class="sw"></div></div>
 <div class="field" style="margin-top:10px"><label>Timeline</label>
-<button type="button" class="choice" data-group="urgency" data-val="asap"><span class="dot"></span>As soon as an open day is available</button>
-<button type="button" class="choice on" data-group="urgency" data-val="two_to_four"><span class="dot"></span>In the next 2–4 weeks</button>
+<button type="button" class="choice" data-group="urgency" data-val="asap"><span class="dot"></span>As soon as possible</button>
+<button type="button" class="choice" data-group="urgency" data-val="two_to_four"><span class="dot"></span>In the next 2–4 weeks</button>
 <button type="button" class="choice" data-group="urgency" data-val="flexible"><span class="dot"></span>Flexible</button>
 <button type="button" class="choice" data-group="urgency" data-val="researching"><span class="dot"></span>Just researching</button>
 </div>
-<div id="fitWarn" class="status bad" role="status"></div>
+<div id="fitWarn" class="status" role="status"></div>
 </section>
+
 <section class="card step hidden" data-step="3">
 <h2>4 · Contact</h2>
-<p class="hint">We’ll reply with fit, a custom quote, and open days. Or call <a href="tel:2132223457" style="color:var(--ink);text-decoration:underline">(213) 222-3457</a>.</p>
-<div class="field"><label for="name">Full name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
+<p class="hint">We’ll reply with a custom quote and a date. Or call / text (213) 222-3457.</p>
+<div class="field" id="fName"><label for="name">Full name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
 <div class="row two">
-<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required></div>
-<div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required inputmode="tel"></div>
+<div class="field" id="fEmail"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+<div class="field" id="fPhone"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" required inputmode="tel" autocomplete="tel"></div>
 </div>
-<div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" placeholder="Access notes, HOA rules…"></textarea></div>
+<div class="field"><label for="notes">Notes (optional)</label><textarea id="notes" name="notes" placeholder="Access notes, HOA rules, photos you’ll text…"></textarea></div>
+<div id="contactErr" class="status bad" role="status"></div>
+<p class="privacy">We’ll use this to quote and schedule your job — not for marketing.</p>
 </section>
+
 <section class="card step hidden" data-step="4">
 <h2>5 · Preferred day</h2>
-<p class="hint">Optional. Only open appointment days are listed.</p>
+<p class="hint">Optional. We’ll confirm a date that works — this is not a booking until we reply.</p>
 <div class="slots" id="slotList"></div>
 </section>
+
 <div class="nav">
 <button type="button" class="btn btn-ghost" id="btnBack" disabled>Back</button>
 <button type="button" class="btn btn-primary" id="btnNext">Continue</button>
 </div>
 </form>
-<p class="foot">CSLB #1150831 · Rinnai Certified · <a href="/">eternahot.com</a> · <a href="tel:2132223457">(213) 222-3457</a></p>
+<p class="foot">CSLB #1150831 · AZ ROC #368070 · Rinnai Certified · <a href="index.html">eternahot.com</a> · <a href="tel:2132223457">(213) 222-3457</a> · <a href="sms:2132223457">Text</a></p>
 </main>
-<script src="/check-app.js"></script>
-
+<script src="zip-socal.js"></script>
+<script src="check-app.js"></script>
 </body></html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Leave a Google review — Eternahot</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C0B0D">
+<meta name="description" content="One tap to review Eternahot Plumbing on Google. We are already selected — you do not search.">
+<link rel="icon" href="assets/favicon.png" type="image/png">
+<link rel="canonical" href="https://eternahot.com/review">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0B0D; --card:#171519; --line:#2A262E; --ink:#fff; --body:#A7A2AD; --dim:#6A646F;
+    --red:#E11D2E; --ok:#39D98A;
+    --grad:linear-gradient(135deg,#F03246 0%,#C20E2E 45%,#7C0817 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--body);min-height:100dvh;line-height:1.5}
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:8px}
+  
+  
+  
+  
+  
+  .top{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(12,11,13,.9);border-bottom:1px solid var(--line)}
+  .top-inner{max-width:560px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+  .top img{height:36px;width:auto}
+  .wrap{max-width:560px;margin:0 auto;padding:28px 18px 48px}
+  .kicker{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#FF7A6B}
+  h1{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:clamp(1.7rem,6vw,2.25rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-top:10px}
+  .lede{margin-top:12px;font-size:1.02rem}
+  .lede b{color:var(--ink)}
+  .go{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;min-height:72px;margin-top:22px;padding:16px 20px;border:0;border-radius:16px;background:var(--grad);color:#fff;font:inherit;font-size:1.2rem;font-weight:800;cursor:pointer;box-shadow:0 10px 28px rgba(194,14,46,.35)}
+  .go:active{transform:scale(.98)}
+  .go small{display:block;font-size:.75rem;font-weight:600;opacity:.85}
+  .go-lab{text-align:left;line-height:1.15}
+  .hint{margin-top:10px;text-align:center;font-size:.82rem;color:var(--dim)}
+  .steps{margin-top:28px;display:grid;gap:10px}
+  .step{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+  .n{width:40px;height:40px;border-radius:12px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .step b{display:block;color:var(--ink);font-size:.95rem}
+  .step p{margin-top:3px;font-size:.88rem}
+  .callout{margin-top:16px;background:#121015;border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:.9rem}
+  .callout b{color:var(--ink)}
+  .callout a{color:#FF7A6B;font-weight:700;border-bottom:1px solid rgba(255,122,107,.4)}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:#121015;color:var(--ink);font:inherit;font-weight:700;cursor:pointer;text-align:center}
+  .btn.copied{border-color:rgba(57,217,138,.45);color:var(--ok)}
+  .btn-red{background:var(--grad);border-color:transparent;color:#fff}
+  .send{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px}
+  .send h2{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:1.2rem;margin-bottom:6px}
+  .send p{font-size:.9rem}
+  .linkbox{margin:12px 0;padding:12px;border-radius:12px;background:#121015;border:1px dashed var(--line);color:var(--ink);font-weight:800;font-size:.92rem;word-break:break-all;text-align:center}
+  .sms{margin-top:12px;background:#121015;border:1px solid var(--line);border-radius:12px;padding:12px;font-size:.82rem;color:var(--dim)}
+  .sms b{color:var(--ink);display:block;margin-bottom:4px}
+  .qr-card{margin-top:16px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 18px}
+  .qr-card h2{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:1.2rem;margin-bottom:6px}
+  .qr-card img{width:240px;height:240px;margin:14px auto;background:#fff;border-radius:12px;padding:12px}
+  .url{font-weight:800;color:var(--ink);letter-spacing:.02em;font-size:.88rem}
+  .stuck{margin-top:22px;font-size:.9rem}
+  .stuck a{color:var(--ink);font-weight:800}
+  .foot{margin-top:28px;text-align:center;font-size:.78rem;color:var(--dim);line-height:1.6}
+  .foot a{text-decoration:underline}
+  .opening{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);align-items:center;justify-content:center;text-align:center;padding:24px}
+  html.going .opening{display:flex;flex-direction:column;gap:12px}
+  html.going .page{visibility:hidden}
+  .opening h2{font-family:Fraunces,Georgia,serif;color:var(--ink);font-size:1.6rem}
+  @media print{
+    .preview-bar,.top,.go,.hint,.steps,.callout,.actions,.stuck,.foot,.opening,.send{display:none!important}
+    body{background:#fff;color:#000}
+    .qr-card{border:0;margin:40px auto;max-width:420px}
+    .qr-card h2,.qr-card p,.url{color:#000}
+    .qr-card img{width:380px;height:380px}
+  }
+</style>
+</head>
+<body>
+<div class="opening" id="opening" aria-live="polite">
+  <img src="assets/eternahot-logo.png" alt="" width="140" height="54">
+  <h2>Opening Google…</h2>
+  <p>Eternahot Plumbing on Google Maps. Tap Write a review, then the stars, then Post.</p>
+</div>
+<div class="page">
+<header class="top"><div class="top-inner">
+  <a href="index.html"><img src="assets/eternahot-logo.png" alt="Eternahot" width="160" height="62"></a>
+  <a href="index.html" style="font-size:.85rem;font-weight:600">← Site</a>
+</div></header>
+<main class="wrap">
+  <div class="kicker">Google review</div>
+  <h1>One tap. You do not search.</h1>
+  <p class="lede">The red button opens <b>Eternahot Plumbing</b> on Google Maps. Tap <b>Write a review</b>, tap the stars, write a sentence, tap Post.</p>
+
+  <button class="go" type="button" id="openGoogle">
+    <span class="go-lab">Open Eternahot on Google<small>Then tap Write a review</small></span>
+  </button>
+  <p class="hint">Takes about 20 seconds. Free. No app to install.</p>
+
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><b>Tap the red button.</b><p>Google Maps opens on Eternahot Plumbing. You should see our name — not a search box.</p></div></div>
+    <div class="step"><div class="n">2</div><div><b>Tap Write a review.</b><p>Sign in if Google asks. Gmail is a Google account. Then tap Write a review.</p></div></div>
+    <div class="step"><div class="n">3</div><div><b>Stars, one sentence, Post.</b><p>Tap 5 stars if that is how it went. Write anything true. Tap Post. Done.</p></div></div>
+  </div>
+
+  <div class="callout">
+    <b>If Google asks you to sign in, that is normal.</b>
+    You cannot post a Google review without a Google account. Use Gmail or any Google login you already have.
+    <div style="margin-top:8px"><a href="https://accounts.google.com/signup" target="_blank" rel="noopener">Create a free Google account →</a></div>
+  </div>
+
+  <div class="send" id="send">
+    <h2>They weren’t home</h2>
+    <p>Text this. It opens Eternahot on Google Maps. They tap Write a review — they do not search.</p>
+    <div class="linkbox" id="sendUrl">eternahot.com/review?go=1</div>
+    <div class="actions">
+      <button class="btn" type="button" id="copySend">Copy link</button>
+      <a class="btn btn-red" id="smsSend" href="#">Open a text</a>
+    </div>
+    <div class="sms">
+      <b>Message that’s ready to send</b>
+      <span id="smsPreview"></span>
+    </div>
+  </div>
+
+  <div class="qr-card">
+    <h2>QR — straight to Google</h2>
+    <p>Scan opens Eternahot Plumbing on Google Maps. Then tap Write a review. Print this for the truck, a door hanger, or the invoice.</p>
+    <img src="assets/review-qr-google.png" alt="QR code that opens the Google review form for Eternahot Plumbing" width="240" height="240">
+    <div class="url">Opens Google · Eternahot already selected</div>
+    <div class="actions" style="margin-top:14px">
+      <a class="btn" href="assets/review-qr-google.png" download="eternahot-google-review-qr.png">Download QR</a>
+      <button class="btn" type="button" id="printQr">Print QR</button>
+    </div>
+  </div>
+
+  <p class="stuck">Stuck? Call or text Jeremy at <a href="tel:2132223457">(213) 222-3457</a>. He will walk you through it.</p>
+  <p class="foot">Eternahot Plumbing · CSLB #1150831 · AZ ROC #368070<br><a href="index.html">eternahot.com</a></p>
+</main>
+</div>
+<script src="review.js"></script>
+</body>
+</html>

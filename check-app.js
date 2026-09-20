@@ -1,23 +1,209 @@
 (function(){
-var ZIPS={"90066":["Mar Vista",2.0],"90064":["West LA / Rancho Park",1.0],"90025":["West LA / Sawtelle",0.0],"90034":["Palms",3.0],"90035":["Beverlywood",4.0],"90067":["Century City",3.0],"90024":["Westwood",4.0],"90049":["Brentwood",5.0],"90077":["Bel Air",7.0],"90095":["UCLA",4.0],"90073":["VA / West LA",3.0],"90291":["Venice",4.0],"90292":["Marina del Rey",5.0],"90293":["Playa del Rey",6.0],"90094":["Playa Vista",5.0],"90045":["Westchester",6.0],"90056":["Ladera Heights",5.0],"90230":["Culver City",4.0],"90232":["Culver City",4.0],"90210":["Beverly Hills",7.0],"90211":["Beverly Hills",6.0],"90212":["Beverly Hills",6.0],"90401":["Santa Monica",5.0],"90402":["Santa Monica",6.0],"90403":["Santa Monica",5.0],"90404":["Santa Monica",4.0],"90405":["Santa Monica",5.0],"90036":["Miracle Mile",6.0],"90048":["Mid-City West",6.0],"90019":["Mid-City",7.0],"90016":["West Adams",6.0],"90008":["Baldwin Hills",7.0],"90043":["View Park",8.0],"90018":["Jefferson Park",8.0],"90272":["Pacific Palisades",8.0],"90069":["West Hollywood",8.0],"90046":["Hollywood Hills West",9.0],"90068":["Hollywood Hills",10.0],"90028":["Hollywood",10.0]};
-var step=0,max=4,covered=false;
-var form=document.getElementById('eligForm');
-var steps=[].slice.call(document.querySelectorAll('.step'));
-var bar=[].slice.call(document.getElementById('stepBar').children);
-var btnBack=document.getElementById('btnBack');
-var btnNext=document.getElementById('btnNext');
-var zipInput=document.getElementById('zip');
-var zipStatus=document.getElementById('zipStatus');
-function showStep(n){step=n;steps.forEach(function(s){s.classList.toggle('hidden',Number(s.getAttribute('data-step'))!==n)});bar.forEach(function(b,i){b.classList.toggle('on',i<=n)});btnBack.disabled=n===0;btnNext.textContent=n===max?'Submit request':'Continue'}
-function checkZip(){var z=(zipInput.value||'').replace(/\D/g,'').slice(0,5);zipInput.value=z;if(z.length!==5){covered=false;zipStatus.className='status';zipStatus.textContent='';document.getElementById('f-coverage').value='';document.getElementById('f-neighborhood').value='';return}var hit=ZIPS[z];if(hit){covered=true;zipStatus.className='status show ok';zipStatus.textContent='Covered — '+hit[0]+' (~'+hit[1]+' mi from West LA)';document.getElementById('f-coverage').value='in_area';document.getElementById('f-neighborhood').value=hit[0]}else{covered=false;zipStatus.className='status show bad';zipStatus.textContent='Outside our West LA coverage area. Call (213) 222-3457 if you need a referral.';document.getElementById('f-coverage').value='out_of_area';document.getElementById('f-neighborhood').value=''}}
-zipInput.addEventListener('input',checkZip);
-document.querySelectorAll('.choice[data-group]').forEach(function(btn){btn.addEventListener('click',function(){var g=btn.getAttribute('data-group'),v=btn.getAttribute('data-val');document.querySelectorAll('.choice[data-group="'+g+'"]').forEach(function(b){b.classList.toggle('on',b===btn)});if(g==='project')document.getElementById('f-project').value=v;if(g==='gas')document.getElementById('f-gas').value=v;if(g==='urgency')document.getElementById('f-urgency').value=v})});
-document.querySelectorAll('.toggle').forEach(function(t){t.addEventListener('click',function(){t.classList.toggle('on');document.getElementById(t.getAttribute('data-field')).value=t.classList.contains('on')?'yes':'no';updateFitWarn()})});
-function updateFitWarn(){var w=document.getElementById('fitWarn');var home=document.getElementById('f-homeowner').value==='yes';var sched=document.getElementById('f-schedule-ok').value==='yes';if(!home||!sched){w.className='status show bad';w.textContent=!home?'We only book with the homeowner or authorized decision-maker.':'Installs are by appointment on open install days.'}else{w.className='status';w.textContent=''}}
-function buildSlots(){var box=document.getElementById('slotList');box.innerHTML='';var none=document.createElement('button');none.type='button';none.className='slot on';none.innerHTML='<b>No preference yet</b><small>We will propose the next open day</small>';none.onclick=function(){document.getElementById('f-preferred').value='';box.querySelectorAll('.slot').forEach(function(s){s.classList.remove('on')});none.classList.add('on')};box.appendChild(none);var d=new Date(),added=0;for(var i=0;i<70&&added<8;i++){var cur=new Date(d.getFullYear(),d.getMonth(),d.getDate()+i);var day=cur.getDay();if(day!==0&&day!==6)continue;var iso=cur.toISOString().slice(0,10);var label=cur.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric'});var kind=day===6?'Saturday':'Sunday';(function(iso,label,kind){var b=document.createElement('button');b.type='button';b.className='slot';b.innerHTML='<b>'+label+'</b><small>'+kind+' · open</small>';b.onclick=function(){document.getElementById('f-preferred').value=iso;box.querySelectorAll('.slot').forEach(function(s){s.classList.remove('on')});b.classList.add('on')};box.appendChild(b);added++})(iso,label,kind)}}
+var ZIPS=(window.ETERNAHOT&&window.ETERNAHOT.ZIPS)||{};
+var isSoCal=window.ETERNAHOT&&window.ETERNAHOT.isSoCal||function(){return false};
+var step=0,max=4;
+var form=document.getElementById("quoteForm");
+var steps=[].slice.call(document.querySelectorAll(".step"));
+var bar=[].slice.call(document.getElementById("stepBar").children);
+var btnBack=document.getElementById("btnBack");
+var btnNext=document.getElementById("btnNext");
+var zipInput=document.getElementById("zip");
+var zipStatus=document.getElementById("zipStatus");
+
+function showErr(el,msg){
+  if(!el) return;
+  el.className="status show bad";
+  el.textContent=msg||"";
+}
+function hideErr(el){
+  if(!el) return;
+  el.className="status";
+  el.textContent="";
+}
+function mark(id,on){
+  var f=document.getElementById(id);
+  if(f) f.classList.toggle("invalid",!!on);
+}
+
+function showStep(n){
+  step=n;
+  steps.forEach(function(s){s.classList.toggle("hidden",Number(s.getAttribute("data-step"))!==n);});
+  bar.forEach(function(b,i){b.classList.toggle("on",i<=n);});
+  btnBack.disabled=n===0;
+  btnNext.textContent=n===max?"Submit request":"Continue";
+}
+
+function checkZip(){
+  var z=(zipInput.value||"").replace(/\D/g,"").slice(0,5);
+  zipInput.value=z;
+  if(z.length!==5){
+    zipStatus.className="status";
+    zipStatus.textContent="";
+    document.getElementById("f-coverage").value="";
+    document.getElementById("f-neighborhood").value="";
+    return false;
+  }
+  var named=ZIPS[z];
+  if(named){
+    zipStatus.className="status show ok";
+    zipStatus.textContent="Southern California — "+named+". We'll quote this job.";
+    document.getElementById("f-coverage").value="socal";
+    document.getElementById("f-neighborhood").value=named;
+    return true;
+  }
+  if(isSoCal(z)){
+    zipStatus.className="status show ok";
+    zipStatus.textContent="Southern California — we'll quote this job.";
+    document.getElementById("f-coverage").value="socal";
+    document.getElementById("f-neighborhood").value="";
+    return true;
+  }
+  zipStatus.className="status show ok";
+  zipStatus.textContent="We'll confirm this address and follow up.";
+  document.getElementById("f-coverage").value="other";
+  document.getElementById("f-neighborhood").value="";
+  return true;
+}
+
+zipInput.addEventListener("input",checkZip);
+["street","city","zip","name","email","phone"].forEach(function(id){
+  var el=document.getElementById(id);
+  if(!el) return;
+  el.addEventListener("input",function(){
+    var f=el.closest(".field");
+    if(f) f.classList.remove("invalid");
+  });
+});
+
+var params=new URLSearchParams(location.search);
+if(params.get("zip")){
+  zipInput.value=params.get("zip").replace(/\D/g,"").slice(0,5);
+  checkZip();
+}
+
+document.querySelectorAll(".choice[data-group]").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var g=btn.getAttribute("data-group"),v=btn.getAttribute("data-val");
+    document.querySelectorAll('.choice[data-group="'+g+'"]').forEach(function(b){b.classList.toggle("on",b===btn);});
+    if(g==="project") document.getElementById("f-project").value=v;
+    if(g==="gas") document.getElementById("f-gas").value=v;
+    if(g==="urgency") document.getElementById("f-urgency").value=v;
+    hideErr(document.getElementById("projectErr"));
+  });
+});
+
+document.querySelectorAll(".toggle").forEach(function(t){
+  t.addEventListener("click",function(){
+    t.classList.toggle("on");
+    document.getElementById(t.getAttribute("data-field")).value=t.classList.contains("on")?"yes":"no";
+    updateFitWarn();
+  });
+});
+
+function updateFitWarn(){
+  var w=document.getElementById("fitWarn");
+  var home=document.getElementById("f-homeowner").value==="yes";
+  var sched=document.getElementById("f-schedule-ok").value==="yes";
+  if(!home||!sched){
+    w.className="status show bad";
+    w.textContent=!home?"We only book with the homeowner or authorized decision-maker.":"We schedule by appointment.";
+    return false;
+  }
+  w.className="status";
+  w.textContent="";
+  return true;
+}
+
+function buildSlots(){
+  var box=document.getElementById("slotList");
+  box.innerHTML="";
+  var none=document.createElement("button");
+  none.type="button";
+  none.className="slot on";
+  none.innerHTML="<b>No preference yet</b><small>We'll confirm a date</small>";
+  none.onclick=function(){
+    document.getElementById("f-preferred").value="";
+    box.querySelectorAll(".slot").forEach(function(s){s.classList.remove("on");});
+    none.classList.add("on");
+  };
+  box.appendChild(none);
+  var d=new Date(),added=0;
+  for(var i=1;i<21&&added<8;i++){
+    var cur=new Date(d.getFullYear(),d.getMonth(),d.getDate()+i);
+    var iso=cur.toISOString().slice(0,10);
+    var label=cur.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
+    (function(iso,label){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className="slot";
+      b.innerHTML="<b>"+label+"</b><small>Preferred — we'll confirm</small>";
+      b.onclick=function(){
+        document.getElementById("f-preferred").value=iso;
+        box.querySelectorAll(".slot").forEach(function(s){s.classList.remove("on");});
+        b.classList.add("on");
+      };
+      box.appendChild(b);
+      added++;
+    })(iso,label);
+  }
+}
 buildSlots();
-function canAdvance(){if(step===0){return document.getElementById('street').value.trim().length>3&&covered}if(step===2){return document.getElementById('f-homeowner').value==='yes'&&document.getElementById('f-schedule-ok').value==='yes'}if(step===3){var name=document.getElementById('name').value.trim(),email=document.getElementById('email').value.trim(),phone=(document.getElementById('phone').value||'').replace(/\D/g,'');return name.length>=2&&email.indexOf('@')>0&&phone.length>=10}return true}
-btnBack.onclick=function(){if(step>0)showStep(step-1)};
-btnNext.onclick=function(){if(!canAdvance()){if(step===0)checkZip();if(step===2)updateFitWarn();return}if(step<max){showStep(step+1);return}btnNext.disabled=true;btnNext.textContent='Submitting…';form.submit()};
+
+function canAdvance(){
+  if(step===0){
+    var street=document.getElementById("street").value.trim();
+    var city=document.getElementById("city").value.trim();
+    var z=(zipInput.value||"").replace(/\D/g,"");
+    var ok=true;
+    mark("fStreet",street.length<4);
+    mark("fCity",city.length<2);
+    mark("fZip",z.length!==5);
+    if(street.length<4){ showErr(zipStatus,"Add a street address."); ok=false; }
+    else if(city.length<2){ showErr(zipStatus,"Add a city."); ok=false; }
+    else if(z.length!==5){ showErr(zipStatus,"Enter a 5-digit ZIP."); ok=false; }
+    else { checkZip(); }
+    return ok && z.length===5 && street.length>=4 && city.length>=2;
+  }
+  if(step===1){
+    var proj=document.getElementById("f-project").value;
+    var gas=document.getElementById("f-gas").value;
+    var err=document.getElementById("projectErr");
+    if(!proj){ showErr(err,"Pick the type of job."); return false; }
+    if(!gas){ showErr(err,"Tell us if gas is available."); return false; }
+    hideErr(err);
+    return true;
+  }
+  if(step===2){
+    return updateFitWarn();
+  }
+  if(step===3){
+    var name=document.getElementById("name").value.trim();
+    var email=document.getElementById("email").value.trim();
+    var phone=(document.getElementById("phone").value||"").replace(/\D/g,"");
+    var err=document.getElementById("contactErr");
+    mark("fName",name.length<2);
+    mark("fEmail",email.indexOf("@")<1);
+    mark("fPhone",phone.length<10);
+    if(name.length<2){ showErr(err,"Add your name."); return false; }
+    if(email.indexOf("@")<1){ showErr(err,"Add a valid email."); return false; }
+    if(phone.length<10){ showErr(err,"Add a 10-digit phone number."); return false; }
+    hideErr(err);
+    return true;
+  }
+  return true;
+}
+
+btnBack.onclick=function(){if(step>0) showStep(step-1);};
+btnNext.onclick=function(){
+  if(!canAdvance()) return;
+  if(step<max){showStep(step+1);return;}
+  btnNext.disabled=true;
+  btnNext.textContent="Submitting…";
+  location.href="check-thanks.html";
+};
+form.addEventListener("submit",function(e){
+  e.preventDefault();
+  btnNext.click();
+});
 showStep(0);
 })();

@@ -1,4 +1,37 @@
-# Static site (published from the repo root) + serverless functions for Stripe checkout.
-# No build command — the site is plain HTML; functions bundle automatically.
+[build]
+  publish = "."
+
 [functions]
   directory = "netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+
+[[headers]]
+  for = "/pay"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/pay.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[redirects]]
+  from = "/check"
+  to = "/check.html"
+  status = 301
+
+[[redirects]]
+  from = "/review"
+  to = "/review.html"
+  status = 200
+
+[[redirects]]
+  from = "/pay"
+  to = "/pay.html"
+  status = 200
