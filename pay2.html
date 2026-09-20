@@ -118,7 +118,14 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 /* success */
 .done-card{display:none;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px 20px;text-align:center;margin-bottom:18px}
 .done-card.on{display:block}
-.done-card .ck{width:64px;height:64px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin:0 auto 14px}
+.done-card .ck{width:72px;height:72px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin:0 auto 14px;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:pop .55s cubic-bezier(.2,1.4,.4,1) both,ring 1.6s ease-out .3s 2}
+@keyframes pop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}100%{box-shadow:0 0 0 26px rgba(34,197,94,0)}}
+.done-card h2,.done-card .a,.done-card p,.done-card .m{animation:rise .5s ease-out both}
+.done-card .a{animation-delay:.12s}.done-card p{animation-delay:.22s}.done-card .m{animation-delay:.32s}
+@keyframes rise{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:15}
+@media (prefers-reduced-motion:reduce){.done-card *{animation:none!important}#fx{display:none}}
 .done-card .ck svg{width:32px;height:32px;stroke:#052e14;stroke-width:3;fill:none}
 .done-card h2{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size:1.5rem;margin-bottom:6px}
 .done-card .a{font-family:Fraunces,Georgia,serif;font-weight:700;color:var(--ink);font-size:2rem;margin:6px 0 4px}
@@ -238,6 +245,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
   <button class="btn ghost" id="sh-done" type="button">Done</button>
 </section>
 
+<canvas id="fx"></canvas>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -344,7 +352,59 @@ function showDone({ amount }) {
   $("#main").classList.add("hide");
   $("#done").classList.add("on");
   $("#done-amt").textContent = amount ? fmt(amount) : "";
-  history.replaceState(null, "", location.pathname);
+  celebrate();
+  try { history.replaceState(null, "", location.pathname); } catch {}
+}
+
+/* ---------- celebration: haptic + fireworks ---------- */
+function celebrate() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  try { navigator.vibrate && navigator.vibrate([40, 60, 40, 60, 120]); } catch {}
+  const c = $("#fx"), ctx = c.getContext("2d");
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const size = () => { c.width = innerWidth * dpr; c.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  size(); addEventListener("resize", size, { once: true });
+  const W = () => innerWidth, H = () => innerHeight;
+  const COLORS = ["#E11D2E", "#FFFFFF", "#22C55E", "#FFD166", "#60A5FA", "#F472B6"];
+  const rockets = [], sparks = [];
+  const G = 0.14;
+  function launch(x) {
+    rockets.push({ x, y: H() + 10, vx: (Math.random() - .5) * 1.2, vy: -(11 + Math.random() * 2.5), color: COLORS[(Math.random() * COLORS.length) | 0], trail: [] });
+  }
+  function burst(x, y, color) {
+    const n = 70 + (Math.random() * 40) | 0;
+    for (let i = 0; i < n; i++) {
+      const a = (Math.PI * 2 * i) / n + Math.random() * .1, sp = 2.2 + Math.random() * 4.2;
+      sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, decay: .010 + Math.random() * .012, color: Math.random() < .25 ? "#fff" : color, r: 1.6 + Math.random() * 1.6 });
+    }
+    try { navigator.vibrate && navigator.vibrate(25); } catch {}
+  }
+  const plan = [0, 250, 550, 900, 1300, 1800];
+  plan.forEach((t, i) => setTimeout(() => launch(W() * (0.2 + Math.random() * 0.6)), t));
+  let last = performance.now(), start = last;
+  function frame(now) {
+    const dt = Math.min((now - last) / 16.7, 2); last = now;
+    ctx.clearRect(0, 0, W(), H());
+    for (let i = rockets.length - 1; i >= 0; i--) {
+      const r = rockets[i];
+      r.trail.push({ x: r.x, y: r.y }); if (r.trail.length > 8) r.trail.shift();
+      r.x += r.vx * dt; r.y += r.vy * dt; r.vy += G * dt;
+      ctx.strokeStyle = r.color; ctx.lineWidth = 2; ctx.globalAlpha = .8;
+      ctx.beginPath(); r.trail.forEach((p, j) => j ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.stroke();
+      if (r.vy > -1.2) { burst(r.x, r.y, r.color); rockets.splice(i, 1); }
+    }
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const p = sparks[i];
+      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += G * dt; p.vx *= 0.985; p.vy *= 0.985; p.life -= p.decay * dt;
+      if (p.life <= 0) { sparks.splice(i, 1); continue; }
+      ctx.globalAlpha = Math.max(p.life, 0); ctx.fillStyle = p.color;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.6 + p.life * 0.6), 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (rockets.length || sparks.length || now - start < 2200) requestAnimationFrame(frame);
+    else ctx.clearRect(0, 0, W(), H());
+  }
+  requestAnimationFrame(frame);
 }
 if (q.get("paid") === "1") showDone({ amount: parseAmt(q.get("amt")) });
 if (q.get("error") === "amount") setTimeout(() => toast("Enter an amount between $1 and $50,000"), 400);
