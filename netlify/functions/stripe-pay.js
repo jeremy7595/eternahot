@@ -39,6 +39,9 @@ export default async (req) => {
   const method = (url.searchParams.get("method") || "card").toLowerCase();
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");
+  } else if (method === "plan") {
+    // Pay over time: Klarna decides Pay in 4 vs monthly financing at checkout.
+    params.set("payment_method_types[0]", "klarna");
   } else {
     params.set("payment_method_types[0]", "card");
   }

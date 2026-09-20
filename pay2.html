@@ -20,7 +20,7 @@
 :root{
   --bg:#0C0B0D; --card:#171519; --card2:#1E1B21; --line:#2A262E; --ink:#fff; --muted:#A7A2AD; --dim:#6A646F;
   --red:#E11D2E; --green:#22C55E;
-  --venmo:#008CFF; --cash:#00D632; --bank:#0A2540;
+  --venmo:#008CFF; --cash:#00D632; --bank:#0A2540; --plan:#FFB3C7;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -61,6 +61,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .mark.bank{background:var(--bank)} .row .mark.bank svg{width:24px;height:24px;fill:#fff}
 .row .mark.venmo{background:var(--venmo)} .row .mark.venmo img{filter:brightness(0) invert(1);width:34px;height:auto}
 .row .mark.cash{background:var(--cash)} .row .mark.cash img{width:28px;height:28px}
+.row .mark.plan{background:var(--plan)} .row .mark.plan img{width:30px;height:auto}
+.row[hidden]{display:none}
 .row .txt{flex:1;min-width:0}
 .row .t{display:block;color:var(--ink);font-weight:700;font-size:1rem}
 .row .s{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
@@ -209,6 +211,11 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
         <span class="txt"><span class="t">Bank transfer</span><span class="s">Connect your bank securely · settles in 1–3 business days</span></span>
         <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
+      <button class="row" data-m="plan" id="row-plan" type="button" hidden>
+        <span class="mark plan"><img src="assets/pay/klarna.svg" alt=""></span>
+        <span class="txt"><span class="t">Pay over time</span><span class="s">Monthly payments through Klarna · subject to approval</span></span>
+        <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
+      </button>
       <button class="row" data-m="venmo" type="button">
         <span class="mark venmo"><img src="assets/pay/venmo.svg" alt=""></span>
         <span class="txt"><span class="t">Venmo</span><span class="s">Opens the Venmo app · @eternahot</span></span>
@@ -274,7 +281,10 @@ const ref = (q.get("ref") || "").slice(0, 80);
 const locked = amount > 0;
 
 /* ---------- amount block ---------- */
+const PLAN_MIN = 500;
+function renderPlan() { $("#row-plan").hidden = !(amount >= PLAN_MIN); }
 function renderAmount() {
+  renderPlan();
   $("#amt-big").textContent = amount ? fmt(amount) : "$0.00";
   $("#amt-ref").innerHTML = ref ? "for <b>" + esc(ref) + "</b>" : "";
   $("#amt-view").classList.toggle("hide", !amount);
@@ -282,7 +292,7 @@ function renderAmount() {
 }
 function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 $("#amt-change").addEventListener("click", () => { $("#amount").value = amount ? amount.toFixed(2) : ""; amount = 0; renderAmount(); $("#amount").focus(); });
-$("#amount").addEventListener("input", (e) => { amount = parseAmt(e.target.value); });
+$("#amount").addEventListener("input", (e) => { amount = parseAmt(e.target.value); renderPlan(); });
 $("#amount").addEventListener("blur", () => { if (amount) { renderAmount(); } });
 $("#amount").addEventListener("keydown", (e) => { if (e.key === "Enter") e.target.blur(); });
 renderAmount();
@@ -298,7 +308,7 @@ $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
   const m = row.dataset.m;
   if (!needAmount()) return;
-  if (m === "card" || m === "bank") {
+  if (m === "card" || m === "bank" || m === "plan") {
     const back = location.pathname.includes("pay2") ? "&back=pay2" : "";
     location.href = "/api/pay?amount=" + amount.toFixed(2) + "&method=" + m + back + (ref ? "&ref=" + encodeURIComponent(ref) : "");
     return;
