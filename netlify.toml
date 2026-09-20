@@ -38,5 +38,5 @@
 
 [[redirects]]
   from = "/pay2"
-  to = "/pay2.html"
-  status = 200
+  to = "/pay"
+  status = 301

@@ -23,7 +23,7 @@ export default async (req) => {
 
   const origin = "https://eternahot.com";
   const ref = (url.searchParams.get("ref") || "").slice(0, 80);
-  const back = url.searchParams.get("back") === "pay2" ? "/pay2" : "/pay";
+  const back = "/pay";
   const q = (extra) => { const p = new URLSearchParams(extra); if (ref) p.set("ref", ref); return "?" + p; };
   const params = new URLSearchParams();
   params.set("mode", "payment");
