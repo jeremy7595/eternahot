@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hot-side tankless sizer</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sizer">
+<link rel="apple-touch-icon" href="icon-180.png">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 16px 16px 40px;
+    font: 16px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #111; color: #eee;
+  }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  p.sub { margin: 0 0 16px; color: #9a9a9a; font-size: 13px; }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 10px 0; border-bottom: 1px solid #2a2a2a;
+  }
+  .row label { flex: 1; }
+  .row small { display: block; color: #8a8a8a; font-size: 12px; }
+  input[type="number"] {
+    width: 72px; height: 44px; text-align: center; font-size: 20px;
+    background: #1c1c1c; color: #fff; border: 1px solid #3a3a3a; border-radius: 8px;
+  }
+  .out {
+    margin-top: 18px; padding: 14px; background: #1a1a1a; border-radius: 12px;
+  }
+  .out h2 { margin: 0 0 8px; font-size: 15px; color: #aaa; font-weight: 600; }
+  .big { font-size: 28px; font-weight: 700; margin: 4px 0 10px; }
+  .unit { font-size: 16px; font-weight: 500; color: #bbb; }
+  .note { color: #bdbdbd; font-size: 14px; margin: 6px 0; }
+  .warn { color: #f0c14a; }
+  .ok { color: #7dcea0; }
+</style>
+</head>
+<body>
+  <h1>Hot-side tankless sizer</h1>
+  <p class="sub">UPC Table 610.3. Hot load = 3/4 of the listed unit (note 3). Cold fixtures ignored. Combo bath/shower counts as the tub, not as a tub plus a shower.</p>
+
+  <div class="row"><label>Showers <small>2.0 WSFU listed · 1.5 hot</small></label><input id="shower" type="number" min="0" value="2" inputmode="numeric"></div>
+  <div class="row"><label>Bathtubs, 1/2 in fill <small>4.0 listed · 3.0 hot. Not added to shower count.</small></label><input id="tub" type="number" min="0" value="1" inputmode="numeric"></div>
+  <div class="row"><label>3/4 in tub filler <small>10.0 listed · 7.5 hot. Soaker.</small></label><input id="tub34" type="number" min="0" value="0" inputmode="numeric"></div>
+  <div class="row"><label>Lavatories <small>1.0 listed · 0.75 hot</small></label><input id="lav" type="number" min="0" value="2" inputmode="numeric"></div>
+  <div class="row"><label>Kitchen sinks <small>1.5 listed · 1.125 hot</small></label><input id="kit" type="number" min="0" value="1" inputmode="numeric"></div>
+  <div class="row"><label>Dishwashers <small>1.5 listed · 1.125 hot</small></label><input id="dw" type="number" min="0" value="1" inputmode="numeric"></div>
+  <div class="row"><label>Clothes washers <small>4.0 listed · 3.0 hot</small></label><input id="cw" type="number" min="0" value="1" inputmode="numeric"></div>
+  <div class="row"><label>Laundry sinks <small>1.5 listed · 1.125 hot</small></label><input id="ls" type="number" min="0" value="0" inputmode="numeric"></div>
+
+  <div class="out">
+    <h2>Hot WSFU</h2>
+    <div class="big" id="wsfu">—</div>
+    <h2>Probable peak, flush-tank curve</h2>
+    <div class="big"><span id="gpm">—</span> <span class="unit">GPM</span></div>
+    <h2>Unit</h2>
+    <div class="big" id="pick">—</div>
+    <p class="note" id="why"></p>
+    <p class="note">199 = 6.4 GPM at a 60° rise. 160 = 5.1 GPM. A tub forces the 199 even when the curve is under 5.1.</p>
+  </div>
+
+<script>
+const curve = [
+  [0, 0], [1, 1], [2, 2], [3, 3], [4, 3.5], [5, 4],
+  [6, 5], [8, 6.5], [10, 8], [12, 9], [14, 11], [16, 12],
+  [18, 13], [20, 14], [25, 17], [30, 20], [35, 23], [40, 25],
+  [45, 27], [50, 29], [60, 32], [70, 35], [80, 38], [90, 41], [100, 44]
+];
+function gpmFrom(wsfu) {
+  if (wsfu <= 0) return 0;
+  for (let i = 1; i < curve.length; i++) {
+    if (wsfu <= curve[i][0]) {
+      const [x0, y0] = curve[i - 1];
+      const [x1, y1] = curve[i];
+      return y0 + (y1 - y0) * ((wsfu - x0) / (x1 - x0));
+    }
+  }
+  return 44 + (wsfu - 100) * 0.4;
+}
+function n(id) { return Math.max(0, parseFloat(document.getElementById(id).value) || 0); }
+function calc() {
+  const showers = n("shower"), tubs = n("tub"), tub34 = n("tub34");
+  const hot =
+    showers * 1.5 + tubs * 3 + tub34 * 7.5 +
+    n("lav") * 0.75 + n("kit") * 1.125 + n("dw") * 1.125 +
+    n("cw") * 3 + n("ls") * 1.125;
+  const gpm = gpmFrom(hot);
+  document.getElementById("wsfu").textContent = hot.toFixed(2);
+  document.getElementById("gpm").textContent = gpm.toFixed(1);
+  const pick = document.getElementById("pick");
+  const why = document.getElementById("why");
+  let text, cls, reason;
+  if (tub34 > 0 || gpm > 11) {
+    text = "Two 199s";
+    cls = "warn";
+    reason = tub34 > 0
+      ? "3/4 in filler is its own 199. Showers go on the second unit."
+      : "Peak is over one 199. Split the load.";
+  } else if (tubs > 0 || gpm > 5.1) {
+    text = "One 199";
+    cls = "ok";
+    reason = tubs > 0
+      ? "Tub present, so minimum is a 199 even if the curve is low. 6.4 GPM covers the filler."
+      : "No tub, but peak is over a 160.";
+  } else {
+    text = "One 160";
+    cls = "ok";
+    reason = "No tub, and peak is inside 5.1 GPM.";
+  }
+  pick.textContent = text;
+  pick.className = "big " + cls;
+  why.textContent = reason;
+}
+document.querySelectorAll("input").forEach(el => el.addEventListener("input", calc));
+calc();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+</body>
+</html>
