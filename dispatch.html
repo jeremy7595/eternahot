@@ -138,7 +138,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .admin.on{display:block}
 .admin .t{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
 .admin input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:10px 12px;font:inherit;outline:0}
-.admin input + input{margin-top:8px}
+.admin input + input,.admin .row2,.admin input + .row2{margin-top:8px}
+.admin .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.admin .row2 input,.admin .row2 input + input{margin-top:0}
 .admin .make{margin-top:10px;background:var(--red)}
 .admin .made{display:none;margin-top:12px}
 .admin .made.on{display:block}
@@ -162,8 +164,16 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
   <section class="admin" id="admin">
     <div class="t">Send this link</div>
     <form id="adm-form">
-      <input id="adm-name" placeholder="Customer name" autocomplete="name">
-      <input id="adm-address" placeholder="Address" autocomplete="street-address">
+      <div class="row2">
+        <input id="adm-first" placeholder="First name" autocomplete="given-name" maxlength="40">
+        <input id="adm-last" placeholder="Last name" autocomplete="family-name" maxlength="40">
+      </div>
+      <input id="adm-street" placeholder="Street address" autocomplete="street-address" maxlength="80">
+      <input id="adm-unit" placeholder="Unit number" autocomplete="address-line2" maxlength="20">
+      <div class="row2">
+        <input id="adm-state" placeholder="State" autocomplete="address-level1" maxlength="2" value="CA">
+        <input id="adm-zip" placeholder="ZIP" autocomplete="postal-code" inputmode="numeric" maxlength="10">
+      </div>
       <button class="btn make" id="adm-make" type="submit">Make link</button>
     </form>
     <div class="made" id="adm-made">
@@ -286,21 +296,56 @@ function copy(text, btn) {
   } else fallback();
 }
 
-const name = (q.get("name") || "").slice(0, 80);
-const address = (q.get("address") || "").slice(0, 120);
 const ref = (q.get("ref") || "").slice(0, 80);
 const amount = FEE;
-function whoLines(n, a) {
+function unitText(unit) {
+  const u = String(unit || "").trim();
+  if (!u) return "";
+  if (/^(#|apt|unit|ste|suite)\b/i.test(u)) return u;
+  return "Unit " + u;
+}
+function visitFrom(parts) {
+  const first = String(parts.first || "").trim().slice(0, 40);
+  const last = String(parts.last || "").trim().slice(0, 40);
+  const street = String(parts.street || "").trim().slice(0, 80);
+  const unit = String(parts.unit || "").trim().slice(0, 20);
+  const state = String(parts.state || "").trim().slice(0, 2).toUpperCase();
+  const zip = String(parts.zip || "").trim().slice(0, 10);
+  const fullName = [first, last].filter(Boolean).join(" ");
+  const streetLine = [street, unitText(unit)].filter(Boolean).join(", ");
+  const region = [state, zip].filter(Boolean).join(" ");
+  const fullAddress = [streetLine, region].filter(Boolean).join(", ");
+  return { first, last, street, unit, state, zip, fullName, streetLine, region, fullAddress };
+}
+const legacyName = (q.get("name") || "").slice(0, 80);
+const legacyAddress = (q.get("address") || "").slice(0, 160);
+const visit = visitFrom({
+  first: q.get("first"), last: q.get("last"), street: q.get("street"),
+  unit: q.get("unit"), state: q.get("state"), zip: q.get("zip")
+});
+const displayName = visit.fullName || legacyName;
+const displayAddress = visit.fullAddress || legacyAddress;
+function renderWho(v, fallbackName, fallbackAddress) {
+  const n = v.fullName || fallbackName || "";
+  const lines = (v.street || v.unit || v.state || v.zip) ? [v.streetLine, v.region].filter(Boolean) : (fallbackAddress ? [fallbackAddress] : []);
   let html = "";
   if (n) html += "<b>" + esc(n) + "</b>";
-  if (a) html += (html ? "<br>" : "") + esc(a);
+  lines.forEach((line) => { html += (html ? "<br>" : "") + esc(line); });
   if (!html && ref) html = esc(ref);
   return html;
 }
-$("#amt-ref").innerHTML = whoLines(name, address);
+function customerParams(extra) {
+  const p = new URLSearchParams(extra || {});
+  const set = (k, v) => { if (v) p.set(k, v); };
+  set("first", visit.first); set("last", visit.last); set("street", visit.street);
+  set("unit", visit.unit); set("state", visit.state); set("zip", visit.zip);
+  set("name", displayName); set("address", displayAddress); set("ref", ref);
+  return p;
+}
+$("#amt-ref").innerHTML = renderWho(visit, legacyName, legacyAddress);
 
-const paidWhere = address || ref;
-const paidNote = "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: " + (paidWhere ? paidWhere : "");
+const paidWhere = displayAddress || ref;
+const paidNote = "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: " + (paidWhere || "");
 $("#done-text").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent(paidNote);
 if (paidWhere) {
   $("#zelle").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent("Hi Eternahot, please send a Zelle request for the $275 diagnostic visit. The address is: " + paidWhere);
@@ -310,10 +355,7 @@ $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
   const m = row.dataset.m;
   if (m === "card") {
-    const pay = new URLSearchParams({ amount: amount.toFixed(2), method: m, kind: "dispatch" });
-    if (name) pay.set("name", name);
-    if (address) pay.set("address", address);
-    if (ref) pay.set("ref", ref);
+    const pay = customerParams({ amount: amount.toFixed(2), method: m, kind: "dispatch" });
     location.href = "/api/pay?" + pay;
     return;
   }
@@ -339,7 +381,7 @@ const SHEETS = {
   }
 };
 function noteText() {
-  const who = [name, address].filter(Boolean).join(", ") || ref;
+  const who = [displayName, displayAddress].filter(Boolean).join(", ") || ref;
   return who ? "Diagnostic visit – " + who : "Diagnostic visit";
 }
 function venmoLink() {
@@ -368,10 +410,7 @@ function showDone() {
   $("#done-amt").textContent = fmt(amount);
   celebrate();
   try {
-    const keep = new URLSearchParams();
-    if (name) keep.set("name", name);
-    if (address) keep.set("address", address);
-    if (ref) keep.set("ref", ref);
+    const keep = customerParams();
     history.replaceState(null, "", location.pathname + (keep.toString() ? "?" + keep : ""));
   } catch {}
 }
@@ -428,19 +467,35 @@ if (q.get("paid") === "1") showDone();
 
 if (q.get("admin") === "1") {
   const box = $("#admin"); box.classList.add("on");
-  const nameEl = $("#adm-name");
-  const addrEl = $("#adm-address");
-  if (name) nameEl.value = name;
-  if (address) addrEl.value = address;
-  else if (ref) addrEl.value = ref;
+  const fields = {
+    first: $("#adm-first"), last: $("#adm-last"), street: $("#adm-street"),
+    unit: $("#adm-unit"), state: $("#adm-state"), zip: $("#adm-zip")
+  };
+  if (visit.first || visit.last || visit.street || visit.unit || visit.zip || q.get("state")) {
+    fields.first.value = visit.first;
+    fields.last.value = visit.last;
+    fields.street.value = visit.street;
+    fields.unit.value = visit.unit;
+    fields.state.value = visit.state;
+    fields.zip.value = visit.zip;
+  } else if (legacyName || legacyAddress || ref) {
+    fields.first.value = legacyName;
+    fields.street.value = legacyAddress || ref;
+  }
+  const currentVisit = () => visitFrom({
+    first: fields.first.value, last: fields.last.value, street: fields.street.value,
+    unit: fields.unit.value, state: fields.state.value, zip: fields.zip.value
+  });
   const link = () => {
+    const v = currentVisit();
     const p = new URLSearchParams();
-    if (nameEl.value.trim()) p.set("name", nameEl.value.trim());
-    if (addrEl.value.trim()) p.set("address", addrEl.value.trim());
+    const set = (k, val) => { if (val) p.set(k, val); };
+    set("first", v.first); set("last", v.last); set("street", v.street);
+    set("unit", v.unit); set("state", v.state); set("zip", v.zip);
     return CFG.site + CFG.path + (p.toString() ? "?" + p : "");
   };
   const sms = (u) => {
-    const who = nameEl.value.trim();
+    const who = currentVisit().fullName;
     const lead = who
       ? "Eternahot diagnostic visit for " + who + ", $275. We schedule once payment is received: "
       : "Eternahot diagnostic visit, $275. We schedule once payment is received: ";
@@ -449,15 +504,20 @@ if (q.get("admin") === "1") {
   const paint = () => {
     const u = link();
     const a = $("#adm-link");
+    const v = currentVisit();
     a.href = u;
     a.textContent = u.replace("https://", "");
     $("#adm-text").href = "sms:?&body=" + encodeURIComponent(sms(u));
-    $("#amt-ref").innerHTML = whoLines(nameEl.value.trim(), addrEl.value.trim());
+    $("#amt-ref").innerHTML = renderWho(v);
   };
   const make = () => { $("#adm-made").classList.add("on"); paint(); };
   $("#adm-form").addEventListener("submit", (e) => { e.preventDefault(); make(); });
-  nameEl.addEventListener("input", () => { if ($("#adm-made").classList.contains("on")) paint(); });
-  addrEl.addEventListener("input", () => { if ($("#adm-made").classList.contains("on")) paint(); });
+  Object.keys(fields).forEach((key) => {
+    fields[key].addEventListener("input", () => {
+      if (key === "state") fields.state.value = fields.state.value.toUpperCase();
+      if ($("#adm-made").classList.contains("on")) paint();
+    });
+  });
   $("#adm-copy").addEventListener("click", () => copy(link(), $("#adm-copy")));
   $("#adm-qr").addEventListener("click", async () => {
     const qr = $("#adm-qrbox");

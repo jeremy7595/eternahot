@@ -26,15 +26,26 @@ export default async (req) => {
   }
 
   const origin = "https://eternahot.com";
-  const name = (url.searchParams.get("name") || "").slice(0, 80);
-  const address = (url.searchParams.get("address") || "").slice(0, 120);
-  const ref = (url.searchParams.get("ref") || "").slice(0, 80);
+  const clip = (key, n) => (url.searchParams.get(key) || "").trim().slice(0, n);
+  const first = clip("first", 40);
+  const last = clip("last", 40);
+  const street = clip("street", 80);
+  const unitRaw = clip("unit", 20);
+  const state = clip("state", 2).toUpperCase();
+  const zip = clip("zip", 10);
+  const legacyName = clip("name", 80);
+  const legacyAddress = clip("address", 160);
+  const ref = clip("ref", 80);
+  const unitText = !unitRaw ? "" : (/^(#|apt|unit|ste|suite)\b/i.test(unitRaw) ? unitRaw : "Unit " + unitRaw);
+  const name = [first, last].filter(Boolean).join(" ") || legacyName;
+  const address = [[street, unitText].filter(Boolean).join(", "), [state, zip].filter(Boolean).join(" ")].filter(Boolean).join(", ") || legacyAddress;
   const back = isDispatch ? "/dispatch" : "/pay";
   const q = (extra) => {
     const p = new URLSearchParams(extra);
-    if (ref) p.set("ref", ref);
-    if (name) p.set("name", name);
-    if (address) p.set("address", address);
+    const set = (k, v) => { if (v) p.set(k, v); };
+    set("first", first); set("last", last); set("street", street);
+    set("unit", unitRaw); set("state", state); set("zip", zip);
+    set("name", name); set("address", address); set("ref", ref);
     return "?" + p;
   };
   const params = new URLSearchParams();
@@ -51,6 +62,12 @@ export default async (req) => {
     params.set("metadata[customer_name]", name);
     params.set("payment_intent_data[metadata][customer_name]", name);
   }
+  if (first) params.set("metadata[first_name]", first);
+  if (last) params.set("metadata[last_name]", last);
+  if (street) params.set("metadata[street]", street);
+  if (unitRaw) params.set("metadata[unit]", unitRaw);
+  if (state) params.set("metadata[state]", state);
+  if (zip) params.set("metadata[zip]", zip);
   if (address) {
     params.set("metadata[address]", address);
     params.set("payment_intent_data[metadata][address]", address);
@@ -76,12 +93,7 @@ export default async (req) => {
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
   if (isDispatch && (method === "bank" || method === "ach")) {
-    const backQ = new URLSearchParams();
-    if (name) backQ.set("name", name);
-    if (address) backQ.set("address", address);
-    if (ref) backQ.set("ref", ref);
-    const qs = backQ.toString();
-    return Response.redirect(origin + "/dispatch" + (qs ? "?" + qs : ""), 302);
+    return Response.redirect(origin + "/dispatch" + q({}), 302);
   }
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");
