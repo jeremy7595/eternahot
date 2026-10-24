@@ -460,9 +460,23 @@ if (q.get("admin") === "1") {
   addrEl.addEventListener("input", () => { if ($("#adm-made").classList.contains("on")) paint(); });
   $("#adm-copy").addEventListener("click", () => copy(link(), $("#adm-copy")));
   $("#adm-qr").addEventListener("click", async () => {
-    const qr = $("#adm-qrbox"); qr.classList.toggle("on"); if (!qr.classList.contains("on")) return;
-    if (!window.QRCode) { await new Promise((res, rej) => { const s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
-    QRCode.toCanvas($("#adm-canvas"), link(), { width: 220, margin: 1 });
+    const qr = $("#adm-qrbox");
+    if (qr.classList.contains("on")) { qr.classList.remove("on"); return; }
+    try {
+      if (!window.QRCode) {
+        await new Promise((res, rej) => {
+          const s = document.createElement("script");
+          s.src = "/assets/qrcode.min.js";
+          s.onload = res;
+          s.onerror = rej;
+          document.head.appendChild(s);
+        });
+      }
+      await QRCode.toCanvas($("#adm-canvas"), link(), { width: 220, margin: 1 });
+      qr.classList.add("on");
+    } catch (e) {
+      toast("Couldn't make the QR code. Copy the link instead.");
+    }
   });
 }
 </script>
