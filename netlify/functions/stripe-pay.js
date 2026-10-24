@@ -54,7 +54,7 @@ export default async (req) => {
   if (isDispatch) {
     params.set(
       "line_items[0][price_data][product_data][description]",
-      "Trip and up to about one hour of diagnostic time. Credited toward a repair or replacement only if you approve it while the technician is still on site. The credit ends when the technician leaves."
+      "We do not dispatch until this payment is received. Trip and up to about one hour of diagnostic time. Credited toward a repair or replacement only if you approve it while the technician is still on site. The credit ends when the technician leaves."
     );
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();

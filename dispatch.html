@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Diagnostic dispatch — $275 | Eternahot Plumbing</title>
-<meta name="description" content="Required $275 before a diagnostic visit. Covers the trip and about an hour. Credited toward a repair or replacement only if you approve it while the technician is still on site.">
+<meta name="description" content="We do not dispatch until we receive the $275 payment. Covers the trip and about an hour. Credited toward a repair or replacement only if you approve it while the technician is still on site.">
 <meta name="theme-color" content="#0C0B0D">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://eternahot.com/dispatch">
@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="https://eternahot.com/assets/icon-512.png">
 <meta property="og:site_name" content="Eternahot Plumbing">
 <meta property="og:title" content="Diagnostic dispatch — $275">
-<meta property="og:description" content="Required before the visit. Covers the trip and about an hour of diagnostic time. Credited toward a repair or replacement only if you approve it while the technician is still on site.">
+<meta property="og:description" content="We do not dispatch until we receive the $275 payment. Covers the trip and about an hour of diagnostic time.">
 <meta property="og:url" content="https://eternahot.com/dispatch">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://eternahot.com/assets/og-pay-v2.jpg">
@@ -176,7 +176,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
     <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h2>Payment received</h2>
     <div class="a" id="done-amt">$275.00</div>
-    <p>Thank you. A receipt has been emailed to you. Text us the job address and a time that works, and we'll schedule the diagnostic visit.</p>
+    <p>Thank you. A receipt has been emailed to you. Text us the job address and a time that works. We dispatch after this payment is received.</p>
     <div class="next">
       <a class="btn rv-btn" id="done-text" href="sms:2132223457?&amp;body=Hi%20Eternahot%2C%20I%20paid%20the%20%24275%20diagnostic%20dispatch.%20Job%20address%3A%20">Text us the job address</a>
     </div>
@@ -187,14 +187,14 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
     <h1>Diagnostic dispatch</h1>
 
     <section class="amount">
-      <div class="lbl">Due before the visit</div>
+      <div class="lbl">Due before dispatch</div>
       <div class="big">$275.00</div>
       <div class="ref" id="amt-ref"></div>
       <div class="sub">Same fee on every diagnostic call, including when the problem is already known.</div>
     </section>
 
     <section class="terms">
-      <p class="lead">This payment is required before we schedule the visit.</p>
+      <p class="lead">We do not dispatch until we receive this payment.</p>
       <h2>What $275 covers</h2>
       <ul>
         <li>The trip to your property</li>
@@ -215,7 +215,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
       </button>
       <button class="row" data-m="bank" type="button">
         <span class="mark bank"><svg viewBox="0 0 24 24"><path d="M4 10h16v2H4zm0 4h16v6H4zm2 2v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zM3 8l9-5 9 5v2H3z"/></svg></span>
-        <span class="txt"><span class="t">Bank transfer</span><span class="s">Connect your bank securely · settles in 1–3 business days</span></span>
+        <span class="txt"><span class="t">Bank transfer</span><span class="s">We dispatch after the payment is received · 1–3 business days</span></span>
         <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
       <button class="row" data-m="venmo" type="button">
@@ -230,8 +230,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
       </button>
     </div>
 
-    <div class="alt">Prefer <b>Zelle</b>? <a id="zelle" href="sms:2132223457?&amp;body=Hi%20Eternahot%2C%20please%20send%20me%20a%20Zelle%20request%20for%20the%20%24275%20diagnostic%20dispatch.">Text us</a> and we'll send you a Zelle request. We schedule the visit after we receive it.</div>
-    <div class="alt check">Paying by <b>check</b>? Make it payable to <b>Eternahot Plumbing</b>. We schedule the visit after the check arrives.<address>Eternahot Plumbing<br>3415 S. Sepulveda Blvd., Suite 1100<br>Los Angeles, CA 90034</address></div>
+    <div class="alt">Prefer <b>Zelle</b>? <a id="zelle" href="sms:2132223457?&amp;body=Hi%20Eternahot%2C%20please%20send%20me%20a%20Zelle%20request%20for%20the%20%24275%20diagnostic%20dispatch.">Text us</a> and we'll send you a Zelle request. We do not dispatch until we receive that payment.</div>
+    <div class="alt check">Paying by <b>check</b>? Make it payable to <b>Eternahot Plumbing</b>. We do not dispatch until we receive the check.<address>Eternahot Plumbing<br>3415 S. Sepulveda Blvd., Suite 1100<br>Los Angeles, CA 90034</address></div>
 
     <div class="trust">
       Eternahot Plumbing · CSLB #1150831<br>
@@ -305,7 +305,7 @@ const SHEETS = {
       <a class="btn app venmo" href="${venmoLink()}" target="_blank" rel="noopener"><img src="assets/pay/venmo.svg" alt="">Open Venmo</a>
       <div class="or">or send manually to</div>
       <div class="kv"><div class="txt"><div class="k">Venmo</div><div class="v">@${CFG.venmo}</div></div><button class="cp" data-copy="@${CFG.venmo}" type="button">Copy</button></div>
-      <div class="note">Put <b>${esc(noteText())}</b> in the note. Then text us the job address so we can schedule the visit.</div>`
+      <div class="note">Put <b>${esc(noteText())}</b> in the note. We do not dispatch until we receive the payment. Then text us the job address.</div>`
   },
   cash: {
     title: "Pay with Cash App", sub: "$" + CFG.cash, cls: "cash", img: "assets/pay/cashapp.svg",
@@ -313,7 +313,7 @@ const SHEETS = {
       <a class="btn app cash" href="https://cash.app/$${CFG.cash}/${amount.toFixed(2)}" target="_blank" rel="noopener"><img src="assets/pay/cashapp.svg" alt="">Open Cash App</a>
       <div class="or">or send manually to</div>
       <div class="kv"><div class="txt"><div class="k">Cashtag</div><div class="v">$${CFG.cash}</div></div><button class="cp" data-copy="$${CFG.cash}" type="button">Copy</button></div>
-      <div class="note">Put <b>${esc(noteText())}</b> in the note. Then text us the job address so we can schedule the visit.</div>`
+      <div class="note">Put <b>${esc(noteText())}</b> in the note. We do not dispatch until we receive the payment. Then text us the job address.</div>`
   }
 };
 function noteText() { return ref ? "Diagnostic dispatch – " + ref : "Diagnostic dispatch"; }
@@ -404,7 +404,7 @@ if (q.get("admin") === "1") {
     if (r.value.trim()) p.set("ref", r.value.trim());
     return CFG.site + CFG.path + (p.toString() ? "?" + p : "");
   };
-  const sms = (u) => "Diagnostic visit is $275 before we come out: " + u;
+  const sms = (u) => "Diagnostic dispatch is $275. We do not dispatch until we receive the payment: " + u;
   const paint = () => { const u = link(); $("#adm-link").textContent = u.replace("https://", ""); $("#adm-text").href = "sms:?&body=" + encodeURIComponent(sms(u)); };
   r.addEventListener("input", paint); paint();
   $("#adm-copy").addEventListener("click", () => copy(link()));
