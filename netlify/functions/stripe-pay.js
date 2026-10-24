@@ -58,6 +58,9 @@ export default async (req) => {
     );
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
+  if (isDispatch && (method === "bank" || method === "ach")) {
+    return Response.redirect(origin + "/dispatch" + (ref ? "?ref=" + encodeURIComponent(ref) : ""), 302);
+  }
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");
   } else if (method === "plan" && !isDispatch) {

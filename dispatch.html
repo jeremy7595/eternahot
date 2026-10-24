@@ -33,7 +33,7 @@
 :root{
   --bg:#0C0B0D; --card:#171519; --card2:#1E1B21; --line:#2A262E; --ink:#fff; --muted:#A7A2AD; --dim:#6A646F;
   --red:#E11D2E; --green:#22C55E;
-  --venmo:#008CFF; --cash:#00D632; --bank:#0A2540; --plan:#FFB3C7;
+  --venmo:#008CFF; --cash:#00D632; --plan:#FFB3C7;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -70,7 +70,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .mark img{width:26px;height:26px}
 .row .mark.card{background:#fff}
 .row .mark.card img{width:34px;height:auto}
-.row .mark.bank{background:var(--bank)} .row .mark.bank svg{width:24px;height:24px;fill:#fff}
 .row .mark.venmo{background:var(--venmo)} .row .mark.venmo img{filter:brightness(0) invert(1);width:34px;height:auto}
 .row .mark.cash{background:var(--cash)} .row .mark.cash img{width:28px;height:28px}
 .row .txt{flex:1;min-width:0}
@@ -208,11 +207,6 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
         <span class="txt"><span class="t">Card or Apple Pay</span><span class="s">Visa, Mastercard, Amex · secure checkout by Stripe</span></span>
         <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
-      <button class="row" data-m="bank" type="button">
-        <span class="mark bank"><svg viewBox="0 0 24 24"><path d="M4 10h16v2H4zm0 4h16v6H4zm2 2v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zM3 8l9-5 9 5v2H3z"/></svg></span>
-        <span class="txt"><span class="t">Bank transfer</span><span class="s">We dispatch after the payment is received · 1–3 business days</span></span>
-        <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
-      </button>
       <button class="row" data-m="venmo" type="button">
         <span class="mark venmo"><img src="assets/pay/venmo.svg" alt=""></span>
         <span class="txt"><span class="t">Venmo</span><span class="s">Opens the Venmo app · @eternahot</span></span>
@@ -230,7 +224,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 
     <div class="trust">
       Eternahot Plumbing · CSLB #1150831<br>
-      Card and bank payments are processed by Stripe. We never see your card number.<br>
+      Card payments are processed by Stripe. We never see your card number.<br>
       Questions? <a href="sms:2132223457">Text (213) 222-3457</a>
     </div>
   </div>
@@ -286,7 +280,7 @@ if (ref) {
 $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
   const m = row.dataset.m;
-  if (m === "card" || m === "bank") {
+  if (m === "card") {
     location.href = "/api/pay?amount=" + amount.toFixed(2) + "&method=" + m + "&kind=dispatch" + (ref ? "&ref=" + encodeURIComponent(ref) : "");
     return;
   }
