@@ -71,7 +71,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .addr .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .addr .same{flex-direction:row;align-items:center;gap:10px;margin-top:14px;color:var(--ink);font-size:.95rem;font-weight:600}
 .addr .same input{width:22px;min-height:22px;height:22px;padding:0;flex:none}
-#bill-fields.off{display:none}
+#bill-fields.locked input{color:var(--muted)}
 .addr .note{color:#ffb4bc;font-size:.88rem;margin-top:10px}
 .addr .note:empty{display:none}
 
@@ -244,9 +244,9 @@ body.sending .brand .phone,body.sending #main,body.sending #done{display:none}
         <label>ZIP<input id="svc-zip" autocomplete="section-service postal-code" inputmode="numeric" enterkeyhint="next" maxlength="10"></label>
       </div>
       <h2>Billing address</h2>
-      <p class="hint">For a card, this is the billing address on the card.</p>
+      <p class="hint">The billing address on the card.</p>
       <label class="same"><input type="checkbox" id="bill-same" checked> Same as the service address</label>
-      <div id="bill-fields" class="off">
+      <div id="bill-fields" class="locked">
         <label>Street<input id="bill-street" autocomplete="section-billing address-line1" autocapitalize="words" enterkeyhint="next" maxlength="80"></label>
         <label>Unit<input id="bill-unit" autocomplete="section-billing address-line2" enterkeyhint="next" maxlength="20" placeholder="Optional"></label>
         <label>City<input id="bill-city" autocomplete="section-billing address-level2" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
@@ -464,11 +464,21 @@ function putAddr(p, prefix, v) {
     : { street: "street", unit: "unit", city: "city", state: "state", zip: "zip" };
   Object.keys(keys).forEach((key) => { if (v[key]) p.set(keys[key], v[key]); else p.delete(keys[key]); });
 }
+function syncBill() {
+  const locked = $("#bill-same").checked;
+  $("#bill-fields").classList.toggle("locked", locked);
+  ["street", "unit", "city", "state", "zip"].forEach((key) => { $("#bill-" + key).readOnly = locked; });
+  if (!locked) return;
+  const svc = readAddr("#svc-");
+  fillAddr("#bill-", svc);
+  $("#bill-state").value = svc.state;
+  clearMarks("#bill-");
+}
 $("#addr").addEventListener("submit", (e) => e.preventDefault());
 $("#bill-same").addEventListener("change", () => {
-  $("#bill-fields").classList.toggle("off", $("#bill-same").checked);
-  if ($("#bill-same").checked) clearMarks("#bill-");
+  syncBill();
   $("#addr-note").textContent = "";
+  if (!$("#bill-same").checked) $("#bill-street").focus();
 });
 ["svc", "bill"].forEach((which) => {
   ["street", "unit", "city", "state", "zip"].forEach((key) => {
@@ -476,6 +486,7 @@ $("#bill-same").addEventListener("change", () => {
     el.addEventListener("input", () => {
       if (key === "state") el.value = el.value.toUpperCase();
       el.classList.remove("invalid");
+      if (which === "svc") syncBill();
     });
   });
 });
@@ -486,9 +497,9 @@ const billed = visitFrom({
 });
 if (billed.fullAddress && billed.fullAddress !== visit.fullAddress) {
   $("#bill-same").checked = false;
-  $("#bill-fields").classList.remove("off");
   fillAddr("#bill-", billed);
 }
+syncBill();
 if (q.get("need") === "service" || q.get("need") === "billing") addressesFor("card");
 $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
