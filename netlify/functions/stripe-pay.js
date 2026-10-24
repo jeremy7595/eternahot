@@ -54,7 +54,7 @@ export default async (req) => {
   if (isDispatch) {
     params.set(
       "line_items[0][price_data][product_data][description]",
-      "We do not dispatch until this payment is received. Trip and up to about one hour of diagnostic time. Credited toward a repair or replacement only if you approve it while the technician is still on site. The credit ends when the technician leaves."
+      "We do not dispatch until this payment is received. Covers drive time, fuel, and up to one hour on site for diagnosis or to gather information for an estimate. This amount may be credited toward a repair or replacement. The offer expires when the technician leaves the jobsite. A signed contract and deposit lock the credit in when parts must be ordered or picked up. The credit is not applied to the deposit. It is applied when the repair or replacement is paid in full."
     );
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
