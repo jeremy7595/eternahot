@@ -26,9 +26,17 @@ export default async (req) => {
   }
 
   const origin = "https://eternahot.com";
+  const name = (url.searchParams.get("name") || "").slice(0, 80);
+  const address = (url.searchParams.get("address") || "").slice(0, 120);
   const ref = (url.searchParams.get("ref") || "").slice(0, 80);
   const back = isDispatch ? "/dispatch" : "/pay";
-  const q = (extra) => { const p = new URLSearchParams(extra); if (ref) p.set("ref", ref); return "?" + p; };
+  const q = (extra) => {
+    const p = new URLSearchParams(extra);
+    if (ref) p.set("ref", ref);
+    if (name) p.set("name", name);
+    if (address) p.set("address", address);
+    return "?" + p;
+  };
   const params = new URLSearchParams();
   params.set("mode", "payment");
   params.set("submit_type", "pay");
@@ -39,12 +47,21 @@ export default async (req) => {
     params.set("metadata[kind]", "diagnostic_dispatch");
     params.set("payment_intent_data[metadata][kind]", "diagnostic_dispatch");
   }
+  if (name) {
+    params.set("metadata[customer_name]", name);
+    params.set("payment_intent_data[metadata][customer_name]", name);
+  }
+  if (address) {
+    params.set("metadata[address]", address);
+    params.set("payment_intent_data[metadata][address]", address);
+  }
   if (ref) {
     params.set("metadata[ref]", ref);
     params.set("payment_intent_data[metadata][ref]", ref);
   }
+  const who = [name, address].filter(Boolean).join(", ");
   const desc = isDispatch
-    ? "Diagnostic visit" + (ref ? " – " + ref : "")
+    ? "Diagnostic visit" + (who ? " – " + who : (ref ? " – " + ref : ""))
     : (ref ? "Eternahot – " + ref : "");
   if (desc) params.set("payment_intent_data[description]", desc);
   params.set("line_items[0][quantity]", "1");
@@ -59,7 +76,12 @@ export default async (req) => {
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
   if (isDispatch && (method === "bank" || method === "ach")) {
-    return Response.redirect(origin + "/dispatch" + (ref ? "?ref=" + encodeURIComponent(ref) : ""), 302);
+    const backQ = new URLSearchParams();
+    if (name) backQ.set("name", name);
+    if (address) backQ.set("address", address);
+    if (ref) backQ.set("ref", ref);
+    const qs = backQ.toString();
+    return Response.redirect(origin + "/dispatch" + (qs ? "?" + qs : ""), 302);
   }
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");

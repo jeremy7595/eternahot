@@ -138,6 +138,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .admin.on{display:block}
 .admin .t{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
 .admin input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:10px 12px;font:inherit;outline:0}
+.admin input + input{margin-top:8px}
 .admin .link{margin:10px 0;font-size:.85rem;color:var(--ink);font-weight:600;word-break:break-all}
 .admin .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .admin .qrbox{display:none;text-align:center;margin-top:10px}
@@ -157,7 +158,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 
   <section class="admin" id="admin">
     <div class="t">Send this link</div>
-    <input id="adm-ref" placeholder="Job / address">
+    <input id="adm-name" placeholder="Customer name" autocomplete="name">
+    <input id="adm-address" placeholder="Address" autocomplete="street-address">
     <div class="link" id="adm-link">eternahot.com/dispatch</div>
     <div class="g3">
       <button class="btn ghost" id="adm-copy" type="button">Copy link</button>
@@ -257,23 +259,35 @@ async function copy(text, btn) {
   else toast("Copied");
 }
 
+const name = (q.get("name") || "").slice(0, 80);
+const address = (q.get("address") || "").slice(0, 120);
 const ref = (q.get("ref") || "").slice(0, 80);
 const amount = FEE;
-$("#amt-ref").innerHTML = ref ? "for <b>" + esc(ref) + "</b>" : "";
+function whoLines(n, a) {
+  let html = "";
+  if (n) html += "<b>" + esc(n) + "</b>";
+  if (a) html += (html ? "<br>" : "") + esc(a);
+  if (!html && ref) html = esc(ref);
+  return html;
+}
+$("#amt-ref").innerHTML = whoLines(name, address);
 
-const paidNote = ref
-  ? "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: " + ref
-  : "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: ";
+const paidWhere = address || ref;
+const paidNote = "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: " + (paidWhere ? paidWhere : "");
 $("#done-text").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent(paidNote);
-if (ref) {
-  $("#zelle").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent("Hi Eternahot, please send a Zelle request for the $275 diagnostic visit. The address is: " + ref);
+if (paidWhere) {
+  $("#zelle").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent("Hi Eternahot, please send a Zelle request for the $275 diagnostic visit. The address is: " + paidWhere);
 }
 
 $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
   const m = row.dataset.m;
   if (m === "card") {
-    location.href = "/api/pay?amount=" + amount.toFixed(2) + "&method=" + m + "&kind=dispatch" + (ref ? "&ref=" + encodeURIComponent(ref) : "");
+    const pay = new URLSearchParams({ amount: amount.toFixed(2), method: m, kind: "dispatch" });
+    if (name) pay.set("name", name);
+    if (address) pay.set("address", address);
+    if (ref) pay.set("ref", ref);
+    location.href = "/api/pay?" + pay;
     return;
   }
   openSheet(m);
@@ -297,7 +311,10 @@ const SHEETS = {
       <div class="note">Please put <b>${esc(noteText())}</b> in the note. Once we receive it, text us the address and we will schedule the visit.</div>`
   }
 };
-function noteText() { return ref ? "Diagnostic visit – " + ref : "Diagnostic visit"; }
+function noteText() {
+  const who = [name, address].filter(Boolean).join(", ") || ref;
+  return who ? "Diagnostic visit – " + who : "Diagnostic visit";
+}
 function venmoLink() {
   const p = new URLSearchParams({ txn: "pay", amount: amount.toFixed(2), note: noteText() });
   return "https://venmo.com/u/" + CFG.venmo + "?" + p;
@@ -323,7 +340,13 @@ function showDone() {
   $("#done").classList.add("on");
   $("#done-amt").textContent = fmt(amount);
   celebrate();
-  try { history.replaceState(null, "", location.pathname + (ref ? "?ref=" + encodeURIComponent(ref) : "")); } catch {}
+  try {
+    const keep = new URLSearchParams();
+    if (name) keep.set("name", name);
+    if (address) keep.set("address", address);
+    if (ref) keep.set("ref", ref);
+    history.replaceState(null, "", location.pathname + (keep.toString() ? "?" + keep : ""));
+  } catch {}
 }
 
 function celebrate() {
@@ -378,16 +401,33 @@ if (q.get("paid") === "1") showDone();
 
 if (q.get("admin") === "1") {
   const box = $("#admin"); box.classList.add("on");
-  const r = $("#adm-ref");
-  if (ref) r.value = ref;
+  const nameEl = $("#adm-name");
+  const addrEl = $("#adm-address");
+  if (name) nameEl.value = name;
+  if (address) addrEl.value = address;
+  else if (ref) addrEl.value = ref;
   const link = () => {
     const p = new URLSearchParams();
-    if (r.value.trim()) p.set("ref", r.value.trim());
+    if (nameEl.value.trim()) p.set("name", nameEl.value.trim());
+    if (addrEl.value.trim()) p.set("address", addrEl.value.trim());
     return CFG.site + CFG.path + (p.toString() ? "?" + p : "");
   };
-  const sms = (u) => "Eternahot diagnostic visit, $275. We schedule once payment is received: " + u;
-  const paint = () => { const u = link(); $("#adm-link").textContent = u.replace("https://", ""); $("#adm-text").href = "sms:?&body=" + encodeURIComponent(sms(u)); };
-  r.addEventListener("input", paint); paint();
+  const sms = (u) => {
+    const who = nameEl.value.trim();
+    const lead = who
+      ? "Eternahot diagnostic visit for " + who + ", $275. We schedule once payment is received: "
+      : "Eternahot diagnostic visit, $275. We schedule once payment is received: ";
+    return lead + u;
+  };
+  const paint = () => {
+    const u = link();
+    $("#adm-link").textContent = u.replace("https://", "");
+    $("#adm-text").href = "sms:?&body=" + encodeURIComponent(sms(u));
+    $("#amt-ref").innerHTML = whoLines(nameEl.value.trim(), addrEl.value.trim());
+  };
+  nameEl.addEventListener("input", paint);
+  addrEl.addEventListener("input", paint);
+  paint();
   $("#adm-copy").addEventListener("click", () => copy(link()));
   $("#adm-qr").addEventListener("click", async () => {
     const qr = $("#adm-qrbox"); qr.classList.toggle("on"); if (!qr.classList.contains("on")) return;
