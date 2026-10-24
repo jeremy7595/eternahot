@@ -21,6 +21,16 @@
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
 
+[[headers]]
+  for = "/dispatch"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/dispatch.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
 [[redirects]]
   from = "/check"
   to = "/check.html"
@@ -39,4 +49,14 @@
 [[redirects]]
   from = "/pay2"
   to = "/pay"
+  status = 301
+
+[[redirects]]
+  from = "/dispatch"
+  to = "/dispatch.html"
+  status = 200
+
+[[redirects]]
+  from = "/diagnostic"
+  to = "/dispatch"
   status = 301

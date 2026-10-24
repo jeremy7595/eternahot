@@ -15,31 +15,52 @@ export default async (req) => {
     }
   }
 
-  const n = Number(String(dollars).replace(/[^0-9.]/g, ""));
+  const kind = (url.searchParams.get("kind") || "").toLowerCase();
+  const isDispatch = kind === "dispatch";
+  const nRaw = Number(String(dollars).replace(/[^0-9.]/g, ""));
+  // Diagnostic dispatch is always $275, even if the link amount was edited.
+  const n = isDispatch ? 275 : nRaw;
   const cents = Math.round(n * 100);
   if (!Number.isFinite(n) || cents < 50) {
-    return Response.redirect("https://eternahot.com/pay", 302);
+    return Response.redirect(isDispatch ? "https://eternahot.com/dispatch" : "https://eternahot.com/pay", 302);
   }
 
   const origin = "https://eternahot.com";
   const ref = (url.searchParams.get("ref") || "").slice(0, 80);
-  const back = "/pay";
+  const back = isDispatch ? "/dispatch" : "/pay";
   const q = (extra) => { const p = new URLSearchParams(extra); if (ref) p.set("ref", ref); return "?" + p; };
   const params = new URLSearchParams();
   params.set("mode", "payment");
   params.set("submit_type", "pay");
   params.set("success_url", origin + back + q({ paid: "1", amt: n.toFixed(2), method: url.searchParams.get("method") || "card" }));
   params.set("cancel_url", origin + back + q({ amt: n.toFixed(2) }));
-  params.set("metadata[source]", "eternahot.com/pay");
-  if (ref) { params.set("metadata[ref]", ref); params.set("payment_intent_data[description]", "Eternahot – " + ref); params.set("payment_intent_data[metadata][ref]", ref); }
+  params.set("metadata[source]", isDispatch ? "eternahot.com/dispatch" : "eternahot.com/pay");
+  if (isDispatch) {
+    params.set("metadata[kind]", "diagnostic_dispatch");
+    params.set("payment_intent_data[metadata][kind]", "diagnostic_dispatch");
+  }
+  if (ref) {
+    params.set("metadata[ref]", ref);
+    params.set("payment_intent_data[metadata][ref]", ref);
+  }
+  const desc = isDispatch
+    ? "Diagnostic dispatch" + (ref ? " – " + ref : "")
+    : (ref ? "Eternahot – " + ref : "");
+  if (desc) params.set("payment_intent_data[description]", desc);
   params.set("line_items[0][quantity]", "1");
   params.set("line_items[0][price_data][currency]", "usd");
   params.set("line_items[0][price_data][unit_amount]", String(cents));
-  params.set("line_items[0][price_data][product_data][name]", "Eternahot");
+  params.set("line_items[0][price_data][product_data][name]", isDispatch ? "Diagnostic dispatch" : "Eternahot");
+  if (isDispatch) {
+    params.set(
+      "line_items[0][price_data][product_data][description]",
+      "Trip and up to about one hour of diagnostic time. Credited toward a repair or replacement only if you approve it while the technician is still on site. The credit ends when the technician leaves."
+    );
+  }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");
-  } else if (method === "plan") {
+  } else if (method === "plan" && !isDispatch) {
     // Pay over time: Klarna decides Pay in 4 vs monthly financing at checkout.
     params.set("payment_method_types[0]", "klarna");
   } else {

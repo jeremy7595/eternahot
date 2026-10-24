@@ -12,3 +12,6 @@ of the site as of Sep 19 2026 and is not deployed from anymore.
 
 Stripe: netlify/functions/stripe-pay.js answers /api/pay. Secret key lives only in
 Netlify -> Site configuration -> Environment variables -> STRIPE_SECRET_KEY (never in this repo).
+
+/dispatch (dispatch.html, also /diagnostic) is the required $275 diagnostic dispatch page.
+Checkout adds kind=dispatch. The function forces $275 and sends success and cancel back to /dispatch.
