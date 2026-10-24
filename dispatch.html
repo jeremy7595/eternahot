@@ -61,6 +61,20 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .terms p + p{margin-top:10px}
 .terms b{color:var(--ink);font-weight:700}
 
+.addr{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.addr h2{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size:1.02rem;margin:14px 0 4px}
+.addr h2:first-child{margin-top:0}
+.addr .hint{font-size:.88rem;color:var(--muted);margin:0}
+.addr label{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--muted)}
+.addr input,.addr select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);font:inherit;font-size:16px;min-height:48px;padding:12px;outline:0}
+.addr input.invalid{border-color:var(--red)}
+.addr .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.addr .same{flex-direction:row;align-items:center;gap:10px;margin-top:14px;color:var(--ink);font-size:.95rem;font-weight:600}
+.addr .same input{width:22px;min-height:22px;height:22px;padding:0;flex:none}
+#bill-fields.off{display:none}
+.addr .note{color:#ffb4bc;font-size:.88rem;margin-top:10px}
+.addr .note:empty{display:none}
+
 .sec{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 4px 8px}
 .methods{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
 .row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px;transition:transform .08s,border-color .15s}
@@ -175,6 +189,7 @@ body.sending .brand .phone,body.sending #main,body.sending #done{display:none}
       </div>
       <label>Street<input id="adm-street" autocomplete="address-line1" autocapitalize="words" enterkeyhint="next" maxlength="80"></label>
       <label>Unit<input id="adm-unit" autocomplete="address-line2" enterkeyhint="next" maxlength="20" placeholder="Optional"></label>
+      <label>City<input id="adm-city" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
       <div class="row2">
         <label>State<input id="adm-state" autocomplete="address-level1" autocapitalize="characters" enterkeyhint="next" maxlength="2" value="CA"></label>
         <label>ZIP<input id="adm-zip" autocomplete="postal-code" inputmode="numeric" enterkeyhint="send" maxlength="10"></label>
@@ -196,7 +211,7 @@ body.sending .brand .phone,body.sending #main,body.sending #done{display:none}
     <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
     <h2>Payment received</h2>
     <div class="a" id="done-amt">$275.00</div>
-    <p>Thank you. A receipt has been emailed to you. Text us the address and a time that suits you, and we will schedule the visit.</p>
+    <p id="done-msg">Thank you. A receipt has been emailed to you. Text us the address and a time that suits you, and we will schedule the visit.</p>
     <div class="next">
       <a class="btn rv-btn" id="done-text" href="sms:2132223457?&amp;body=Hi%20Eternahot%2C%20I%20have%20paid%20the%20%24275%20diagnostic%20visit.%20The%20address%20is%3A%20">Text us the address</a>
     </div>
@@ -217,6 +232,31 @@ body.sending .brand .phone,body.sending #main,body.sending #done{display:none}
       <h2>What $275 covers</h2>
       <p>The trip to your property and up to one hour on site. We use that hour to diagnose the issue, or to gather what an estimate requires.</p>
     </section>
+
+    <form class="addr" id="addr">
+      <h2>Service address</h2>
+      <p class="hint">The exact address where we come.</p>
+      <label>Street<input id="svc-street" autocomplete="section-service address-line1" autocapitalize="words" enterkeyhint="next" maxlength="80"></label>
+      <label>Unit<input id="svc-unit" autocomplete="section-service address-line2" enterkeyhint="next" maxlength="20" placeholder="Optional"></label>
+      <label>City<input id="svc-city" autocomplete="section-service address-level2" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
+      <div class="row2">
+        <label>State<input id="svc-state" autocomplete="section-service address-level1" autocapitalize="characters" enterkeyhint="next" maxlength="2" value="CA"></label>
+        <label>ZIP<input id="svc-zip" autocomplete="section-service postal-code" inputmode="numeric" enterkeyhint="next" maxlength="10"></label>
+      </div>
+      <h2>Billing address</h2>
+      <p class="hint">For a card, this is the billing address on the card.</p>
+      <label class="same"><input type="checkbox" id="bill-same" checked> Same as the service address</label>
+      <div id="bill-fields" class="off">
+        <label>Street<input id="bill-street" autocomplete="section-billing address-line1" autocapitalize="words" enterkeyhint="next" maxlength="80"></label>
+        <label>Unit<input id="bill-unit" autocomplete="section-billing address-line2" enterkeyhint="next" maxlength="20" placeholder="Optional"></label>
+        <label>City<input id="bill-city" autocomplete="section-billing address-level2" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
+        <div class="row2">
+          <label>State<input id="bill-state" autocomplete="section-billing address-level1" autocapitalize="characters" enterkeyhint="next" maxlength="2" value="CA"></label>
+          <label>ZIP<input id="bill-zip" autocomplete="section-billing postal-code" inputmode="numeric" enterkeyhint="done" maxlength="10"></label>
+        </div>
+      </div>
+      <p class="note" id="addr-note"></p>
+    </form>
 
     <div class="sec">Choose how to pay</div>
     <div class="methods" id="methods">
@@ -314,19 +354,20 @@ function visitFrom(parts) {
   const last = String(parts.last || "").trim().slice(0, 40);
   const street = String(parts.street || "").trim().slice(0, 80);
   const unit = String(parts.unit || "").trim().slice(0, 20);
+  const city = String(parts.city || "").trim().slice(0, 40);
   const state = String(parts.state || "").trim().slice(0, 2).toUpperCase();
   const zip = String(parts.zip || "").trim().slice(0, 10);
   const fullName = [first, last].filter(Boolean).join(" ");
   const streetLine = [street, unitText(unit)].filter(Boolean).join(", ");
-  const region = [state, zip].filter(Boolean).join(" ");
+  const region = [city, [state, zip].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const fullAddress = [streetLine, region].filter(Boolean).join(", ");
-  return { first, last, street, unit, state, zip, fullName, streetLine, region, fullAddress };
+  return { first, last, street, unit, city, state, zip, fullName, streetLine, region, fullAddress };
 }
 const legacyName = (q.get("name") || "").slice(0, 80);
 const legacyAddress = (q.get("address") || "").slice(0, 160);
 const visit = visitFrom({
   first: q.get("first"), last: q.get("last"), street: q.get("street"),
-  unit: q.get("unit"), state: q.get("state"), zip: q.get("zip")
+  unit: q.get("unit"), city: q.get("city"), state: q.get("state"), zip: q.get("zip")
 });
 const displayName = visit.fullName || legacyName;
 const displayAddress = visit.fullAddress || legacyAddress;
@@ -343,7 +384,7 @@ function customerParams(extra) {
   const p = new URLSearchParams(extra || {});
   const set = (k, v) => { if (v) p.set(k, v); };
   set("first", visit.first); set("last", visit.last); set("street", visit.street);
-  set("unit", visit.unit); set("state", visit.state); set("zip", visit.zip);
+  set("unit", visit.unit); set("city", visit.city); set("state", visit.state); set("zip", visit.zip);
   set("name", displayName); set("address", displayAddress); set("ref", ref);
   return p;
 }
@@ -352,19 +393,123 @@ $("#amt-ref").innerHTML = renderWho(visit, legacyName, legacyAddress);
 const paidWhere = displayAddress || ref;
 const paidNote = "Hi Eternahot, I have paid the $275 diagnostic visit. The address is: " + (paidWhere || "");
 $("#done-text").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent(paidNote);
+if (displayAddress) {
+  $("#done-msg").textContent = "Thank you. A receipt has been emailed to you. Text us a time that suits you, and we will schedule the visit.";
+  $("#done-text").textContent = "Text us a time";
+}
 if (paidWhere) {
   $("#zelle").href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent("Hi Eternahot, please send a Zelle request for the $275 diagnostic visit. The address is: " + paidWhere);
 }
 
+function readAddr(prefix) {
+  return visitFrom({
+    street: $(prefix + "street").value, unit: $(prefix + "unit").value, city: $(prefix + "city").value,
+    state: $(prefix + "state").value, zip: $(prefix + "zip").value
+  });
+}
+function addrProblems(v) {
+  return {
+    street: !v.street,
+    city: !v.city,
+    state: !/^[A-Z]{2}$/.test(v.state),
+    zip: !/^\d{5}(-\d{4})?$/.test(v.zip)
+  };
+}
+function addrComplete(v) {
+  const p = addrProblems(v);
+  return !p.street && !p.city && !p.state && !p.zip;
+}
+function markAddr(prefix, v) {
+  const missing = addrProblems(v);
+  let firstBad = null;
+  Object.keys(missing).forEach((key) => {
+    const el = $(prefix + key);
+    el.classList.toggle("invalid", missing[key]);
+    if (missing[key] && !firstBad) firstBad = el;
+  });
+  return firstBad;
+}
+function clearMarks(prefix) { ["street", "unit", "city", "state", "zip"].forEach((key) => $(prefix + key).classList.remove("invalid")); }
+function fillAddr(prefix, v) {
+  $(prefix + "street").value = v.street;
+  $(prefix + "unit").value = v.unit;
+  $(prefix + "city").value = v.city;
+  if (v.state) $(prefix + "state").value = v.state;
+  $(prefix + "zip").value = v.zip;
+}
+function addressesFor(method) {
+  const svc = readAddr("#svc-");
+  const same = $("#bill-same").checked;
+  const bill = same ? svc : readAddr("#bill-");
+  const badSvc = markAddr("#svc-", svc);
+  if (same) clearMarks("#bill-");
+  const badBill = method === "card" && !same ? markAddr("#bill-", bill) : null;
+  const note = $("#addr-note");
+  if (!addrComplete(svc)) {
+    note.textContent = "Enter the full service address.";
+    if (badSvc) badSvc.focus();
+    return null;
+  }
+  if (method === "card" && !addrComplete(bill)) {
+    note.textContent = "Enter the billing address on the card.";
+    if (badBill) badBill.focus();
+    return null;
+  }
+  note.textContent = "";
+  return { svc: svc, bill: bill };
+}
+function putAddr(p, prefix, v) {
+  const keys = prefix
+    ? { street: "bstreet", unit: "bunit", city: "bcity", state: "bstate", zip: "bzip" }
+    : { street: "street", unit: "unit", city: "city", state: "state", zip: "zip" };
+  Object.keys(keys).forEach((key) => { if (v[key]) p.set(keys[key], v[key]); else p.delete(keys[key]); });
+}
+$("#addr").addEventListener("submit", (e) => e.preventDefault());
+$("#bill-same").addEventListener("change", () => {
+  $("#bill-fields").classList.toggle("off", $("#bill-same").checked);
+  if ($("#bill-same").checked) clearMarks("#bill-");
+  $("#addr-note").textContent = "";
+});
+["svc", "bill"].forEach((which) => {
+  ["street", "unit", "city", "state", "zip"].forEach((key) => {
+    const el = $("#" + which + "-" + key);
+    el.addEventListener("input", () => {
+      if (key === "state") el.value = el.value.toUpperCase();
+      el.classList.remove("invalid");
+    });
+  });
+});
+if (visit.street || visit.city || visit.zip || visit.unit) fillAddr("#svc-", visit);
+const billed = visitFrom({
+  street: q.get("bstreet"), unit: q.get("bunit"), city: q.get("bcity"),
+  state: q.get("bstate"), zip: q.get("bzip")
+});
+if (billed.fullAddress && billed.fullAddress !== visit.fullAddress) {
+  $("#bill-same").checked = false;
+  $("#bill-fields").classList.remove("off");
+  fillAddr("#bill-", billed);
+}
+if (q.get("need") === "service" || q.get("need") === "billing") addressesFor("card");
 $("#methods").addEventListener("click", (e) => {
   const row = e.target.closest("[data-m]"); if (!row) return;
   const m = row.dataset.m;
+  const got = addressesFor(m);
+  if (!got) return;
   if (m === "card") {
     const pay = customerParams({ amount: amount.toFixed(2), method: m, kind: "dispatch" });
+    putAddr(pay, "", got.svc);
+    putAddr(pay, "b", got.bill);
+    pay.set("address", got.svc.fullAddress);
     location.href = "/api/pay?" + pay;
     return;
   }
   openSheet(m);
+});
+$("#zelle").addEventListener("click", (e) => {
+  const got = addressesFor("zelle");
+  e.preventDefault();
+  if (!got) return;
+  location.href = "sms:" + CFG.phone + "?&body=" + encodeURIComponent("Hi Eternahot, please send a Zelle request for the $275 diagnostic visit. The service address is: " + got.svc.fullAddress);
 });
 
 const SHEETS = {
@@ -374,7 +519,7 @@ const SHEETS = {
       <a class="btn app venmo" href="${venmoLink()}" target="_blank" rel="noopener"><img src="assets/pay/venmo.svg" alt="">Open Venmo</a>
       <div class="or">or send manually to</div>
       <div class="kv"><div class="txt"><div class="k">Venmo</div><div class="v">@${CFG.venmo}</div></div><button class="cp" data-copy="@${CFG.venmo}" type="button">Copy</button></div>
-      <div class="note">Please put <b>${esc(noteText())}</b> in the note. Once we receive it, text us the address and we will schedule the visit.</div>`
+      <div class="note">Please put <b>${esc(noteText())}</b> in the note. Once we receive it, we will schedule the visit.</div>`
   },
   cash: {
     title: "Pay with Cash App", sub: "$" + CFG.cash, cls: "cash", img: "assets/pay/cashapp.svg",
@@ -382,11 +527,12 @@ const SHEETS = {
       <a class="btn app cash" href="https://cash.app/$${CFG.cash}/${amount.toFixed(2)}" target="_blank" rel="noopener"><img src="assets/pay/cashapp.svg" alt="">Open Cash App</a>
       <div class="or">or send manually to</div>
       <div class="kv"><div class="txt"><div class="k">Cashtag</div><div class="v">$${CFG.cash}</div></div><button class="cp" data-copy="$${CFG.cash}" type="button">Copy</button></div>
-      <div class="note">Please put <b>${esc(noteText())}</b> in the note. Once we receive it, text us the address and we will schedule the visit.</div>`
+      <div class="note">Please put <b>${esc(noteText())}</b> in the note. Once we receive it, we will schedule the visit.</div>`
   }
 };
 function noteText() {
-  const who = [displayName, displayAddress].filter(Boolean).join(", ") || ref;
+  const where = ($("#svc-street") && readAddr("#svc-").fullAddress) || displayAddress;
+  const who = [displayName, where].filter(Boolean).join(", ") || ref;
   return who ? "Diagnostic visit – " + who : "Diagnostic visit";
 }
 function venmoLink() {
@@ -475,13 +621,14 @@ if (q.get("admin") === "1") {
   const box = $("#admin"); box.classList.add("on");
   const fields = {
     first: $("#adm-first"), last: $("#adm-last"), street: $("#adm-street"),
-    unit: $("#adm-unit"), state: $("#adm-state"), zip: $("#adm-zip")
+    unit: $("#adm-unit"), city: $("#adm-city"), state: $("#adm-state"), zip: $("#adm-zip")
   };
-  if (visit.first || visit.last || visit.street || visit.unit || visit.zip || q.get("state")) {
+  if (visit.first || visit.last || visit.street || visit.unit || visit.city || visit.zip || q.get("state")) {
     fields.first.value = visit.first;
     fields.last.value = visit.last;
     fields.street.value = visit.street;
     fields.unit.value = visit.unit;
+    fields.city.value = visit.city;
     fields.state.value = visit.state;
     fields.zip.value = visit.zip;
   } else if (legacyName || legacyAddress || ref) {
@@ -490,15 +637,15 @@ if (q.get("admin") === "1") {
   }
   const currentVisit = () => visitFrom({
     first: fields.first.value, last: fields.last.value, street: fields.street.value,
-    unit: fields.unit.value, state: fields.state.value, zip: fields.zip.value
+    unit: fields.unit.value, city: fields.city.value, state: fields.state.value, zip: fields.zip.value
   });
   const link = () => {
     const v = currentVisit();
     const p = new URLSearchParams();
     const set = (k, val) => { if (val) p.set(k, val); };
-    const hasPlace = v.street || v.unit || v.zip || fields.state.dataset.touched === "1";
+    const hasPlace = v.street || v.unit || v.city || v.zip || fields.state.dataset.touched === "1";
     set("first", v.first); set("last", v.last); set("street", v.street);
-    set("unit", v.unit); set("zip", v.zip);
+    set("unit", v.unit); set("city", v.city); set("zip", v.zip);
     if (hasPlace) set("state", v.state);
     return CFG.site + CFG.path + (p.toString() ? "?" + p : "");
   };
@@ -510,8 +657,8 @@ if (q.get("admin") === "1") {
   };
   const shownVisit = () => {
     const v = currentVisit();
-    const includeState = v.street || v.unit || v.zip || fields.state.dataset.touched === "1";
-    const region = [includeState ? v.state : "", v.zip].filter(Boolean).join(" ");
+    const includeState = v.street || v.unit || v.city || v.zip || fields.state.dataset.touched === "1";
+    const region = [v.city, [includeState ? v.state : "", v.zip].filter(Boolean).join(" ")].filter(Boolean).join(", ");
     return Object.assign({}, v, { state: includeState ? v.state : "", region: region });
   };
   const paint = () => {

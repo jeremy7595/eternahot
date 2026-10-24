@@ -31,20 +31,30 @@ export default async (req) => {
   const last = clip("last", 40);
   const street = clip("street", 80);
   const unitRaw = clip("unit", 20);
+  const city = clip("city", 40);
   const state = clip("state", 2).toUpperCase();
   const zip = clip("zip", 10);
+  const bstreet = clip("bstreet", 80);
+  const bunitRaw = clip("bunit", 20);
+  const bcity = clip("bcity", 40);
+  const bstate = clip("bstate", 2).toUpperCase();
+  const bzip = clip("bzip", 10);
   const legacyName = clip("name", 80);
   const legacyAddress = clip("address", 160);
   const ref = clip("ref", 80);
-  const unitText = !unitRaw ? "" : (/^(#|apt|unit|ste|suite)\b/i.test(unitRaw) ? unitRaw : "Unit " + unitRaw);
+  const niceUnit = (u) => !u ? "" : (/^(#|apt|unit|ste|suite)\b/i.test(u) ? u : "Unit " + u);
+  const unitText = niceUnit(unitRaw);
+  const bunitText = niceUnit(bunitRaw);
   const name = [first, last].filter(Boolean).join(" ") || legacyName;
-  const address = [[street, unitText].filter(Boolean).join(", "), [state, zip].filter(Boolean).join(" ")].filter(Boolean).join(", ") || legacyAddress;
+  const address = [[street, unitText].filter(Boolean).join(", "), [city, [state, zip].filter(Boolean).join(" ")].filter(Boolean).join(", ")].filter(Boolean).join(", ") || legacyAddress;
+  const billing = [[bstreet, bunitText].filter(Boolean).join(", "), [bcity, [bstate, bzip].filter(Boolean).join(" ")].filter(Boolean).join(", ")].filter(Boolean).join(", ");
   const back = isDispatch ? "/dispatch" : "/pay";
   const q = (extra) => {
     const p = new URLSearchParams(extra);
     const set = (k, v) => { if (v) p.set(k, v); };
     set("first", first); set("last", last); set("street", street);
-    set("unit", unitRaw); set("state", state); set("zip", zip);
+    set("unit", unitRaw); set("city", city); set("state", state); set("zip", zip);
+    set("bstreet", bstreet); set("bunit", bunitRaw); set("bcity", bcity); set("bstate", bstate); set("bzip", bzip);
     set("name", name); set("address", address); set("ref", ref);
     return "?" + p;
   };
@@ -66,8 +76,14 @@ export default async (req) => {
   if (last) params.set("metadata[last_name]", last);
   if (street) params.set("metadata[street]", street);
   if (unitRaw) params.set("metadata[unit]", unitRaw);
+  if (city) params.set("metadata[city]", city);
   if (state) params.set("metadata[state]", state);
   if (zip) params.set("metadata[zip]", zip);
+  if (address) params.set("metadata[service_address]", address);
+  if (billing) {
+    params.set("metadata[billing_address]", billing);
+    params.set("payment_intent_data[metadata][billing_address]", billing);
+  }
   if (address) {
     params.set("metadata[address]", address);
     params.set("payment_intent_data[metadata][address]", address);
@@ -94,6 +110,33 @@ export default async (req) => {
   const method = (url.searchParams.get("method") || "card").toLowerCase();
   if (isDispatch && (method === "bank" || method === "ach")) {
     return Response.redirect(origin + "/dispatch" + q({}), 302);
+  }
+  const placeOk = (line, town, st, postal) => !!(line && town && /^[A-Z]{2}$/.test(st) && /^\d{5}(-\d{4})?$/.test(postal));
+  const serviceOk = placeOk(street, city, state, zip);
+  const billingOk = placeOk(bstreet, bcity, bstate, bzip);
+  if (isDispatch && method === "card" && (!serviceOk || !billingOk)) {
+    return Response.redirect(origin + "/dispatch" + q({ need: serviceOk ? "billing" : "service" }), 302);
+  }
+  if (isDispatch && method === "card") {
+    params.set("billing_address_collection", "required");
+    const cust = new URLSearchParams();
+    if (name) cust.set("name", name);
+    cust.set("address[line1]", bstreet);
+    if (bunitText) cust.set("address[line2]", bunitText);
+    cust.set("address[city]", bcity);
+    cust.set("address[state]", bstate);
+    cust.set("address[postal_code]", bzip);
+    cust.set("address[country]", "US");
+    const cres = await fetch("https://api.stripe.com/v1/customers", {
+      method: "POST",
+      headers: { Authorization: "Bearer " + key, "Content-Type": "application/x-www-form-urlencoded" },
+      body: cust,
+    });
+    const customer = await cres.json();
+    if (customer && customer.id) {
+      params.set("customer", customer.id);
+      params.set("customer_update[address]", "auto");
+    }
   }
   if (method === "bank" || method === "ach") {
     params.set("payment_method_types[0]", "us_bank_account");
