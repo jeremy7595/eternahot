@@ -134,18 +134,23 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .done-card .m{margin-top:14px;font-size:.85rem;color:var(--dim)}
 .hide{display:none!important}
 
-.admin{display:none;background:var(--card);border:1px solid var(--red);border-radius:18px;padding:14px 16px;margin-bottom:20px}
+.admin{display:none}
 .admin.on{display:block}
-.admin .t{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
-.admin input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:10px 12px;font:inherit;outline:0}
-.admin input + input,.admin .row2,.admin input + .row2{margin-top:8px}
-.admin .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.admin .row2 input,.admin .row2 input + input{margin-top:0}
-.admin .make{margin-top:10px;background:var(--red)}
-.admin .made{display:none;margin-top:12px}
+body.sending .brand{margin-bottom:6px;gap:0}
+body.sending .brand img{width:108px}
+body.sending .brand .phone,body.sending #main,body.sending #done{display:none}
+.admin .t{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:1.35rem;letter-spacing:0;text-transform:none;color:var(--ink);margin:0 0 12px}
+.admin label{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:.78rem;font-weight:600;color:var(--muted)}
+.admin .row2 label{margin-top:0}
+.admin .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.admin input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink);padding:12px;font:inherit;font-size:16px;min-height:48px;outline:0}
+.admin .make{margin-top:16px;min-height:56px;background:var(--red);font-size:1.05rem;position:sticky;bottom:calc(10px + env(safe-area-inset-bottom))}
+.admin .preview{margin-top:12px;font-size:.95rem;line-height:1.35;color:var(--ink)}
+.admin .preview:empty{display:none}
+.admin .made{display:none;margin-top:14px}
 .admin .made.on{display:block}
-.admin a.out{display:block;margin:0 0 10px;color:#fff;font-weight:700;font-size:.95rem;line-height:1.4;word-break:break-all;text-decoration:underline;text-underline-offset:3px}
-.admin .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.admin a.out{display:block;margin:0 0 10px;color:#fff;font-weight:700;font-size:.92rem;line-height:1.4;word-break:break-all;text-decoration:underline;text-underline-offset:3px}
+.admin .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .admin .qrbox{display:none;text-align:center;margin-top:10px}
 .admin .qrbox.on{display:block}
 .admin canvas{border-radius:12px;background:#fff;padding:8px}
@@ -162,26 +167,26 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
   </div>
 
   <section class="admin" id="admin">
-    <div class="t">Send this link</div>
+    <div class="t">Text a visit link</div>
     <form id="adm-form">
       <div class="row2">
-        <input id="adm-first" placeholder="First name" autocomplete="given-name" maxlength="40">
-        <input id="adm-last" placeholder="Last name" autocomplete="family-name" maxlength="40">
+        <label>First name<input id="adm-first" autocomplete="given-name" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
+        <label>Last name<input id="adm-last" autocomplete="family-name" autocapitalize="words" enterkeyhint="next" maxlength="40"></label>
       </div>
-      <input id="adm-street" placeholder="Street address" autocomplete="street-address" maxlength="80">
-      <input id="adm-unit" placeholder="Unit number" autocomplete="address-line2" maxlength="20">
+      <label>Street<input id="adm-street" autocomplete="address-line1" autocapitalize="words" enterkeyhint="next" maxlength="80"></label>
+      <label>Unit<input id="adm-unit" autocomplete="address-line2" enterkeyhint="next" maxlength="20" placeholder="Optional"></label>
       <div class="row2">
-        <input id="adm-state" placeholder="State" autocomplete="address-level1" maxlength="2" value="CA">
-        <input id="adm-zip" placeholder="ZIP" autocomplete="postal-code" inputmode="numeric" maxlength="10">
+        <label>State<input id="adm-state" autocomplete="address-level1" autocapitalize="characters" enterkeyhint="next" maxlength="2" value="CA"></label>
+        <label>ZIP<input id="adm-zip" autocomplete="postal-code" inputmode="numeric" enterkeyhint="send" maxlength="10"></label>
       </div>
-      <button class="btn make" id="adm-make" type="submit">Make link</button>
+      <p class="preview" id="adm-preview"></p>
+      <button class="btn make" id="adm-make" type="submit">Text the link</button>
     </form>
     <div class="made" id="adm-made">
       <a class="out" id="adm-link" href="https://eternahot.com/dispatch">eternahot.com/dispatch</a>
-      <div class="g3">
-        <button class="btn ghost" id="adm-copy" type="button">Copy link</button>
-        <a class="btn ghost" id="adm-text" href="sms:?&body=">Text link</a>
-        <button class="btn ghost" id="adm-qr" type="button">QR</button>
+      <div class="g2">
+        <button class="btn ghost" id="adm-copy" type="button">Copy</button>
+        <button class="btn ghost" id="adm-qr" type="button">QR code</button>
       </div>
       <div class="qrbox" id="adm-qrbox"><canvas id="adm-canvas"></canvas></div>
     </div>
@@ -466,6 +471,7 @@ function celebrate() {
 if (q.get("paid") === "1") showDone();
 
 if (q.get("admin") === "1") {
+  document.body.classList.add("sending");
   const box = $("#admin"); box.classList.add("on");
   const fields = {
     first: $("#adm-first"), last: $("#adm-last"), street: $("#adm-street"),
@@ -490,34 +496,61 @@ if (q.get("admin") === "1") {
     const v = currentVisit();
     const p = new URLSearchParams();
     const set = (k, val) => { if (val) p.set(k, val); };
+    const hasPlace = v.street || v.unit || v.zip || fields.state.dataset.touched === "1";
     set("first", v.first); set("last", v.last); set("street", v.street);
-    set("unit", v.unit); set("state", v.state); set("zip", v.zip);
+    set("unit", v.unit); set("zip", v.zip);
+    if (hasPlace) set("state", v.state);
     return CFG.site + CFG.path + (p.toString() ? "?" + p : "");
   };
-  const sms = (u) => {
+  const leadFor = () => {
     const who = currentVisit().fullName;
-    const lead = who
-      ? "Eternahot diagnostic visit for " + who + ", $275. We schedule once payment is received: "
-      : "Eternahot diagnostic visit, $275. We schedule once payment is received: ";
-    return lead + u;
+    return who
+      ? "Eternahot diagnostic visit for " + who + ", $275. We schedule once payment is received."
+      : "Eternahot diagnostic visit, $275. We schedule once payment is received.";
+  };
+  const shownVisit = () => {
+    const v = currentVisit();
+    const includeState = v.street || v.unit || v.zip || fields.state.dataset.touched === "1";
+    const region = [includeState ? v.state : "", v.zip].filter(Boolean).join(" ");
+    return Object.assign({}, v, { state: includeState ? v.state : "", region: region });
   };
   const paint = () => {
     const u = link();
     const a = $("#adm-link");
-    const v = currentVisit();
     a.href = u;
     a.textContent = u.replace("https://", "");
-    $("#adm-text").href = "sms:?&body=" + encodeURIComponent(sms(u));
-    $("#amt-ref").innerHTML = renderWho(v);
+    $("#adm-preview").innerHTML = renderWho(shownVisit());
   };
-  const make = () => { $("#adm-made").classList.add("on"); paint(); };
-  $("#adm-form").addEventListener("submit", (e) => { e.preventDefault(); make(); });
+  const textHref = (u) => {
+    const body = encodeURIComponent(leadFor() + " " + u);
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    return ios ? "sms:&body=" + body : "sms:?body=" + body;
+  };
+  const send = () => {
+    const u = link();
+    $("#adm-made").classList.add("on");
+    paint();
+    const lead = leadFor();
+    if (navigator.share) {
+      navigator.share({ text: lead, url: u }).catch((err) => {
+        if (err && err.name === "AbortError") return;
+        location.href = textHref(u);
+      });
+      return;
+    }
+    location.href = textHref(u);
+  };
+  $("#adm-form").addEventListener("submit", (e) => { e.preventDefault(); send(); });
   Object.keys(fields).forEach((key) => {
     fields[key].addEventListener("input", () => {
-      if (key === "state") fields.state.value = fields.state.value.toUpperCase();
-      if ($("#adm-made").classList.contains("on")) paint();
+      if (key === "state") {
+        fields.state.value = fields.state.value.toUpperCase();
+        fields.state.dataset.touched = "1";
+      }
+      paint();
     });
   });
+  paint();
   $("#adm-copy").addEventListener("click", () => copy(link(), $("#adm-copy")));
   $("#adm-qr").addEventListener("click", async () => {
     const qr = $("#adm-qrbox");
