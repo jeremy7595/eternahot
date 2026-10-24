@@ -44,17 +44,17 @@ export default async (req) => {
     params.set("payment_intent_data[metadata][ref]", ref);
   }
   const desc = isDispatch
-    ? "Diagnostic dispatch" + (ref ? " – " + ref : "")
+    ? "Diagnostic visit" + (ref ? " – " + ref : "")
     : (ref ? "Eternahot – " + ref : "");
   if (desc) params.set("payment_intent_data[description]", desc);
   params.set("line_items[0][quantity]", "1");
   params.set("line_items[0][price_data][currency]", "usd");
   params.set("line_items[0][price_data][unit_amount]", String(cents));
-  params.set("line_items[0][price_data][product_data][name]", isDispatch ? "Diagnostic dispatch" : "Eternahot");
+  params.set("line_items[0][price_data][product_data][name]", isDispatch ? "Diagnostic visit" : "Eternahot");
   if (isDispatch) {
     params.set(
       "line_items[0][price_data][product_data][description]",
-      "We do not dispatch until this payment is received. Covers drive time, fuel, and up to one hour on site for diagnosis or to gather information for an estimate. This amount may be credited toward a repair or replacement. The offer expires when the technician leaves the jobsite. A signed contract and deposit lock the credit in when parts must be ordered or picked up. The credit is not applied to the deposit. It is applied when the repair or replacement is paid in full."
+      "Your visit is scheduled once this payment is received. It covers the trip and up to one hour on site, for diagnosis or to gather what an estimate requires. If we recommend a repair or replacement, this amount may be applied toward that work while the technician is still with you. The credit ends when the technician leaves. If parts must be ordered or picked up, a signed agreement and a deposit keep the credit in place. The deposit is separate. The credit is applied when the repair or replacement is paid in full."
     );
   }
   const method = (url.searchParams.get("method") || "card").toLowerCase();
