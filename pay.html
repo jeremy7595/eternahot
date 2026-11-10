@@ -75,7 +75,25 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 @keyframes amt-shimmer{0%{left:-60%}60%,100%{left:130%}}
 .amount.shake{animation:amt-shake .38s,amt-metal 2.2s linear infinite;box-shadow:0 0 30px 6px rgba(255,226,122,.8)}
 @keyframes amt-shake{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-@media (prefers-reduced-motion:reduce){.amount.shake,.amount.need{animation:none}.amount.need::after{display:none}}
+/* amount entered: the reward state - brighter, faster, more of everything */
+.amount.has{position:relative;overflow:hidden;border:2px solid transparent;padding:17px 17px 15px;
+  background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(90deg,#12b85a,#7dffb0,#fff6c2,#ffcf3a,#ffffff,#3df08c,#ffd95a,#fff3b0,#12b85a) border-box;
+  background-size:auto,200% 100%;
+  animation:amt-metal 1.15s linear infinite,amt-flash2 1.05s ease-in-out infinite}
+.amount.has::after,.amount.has::before{content:"";position:absolute;top:-20%;bottom:-20%;left:-70%;width:55%;pointer-events:none;transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(60,240,140,.28),rgba(255,226,122,.50),rgba(255,255,255,.72),rgba(255,226,122,.50),rgba(60,240,140,.28),transparent);
+  animation:amt-shimmer2 1.5s ease-in-out infinite}
+.amount.has::before{width:22%;animation-delay:.42s;opacity:.75}
+.amount.has .lbl{color:#ffe27a}
+.amount.has .big,.amount.has .sym{background:linear-gradient(90deg,#3df08c,#fff3b0,#ffcf3a,#ffffff,#3df08c,#ffd95a,#3df08c);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:amt-text 1.6s linear infinite}
+.amount.has .big{filter:drop-shadow(0 0 10px rgba(255,217,90,.45))}
+.amount.has input{color:#ffe27a;caret-color:#3df08c}
+@keyframes amt-flash2{0%,100%{box-shadow:0 0 10px 1px rgba(61,240,140,.35)}25%{box-shadow:0 0 34px 7px rgba(61,240,140,.80)}50%{box-shadow:0 0 12px 2px rgba(255,217,90,.40)}75%{box-shadow:0 0 34px 7px rgba(255,217,90,.85)}}
+@keyframes amt-shimmer2{0%{left:-70%}75%,100%{left:135%}}
+@keyframes amt-text{from{background-position:0 0}to{background-position:200% 0}}
+.amount.has.pop{animation:amt-pop .75s cubic-bezier(.2,1.5,.4,1),amt-metal 1.15s linear infinite}
+@keyframes amt-pop{0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,.95)}30%{transform:scale(1.045);box-shadow:0 0 60px 18px rgba(255,226,122,.95)}60%{transform:scale(.99);box-shadow:0 0 70px 26px rgba(61,240,140,.55)}100%{transform:scale(1);box-shadow:0 0 34px 7px rgba(61,240,140,.5)}}
+@media (prefers-reduced-motion:reduce){.amount.shake,.amount.need,.amount.has,.amount.has.pop,.amount.has .big,.amount.has .sym{animation:none}.amount.need::after,.amount.has::after,.amount.has::before{display:none}}
 
 /* method rows */
 .sec{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 4px 8px}
@@ -345,11 +363,17 @@ function renderAmount() {
 }
 /* amount is mandatory: payment methods stay locked until it is filled in */
 const HINT = "Enter the amount on your invoice or estimate.";
-$("#amount-box").addEventListener("animationend", (e) => { if (e.animationName === "amt-shake") e.currentTarget.classList.remove("shake"); });
+$("#amount-box").addEventListener("animationend", (e) => { if (e.target !== e.currentTarget) return; if (e.animationName === "amt-shake") e.currentTarget.classList.remove("shake"); if (e.animationName === "amt-pop") e.currentTarget.classList.remove("pop"); });
+let wasOk = false;
+function pop() { const box = $("#amount-box"); box.classList.remove("pop"); void box.offsetWidth; box.classList.add("pop"); try { navigator.vibrate && navigator.vibrate(25); } catch {} }
 function renderLock() {
   const ok = amount > 0;
   $("#methods").classList.toggle("locked", !ok);
   $("#amount-box").classList.toggle("need", !ok);
+  $("#amount-box").classList.toggle("has", ok);
+  if (!ok) $("#amount-box").classList.remove("pop");
+  if (ok && !wasOk) pop();
+  wasOk = ok;
   document.querySelectorAll("#methods .row").forEach((r) => r.setAttribute("aria-disabled", ok ? "false" : "true"));
   $("#sec-pay").textContent = ok ? "Choose how to pay" : "Enter the amount above to choose how to pay";
   $("#amt-rq").hidden = ok;
@@ -358,7 +382,7 @@ function renderLock() {
 function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 $("#amt-change").addEventListener("click", () => { $("#amount").value = amount ? amount.toFixed(2) : ""; amount = 0; renderAmount(); amount = parseAmt($("#amount").value); renderPlan(); renderLock(); $("#amount").focus(); });
 $("#amount").addEventListener("input", (e) => { amount = parseAmt(e.target.value); renderPlan(); renderLock(); });
-$("#amount").addEventListener("blur", () => { if (amount) { renderAmount(); } });
+$("#amount").addEventListener("blur", () => { if (amount) { renderAmount(); pop(); } });
 $("#amount").addEventListener("keydown", (e) => { if (e.key === "Enter") e.target.blur(); });
 renderAmount();
 
