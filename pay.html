@@ -60,12 +60,22 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .amount input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:2.6rem;line-height:1.1;padding:0}
 .amount input::placeholder{color:var(--dim)}
 .amount .hint{font-size:.82rem;color:var(--dim);margin-top:8px}
-.amount .lbl .rq{color:#ff6b78;margin-left:6px}
-.amount.req{border-color:#E11D2E;box-shadow:0 0 0 3px rgba(225,29,46,.28)}
-.amount.req .hint{color:#ff6b78;font-weight:700;font-size:.92rem}
-.amount.shake{animation:amt-shake .38s}
+.amount .lbl .rq{color:#ffd95a;margin-left:6px}
+.amount.req .hint{color:#ffd95a;font-weight:700;font-size:.92rem}
+.amount.need{position:relative;overflow:hidden;border:2px solid transparent;padding:17px 17px 15px;
+  background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(90deg,#0a7a3d,#34e07a,#fff1a8,#d9a520,#fff7c9,#1fbf63,#b8860b,#ffe27a,#0a7a3d) border-box;
+  background-size:auto,200% 100%;
+  animation:amt-metal 2.2s linear infinite,amt-flash 1.5s ease-in-out infinite}
+.amount.need::after{content:"";position:absolute;top:-20%;bottom:-20%;left:-60%;width:46%;pointer-events:none;transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(60,235,135,.20),rgba(255,226,122,.38),rgba(255,255,255,.55),rgba(255,226,122,.38),rgba(60,235,135,.20),transparent);
+  animation:amt-shimmer 2.4s ease-in-out infinite}
+.amount.need .sym{color:#e9c046}
+@keyframes amt-metal{from{background-position:0 0,0 0}to{background-position:0 0,200% 0}}
+@keyframes amt-flash{0%,100%{box-shadow:0 0 0 0 rgba(52,224,122,0)}25%{box-shadow:0 0 22px 3px rgba(52,224,122,.60)}50%{box-shadow:0 0 4px 0 rgba(255,215,90,.15)}75%{box-shadow:0 0 22px 3px rgba(255,215,90,.65)}}
+@keyframes amt-shimmer{0%{left:-60%}60%,100%{left:130%}}
+.amount.shake{animation:amt-shake .38s,amt-metal 2.2s linear infinite;box-shadow:0 0 30px 6px rgba(255,226,122,.8)}
 @keyframes amt-shake{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-@media (prefers-reduced-motion:reduce){.amount.shake{animation:none}}
+@media (prefers-reduced-motion:reduce){.amount.shake,.amount.need{animation:none}.amount.need::after{display:none}}
 
 /* method rows */
 .sec{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 4px 8px}
@@ -335,9 +345,11 @@ function renderAmount() {
 }
 /* amount is mandatory: payment methods stay locked until it is filled in */
 const HINT = "Enter the amount on your invoice or estimate.";
+$("#amount-box").addEventListener("animationend", (e) => { if (e.animationName === "amt-shake") e.currentTarget.classList.remove("shake"); });
 function renderLock() {
   const ok = amount > 0;
   $("#methods").classList.toggle("locked", !ok);
+  $("#amount-box").classList.toggle("need", !ok);
   document.querySelectorAll("#methods .row").forEach((r) => r.setAttribute("aria-disabled", ok ? "false" : "true"));
   $("#sec-pay").textContent = ok ? "Choose how to pay" : "Enter the amount above to choose how to pay";
   $("#amt-rq").hidden = ok;
