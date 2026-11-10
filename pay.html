@@ -60,10 +60,19 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .amount input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);font-family:Fraunces,Georgia,serif;font-weight:700;font-size:2.6rem;line-height:1.1;padding:0}
 .amount input::placeholder{color:var(--dim)}
 .amount .hint{font-size:.82rem;color:var(--dim);margin-top:8px}
+.amount .lbl .rq{color:#ff6b78;margin-left:6px}
+.amount.req{border-color:#E11D2E;box-shadow:0 0 0 3px rgba(225,29,46,.28)}
+.amount.req .hint{color:#ff6b78;font-weight:700;font-size:.92rem}
+.amount.shake{animation:amt-shake .38s}
+@keyframes amt-shake{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){.amount.shake{animation:none}}
 
 /* method rows */
 .sec{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 4px 8px}
 .methods{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.methods.locked .row{opacity:.38}
+.methods.locked .row:hover{border-color:var(--line)}
+.methods.locked .row:active{transform:none}
 .row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 14px;transition:transform .08s,border-color .15s}
 .row:active{transform:scale(.985)}
 .row:hover{border-color:#3a3540}
@@ -219,7 +228,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
     <h1 id="h1">Pay Eternahot</h1>
 
     <section class="amount" id="amount-box">
-      <div class="lbl">Amount due</div>
+      <div class="lbl">Amount due<span class="rq" id="amt-rq">Required</span></div>
       <div id="amt-view">
         <div class="big" id="amt-big">$0.00</div>
         <div class="ref" id="amt-ref"></div>
@@ -227,11 +236,11 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
       </div>
       <div id="amt-edit">
         <div class="field"><span class="sym">$</span><input id="amount" type="text" inputmode="decimal" placeholder="0.00" autocomplete="off" aria-label="Amount"></div>
-        <div class="hint">Enter the amount on your invoice or estimate.</div>
+        <div class="hint" id="amt-hint">Enter the amount on your invoice or estimate.</div>
       </div>
     </section>
 
-    <div class="sec">Choose how to pay</div>
+    <div class="sec" id="sec-pay">Choose how to pay</div>
     <div class="methods" id="methods">
       <button class="row" data-m="card" type="button">
         <span class="mark card"><svg viewBox="0 0 24 24"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 3v2h18V8zm0 5v4h18v-4zm2 1.5h5v1.5H5z" fill-rule="evenodd"/></svg></span>
@@ -322,10 +331,21 @@ function renderAmount() {
   $("#amt-ref").innerHTML = ref ? "for <b>" + esc(ref) + "</b>" : "";
   $("#amt-view").classList.toggle("hide", !amount);
   $("#amt-edit").classList.toggle("hide", !!amount);
+  renderLock();
+}
+/* amount is mandatory: payment methods stay locked until it is filled in */
+const HINT = "Enter the amount on your invoice or estimate.";
+function renderLock() {
+  const ok = amount > 0;
+  $("#methods").classList.toggle("locked", !ok);
+  document.querySelectorAll("#methods .row").forEach((r) => r.setAttribute("aria-disabled", ok ? "false" : "true"));
+  $("#sec-pay").textContent = ok ? "Choose how to pay" : "Enter the amount above to choose how to pay";
+  $("#amt-rq").hidden = ok;
+  if (ok) { $("#amount-box").classList.remove("req"); $("#amt-hint").textContent = HINT; }
 }
 function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-$("#amt-change").addEventListener("click", () => { $("#amount").value = amount ? amount.toFixed(2) : ""; amount = 0; renderAmount(); $("#amount").focus(); });
-$("#amount").addEventListener("input", (e) => { amount = parseAmt(e.target.value); renderPlan(); });
+$("#amt-change").addEventListener("click", () => { $("#amount").value = amount ? amount.toFixed(2) : ""; amount = 0; renderAmount(); amount = parseAmt($("#amount").value); renderPlan(); renderLock(); $("#amount").focus(); });
+$("#amount").addEventListener("input", (e) => { amount = parseAmt(e.target.value); renderPlan(); renderLock(); });
 $("#amount").addEventListener("blur", () => { if (amount) { renderAmount(); } });
 $("#amount").addEventListener("keydown", (e) => { if (e.key === "Enter") e.target.blur(); });
 renderAmount();
@@ -333,8 +353,12 @@ renderAmount();
 /* ---------- methods ---------- */
 function needAmount() {
   if (amount > 0) return true;
-  toast("Enter the amount first");
-  $("#amount").focus();
+  const box = $("#amount-box");
+  box.classList.add("req");
+  $("#amt-hint").textContent = "Enter your amount to continue.";
+  box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake");
+  box.scrollIntoView({ block: "center", behavior: "smooth" });
+  $("#amount").focus({ preventScroll: true });
   return false;
 }
 $("#methods").addEventListener("click", (e) => {
