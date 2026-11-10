@@ -71,6 +71,7 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .mark img{width:26px;height:26px}
 .row .mark.card{background:#fff}
 .row .mark.card img{width:34px;height:auto}
+.row .mark.card svg{width:26px;height:26px;fill:#141619}
 .row .mark.bank{background:var(--bank)} .row .mark.bank svg{width:24px;height:24px;fill:#fff}
 .row .mark.venmo{background:var(--venmo)} .row .mark.venmo img{filter:brightness(0) invert(1);width:34px;height:auto}
 .row .mark.cash{background:var(--cash)} .row .mark.cash img{width:28px;height:28px}
@@ -79,6 +80,9 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
 .row .txt{flex:1;min-width:0}
 .row .t{display:block;color:var(--ink);font-weight:700;font-size:1rem}
 .row .s{display:block;font-size:.82rem;color:var(--muted);margin-top:2px}
+.row .brands{display:flex;gap:6px;margin:7px 0 5px}
+.row .brands img{width:40px;height:26px;padding:3px 6px;background:#fff;border-radius:5px;object-fit:contain}
+.row .brands img[alt=Discover]{padding:2px 3px}
 .row .chev{color:var(--dim);flex-shrink:0}
 .row .chev svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
 .badge{display:inline-block;font-size:.66rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#0C0B0D;background:#fff;border-radius:999px;padding:2px 7px;margin-left:6px;vertical-align:2px}
@@ -230,8 +234,8 @@ h1{font-family:Fraunces,Georgia,serif;font-weight:600;color:var(--ink);font-size
     <div class="sec">Choose how to pay</div>
     <div class="methods" id="methods">
       <button class="row" data-m="card" type="button">
-        <span class="mark card"><img src="assets/pay/applepay.svg" alt=""></span>
-        <span class="txt"><span class="t">Card or Apple Pay</span><span class="s">Visa, Mastercard, Amex · secure checkout by Stripe</span></span>
+        <span class="mark card"><svg viewBox="0 0 24 24"><path d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm0 3v2h18V8zm0 5v4h18v-4zm2 1.5h5v1.5H5z" fill-rule="evenodd"/></svg></span>
+        <span class="txt"><span class="t">Pay by credit card</span><span class="brands"><img src="assets/pay/cards/visa.svg" alt="Visa"><img src="assets/pay/cards/mastercard.svg" alt="Mastercard"><img src="assets/pay/cards/amex.svg" alt="American Express"><img src="assets/pay/cards/discover.svg" alt="Discover"></span><span class="s">Credit or debit · Apple Pay accepted · secure checkout by Stripe</span></span>
         <span class="chev"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
       </button>
       <button class="row" data-m="bank" type="button">
